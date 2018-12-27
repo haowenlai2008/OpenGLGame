@@ -8,23 +8,37 @@
       <UniqueIdentifier>20d1d2f3-c9a1-450d-b285-30e2f7069c8a</UniqueIdentifier>
       <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
     </Filter>
-    <Filter Include="Common\GLFW">
+    <Filter Include="Common\head">
+      <UniqueIdentifier>{c314c8fe-e252-426d-86ae-67c4642c643a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\head\GLFW">
       <UniqueIdentifier>{44fa95da-b3ec-4a20-9065-97ceec5f1e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\head\GLAD">
+      <UniqueIdentifier>{61c99110-57df-4055-8116-18739e83356f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\source">
+      <UniqueIdentifier>{9f09a083-ec9a-4b24-abee-a745c6600d8a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.xaml.cpp" />
-    <ClCompile Include="MainPage.xaml.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="source\glad.c">
+      <Filter>Common\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.xaml.h" />
-    <ClInclude Include="MainPage.xaml.h" />
-    <ClInclude Include="include\glfw3.h">
-      <Filter>Common\GLFW</Filter>
+    <ClInclude Include="include\glad.h">
+      <Filter>Common\head\GLAD</Filter>
     </ClInclude>
-    <ClInclude Include="include\glfw3native.h">
-      <Filter>Common\GLFW</Filter>
+    <ClInclude Include="include\khrplatform.h">
+      <Filter>Common\head\GLAD</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLFW\glfw3.h">
+      <Filter>Common\head\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLFW\glfw3native.h">
+      <Filter>Common\head\GLFW</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

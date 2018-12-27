@@ -1,6 +1,6 @@
 
-#include "glfw3.h"
-#include "glfw3native.h"
+#include "GLFW/glfw3.h"
+#include "glad.h"
 int main()
 {
 	glfwInit();

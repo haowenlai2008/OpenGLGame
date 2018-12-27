@@ -1,6 +1,4 @@
-﻿  Application.cpp
-e:\opengl\openglgame\openglgame\application.cpp(4): warning C4447: 找到的“main”签名不带线程模型。请考虑使用“int main(Platform::Array<Platform::String^>^ args)”。
-glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__GetModuleHandleW@4，该符号在函数 _createHelperWindow 中被引用
+﻿glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__GetModuleHandleW@4，该符号在函数 _createHelperWindow 中被引用
 glfw3.lib(win32_window.obj) : error LNK2001: 无法解析的外部符号 __imp__GetModuleHandleW@4
 glfw3.lib(win32_joystick.obj) : error LNK2001: 无法解析的外部符号 __imp__GetModuleHandleW@4
 glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__LoadLibraryA@4，该符号在函数 _loadLibraries 中被引用
@@ -96,5 +94,5 @@ glfw3.lib(wgl_context.obj) : error LNK2019: 无法解析的外部符号 __imp__C
 glfw3.lib(wgl_context.obj) : error LNK2019: 无法解析的外部符号 __imp__DescribePixelFormat@16，该符号在函数 __glfwCreateContextWGL 中被引用
 glfw3.lib(wgl_context.obj) : error LNK2019: 无法解析的外部符号 __imp__SetPixelFormat@12，该符号在函数 __glfwCreateContextWGL 中被引用
 glfw3.lib(wgl_context.obj) : error LNK2019: 无法解析的外部符号 __imp__SwapBuffers@4，该符号在函数 _swapBuffersWGL 中被引用
-vccorlibd.lib(climain.obj) : error LNK2019: 无法解析的外部符号 "?main@@YAHP$01$AAV?$Array@P$AAVString@Platform@@$00@Platform@@@Z" (?main@@YAHP$01$AAV?$Array@P$AAVString@Platform@@$00@Platform@@@Z)，该符号在函数 "int __cdecl _main(void)" (?_main@@YAHXZ) 中被引用
-E:\OpenGL\OpenGLGame\Debug\OpenGLGame\OpenGLGame.exe : fatal error LNK1120: 88 个无法解析的外部命令
+MSVCRTD.lib(exe_winmain.obj) : error LNK2019: 无法解析的外部符号 _WinMain@16，该符号在函数 "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ) 中被引用
+E:\OpenGL\DEMO\OpenGLGame\Debug\OpenGLGame\OpenGLGame.exe : fatal error LNK1120: 88 个无法解析的外部命令
