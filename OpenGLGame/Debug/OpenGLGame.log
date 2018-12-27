@@ -1,0 +1,100 @@
+﻿  Application.cpp
+e:\opengl\openglgame\openglgame\application.cpp(4): warning C4447: 找到的“main”签名不带线程模型。请考虑使用“int main(Platform::Array<Platform::String^>^ args)”。
+glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__GetModuleHandleW@4，该符号在函数 _createHelperWindow 中被引用
+glfw3.lib(win32_window.obj) : error LNK2001: 无法解析的外部符号 __imp__GetModuleHandleW@4
+glfw3.lib(win32_joystick.obj) : error LNK2001: 无法解析的外部符号 __imp__GetModuleHandleW@4
+glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__LoadLibraryA@4，该符号在函数 _loadLibraries 中被引用
+glfw3.lib(vulkan.obj) : error LNK2001: 无法解析的外部符号 __imp__LoadLibraryA@4
+glfw3.lib(wgl_context.obj) : error LNK2001: 无法解析的外部符号 __imp__LoadLibraryA@4
+glfw3.lib(egl_context.obj) : error LNK2001: 无法解析的外部符号 __imp__LoadLibraryA@4
+glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__RegisterDeviceNotificationW@12，该符号在函数 _createHelperWindow 中被引用
+glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__CreateWindowExW@48，该符号在函数 _createHelperWindow 中被引用
+glfw3.lib(win32_window.obj) : error LNK2001: 无法解析的外部符号 __imp__CreateWindowExW@48
+glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__DestroyWindow@4，该符号在函数 __glfwPlatformTerminate 中被引用
+glfw3.lib(win32_window.obj) : error LNK2001: 无法解析的外部符号 __imp__DestroyWindow@4
+glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__ShowWindow@8，该符号在函数 _createHelperWindow 中被引用
+glfw3.lib(win32_window.obj) : error LNK2001: 无法解析的外部符号 __imp__ShowWindow@8
+glfw3.lib(win32_init.obj) : error LNK2019: 无法解析的外部符号 __imp__SystemParametersInfoW@16，该符号在函数 __glfwPlatformInit 中被引用
+glfw3.lib(win32_monitor.obj) : error LNK2019: 无法解析的外部符号 __imp__CreateDCW@16，该符号在函数 __glfwPlatformGetGammaRamp 中被引用
+glfw3.lib(win32_monitor.obj) : error LNK2019: 无法解析的外部符号 __imp__DeleteDC@4，该符号在函数 __glfwPlatformGetGammaRamp 中被引用
+glfw3.lib(win32_monitor.obj) : error LNK2019: 无法解析的外部符号 __imp__GetDeviceCaps@8，该符号在函数 _createMonitor 中被引用
+glfw3.lib(win32_monitor.obj) : error LNK2019: 无法解析的外部符号 __imp__GetDeviceGammaRamp@8，该符号在函数 __glfwPlatformGetGammaRamp 中被引用
+glfw3.lib(win32_monitor.obj) : error LNK2019: 无法解析的外部符号 __imp__SetDeviceGammaRamp@8，该符号在函数 __glfwPlatformSetGammaRamp 中被引用
+glfw3.lib(win32_monitor.obj) : error LNK2019: 无法解析的外部符号 __imp__ChangeDisplaySettingsExW@20，该符号在函数 __glfwSetVideoModeWin32 中被引用
+glfw3.lib(win32_monitor.obj) : error LNK2019: 无法解析的外部符号 __imp__EnumDisplaySettingsW@12，该符号在函数 __glfwPlatformGetVideoModes 中被引用
+glfw3.lib(win32_monitor.obj) : error LNK2019: 无法解析的外部符号 __imp__EnumDisplaySettingsExW@16，该符号在函数 __glfwPlatformGetMonitorPos 中被引用
+glfw3.lib(win32_monitor.obj) : error LNK2019: 无法解析的外部符号 __imp__EnumDisplayDevicesW@16，该符号在函数 __glfwPlatformGetMonitors 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__CreateBitmap@20，该符号在函数 _createIcon 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__DeleteObject@4，该符号在函数 _createIcon 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__CreateDIBSection@24，该符号在函数 _createIcon 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__TrackMouseEvent@4，该符号在函数 _windowProc@16 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__TranslateMessage@4，该符号在函数 __glfwPlatformPollEvents 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__DispatchMessageW@4，该符号在函数 __glfwPlatformPollEvents 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__PeekMessageW@20，该符号在函数 __glfwPlatformPollEvents 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetMessageTime@0，该符号在函数 _translateKey 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SendMessageW@16，该符号在函数 __glfwPlatformSetWindowIcon 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__PostMessageW@16，该符号在函数 __glfwPlatformPostEmptyEvent 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__WaitMessage@0，该符号在函数 __glfwPlatformWaitEvents 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__DefWindowProcW@16，该符号在函数 _windowProc@16 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__UnregisterClassW@8，该符号在函数 __glfwUnregisterWindowClassWin32 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__RegisterClassExW@4，该符号在函数 __glfwRegisterWindowClassWin32 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__MoveWindow@24，该符号在函数 __glfwPlatformSetWindowSizeLimits 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetWindowPos@28，该符号在函数 __glfwPlatformSetWindowPos 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__IsWindowVisible@4，该符号在函数 __glfwPlatformWindowVisible 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__IsIconic@4，该符号在函数 __glfwPlatformWindowIconified 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__BringWindowToTop@4，该符号在函数 __glfwPlatformFocusWindow 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__IsZoomed@4，该符号在函数 __glfwPlatformWindowMaximized 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__OpenClipboard@4，该符号在函数 __glfwPlatformSetClipboardString 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__CloseClipboard@0，该符号在函数 __glfwPlatformSetClipboardString 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetClipboardData@8，该符号在函数 __glfwPlatformSetClipboardString 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetClipboardData@4，该符号在函数 __glfwPlatformGetClipboardString 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__EmptyClipboard@0，该符号在函数 __glfwPlatformSetClipboardString 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetFocus@4，该符号在函数 __glfwPlatformFocusWindow 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetActiveWindow@0，该符号在函数 __glfwPlatformWindowFocused 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetKeyState@4，该符号在函数 _getKeyMods 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetAsyncKeyState@4，该符号在函数 __glfwPlatformPollEvents 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetKeyNameTextW@12，该符号在函数 __glfwPlatformGetKeyName 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetCapture@4，该符号在函数 _windowProc@16 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__ReleaseCapture@0，该符号在函数 _windowProc@16 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__MsgWaitForMultipleObjects@20，该符号在函数 __glfwPlatformWaitEventsTimeout 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetSystemMetrics@4，该符号在函数 __glfwPlatformSetWindowIcon 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetForegroundWindow@4，该符号在函数 __glfwPlatformFocusWindow 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetDC@4，该符号在函数 _createIcon 中被引用
+glfw3.lib(wgl_context.obj) : error LNK2001: 无法解析的外部符号 __imp__GetDC@4
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__ReleaseDC@8，该符号在函数 _createIcon 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetPropW@12，该符号在函数 _createNativeWindow 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetPropW@8，该符号在函数 __glfwPlatformPollEvents 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__RemovePropW@8，该符号在函数 __glfwPlatformDestroyWindow 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetWindowTextW@8，该符号在函数 __glfwPlatformSetWindowTitle 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetClientRect@8，该符号在函数 __glfwPlatformGetWindowSize 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetWindowRect@8，该符号在函数 __glfwPlatformSetWindowSizeLimits 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__AdjustWindowRectEx@16，该符号在函数 __glfwPlatformSetWindowPos 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetCursorPos@8，该符号在函数 __glfwPlatformSetCursorPos 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetCursor@4，该符号在函数 _updateCursorImage 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetCursorPos@4，该符号在函数 __glfwPlatformGetCursorPos 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__ClientToScreen@8，该符号在函数 __glfwPlatformSetCursorPos 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__ScreenToClient@8，该符号在函数 __glfwPlatformGetCursorPos 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__WindowFromPoint@8，该符号在函数 _cursorInClientArea 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__ClipCursor@4，该符号在函数 _updateClipRect 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetRect@20，该符号在函数 __glfwPlatformGetWindowFrameSize 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__PtInRect@12，该符号在函数 _cursorInClientArea 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetWindowLongW@8，该符号在函数 __glfwPlatformSetWindowMonitor 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__SetWindowLongW@12，该符号在函数 __glfwPlatformSetWindowMonitor 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__GetClassLongW@8，该符号在函数 __glfwPlatformSetWindowIcon 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__LoadCursorW@8，该符号在函数 __glfwRegisterWindowClassWin32 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__DestroyIcon@4，该符号在函数 __glfwPlatformDestroyWindow 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__LoadImageW@24，该符号在函数 __glfwRegisterWindowClassWin32 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__CreateIconIndirect@4，该符号在函数 _createIcon 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__CopyIcon@4，该符号在函数 __glfwPlatformCreateStandardCursor 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__DragQueryFileW@16，该符号在函数 _windowProc@16 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__DragQueryPoint@8，该符号在函数 _windowProc@16 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__DragFinish@4，该符号在函数 _windowProc@16 中被引用
+glfw3.lib(win32_window.obj) : error LNK2019: 无法解析的外部符号 __imp__DragAcceptFiles@8，该符号在函数 _createNativeWindow 中被引用
+glfw3.lib(win32_joystick.obj) : error LNK2019: 无法解析的外部符号 __imp__GetRawInputDeviceInfoA@16，该符号在函数 _supportsXInput 中被引用
+glfw3.lib(win32_joystick.obj) : error LNK2019: 无法解析的外部符号 __imp__GetRawInputDeviceList@12，该符号在函数 _supportsXInput 中被引用
+glfw3.lib(wgl_context.obj) : error LNK2019: 无法解析的外部符号 __imp__ChoosePixelFormat@8，该符号在函数 _loadWGLExtensions 中被引用
+glfw3.lib(wgl_context.obj) : error LNK2019: 无法解析的外部符号 __imp__DescribePixelFormat@16，该符号在函数 __glfwCreateContextWGL 中被引用
+glfw3.lib(wgl_context.obj) : error LNK2019: 无法解析的外部符号 __imp__SetPixelFormat@12，该符号在函数 __glfwCreateContextWGL 中被引用
+glfw3.lib(wgl_context.obj) : error LNK2019: 无法解析的外部符号 __imp__SwapBuffers@4，该符号在函数 _swapBuffersWGL 中被引用
+vccorlibd.lib(climain.obj) : error LNK2019: 无法解析的外部符号 "?main@@YAHP$01$AAV?$Array@P$AAVString@Platform@@$00@Platform@@@Z" (?main@@YAHP$01$AAV?$Array@P$AAVString@Platform@@$00@Platform@@@Z)，该符号在函数 "int __cdecl _main(void)" (?_main@@YAHXZ) 中被引用
+E:\OpenGL\OpenGLGame\Debug\OpenGLGame\OpenGLGame.exe : fatal error LNK1120: 88 个无法解析的外部命令
