@@ -80,7 +80,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\external\include\KHR;.\external\include\GLFW;.\external\include\GLEW;.\external\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FrameWork\Manager;.\external\include\KHR;.\external\include\GLFW;.\external\include\GLEW;.\external\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>.\external\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="external\source\glad.c" />
+    <ClCompile Include="FrameWork\Manager\BaseManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\include\glad.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="external\include\GLFW\glfw3.h" />
     <ClInclude Include="external\include\GLFW\glfw3native.h" />
     <ClInclude Include="external\include\KHR\khrplatform.h" />
+    <ClInclude Include="FrameWork\Manager\BaseManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

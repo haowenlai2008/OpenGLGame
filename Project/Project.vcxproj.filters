@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\管理器">
+      <UniqueIdentifier>{9658bab5-d3d0-4e6d-9c6c-8efa78d006c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -20,6 +23,9 @@
     </ClCompile>
     <ClCompile Include="external\source\glad.c">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Manager\BaseManager.cpp">
+      <Filter>源文件\管理器</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="external\include\glad.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Manager\BaseManager.h">
+      <Filter>源文件\管理器</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
