@@ -13,6 +13,7 @@ private:
 	void MainLoop();
 	void ProcessInput(GLFWwindow *window);
 	void Render();
+	void Render2();
 	BaseManager();
 };
 

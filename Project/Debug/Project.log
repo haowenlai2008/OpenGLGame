@@ -1,6 +1,4 @@
-﻿  Application.cpp
-  BaseManager.cpp
+﻿  BaseManager.cpp
 e:\opengl\demo\openglgame\project\external\include\glfw\glfw3.h(789): warning C4099: “GLFWwindow”: 类型名称以前使用“class”现在使用的是“struct”
   e:\opengl\demo\openglgame\project\framework\manager\basemanager.h(2): note: 参见“GLFWwindow”的声明
-  正在生成代码...
   Project.vcxproj -> E:\OpenGL\DEMO\OpenGLGame\Debug\Project.exe
