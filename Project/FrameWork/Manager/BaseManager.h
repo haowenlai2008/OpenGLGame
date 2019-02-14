@@ -12,8 +12,11 @@ private:
 	void BaseInit();
 	void MainLoop();
 	void ProcessInput(GLFWwindow *window);
+	void RenderInit();
 	void Render();
 	void Render2();
+	unsigned int shaderProgram;
+	unsigned int VAO;
 	BaseManager();
 };
 

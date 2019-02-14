@@ -60,6 +60,7 @@ void BaseManager::BaseInit()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);//
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
+	//´´½¨´°¿Ú
 	glWindow = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
 	if (glWindow == nullptr)
 	{
@@ -80,6 +81,9 @@ void BaseManager::ProcessInput(GLFWwindow *window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
+}
+void BaseManager::RenderInit()
+{
 }
 void BaseManager::Render()
 {
@@ -196,8 +200,8 @@ void BaseManager::Render2()
 
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vList), vList, GL_STATIC_DRAW);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vList), vList, GL_STATIC_DRAW);
 
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
@@ -216,6 +220,7 @@ void BaseManager::Render2()
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glUseProgram(shaderProgram);
+	
 	glDrawArrays(GL_TRIANGLES,0,6);
 	glBindVertexArray(0);
 }
