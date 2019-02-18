@@ -2,11 +2,11 @@
 #define SHADER_H
 #include "glfw3.h"
 #include "glad.h"; // 包含glad来获取所有的必须OpenGL头文件
-
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include "const.h"
 //检查Shader是否编译正确
 inline void assertShader(unsigned int shaderObj, std::string&& shaderName)
 {
@@ -36,7 +36,10 @@ class Shader
 public:
 	// 程序ID
 	unsigned int ID;
+	Shader() : ID(-1)
+	{
 
+	};
 	// 构造器读取并构建着色器
 	template <typename S1, typename S2 = std::string>
 	Shader(S1&& vertexPath, S2&& fragmentPath)
@@ -52,8 +55,8 @@ public:
 		try
 		{
 			// 打开文件
-			vShaderFile.open(std::string("Resources/Shader/") + std::forward<S1>(vertexPath));
-			fShaderFile.open(std::string("Resources/Shader/") + std::forward<S2>(fragmentPath));
+			vShaderFile.open(SHADER_PATH + std::forward<S1>(vertexPath));
+			fShaderFile.open(SHADER_PATH + std::forward<S2>(fragmentPath));
 			std::stringstream vShaderStream, fShaderStream;
 			// 读取文件的缓冲内容到数据流中
 			vShaderStream << vShaderFile.rdbuf();

@@ -68,5 +68,8 @@
     <ClInclude Include="external\include\stb_image\stb_image.h">
       <Filter>源文件\第三方库\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="const.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
