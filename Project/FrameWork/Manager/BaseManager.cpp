@@ -31,7 +31,7 @@ int BaseManager::Run()
 	MainLoop();
 	return 0;
 }
-
+//窗口初始化
 void BaseManager::BaseInit()
 {
 	glfwInit();//初始化
@@ -62,6 +62,22 @@ void BaseManager::ProcessInput(GLFWwindow *window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
+	else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		if (view >= 1)
+			view = 1;
+		else
+			view += 0.01;
+		std::cout << "view = " << view << endl;
+	}	
+	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		if (view <= 0)
+			view = 0;
+		else
+			view -= 0.01;
+		std::cout << "view = " << view << endl;
+	}
 }
 
 
@@ -80,7 +96,9 @@ void BaseManager::Render()
 		0,1,4,
 		1,2,3
 	};
-	
+	//编译着色器
+	ShaderCompile("vertex_1.vs", "fragment_1.fs");
+	ourShader.use();//glUseProgram(shaderProgram);
 	//顶点数组
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
@@ -93,7 +111,6 @@ void BaseManager::Render()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vList), vList, GL_STATIC_DRAW);
 
 	//索引缓存
-	unsigned int EBO;
 	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
@@ -103,10 +120,21 @@ void BaseManager::Render()
 	glEnableVertexAttribArray(0);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	while (!glfwWindowShouldClose(glWindow))
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		//draw
+		glBindVertexArray(VAO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
 
-	glUseProgram(shaderProgram);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
+		ProcessInput(glWindow);
+		glfwPollEvents();
+		glfwSwapBuffers(glWindow);
+	}
+	
 }
 //按顺序手动画两个三角形
 void BaseManager::Render2()
@@ -120,8 +148,10 @@ void BaseManager::Render2()
 		0.0f,0.7f,0.0f
 	};
 
+	//编译着色器
+	ShaderCompile("vertex_1.vs", "fragment_1.fs");
+	ourShader.use();//glUseProgram(shaderProgram);
 	//顶点数组
-	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
@@ -140,10 +170,20 @@ void BaseManager::Render2()
 	//线框模式
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-	glUseProgram(shaderProgram);
+	while (!glfwWindowShouldClose(glWindow))
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		//draw
+		glBindVertexArray(VAO);
+		glDrawArrays(GL_TRIANGLES,0,6);
+		glBindVertexArray(0);
+
+		ProcessInput(glWindow);
+		glfwPollEvents();
+		glfwSwapBuffers(glWindow);
+	}
 	
-	glDrawArrays(GL_TRIANGLES,0,6);
-	glBindVertexArray(0);
 }
 
 //使用不同的顶点数组画两个三角形
@@ -159,6 +199,10 @@ void BaseManager::Render3()
 		0.9f, -0.5f, 0.0f,  // right
 		0.45f, 0.5f, 0.0f   // top 
 	};
+
+	//编译着色器
+	ShaderCompile("vertex_1.vs", "fragment_1.fs");
+	ourShader.use();//glUseProgram(shaderProgram);
 	unsigned int VBOs[2], VAOs[2];
 	glGenVertexArrays(2, VAOs); // we can also generate multiple VAOs or buffers at the same time
 	glGenBuffers(2, VBOs);
@@ -179,12 +223,23 @@ void BaseManager::Render3()
 	glEnableVertexAttribArray(0);
 
 
-	glUseProgram(shaderProgram);
-	glBindVertexArray(VAOs[0]);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	// then we draw the second triangle using the data from the second VAO
-	glBindVertexArray(VAOs[1]);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	while (!glfwWindowShouldClose(glWindow))
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		//draw
+		glBindVertexArray(VAOs[0]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		// then we draw the second triangle using the data from the second VAO
+		glBindVertexArray(VAOs[1]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		ProcessInput(glWindow);
+		glfwPollEvents();
+		glfwSwapBuffers(glWindow);
+	}
+	
 }
 
 void BaseManager::Render4()
@@ -197,8 +252,11 @@ void BaseManager::Render4()
 		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // 左下
 		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // 顶部
 	};
+
+	//编译着色器
+	ShaderCompile("vertex_4.vs", "fragment_4.fs");
+	ourShader.use();//glUseProgram(shaderProgram);
 	//顶点数组
-	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
@@ -215,11 +273,23 @@ void BaseManager::Render4()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
 	glEnableVertexAttribArray(1);
 
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	glBindVertexArray(0);
+
+	while (!glfwWindowShouldClose(glWindow))
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		//draw
+		glBindVertexArray(VAO);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindVertexArray(0);
+
+		ProcessInput(glWindow);
+		glfwPollEvents();
+		glfwSwapBuffers(glWindow);
+	}
 }
-//贴纹理初始化
-void BaseManager::RenderInit5()
+//贴纹理
+void BaseManager::Render5()
 {
 	float vertices[] = {
 		//     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
@@ -233,6 +303,78 @@ void BaseManager::RenderInit5()
 		0,1,3,
 		1,2,3
 	};
+	//编译着色器
+	ShaderCompile("vertex_5.vs", "fragment_5.fs");
+	ourShader.use();//glUseProgram(shaderProgram);
+
+	//顶点数组
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+	//绑定顶点数组缓存
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	//索引缓存
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	unsigned int texture1;
+	//生成纹理
+	LoadTexture(texture1, std::move("awesomeface.png"));	//加载纹理
+	// 位置属性
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// 颜色属性
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
+	glEnableVertexAttribArray(1);
+	// 纹理属性
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
+	glEnableVertexAttribArray(2);
+
+	glBindTexture(GL_TEXTURE_2D, texture1);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+	while (!glfwWindowShouldClose(glWindow))
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		//draw
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+		ProcessInput(glWindow);
+		glfwPollEvents();
+		glfwSwapBuffers(glWindow);
+	}
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+	glfwTerminate();
+}
+
+//纹理单元测试
+void BaseManager::Render6()
+{
+	float vertices[] = {
+		//     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
+			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
+			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
+			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
+			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
+	};
+
+	unsigned int indices[] = {
+		0,1,3,
+		1,2,3
+	};
+	//编译着色器
+	ShaderCompile("vertex_6.vs", "fragment_6.fs");
+	ourShader.use();//glUseProgram(shaderProgram);
+
 	//顶点数组
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -248,9 +390,9 @@ void BaseManager::RenderInit5()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-
+	unsigned int texture1, texture2;
 	//生成纹理
-	LoadTexture(Texture, std::move("container.jpg"));	//加载纹理
+
 	// 位置属性
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -260,28 +402,132 @@ void BaseManager::RenderInit5()
 	// 纹理属性
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
 	glEnableVertexAttribArray(2);
-}
-//贴纹理
-void BaseManager::Render5()
-{
-	glBindTexture(GL_TEXTURE_2D, Texture);
+
+	LoadTexture(texture1, "container.jpg");	//加载纹理
+	LoadTexture(texture2, "awesomeface.png");	//加载纹理
+
+	glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+	ourShader.setInt("texture2", 1);
+
+
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
-}
-void BaseManager::MainLoop()
-{
-	ShaderCompile("vertex_5.vs", "fragment_5.fs");
-	ourShader.use();
-	RenderInit5();
+
+
 	while (!glfwWindowShouldClose(glWindow))
 	{
+		ProcessInput(glWindow);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		Render5();
-		ProcessInput(glWindow);
+		//draw
+		
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
+
+		ourShader.use();
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+		
 		glfwPollEvents();
 		glfwSwapBuffers(glWindow);
 	}
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+	glfwTerminate();
+}
+
+//纹理单元测试(通过上下调整两个纹理的可见度
+void BaseManager::Render7()
+{
+	float vertices[] = {
+		//     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
+			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
+			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
+			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
+			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
+	};
+
+	unsigned int indices[] = {
+		0,1,3,
+		1,2,3
+	};
+	//编译着色器
+	ShaderCompile("vertex_6.vs", "fragment_6_2.fs");
+	ourShader.use();//glUseProgram(shaderProgram);
+
+	//顶点数组
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	//绑定顶点数组缓存
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	//索引缓存
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	unsigned int texture1, texture2;
+	//生成纹理
+
+	// 位置属性
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// 颜色属性
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
+	glEnableVertexAttribArray(1);
+	// 纹理属性
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
+	glEnableVertexAttribArray(2);
+
+	LoadTexture(texture1, "container.jpg");	//加载纹理
+	LoadTexture(texture2, "awesomeface.png");	//加载纹理
+	view = 0.5;
+	glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+	ourShader.setInt("texture2", 1);
+	ourShader.setFloat("view", view);
+
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+
+	while (!glfwWindowShouldClose(glWindow))
+	{
+		ProcessInput(glWindow);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		//draw
+		
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
+		ourShader.setFloat("view", view);
+		ourShader.use();
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+
+		glfwPollEvents();
+		glfwSwapBuffers(glWindow);
+	}
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+	glfwTerminate();
+}
+void BaseManager::MainLoop()
+{
+	Render7();
 }
