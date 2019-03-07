@@ -80,7 +80,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>.\;.\FrameWork\Shader;.\FrameWork\Manager;.\external\include\KHR;.\external\include\GLFW;.\external\include\stb_image;.\external\include\GLEW;.\external\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\FrameWork\Shader;.\FrameWork\Manager;.\external\include\KHR;.\external\include\glm;.\external\include\GLFW;.\external\include\stb_image;.\external\include\GLEW;.\external\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>.\external\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

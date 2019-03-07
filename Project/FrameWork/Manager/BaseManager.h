@@ -5,6 +5,7 @@
 #include "stb_image.h"
 #include "const.h"
 #include <iostream>
+
 class GLFWwindow;
 class BaseManager
 {
@@ -65,6 +66,8 @@ private:
 	void Render5();//贴纹理测试
 	void Render6();//纹理单元测试
 	void Render7();//纹理单元测试(通过上下调整两个纹理的可见度
+	void GLMTest();//测试GML库
+	void GLMTest2();//旋转缩放测试
 	Shader ourShader;
 	unsigned int shaderProgram;
 	unsigned int VAO;

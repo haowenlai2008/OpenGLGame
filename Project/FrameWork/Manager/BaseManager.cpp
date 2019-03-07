@@ -5,6 +5,14 @@
 #include "stb_image.h"
 #include <iostream>
 #include <string>
+#include "glm/vec3.hpp"
+#include "glm/vec4.hpp"
+#include "glm/mat4x4.hpp"
+#include "glm/ext/matrix_transform.hpp"
+#include "glm/ext/matrix_clip_space.hpp"
+#include "glm/ext/scalar_constants.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 using namespace std;
 BaseManager* BaseManager::m_instance = nullptr;
 
@@ -527,7 +535,114 @@ void BaseManager::Render7()
 	glDeleteBuffers(1, &EBO);
 	glfwTerminate();
 }
+void BaseManager::GLMTest()
+{
+	glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
+	glm::mat4 trans = glm::mat4(1.0f);
+	trans = glm::translate(trans, glm::vec3(1.0, 1.0, 1.0));
+	vec = trans * vec;
+	cout << vec.x << vec.y << vec.z << endl;
+	system("pause");
+}
+void BaseManager::GLMTest2()
+{
+	float vertices[] = {
+		//     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
+			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
+			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
+			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
+			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
+	};
+
+	unsigned int indices[] = {
+		0,1,3,
+		1,2,3
+	};
+	//编译着色器
+	ShaderCompile("vertex_7.vs", "fragment_7.fs");
+	ourShader.use();//glUseProgram(shaderProgram);
+
+	//顶点数组
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	//绑定顶点数组缓存
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	//索引缓存
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	unsigned int texture1, texture2;
+	//生成纹理
+
+	// 位置属性
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// 颜色属性
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
+	glEnableVertexAttribArray(1);
+	// 纹理属性
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
+	glEnableVertexAttribArray(2);
+
+	LoadTexture(texture1, "container.jpg");	//加载纹理
+	LoadTexture(texture2, "awesomeface.png");	//加载纹理
+
+	glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+	ourShader.setInt("texture2", 1);
+
+
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+	
+	
+	while (!glfwWindowShouldClose(glWindow))
+	{
+		ProcessInput(glWindow);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		//draw
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
+		glm::mat4 transform = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+		//创建变换矩阵，绕z轴旋转90度
+		//transform = glm::rotate(transform, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
+		//transform = glm::scale(transform, glm::vec3(0.5, 0.5, 0.5));
+
+		//创建变换矩阵，一直旋转一直爽
+		transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
+		transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
+		unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+		ourShader.use();
+		
+
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+
+		glfwPollEvents();
+		glfwSwapBuffers(glWindow);
+	}
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+	glfwTerminate();
+}
 void BaseManager::MainLoop()
 {
-	Render7();
+	//Render7();
+	GLMTest2();
 }
