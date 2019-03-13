@@ -543,6 +543,7 @@ void BaseManager::GLMTest()
 	cout << vec.x << vec.y << vec.z << endl;
 	system("pause");
 }
+//Ðý×ªËõ·Å²âÊÔ
 void BaseManager::GLMTest2()
 {
 	float vertices[] = {
@@ -642,6 +643,7 @@ void BaseManager::GLMTest2()
 	glDeleteBuffers(1, &EBO);
 	glfwTerminate();
 }
+//¿Õ¼ä±ä»»²âÊÔ
 void BaseManager::GLM3DTest()
 {
 	float vertices[] = {

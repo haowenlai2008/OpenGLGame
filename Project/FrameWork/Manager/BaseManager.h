@@ -68,7 +68,7 @@ private:
 	void Render7();//纹理单元测试(通过上下调整两个纹理的可见度
 	void GLMTest();//测试GML库
 	void GLMTest2();//旋转缩放测试
-	void GLM3DTest();//3D测试
+	void GLM3DTest();//空间变换测试
 	void GLM3DTest2();//旋转正方体
 
 	Shader ourShader;
