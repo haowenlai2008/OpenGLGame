@@ -1,10 +1,10 @@
 # OpenGLGame
-A demo based on OpenGL
-根据LearnOpenGL CN的教程学习OpenGL的项目
-着色器的路径 Project/Resources/Shader
-图片的路径 Project/Resources/Texture
-主要的代码都在BaseManager.c还有BaseManager.h文件
-每个Shader对应的测试为
+A demo based on OpenGL  
+根据LearnOpenGL CN的教程学习OpenGL的项目  
+着色器的路径 Project/Resources/Shader  
+图片的路径 Project/Resources/Texture  
+主要的代码都在BaseManager.c还有BaseManager.h文件  
+每个Shader对应的测试为  
 fragment_1   vertex_1    利用顶点索引画两个三角形  
 fragment_1   vertex_1    按顺序手动画两个三角形  
 fragment_1   vertex_1    使用不同的顶点数组画两个三角形  
