@@ -68,10 +68,15 @@ private:
 	void Render7();//纹理单元测试(通过上下调整两个纹理的可见度
 	void GLMTest();//测试GML库
 	void GLMTest2();//旋转缩放测试
+	void GLM3DTest();//3D测试
+	void GLM3DTest2();//旋转正方体
+
 	Shader ourShader;
 	unsigned int shaderProgram;
 	unsigned int VAO;
 	unsigned int EBO;
+	float screenWidth;
+	float screenHeight;
 	float view;
 	BaseManager();
 };
