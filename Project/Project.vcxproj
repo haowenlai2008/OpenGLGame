@@ -125,12 +125,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="external\include\stb_image\stb_image.cpp" />
     <ClCompile Include="external\source\glad.c" />
     <ClCompile Include="FrameWork\Manager\BaseManager.cpp" />
     <ClCompile Include="FrameWork\Shader\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="const.h" />
     <ClInclude Include="external\include\glad.h" />
     <ClInclude Include="external\include\GLEW\glew.h" />

@@ -1,5 +1,6 @@
 #pragma once
 #include "Shader.h"
+#include "Camera.h"
 #include "glfw3.h"
 #include "glad.h"
 #include "stb_image.h"
@@ -14,17 +15,19 @@ public:
 	~BaseManager();
 	static BaseManager* getInstance();
 	int Run();
+	void ProcessInput(GLFWwindow *window);
+	void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 private:
 	GLFWwindow* glWindow;
 	void BaseInit();//窗口初始化
 	void MainLoop();//主循环
-	void ProcessInput(GLFWwindow *window);
+	
 	//编译着色器
 	template <typename S1, typename S2 = std::string>
 	void ShaderCompile(S1&& vs, S2&& fs)
 	{
 		ourShader = Shader(std::forward<std::string>(vs), std::forward<std::string>(fs));
-		shaderProgram = ourShader.ID;
 	};
 	//加载纹理
 	template <typename S1 = std::string>
@@ -70,13 +73,18 @@ private:
 	void GLMTest2();//旋转缩放测试
 	void GLM3DTest();//空间变换测试
 	void GLM3DTest2();//旋转正方体
-
+	void GLM3DTest3();//自由摄像机
 	Shader ourShader;
-	unsigned int shaderProgram;
+	Camera myCamera;
 	unsigned int VAO;
 	unsigned int EBO;
 	float screenWidth;
 	float screenHeight;
+	float lastFrame;
+	float deltaTime;
+	float lastX;
+	float lastY;
+	bool firstMouse;
 	float view;
 	BaseManager();
 };

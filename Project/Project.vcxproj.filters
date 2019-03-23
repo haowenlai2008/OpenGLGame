@@ -25,6 +25,9 @@
     <Filter Include="源文件\第三方库\stb_image">
       <UniqueIdentifier>{abdb740e-f254-4e49-8459-f5728062c156}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\摄像机">
+      <UniqueIdentifier>{c1bfb2cc-dec6-4d17-8024-fbc1f4f7996e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -41,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="external\include\stb_image\stb_image.cpp">
       <Filter>源文件\第三方库\stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>源文件\摄像机</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="const.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>源文件\摄像机</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
