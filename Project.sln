@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project", "Project\Project.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Triangle", "Triangle\Triangle.vcxproj", "{1C56D461-FDD5-4781-AFCE-D95C22B13505}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Square", "Square\Square.vcxproj", "{74526C55-0390-4FFD-9423-5BEFD00780A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{1C56D461-FDD5-4781-AFCE-D95C22B13505}.Release|x64.Build.0 = Release|x64
 		{1C56D461-FDD5-4781-AFCE-D95C22B13505}.Release|x86.ActiveCfg = Release|Win32
 		{1C56D461-FDD5-4781-AFCE-D95C22B13505}.Release|x86.Build.0 = Release|Win32
+		{74526C55-0390-4FFD-9423-5BEFD00780A1}.Debug|x64.ActiveCfg = Debug|x64
+		{74526C55-0390-4FFD-9423-5BEFD00780A1}.Debug|x64.Build.0 = Debug|x64
+		{74526C55-0390-4FFD-9423-5BEFD00780A1}.Debug|x86.ActiveCfg = Debug|Win32
+		{74526C55-0390-4FFD-9423-5BEFD00780A1}.Debug|x86.Build.0 = Debug|Win32
+		{74526C55-0390-4FFD-9423-5BEFD00780A1}.Release|x64.ActiveCfg = Release|x64
+		{74526C55-0390-4FFD-9423-5BEFD00780A1}.Release|x64.Build.0 = Release|x64
+		{74526C55-0390-4FFD-9423-5BEFD00780A1}.Release|x86.ActiveCfg = Release|Win32
+		{74526C55-0390-4FFD-9423-5BEFD00780A1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
