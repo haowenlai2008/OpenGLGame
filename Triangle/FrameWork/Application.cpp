@@ -35,9 +35,9 @@ void BaseInit()
 void NormalTriangle()
 {
 	float Triangle[] = {
--0.9f, -0.5f, 0.0f,  // left 
--0.0f, -0.5f, 0.0f,  // right
--0.45f, 0.5f, 0.0f,  // top 
+		-0.9f, -0.5f, 0.0f,  // left 
+		-0.0f, -0.5f, 0.0f,  // right
+		-0.45f, 0.5f, 0.0f,  // top 
 	};
 
 	//±àÒë×ÅÉ«Æ÷
