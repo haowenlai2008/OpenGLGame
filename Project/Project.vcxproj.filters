@@ -28,57 +28,42 @@
     <Filter Include="源文件\摄像机">
       <UniqueIdentifier>{c1bfb2cc-dec6-4d17-8024-fbc1f4f7996e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\第三方库\glad">
+      <UniqueIdentifier>{81b9c7ac-ae65-46db-9c05-fe272cfab5ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="external\source\glad.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="FrameWork\Manager\BaseManager.cpp">
       <Filter>源文件\管理器</Filter>
     </ClCompile>
     <ClCompile Include="FrameWork\Shader\Shader.cpp">
       <Filter>源文件\着色器类</Filter>
     </ClCompile>
-    <ClCompile Include="external\include\stb_image\stb_image.cpp">
+    <ClCompile Include="FrameWork\Application.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Camera.cpp">
+      <Filter>源文件\摄像机</Filter>
+    </ClCompile>
+    <ClCompile Include="external\source\stb_image.cpp">
       <Filter>源文件\第三方库\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>源文件\摄像机</Filter>
+    <ClCompile Include="external\source\glad.c">
+      <Filter>源文件\第三方库\glad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="external\include\GLFW\glfw3.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\GLFW\glfw3native.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\GLEW\glew.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\KHR\khrplatform.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\glad.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="FrameWork\Manager\BaseManager.h">
       <Filter>源文件\管理器</Filter>
     </ClInclude>
     <ClInclude Include="FrameWork\Shader\Shader.h">
       <Filter>源文件\着色器类</Filter>
     </ClInclude>
-    <ClInclude Include="external\include\stb_image\stb_image.h">
-      <Filter>源文件\第三方库\stb_image</Filter>
-    </ClInclude>
-    <ClInclude Include="const.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="FrameWork\Camera.h">
       <Filter>源文件\摄像机</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\const.h">
+      <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -80,7 +80,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>.\;.\FrameWork\Shader;.\FrameWork\Manager;.\external\include\KHR;.\external\include\glm;.\external\include\GLFW;.\external\include\stb_image;.\external\include\GLEW;.\external\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\external\include\glm;.\FrameWork\;.\FrameWork\Shader;.\FrameWork\Manager;.\external\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>.\external\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -124,22 +124,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="external\include\stb_image\stb_image.cpp" />
     <ClCompile Include="external\source\glad.c" />
+    <ClCompile Include="external\source\stb_image.cpp" />
+    <ClCompile Include="FrameWork\Application.cpp" />
+    <ClCompile Include="FrameWork\Camera.cpp" />
     <ClCompile Include="FrameWork\Manager\BaseManager.cpp" />
     <ClCompile Include="FrameWork\Shader\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="const.h" />
-    <ClInclude Include="external\include\glad.h" />
-    <ClInclude Include="external\include\GLEW\glew.h" />
-    <ClInclude Include="external\include\GLFW\glfw3.h" />
-    <ClInclude Include="external\include\GLFW\glfw3native.h" />
-    <ClInclude Include="external\include\KHR\khrplatform.h" />
-    <ClInclude Include="external\include\stb_image\stb_image.h" />
+    <ClInclude Include="FrameWork\Camera.h" />
+    <ClInclude Include="FrameWork\const.h" />
     <ClInclude Include="FrameWork\Manager\BaseManager.h" />
     <ClInclude Include="FrameWork\Shader\Shader.h" />
   </ItemGroup>
