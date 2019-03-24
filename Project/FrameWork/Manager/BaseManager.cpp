@@ -1023,7 +1023,7 @@ void BaseManager::GLM3DTest3()
 	unsigned int texture1, texture2;
 	//生成纹理
 	LoadTexture(texture1, "container.jpg");	//加载纹理
-	LoadTexture(texture2, "awesomeface.png");	//加载纹理
+	LoadTexture(texture2, "ICO02.png");	//加载纹理
 
 	glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
 	ourShader.setInt("texture2", 1);
@@ -1061,7 +1061,7 @@ void BaseManager::GLM3DTest3()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		//设置观察矩阵的值
 		int viewLoc = glGetUniformLocation(ourShader.ID, "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		
 		//设置透视矩阵的值
 		int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
 		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
@@ -1077,7 +1077,7 @@ void BaseManager::GLM3DTest3()
 			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 			int modelLoc = glGetUniformLocation(ourShader.ID, "model");
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
+			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(myCamera.GetViewMatrix()));
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 		glBindVertexArray(0);
@@ -1093,5 +1093,5 @@ void BaseManager::GLM3DTest3()
 }
 void BaseManager::MainLoop()
 {
-	Render();//画两个三角形
+	GLM3DTest3();//画两个三角形
 }
