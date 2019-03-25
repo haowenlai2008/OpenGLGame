@@ -32,7 +32,7 @@ void LoadTexture(unsigned int &texture, S1&& pic)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// 加载并生成纹理
 	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
+	stbi_set_flip_vertically_on_load(true);//读取图片的时候对Y轴进行反转
 	unsigned char *data = stbi_load((TEXTURE_PATH + std::forward<std::string>(pic)).c_str(), &width, &height, &nrChannels, 0);
 	std::cout << "nrChannels = " << nrChannels << endl;
 	if (data)
