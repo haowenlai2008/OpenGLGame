@@ -13,5 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\第三方库">
+      <UniqueIdentifier>{d18306f1-be5b-4440-99a2-d31402e748a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\第三方库\stb_image">
+      <UniqueIdentifier>{9bf86c06-cbd9-40ea-9cc7-f04d417b7826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\第三方库\glad">
+      <UniqueIdentifier>{55795f5b-0954-432c-855b-7a38ec495bcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\着色器类">
+      <UniqueIdentifier>{0e6aa5d6-d90e-4b21-a03b-b27e3c2a0f44}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FrameWork\Application.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Shader.cpp">
+      <Filter>源文件\着色器类</Filter>
+    </ClCompile>
+    <ClCompile Include="external\source\glad.c">
+      <Filter>源文件\第三方库\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="external\source\stb_image.cpp">
+      <Filter>源文件\第三方库\stb_image</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FrameWork\Shader.h">
+      <Filter>源文件\着色器类</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

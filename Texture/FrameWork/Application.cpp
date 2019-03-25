@@ -52,6 +52,38 @@ void LoadTexture(unsigned int &texture, S1&& pic)
 	stbi_image_free(data);
 	data = nullptr;
 }
+template <typename S1 = std::string>
+void LoadTexture(unsigned int &texture, S1&& pic, SurroundMode surroundMode, FilteringMode filteringMode)
+{
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	// 为当前绑定的纹理对象设置环绕、过滤方式
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, (int)surroundMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (int)surroundMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (int)filteringMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, (int)filteringMode);
+	// 加载并生成纹理
+	int width, height, nrChannels;
+	stbi_set_flip_vertically_on_load(true);
+	unsigned char *data = stbi_load((TEXTURE_PATH + std::forward<std::string>(pic)).c_str(), &width, &height, &nrChannels, 0);
+	std::cout << "nrChannels = " << nrChannels << endl;
+	if (data)
+	{
+		//位深度为24，3个通道(jpg
+		if (nrChannels == 3)
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		//位深度为32，4个通道(png
+		else if (nrChannels == 4)
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+	data = nullptr;
+}
 void BaseInit()
 {
 	glfwInit();//初始化
@@ -77,42 +109,118 @@ void BaseInit()
 		return;
 	}
 }
-void NormalSquare()
+void SurroundTest(SurroundMode surroundMode, FilteringMode filteringMode)
 {
 	float vertices[] = {
-		//     ---- 位置 ----
-			 0.5f,  0.5f, 0.0f,  // 右上
-			 0.5f, -0.5f, 0.0f,  // 右下
-			-0.5f, -0.5f, 0.0f,  // 左下
-			-0.5f,  0.5f, 0.0f,  // 左上
+		//     ---- 位置 ----     - 纹理坐标 -
+			 0.5f,  0.5f, 0.0f,  2.0f, 2.0f,    // 右上
+			 0.5f, -0.5f, 0.0f,  2.0f, -1.0f,   // 右下
+			-0.5f, -0.5f, 0.0f,  -1.0f, -1.0f,  // 左下
+			-0.5f,  0.5f, 0.0f,  -1.0f, 2.0f    // 左上
 	};
-	//索引
+
 	unsigned int indices[] = {
 		0,1,3,
 		1,2,3
 	};
+	float borderColor[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 	//编译着色器
-	Shader ourShader("vertex_1.vs", "fragment_1.fs");
+	Shader ourShader("vertex_3.vs", "fragment_3.fs");
 	ourShader.use();//glUseProgram(shaderProgram);
-	unsigned int VAO;
+	unsigned int VAO, VBO, EBO;
+
 	//顶点数组
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
+
 	//绑定顶点数组缓存
-	unsigned int VBO;
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	//绑定索引缓存
-	unsigned int EBO;
+	//索引缓存
 	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
+	//生成纹理
+	unsigned int texture1;
+	LoadTexture(texture1, std::move("picture4.png"), surroundMode, filteringMode);	//加载纹理
+	glBindTexture(GL_TEXTURE_2D, texture1);
+
 	// 位置属性
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+	// 纹理属性
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
+	glEnableVertexAttribArray(1);
+	
+
+	while (!glfwWindowShouldClose(glWindow))
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		//draw
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+		glfwPollEvents();
+		glfwSwapBuffers(glWindow);
+	}
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+	glfwTerminate();
+}
+//过滤模式测试
+void FilterTest(SurroundMode surroundMode, FilteringMode filteringMode)
+{
+	float vertices[] = {
+		//     ---- 位置 ----     - 纹理坐标 -
+			 0.9f,  0.9f, 0.0f,  1.0f, 1.0f,   // 右上
+			 0.9f, -0.9f, 0.0f,  1.0f, 0.0f,   // 右下
+			-0.9f, -0.9f, 0.0f,  0.0f, 0.0f,   // 左下
+			-0.9f,  0.9f, 0.0f,  0.0f, 1.0f    // 左上
+	};
+
+	unsigned int indices[] = {
+		0,1,3,
+		1,2,3
+	};
+	float borderColor[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+	//编译着色器
+	Shader ourShader("vertex_3.vs", "fragment_3.fs");
+	ourShader.use();//glUseProgram(shaderProgram);
+	unsigned int VAO, VBO, EBO;
+
+	//顶点数组
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	//绑定顶点数组缓存
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	//索引缓存
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	//生成纹理
+	unsigned int texture1;
+	LoadTexture(texture1, std::move("picture4.png"), surroundMode, filteringMode);	//加载纹理
+	glBindTexture(GL_TEXTURE_2D, texture1);
+
+	// 位置属性
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// 纹理属性
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
+	glEnableVertexAttribArray(1);
+
 
 	while (!glfwWindowShouldClose(glWindow))
 	{
@@ -131,48 +239,53 @@ void NormalSquare()
 	glfwTerminate();
 }
 
-//彩色正方形
-void ColourfulSquare()
+//普通测试
+void NormalTest()
 {
 	float vertices[] = {
-		//     ---- 位置 ----       ---- 颜色 ---- 
-			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,  // 右上
-			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,  // 右下
-			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,  // 左下
-			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,  // 左上
+		//     ---- 位置 ----     - 纹理坐标 -
+			 0.9f,  0.9f, 0.0f,  1.0f, 1.0f,   // 右上
+			 0.9f, -0.9f, 0.0f,  1.0f, 0.0f,   // 右下
+			-0.9f, -0.9f, 0.0f,  0.0f, 0.0f,   // 左下
+			-0.9f,  0.9f, 0.0f,  0.0f, 1.0f    // 左上
 	};
-	//索引
+
 	unsigned int indices[] = {
 		0,1,3,
 		1,2,3
 	};
 	//编译着色器
-	Shader ourShader("vertex_4.vs", "fragment_4.fs");
+	Shader ourShader("vertex_3.vs", "fragment_3.fs");
 	ourShader.use();//glUseProgram(shaderProgram);
-	unsigned int VAO;
+	unsigned int VAO, VBO, EBO;
+
 	//顶点数组
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
+
 	//绑定顶点数组缓存
-	unsigned int VBO;
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	
-	//绑定索引缓存
-	unsigned int EBO;
+
+	//索引缓存
 	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
+	//生成纹理
+	unsigned int texture1;
+	LoadTexture(texture1, std::move("picture4.png"));	//加载纹理
+	glBindTexture(GL_TEXTURE_2D, texture1);//绑定纹理
+
 	// 位置属性
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// 颜色属性
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
+	// 纹理属性
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
 	glEnableVertexAttribArray(1);
-	//线框模式
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+
 	while (!glfwWindowShouldClose(glWindow))
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -191,7 +304,7 @@ void ColourfulSquare()
 }
 void MainLoop()
 {
-	ColourfulSquare();
+	NormalTest();//测试
 }
 
 int main(int argc, char** argv[])
