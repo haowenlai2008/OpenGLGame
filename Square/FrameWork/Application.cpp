@@ -6,39 +6,6 @@
 using namespace std;
 
 GLFWwindow* glWindow = nullptr;
-//加载纹理
-template <typename S1 = std::string>
-void LoadTexture(unsigned int &texture, S1&& pic)
-{
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	// 为当前绑定的纹理对象设置环绕、过滤方式
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// 加载并生成纹理
-	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data = stbi_load((TEXTURE_PATH + std::forward<std::string>(pic)).c_str(), &width, &height, &nrChannels, 0);
-	std::cout << "nrChannels = " << nrChannels << endl;
-	if (data)
-	{
-		//位深度为24，3个通道(jpg
-		if (nrChannels == 3)
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		//位深度为32，4个通道(png
-		else if (nrChannels == 4)
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
-	stbi_image_free(data);
-	data = nullptr;
-}
 void BaseInit()
 {
 	glfwInit();//初始化
@@ -158,6 +125,7 @@ void ColourfulSquare()
 	// 颜色属性
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
 	glEnableVertexAttribArray(1);
+	//线框模式
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	while (!glfwWindowShouldClose(glWindow))
 	{
