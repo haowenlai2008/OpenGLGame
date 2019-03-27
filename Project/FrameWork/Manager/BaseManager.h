@@ -44,7 +44,7 @@ private:
 		int width, height, nrChannels;
 		stbi_set_flip_vertically_on_load(true);
 		unsigned char *data = stbi_load((TEXTURE_PATH + std::forward<std::string>(pic)).c_str(), &width, &height, &nrChannels, 0);
-		std::cout << "nrChannels = " << nrChannels << endl;
+		std::cout << "nrChannels = " << nrChannels << std::endl;
 		if (data)
 		{
 			//位深度为24，3个通道(jpg

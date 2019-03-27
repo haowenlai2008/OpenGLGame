@@ -134,6 +134,7 @@ void BaseManager::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 // ----------------------------------------------------------------------
 void BaseManager::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
+	std::cout << "23333" << std::endl;
 	myCamera.ProcessMouseScroll(yoffset);
 }
 
@@ -310,7 +311,7 @@ void BaseManager::Render4()
 	};
 
 	//编译着色器
-	ShaderCompile("vertex_4.vs", "fragment_4.fs");
+	ShaderCompile("vertex_1_2.vs", "fragment_1_2.fs");
 	ourShader.use();//glUseProgram(shaderProgram);
 	//顶点数组
 	glGenVertexArrays(1, &VAO);
@@ -1038,7 +1039,7 @@ void BaseManager::GLM3DTest3()
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 	//透视矩阵
 	glm::mat4 projection = glm::mat4(1.0f);
-	projection = glm::perspective(glm::radians(45.0f), screenWidth / screenHeight, 0.1f, 100.0f);
+	
 
 
 	while (!glfwWindowShouldClose(glWindow))
@@ -1061,8 +1062,8 @@ void BaseManager::GLM3DTest3()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		//设置观察矩阵的值
 		int viewLoc = glGetUniformLocation(ourShader.ID, "view");
-		
 		//设置透视矩阵的值
+		projection = glm::perspective(glm::radians(myCamera.Zoom), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 		int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
 		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 

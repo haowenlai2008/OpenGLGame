@@ -46,7 +46,7 @@ void NormalSquare()
 		1,2,3
 	};
 	//编译着色器
-	Shader ourShader("vertex_1.vs", "fragment_1.fs");
+	Shader ourShader("vertex_2.vs", "fragment_2.fs");
 	ourShader.use();//glUseProgram(shaderProgram);
 	unsigned int VAO;
 	//顶点数组

@@ -76,6 +76,7 @@ public:
 			Position -= Right * velocity;
 		if (direction == RIGHT)
 			Position += Right * velocity;
+		updateCameraVectors();
 	}
 
 	// Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
@@ -109,6 +110,7 @@ public:
 			Zoom = 1.0f;
 		if (Zoom >= 45.0f)
 			Zoom = 45.0f;
+		updateCameraVectors();
 	}
 
 private:
