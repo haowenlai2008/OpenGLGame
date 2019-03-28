@@ -22,7 +22,8 @@ private:
 	GLFWwindow* glWindow;
 	void BaseInit();//窗口初始化
 	void MainLoop();//主循环
-	
+	void Diffuse();//漫反射光
+	void Specular();//镜面光
 	//编译着色器
 	template <typename S1, typename S2 = std::string>
 	void ShaderCompile(S1&& vs, S2&& fs)

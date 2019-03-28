@@ -225,7 +225,7 @@ void GLMTest2()
 }
 void MainLoop()
 {
-	GLMTest2();
+	GLMTest();
 }
 
 int main(int argc, char** argv[])
