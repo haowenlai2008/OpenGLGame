@@ -22,9 +22,6 @@
     <Filter Include="源文件\第三方库\glad">
       <UniqueIdentifier>{bde39879-aa91-4724-872e-d38a26b69156}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\管理器">
-      <UniqueIdentifier>{0095d1ca-ce96-433f-a387-264ce821e35b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\摄像机">
       <UniqueIdentifier>{9bdefe45-3a8c-481a-8f10-77f37968d606}</UniqueIdentifier>
     </Filter>
@@ -45,9 +42,6 @@
     <ClCompile Include="FrameWork\Camera.cpp">
       <Filter>源文件\摄像机</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Manager\BaseManager.cpp">
-      <Filter>源文件\管理器</Filter>
-    </ClCompile>
     <ClCompile Include="FrameWork\Shader\Shader.cpp">
       <Filter>源文件\着色器类</Filter>
     </ClCompile>
@@ -58,9 +52,6 @@
     </ClInclude>
     <ClInclude Include="FrameWork\Camera.h">
       <Filter>源文件\摄像机</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Manager\BaseManager.h">
-      <Filter>源文件\管理器</Filter>
     </ClInclude>
     <ClInclude Include="FrameWork\Shader\Shader.h">
       <Filter>源文件\着色器类</Filter>
