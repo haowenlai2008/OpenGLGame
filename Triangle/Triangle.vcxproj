@@ -32,6 +32,7 @@
     <ProjectGuid>{1C56D461-FDD5-4781-AFCE-D95C22B13505}</ProjectGuid>
     <RootNamespace>Triangle</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>1_Triangle</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
