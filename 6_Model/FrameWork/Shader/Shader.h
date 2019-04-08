@@ -10,6 +10,7 @@
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 #include "glm/mat4x4.hpp"
+
 //检查Shader是否编译正确
 inline void assertShader(unsigned int shaderObj, std::string&& shaderName)
 {

@@ -1,5 +1,4 @@
 #include "Shader.h"
-#include "BaseManager.h"
 #include <string>
 
 void Shader::use()

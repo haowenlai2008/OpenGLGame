@@ -18,6 +18,22 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="external\source\glad.c" />
+    <ClCompile Include="external\source\stb_image.cpp" />
+    <ClCompile Include="FrameWork\Application.cpp" />
+    <ClCompile Include="FrameWork\Camera.cpp" />
+    <ClCompile Include="FrameWork\Mesh\Mesh.cpp" />
+    <ClCompile Include="FrameWork\Model\Model.cpp" />
+    <ClCompile Include="FrameWork\Shader\Shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FrameWork\Camera.h" />
+    <ClInclude Include="FrameWork\const.h" />
+    <ClInclude Include="FrameWork\Mesh\Mesh.h" />
+    <ClInclude Include="FrameWork\Model\Model.h" />
+    <ClInclude Include="FrameWork\Shader\Shader.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{6E58A42B-B040-4E52-864C-BD13D8E1F831}</ProjectGuid>
@@ -69,14 +85,26 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ExecutablePath>.\external\dll;$(ExecutablePath)</ExecutablePath>
+    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
+    <LibraryPath>.\external\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\external\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.\external\include;.\FrameWork\Model;.\FrameWork\Mesh;.\FrameWork\Shader;.\FrameWork;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>.\external\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/nodefaultlib:"MSVCRT" %(AdditionalOptions)</AdditionalOptions>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -114,8 +142,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

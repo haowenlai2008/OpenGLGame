@@ -230,7 +230,6 @@ void MainLoop()
 
 int main(int argc, char** argv[])
 {
-	BaseInit();
 	MainLoop();
-	return 0;;
+	return 0;
 }
