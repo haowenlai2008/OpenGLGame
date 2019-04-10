@@ -182,13 +182,13 @@ private:
 		// specular: texture_specularN
 		// normal: texture_normalN
 
-		// 1. diffuse maps
+		// 1. diffuse maps 漫反射贴图
 		vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-		// 2. specular maps
+		// 2. specular maps 镜面反射贴图
 		vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-		// 3. normal maps
+		// 3. normal maps 法向量
 		std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
 		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 		// 4. height maps
@@ -215,12 +215,12 @@ private:
 				if (std::strcmp(textures_loaded[j].path.data(), str.C_Str()) == 0)
 				{
 					textures.push_back(textures_loaded[j]);
-					skip = true; // a texture with the same filepath has already been loaded, continue to next one. (optimization)
+					skip = true; // 一个拥有相同路径的纹理已经被加载了，去加载下一个
 					break;
 				}
 			}
 			if (!skip)
-			{   // if texture hasn't been loaded already, load it
+			{   //如果纹理没有加载，那就加载
 				Texture texture;
 				texture.id = TextureFromFile(str.C_Str(), this->directory);
 				texture.type = typeName;
