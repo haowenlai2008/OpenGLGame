@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\第三方库">
+      <UniqueIdentifier>{e5897145-0878-4468-ac9c-9490a0b47ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\第三方库\glad">
+      <UniqueIdentifier>{54f44a0f-333b-4649-841b-5f3d1c1dd339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\第三方库\stb_image">
+      <UniqueIdentifier>{d7f95549-f8f9-4eb6-bb33-0ebc3fba996a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\模型">
+      <UniqueIdentifier>{6f45eb78-45d8-4336-91cd-29c0cbbf8ab8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\摄像机">
+      <UniqueIdentifier>{4fe172ff-0f2c-4cb9-924c-f27a5de072ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\网格">
+      <UniqueIdentifier>{07703ccc-9772-4292-9a86-4a961ee245ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\着色器">
+      <UniqueIdentifier>{2dfb2491-4006-49be-a33c-f8f3ace1939b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\管理器">
+      <UniqueIdentifier>{2e25b5be-a8e6-48e3-93c7-186c3fd0869d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\基类">
+      <UniqueIdentifier>{0d65765d-01b6-434b-bd2d-955ca1ea0d77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\图形类">
+      <UniqueIdentifier>{718294b5-1f9c-4be3-b47d-1ea68926dd66}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="external\source\glad.c">
+      <Filter>源文件\第三方库\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="external\source\stb_image.cpp">
+      <Filter>源文件\第三方库\stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Model\Model.cpp">
+      <Filter>源文件\模型</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Camera.cpp">
+      <Filter>源文件\摄像机</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Mesh\Mesh.cpp">
+      <Filter>源文件\网格</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Shader\Shader.cpp">
+      <Filter>源文件\着色器</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Application.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Manager\BaseManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Base\Transform.cpp">
+      <Filter>源文件\基类</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Base\Ref.cpp">
+      <Filter>源文件\基类</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Base\Node.cpp">
+      <Filter>源文件\基类</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Manager\RefManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Graph\Cube.cpp">
+      <Filter>源文件\图形类</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Manager\RenderManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Base\Scene.cpp">
+      <Filter>源文件\基类</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FrameWork\Model\Model.h">
+      <Filter>源文件\模型</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Camera.h">
+      <Filter>源文件\摄像机</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Mesh\Mesh.h">
+      <Filter>源文件\网格</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Shader\Shader.h">
+      <Filter>源文件\着色器</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\const.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Manager\BaseManager.h">
+      <Filter>源文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Base\Transform.h">
+      <Filter>源文件\基类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Base\Ref.h">
+      <Filter>源文件\基类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Base\Node.h">
+      <Filter>源文件\基类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Manager\RefManager.h">
+      <Filter>源文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Graph\Cube.h">
+      <Filter>源文件\图形类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\func.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Manager\RenderManager.h">
+      <Filter>源文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Base\Scene.h">
+      <Filter>源文件\基类</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

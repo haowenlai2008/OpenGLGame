@@ -1,6 +1,5 @@
 #include "Shader.h"
 #include "glfw3.h"
-#include "glad.h"
 #include "stb_image.h"
 #include <iostream>
 using namespace std;

@@ -6,10 +6,12 @@
 
 #include <glfw3.h>
 #include <glad.h>
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
-#include "stb_image.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/quaternion.hpp>
+
+#include <stb_image.h>
 #include "Model.h"
 #include "Shader.h"
 #include "Camera.h"
@@ -149,8 +151,13 @@ void Test1()
 
 		// render the loaded model
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
+		
+
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		glm::qua<float> q = glm::qua<float>(glm::radians(glm::vec3(0.0f, 0.0f, 90.0f)));
+		model = glm::mat4_cast(q) * model;
+		//model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
 		ourShader.setMat4("model", model);
 		ourModel.Draw(ourShader);
 
