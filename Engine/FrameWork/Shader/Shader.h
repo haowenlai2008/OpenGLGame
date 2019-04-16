@@ -7,9 +7,12 @@
 #include <sstream>
 #include <iostream>
 #include "const.h"
-#include "glm/vec3.hpp"
-#include "glm/vec4.hpp"
-#include "glm/mat4x4.hpp"
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+#include <map>
+using std::map;
+using std::string;
 
 //检查Shader是否编译正确
 inline void assertShader(unsigned int shaderObj, std::string&& shaderName)
@@ -102,6 +105,22 @@ public:
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
 	}
+
+	static Shader getShader(string&& shaderName)
+	{
+		if (shaderMap.find(shaderName) != shaderMap.end())
+		{
+			std::cout << "hahha" << std::endl;
+			return shaderMap[shaderName];
+			
+		}
+		else
+		{
+			Shader shader(shaderName + ".vs", shaderName + ".fs");
+			shaderMap.insert(std::pair<string, Shader>(shaderName, shader));
+			return shaderMap[shaderName];
+		}
+	}
 	// 使用/激活程序
 	void use();
 	// uniform工具函数
@@ -117,6 +136,9 @@ public:
 	void setMat2(const std::string &name, const glm::mat2 &mat) const;
 	void setMat3(const std::string &name, const glm::mat3 &mat) const;
 	void setMat4(const std::string &name, const glm::mat4 &mat) const;
+
+private:
+	static map<string, Shader> shaderMap;
 };
 
 #endif

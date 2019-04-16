@@ -74,21 +74,22 @@ bool Cube::init()
 	switch (cubeType)
 	{
 	case CubeType::normal:
-		shader = Shader("normal.vs", "normal.fs");
+		shader = Shader::getShader("normal");
+		break;
 	case CubeType::withLight:
-		shader = Shader("withLight.vs", "withLight.fs");
+		shader = Shader::getShader("withLight");
 		//法线
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
 		glEnableVertexAttribArray(1);
 		break;
 	case CubeType::withTexture:
-		shader = Shader("withTexture.vs", "withTexture.fs");
+		shader = Shader::getShader("withTexture");
 		//纹理坐标
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
 		glEnableVertexAttribArray(1);
 		break;
 	case CubeType::withTexAndLight:
-		shader = Shader("withTexAndLight.vs", "withTexAndLight.fs");
+		shader = Shader::getShader("withTexAndLight");
 		shader.setInt("material.diffuse", 0);
 		//法线
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
@@ -142,6 +143,8 @@ void Cube::draw()
 			glBindTexture(GL_TEXTURE_2D, diffuseMap);
 		}
 		break;
+	default:
+		break;
 	}
 	//MVP变换
 	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)baseManager->screenWidth / (float)baseManager->screenHeight, 0.1f, 100.0f);
@@ -183,15 +186,6 @@ void Cube::setType(CubeType _cubeType)
 	cubeType = _cubeType;
 }
 
-void Cube::setLightSrc(Node * node)
-{
-	lightSrc = node;
-}
-
-void Cube::setTexture(std::string src)
-{
-	LoadTexture(diffuseMap, src);
-}
 
 Cube::Cube() : cubeType(CubeType::normal)
 {
@@ -199,7 +193,6 @@ Cube::Cube() : cubeType(CubeType::normal)
 
 Cube::~Cube()
 {
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
+	
 }
 

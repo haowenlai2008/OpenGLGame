@@ -131,6 +131,9 @@
     <ClCompile Include="FrameWork\Base\Transform.cpp" />
     <ClCompile Include="FrameWork\Camera.cpp" />
     <ClCompile Include="FrameWork\Graph\Cube.cpp" />
+    <ClCompile Include="FrameWork\Graph\CubeMat.cpp" />
+    <ClCompile Include="FrameWork\Graph\Entity.cpp" />
+    <ClCompile Include="FrameWork\Graph\SkyBox.cpp" />
     <ClCompile Include="FrameWork\Manager\BaseManager.cpp" />
     <ClCompile Include="FrameWork\Manager\RefManager.cpp" />
     <ClCompile Include="FrameWork\Manager\RenderManager.cpp" />
@@ -147,6 +150,9 @@
     <ClInclude Include="FrameWork\const.h" />
     <ClInclude Include="FrameWork\func.h" />
     <ClInclude Include="FrameWork\Graph\Cube.h" />
+    <ClInclude Include="FrameWork\Graph\CubeMat.h" />
+    <ClInclude Include="FrameWork\Graph\Entity.h" />
+    <ClInclude Include="FrameWork\Graph\SkyBox.h" />
     <ClInclude Include="FrameWork\Manager\BaseManager.h" />
     <ClInclude Include="FrameWork\Manager\RefManager.h" />
     <ClInclude Include="FrameWork\Manager\RenderManager.h" />

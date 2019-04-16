@@ -1,9 +1,16 @@
 #pragma once
-#include "const.h"
+#include <iostream>
 #include <glfw3.h>
 #include <glad.h>
 #include <stb_image.h>
 #include <glm/glm.hpp>
+#include <vector>
+#include <string>
+#include "const.h"
+using std::vector;
+using std::string;
+
+unsigned int loadCubemap(vector<std::string> faces);
 #define CREATE_FUNC(__TYPE__) \
 static __TYPE__* create() \
 { \
@@ -54,3 +61,4 @@ void LoadTexture(unsigned int &texture, S1&& pic)
 	stbi_image_free(data);
 	data = nullptr;
 }
+

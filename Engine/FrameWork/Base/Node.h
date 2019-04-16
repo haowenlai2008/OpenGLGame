@@ -28,7 +28,6 @@ public:
 	mat4 getModelMatrix();
 	Node();
 	virtual ~Node();
-protected:
-	Shader shader;
+
 	
 };

@@ -90,6 +90,15 @@
     <ClCompile Include="FrameWork\Base\Scene.cpp">
       <Filter>源文件\基类</Filter>
     </ClCompile>
+    <ClCompile Include="FrameWork\Graph\Entity.cpp">
+      <Filter>源文件\图形类</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Graph\SkyBox.cpp">
+      <Filter>源文件\图形类</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Graph\CubeMat.cpp">
+      <Filter>源文件\图形类</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork\Model\Model.h">
@@ -133,6 +142,15 @@
     </ClInclude>
     <ClInclude Include="FrameWork\Base\Scene.h">
       <Filter>源文件\基类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Graph\Entity.h">
+      <Filter>源文件\图形类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Graph\SkyBox.h">
+      <Filter>源文件\图形类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Graph\CubeMat.h">
+      <Filter>源文件\图形类</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

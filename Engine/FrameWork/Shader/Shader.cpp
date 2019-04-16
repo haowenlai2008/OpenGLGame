@@ -1,6 +1,6 @@
 #include "Shader.h"
 #include <string>
-
+map<string, Shader> Shader::shaderMap;
 void Shader::use()
 {
 	glUseProgram(ID);
