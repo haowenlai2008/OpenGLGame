@@ -117,7 +117,7 @@ void Cube::draw()
 	case CubeType::withLight:
 		if (lightSrc)
 		{
-			shader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+			shader.setVec3("objectColor", 1.0f, 0.24f, 0.586f);
 			shader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 			shader.setVec3("lightPos", lightSrc->getPosition());
 			shader.setVec3("viewPos", camera.Position);
@@ -131,7 +131,7 @@ void Cube::draw()
 		{
 			shader.setVec3("light.position", lightSrc->getPosition());
 			shader.setVec3("viewPos", camera.Position);
-			shader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+			shader.setVec3("light.ambient", 0.5f, 0.5f, 0.5f);
 			shader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
 			shader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 

@@ -15,7 +15,7 @@ CubeMat * CubeMat::create(vector<vector<int>>& mat)
 				{
 					auto cube = Cube::create(CubeType::withLight);
 					cube->setLocalPosition(vec3(float(j), -float(i), 0.0f));
-					cube->setScale(vec3(0.5f, 0.5f, 0.5f));
+					cube->setScale(vec3(0.1f, 0.2f, 0.2f));
 					pRet->addChild(cube);
 				}
 			}

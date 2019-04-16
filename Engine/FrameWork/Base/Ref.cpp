@@ -15,7 +15,6 @@ Ref::~Ref()
 void Ref::retain()
 {
 	count += 1;
-	std::cout << "count + 1" << std::endl;
 }
 
 void Ref::release()
@@ -26,5 +25,4 @@ void Ref::release()
 void Ref::autorelease()
 {
 	RefManager::getInstance()->addRef(this);
-	std::cout << "autorelease" << std::endl;
 }
