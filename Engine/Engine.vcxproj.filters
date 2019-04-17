@@ -43,6 +43,9 @@
     <Filter Include="源文件\图形类">
       <UniqueIdentifier>{718294b5-1f9c-4be3-b47d-1ea68926dd66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\地形">
+      <UniqueIdentifier>{76539750-c4ec-431f-a562-06ed2c4ae5dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\source\glad.c">
@@ -99,6 +102,15 @@
     <ClCompile Include="FrameWork\Graph\CubeMat.cpp">
       <Filter>源文件\图形类</Filter>
     </ClCompile>
+    <ClCompile Include="FrameWork\Graph\Maze.cpp">
+      <Filter>源文件\地形</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Graph\Perlin.cpp">
+      <Filter>源文件\地形</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Graph\PerlinGround.cpp">
+      <Filter>源文件\地形</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork\Model\Model.h">
@@ -151,6 +163,15 @@
     </ClInclude>
     <ClInclude Include="FrameWork\Graph\CubeMat.h">
       <Filter>源文件\图形类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Graph\Maze.h">
+      <Filter>源文件\地形</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Graph\Perlin.h">
+      <Filter>源文件\地形</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Graph\PerlinGround.h">
+      <Filter>源文件\地形</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

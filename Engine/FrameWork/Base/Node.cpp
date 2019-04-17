@@ -15,7 +15,7 @@ mat4 Node::getModelMatrix()
 	return model;
 }
 
-Node::Node() : parent(nullptr)
+Node::Node() : parent(nullptr), isVis(true)
 {
 }
 

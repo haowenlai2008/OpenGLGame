@@ -133,6 +133,9 @@
     <ClCompile Include="FrameWork\Graph\Cube.cpp" />
     <ClCompile Include="FrameWork\Graph\CubeMat.cpp" />
     <ClCompile Include="FrameWork\Graph\Entity.cpp" />
+    <ClCompile Include="FrameWork\Graph\Maze.cpp" />
+    <ClCompile Include="FrameWork\Graph\Perlin.cpp" />
+    <ClCompile Include="FrameWork\Graph\PerlinGround.cpp" />
     <ClCompile Include="FrameWork\Graph\SkyBox.cpp" />
     <ClCompile Include="FrameWork\Manager\BaseManager.cpp" />
     <ClCompile Include="FrameWork\Manager\RefManager.cpp" />
@@ -152,6 +155,9 @@
     <ClInclude Include="FrameWork\Graph\Cube.h" />
     <ClInclude Include="FrameWork\Graph\CubeMat.h" />
     <ClInclude Include="FrameWork\Graph\Entity.h" />
+    <ClInclude Include="FrameWork\Graph\Maze.h" />
+    <ClInclude Include="FrameWork\Graph\Perlin.h" />
+    <ClInclude Include="FrameWork\Graph\PerlinGround.h" />
     <ClInclude Include="FrameWork\Graph\SkyBox.h" />
     <ClInclude Include="FrameWork\Manager\BaseManager.h" />
     <ClInclude Include="FrameWork\Manager\RefManager.h" />

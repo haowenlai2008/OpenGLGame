@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
-unsigned int loadCubemap(vector<std::string> faces)
+unsigned int SkyBox::cubemapTexture = 0;
+unsigned int SkyBox::loadCubemap(std::string&& sboxName, vector<std::string> faces)
 {
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
@@ -14,7 +14,7 @@ unsigned int loadCubemap(vector<std::string> faces)
 	int width, height, nrChannels;
 	for (unsigned int i = 0; i < faces.size(); i++)
 	{
-		unsigned char *data = stbi_load((TEXTURE_PATH + faces[i]).c_str(), &width, &height, &nrChannels, 0);
+		unsigned char *data = stbi_load((TEXTURE_PATH + sboxName + faces[i]).c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
@@ -38,13 +38,20 @@ unsigned int loadCubemap(vector<std::string> faces)
 }
 static vector<std::string> faces
 {
-	"skybox/right.jpg",
-	"skybox/left.jpg",
-	"skybox/top.jpg",
-	"skybox/bottom.jpg",
-	"skybox/front.jpg",
-	"skybox/back.jpg"
+	"/right.jpg",
+	"/left.jpg",
+	"/top.jpg",
+	"/bottom.jpg",
+	"/front.jpg",
+	"/back.jpg"
 };
+unsigned int SkyBox::getSkyBxCubeMap()
+{
+	if (cubemapTexture == 0)
+		cubemapTexture = loadCubemap(SKY_BOX, faces);
+	return cubemapTexture;
+}
+
 bool SkyBox::init()
 {
 	float skyboxVertices[] = {
@@ -93,7 +100,6 @@ bool SkyBox::init()
 	};
 	shader = Shader::getShader("SkyBox");
 
-	unsigned int skyboxVAO, skyboxVBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glBindVertexArray(VAO);
@@ -102,7 +108,7 @@ bool SkyBox::init()
 	
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	cubemapTexture = loadCubemap(faces);
+	cubemapTexture = getSkyBxCubeMap();
 	shader.use();
 	//shader.setInt("skybox", 0);
 	return true;

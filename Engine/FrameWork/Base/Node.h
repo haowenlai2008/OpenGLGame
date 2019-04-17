@@ -13,6 +13,7 @@ public:
 	list<Node*> childs;
 	Transform transform;
 	CREATE_FUNC(Node);
+	LL_SYNTHESIZE(bool, isVis, Visable);
 	void addChild(Node* node);
 	void setPosition(vec3 position);
 	void setLocalPosition(vec3 position);

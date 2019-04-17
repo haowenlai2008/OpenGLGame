@@ -14,7 +14,6 @@ RefManager * RefManager::getInstance()
 
 void RefManager::addRef(Ref * ref)
 {
-	std::cout << "addRef" << std::endl;
 	refPool.push_back(ref);
 }
 

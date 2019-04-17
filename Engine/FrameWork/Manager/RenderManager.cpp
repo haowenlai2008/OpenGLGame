@@ -23,7 +23,8 @@ void RenderManager::update(Node * node)
 		return;
 	for (auto* p : node->childs)
 	{
-		p->draw();
+		if (p->getVisable())
+			p->draw();
 		update(p);
 	}
 		

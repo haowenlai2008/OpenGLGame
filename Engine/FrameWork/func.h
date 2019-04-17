@@ -10,6 +10,12 @@
 using std::vector;
 using std::string;
 
+
+#define LL_SYNTHESIZE(varType, varName, funName)\
+protected: varType varName;\
+public: virtual varType get##funName(void) const { return varName; }\
+public: virtual void set##funName(varType var){ varName = var; }
+
 unsigned int loadCubemap(vector<std::string> faces);
 #define CREATE_FUNC(__TYPE__) \
 static __TYPE__* create() \
@@ -43,7 +49,6 @@ void LoadTexture(unsigned int &texture, S1&& pic)
 	int width, height, nrChannels;
 	stbi_set_flip_vertically_on_load(true);
 	unsigned char *data = stbi_load((TEXTURE_PATH + std::forward<std::string>(pic)).c_str(), &width, &height, &nrChannels, 0);
-	std::cout << "nrChannels = " << nrChannels << std::endl;
 	if (data)
 	{
 		//位深度为24，3个通道(jpg

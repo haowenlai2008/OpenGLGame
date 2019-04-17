@@ -110,7 +110,6 @@ public:
 	{
 		if (shaderMap.find(shaderName) != shaderMap.end())
 		{
-			std::cout << "hahha" << std::endl;
 			return shaderMap[shaderName];
 			
 		}

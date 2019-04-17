@@ -10,7 +10,7 @@ void Entity::setTexture(std::string src)
 	LoadTexture(diffuseMap, src);
 }
 
-Entity::Entity() : lightSrc(nullptr)
+Entity::Entity() : lightSrc(nullptr), color(glm::vec3(1.0f, 1.0f, 1.0f))
 {
 }
 

@@ -5,6 +5,7 @@ class Entity : public Node
 {
 public:
 	CREATE_FUNC(Entity);
+	LL_SYNTHESIZE(glm::vec3, color, Color);
 	virtual void setLightSrc(Node* node);
 	void setTexture(std::string src);
 	Entity();
