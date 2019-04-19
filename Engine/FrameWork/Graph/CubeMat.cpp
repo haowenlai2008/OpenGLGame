@@ -3,6 +3,7 @@
 #include "BaseManager.h"
 #include <fstream>
 using std::ifstream;
+vec3 CubeMat::dotScale = vec3(1.0f);
 CubeMat * CubeMat::create(vector<vector<int>>& mat, MatType type)
 {
 	auto pRet = new(std::nothrow) CubeMat();
@@ -19,7 +20,8 @@ CubeMat * CubeMat::create(vector<vector<int>>& mat, MatType type)
 					{
 						auto cube = Cube::create(CubeType::withTexAndLight);
 						cube->setTexture("awesomeface2.png");
-						cube->setLocalPosition(vec3(float(j), float(mat.size() - i - 1), 0.0f));
+						cube->setScale(dotScale);
+						cube->setLocalPosition(vec3(float(j) * dotScale.x, float(mat.size() - i - 1)* dotScale.y, 0.0f));
 						pRet->addChild(cube);
 					}
 				}
@@ -34,7 +36,8 @@ CubeMat * CubeMat::create(vector<vector<int>>& mat, MatType type)
 					{
 						auto cube = Cube::create(CubeType::withTexAndLight);
 						cube->setTexture("awesomeface2.png");
-						cube->setLocalPosition(vec3(float(j), 0.0f, -float(mat.size() - i - 1)));
+						cube->setScale(dotScale);
+						cube->setLocalPosition(vec3(float(j)* dotScale.x, 0.0f, -float(mat.size() - i - 1) * dotScale.z));
 						pRet->addChild(cube);
 					}
 				}
@@ -63,9 +66,10 @@ CubeMat* CubeMat::create(vector<vector<vec3> >& mat)
 		{
 			for (int j = 0; j < mat[i].size(); j++)
 			{
-				auto cube = Cube::create(CubeType::withLight);
-				cube->setLocalPosition(mat[i][j]);
-				cube->setScale(vec3(0.2f, 0.2f, 0.2f));
+				auto cube = Cube::create(CubeType::withTexAndLight);
+				cube->setTexture("awesomeface2.png");
+				cube->setScale(dotScale);
+				cube->setLocalPosition(vec3(mat[i][j].x * dotScale.x, mat[i][j].y * dotScale.y, mat[i][j].z * dotScale.z));
 				pRet->addChild(cube);
 			}
 		}
@@ -85,13 +89,13 @@ CubeMat * CubeMat::create(std::string&& file, MatType type)
 	ifstream infile;
 	std::cout << DOT_MAT_PATH + file << std::endl;
 	infile.open(DOT_MAT_PATH + file);
-	//if (!infile.is_open())
-	//{
-	//	std::cout << "nonono" << std::endl;
-	//}
+	if (!infile.is_open())
+	{
+		std::cout << "nonono" << std::endl;
+	}
 	vector<string> mat;
 	string str;
-	while (infile)
+	while (infile)//一行行地读
 	{
 		std::getline(infile, str);
 		mat.push_back(str);
@@ -99,6 +103,7 @@ CubeMat * CubeMat::create(std::string&& file, MatType type)
 	}
 	infile.close();
 	auto pRet = new(std::nothrow) CubeMat();
+	setDotScale(vec3(0.3f, 0.6f, 0.3f));
 	if (pRet && pRet->init())
 	{
 		switch (type)
@@ -111,13 +116,15 @@ CubeMat * CubeMat::create(std::string&& file, MatType type)
 					if (mat[i][j] != '0')
 					{
 						auto cube = Cube::create(CubeType::withSkyBox);
-						cube->setLocalPosition(vec3(float(j), float(mat.size() - i - 1), 0.0f));
-						cube->setScale(vec3(0.1f, 0.2f, 0.2f));
+						//cube->setTexture("back__.jpg");
+						cube->setScale(dotScale);
+						cube->setLocalPosition(vec3(float(j) * dotScale.x, float(mat.size() - i - 1)* dotScale.y, 0.0f));
 						pRet->addChild(cube);
 
 						auto cube2 = Cube::create(CubeType::withSkyBox);
-						cube2->setLocalPosition(vec3(float(j), float(mat.size() - i - 1), -1.0f));
-						cube2->setScale(vec3(0.1f, 0.2f, 0.2f));
+						//cube2->setTexture("back__.jpg");
+						cube2->setScale(dotScale);
+						cube2->setLocalPosition(vec3(float(j)* dotScale.x, float(mat.size() - i - 1)* dotScale.y, -1.0f *  dotScale.z));
 						pRet->addChild(cube2);
 					}
 				}
@@ -131,13 +138,13 @@ CubeMat * CubeMat::create(std::string&& file, MatType type)
 					if (mat[i][j] != '0')
 					{
 						auto cube = Cube::create(CubeType::withSkyBox);
-						cube->setLocalPosition(vec3(float(j), 0.0f, -float(mat.size() - i - 1)));
-						cube->setScale(vec3(0.1f, 0.2f, 0.2f));
+						cube->setScale(dotScale);
+						cube->setLocalPosition(vec3(float(j) * dotScale.x, 0.0f, -float(mat.size() - i - 1) * dotScale.z));
 						pRet->addChild(cube);
 
 						auto cube2 = Cube::create(CubeType::withSkyBox);
-						cube2->setLocalPosition(vec3(float(j), 1.0f, -float(mat.size() - i - 1)));
-						cube2->setScale(vec3(0.1f, 0.2f, 0.2f));
+						cube2->setScale(dotScale);
+						cube2->setLocalPosition(vec3(float(j) * dotScale.x, 1.0f * dotScale.y, -float(mat.size() - i - 1) * dotScale.z));
 						pRet->addChild(cube2);
 					}
 				}
@@ -174,6 +181,8 @@ void CubeMat::setLightSrc(Node * node)
 		static_cast<Entity*>(p)->setLightSrc(node);
 	}
 }
+
+
 
 CubeMat::CubeMat()
 {

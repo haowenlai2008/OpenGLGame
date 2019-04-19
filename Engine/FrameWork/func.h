@@ -16,6 +16,12 @@ protected: varType varName;\
 public: virtual varType get##funName(void) const { return varName; }\
 public: virtual void set##funName(varType var){ varName = var; }
 
+
+#define LL_STATIC_SYNTHESIZE(varType, varName, funName)\
+public: static varType varName;\
+public: static varType get##funName(void) { return varName; }\
+public: static void set##funName(varType var){ varName = var; }
+
 unsigned int loadCubemap(vector<std::string> faces);
 #define CREATE_FUNC(__TYPE__) \
 static __TYPE__* create() \

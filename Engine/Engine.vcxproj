@@ -79,7 +79,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\FrameWork\Graph;.\FrameWork\Base;.\FrameWork\Manager;.\FrameWork;.\FrameWork\Model;.\FrameWork\Mesh;.\FrameWork\Shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FrameWork\Component;.\FrameWork\Graph;.\FrameWork\Base;.\FrameWork\Manager;.\FrameWork;.\FrameWork\Model;.\FrameWork\Mesh;.\FrameWork\Shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -130,6 +130,13 @@
     <ClCompile Include="FrameWork\Base\Scene.cpp" />
     <ClCompile Include="FrameWork\Base\Transform.cpp" />
     <ClCompile Include="FrameWork\Camera.cpp" />
+    <ClCompile Include="FrameWork\Component\Component.cpp" />
+    <ClCompile Include="FrameWork\Component\Shader3D_Component.cpp" />
+    <ClCompile Include="FrameWork\Component\Shader3D_Light.cpp" />
+    <ClCompile Include="FrameWork\Component\Shader3D_normal.cpp" />
+    <ClCompile Include="FrameWork\Component\Shader3D_SkyBox.cpp" />
+    <ClCompile Include="FrameWork\Component\Shader3D_Tex.cpp" />
+    <ClCompile Include="FrameWork\Component\Shader3D_TexLight.cpp" />
     <ClCompile Include="FrameWork\Graph\Cube.cpp" />
     <ClCompile Include="FrameWork\Graph\CubeMat.cpp" />
     <ClCompile Include="FrameWork\Graph\Entity.cpp" />
@@ -150,6 +157,14 @@
     <ClInclude Include="FrameWork\Base\Scene.h" />
     <ClInclude Include="FrameWork\Base\Transform.h" />
     <ClInclude Include="FrameWork\Camera.h" />
+    <ClInclude Include="FrameWork\Component\all3DShader.h" />
+    <ClInclude Include="FrameWork\Component\Component.h" />
+    <ClInclude Include="FrameWork\Component\Shader3D_Component.h" />
+    <ClInclude Include="FrameWork\Component\Shader3D_Light.h" />
+    <ClInclude Include="FrameWork\Component\Shader3D_normal.h" />
+    <ClInclude Include="FrameWork\Component\Shader3D_SkyBox.h" />
+    <ClInclude Include="FrameWork\Component\Shader3D_Tex.h" />
+    <ClInclude Include="FrameWork\Component\Shader3D_TexLight.h" />
     <ClInclude Include="FrameWork\const.h" />
     <ClInclude Include="FrameWork\func.h" />
     <ClInclude Include="FrameWork\Graph\Cube.h" />

@@ -2,7 +2,7 @@
 #include "Transform.h"
 #include "Ref.h"
 #include "func.h"
-#include "Shader/Shader.h"
+#include "Component.h"
 #include <list>
 
 using std::list;
@@ -19,6 +19,7 @@ public:
 	void setLocalPosition(vec3 position);
 	void setRotate(vec3 rotate);
 	void setScale(vec3 scale);
+	void Rotate(vec3 rotate);
 	vec3 getPosition();
 	vec3 getLocalPosition();
 	vec3 getRotate();

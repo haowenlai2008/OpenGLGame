@@ -46,6 +46,9 @@
     <Filter Include="源文件\地形">
       <UniqueIdentifier>{76539750-c4ec-431f-a562-06ed2c4ae5dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\组件">
+      <UniqueIdentifier>{8022c258-f734-412f-b630-9bce423f19bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\source\glad.c">
@@ -111,6 +114,27 @@
     <ClCompile Include="FrameWork\Graph\PerlinGround.cpp">
       <Filter>源文件\地形</Filter>
     </ClCompile>
+    <ClCompile Include="FrameWork\Component\Component.cpp">
+      <Filter>源文件\组件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Component\Shader3D_Light.cpp">
+      <Filter>源文件\组件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Component\Shader3D_normal.cpp">
+      <Filter>源文件\组件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Component\Shader3D_Tex.cpp">
+      <Filter>源文件\组件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Component\Shader3D_TexLight.cpp">
+      <Filter>源文件\组件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Component\Shader3D_Component.cpp">
+      <Filter>源文件\组件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Component\Shader3D_SkyBox.cpp">
+      <Filter>源文件\组件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork\Model\Model.h">
@@ -172,6 +196,30 @@
     </ClInclude>
     <ClInclude Include="FrameWork\Graph\PerlinGround.h">
       <Filter>源文件\地形</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Component\Component.h">
+      <Filter>源文件\组件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Component\Shader3D_Light.h">
+      <Filter>源文件\组件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Component\Shader3D_normal.h">
+      <Filter>源文件\组件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Component\Shader3D_Tex.h">
+      <Filter>源文件\组件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Component\Shader3D_TexLight.h">
+      <Filter>源文件\组件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Component\Shader3D_Component.h">
+      <Filter>源文件\组件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Component\all3DShader.h">
+      <Filter>源文件\组件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Component\Shader3D_SkyBox.h">
+      <Filter>源文件\组件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

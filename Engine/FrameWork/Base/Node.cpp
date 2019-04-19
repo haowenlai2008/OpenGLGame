@@ -7,10 +7,11 @@ mat4 Node::getModelMatrix()
 	mat4 model = mat4(1.0f);
 	if (parent)
 	{
+		glm::qua<float> q = glm::qua<float>(glm::radians(parent->getRotate() + transform.rotate));		//旋转
 		model = glm::scale(model, transform.scale);									//缩放
-		glm::qua<float> q = glm::qua<float>(glm::radians(transform.rotate));		//旋转
-		model = glm::translate(model, parent->getPosition() + transform.position);		//位移
-		
+		vec3 scaleC(1.0f / transform.scale.x, 1.0f / transform.scale.y, 1.0f / transform.scale.z);	//缩放系数每个分量的倒数组成的向量
+		vec3 move = parent->getPosition() + transform.position;//理论上的位移
+		model = glm::translate(model, vec3(move.x * scaleC.x, move.y * scaleC.y, move.z * scaleC.z));		//位移, 为了保持尺度不变，去掉缩放的影响
 	}
 	return model;
 }
@@ -23,14 +24,17 @@ Node::Node() : parent(nullptr), isVis(true)
 Node::~Node()
 {
 	for (auto ptr : childs)
-		delete ptr;
+		ptr->release();
 }
 
 void Node::addChild(Node * node)
 {
-	childs.push_back(node);
-	node->parent = this;
-	node->retain();
+	if (node->parent == nullptr)
+	{
+		childs.push_back(node);
+		node->parent = this;
+		node->retain();
+	}
 }
 
 void Node::setPosition(vec3 position)
@@ -55,6 +59,11 @@ void Node::setScale(vec3 scale)
 	transform.scale = scale;
 }
 
+void Node::Rotate(vec3 rotate)
+{
+	transform.rotate += rotate;
+}
+
 vec3 Node::getPosition()
 {
 	if (!parent)
@@ -70,7 +79,9 @@ vec3 Node::getLocalPosition()
 
 vec3 Node::getRotate()
 {
-	return transform.rotate;
+	if (!parent)
+		return transform.rotate;
+	return parent->getRotate() + transform.rotate;
 }
 
 vec3 Node::getScale()

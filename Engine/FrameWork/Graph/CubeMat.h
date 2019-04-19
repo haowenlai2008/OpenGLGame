@@ -11,6 +11,7 @@ class CubeMat : public Entity
 {
 public:
 	CREATE_FUNC(CubeMat);
+	LL_STATIC_SYNTHESIZE(vec3, dotScale, DotScale);
 	static CubeMat* create(vector<vector<int> >& mat, MatType type);
 	static CubeMat* create(vector<vector<vec3> >& mat);
 	static CubeMat* create(std::string&& file, MatType type);

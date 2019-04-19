@@ -1,6 +1,9 @@
 #include "Cube.h"
 #include "BaseManager.h"
 #include "SkyBox.h"
+#include "all3DShader.h"
+using std::endl;
+using std::cout;
 vector<float> Cube::vertex  = {
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
 		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
@@ -68,108 +71,92 @@ bool Cube::init()
 	glBindVertexArray(VAO);// 绑定顶点数组对象
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);//绑定顶点缓冲区
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertex.size(), vertex.begin()._Ptr, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(0));	//最后一个参数是数据的起点
+	//坐标
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(0));
 	glEnableVertexAttribArray(0);
+	//法线
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	//纹理坐标
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 	switch (cubeType)
 	{
 	case CubeType::normal:
-		shader = Shader::getShader("normal");
+		//cout << "2333" << std::endl;
+		addComponent(new Shader3D_normal());
 		break;
 	case CubeType::withLight:
-		shader = Shader::getShader("withLight");
-		//法线
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
-		glEnableVertexAttribArray(1);
+		addComponent(new Shader3D_Light());
 		break;
 	case CubeType::withTexture:
-		shader = Shader::getShader("withTexture");
-		//纹理坐标
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
-		glEnableVertexAttribArray(1);
+		addComponent(new Shader3D_Tex());
 		break;
 	case CubeType::withTexAndLight:
-		shader = Shader::getShader("withTexAndLight");
-		shader.setInt("material.diffuse", 0);
-		//法线
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
-		glEnableVertexAttribArray(1);
-		//纹理坐标
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
-		glEnableVertexAttribArray(2);
+		addComponent(new Shader3D_TexLight());
 		break;
 	case CubeType::withSkyBox:
-		shader = Shader::getShader("withSkyBox");
-		//法线
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
-		glEnableVertexAttribArray(1);
+		addComponent(new Shader3D_SkyBox());
+		break;
+	default:
 		break;
 	}
-	shader.use();
-	glBindVertexArray(VAO);
+	//switch (cubeType)
+	//{
+	//case CubeType::normal:
+	//	shader = Shader::getShader("normal");
+	//	break;
+	//case CubeType::withLight:
+	//	shader = Shader::getShader("withLight");
+	//	//法线
+	//	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
+	//	glEnableVertexAttribArray(1);
+	//	break;
+	//case CubeType::withTexture:
+	//	shader = Shader::getShader("withTexture");
+	//	//纹理坐标
+	//	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
+	//	glEnableVertexAttribArray(1);
+	//	break;
+	//case CubeType::withTexAndLight:
+	//	shader = Shader::getShader("withTexAndLight");
+	//	shader.setInt("material.diffuse", 0);
+	//	//法线
+	//	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
+	//	glEnableVertexAttribArray(1);
+	//	//纹理坐标
+	//	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
+	//	glEnableVertexAttribArray(2);
+	//	break;
+	//case CubeType::withSkyBox:
+	//	shader = Shader::getShader("withSkyBox");
+	//	//法线
+	//	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
+	//	glEnableVertexAttribArray(1);
+	//	break;
+	//}
+	//shader.use();
+	//shader = Shader::getShader("normal");
+	
 	return true;
 }
 
 void Cube::draw()
 {
+	//shader.use();
 	glBindVertexArray(VAO);
-	BaseManager* baseManager = BaseManager::getInstance();
-	Camera& camera = *baseManager->getCamera();
-	shader.use();
-
-	switch (cubeType)
-	{
-	case CubeType::normal:
-		shader.setVec3("aColor", getColor());
-		break;
-	case CubeType::withLight:
-		if (lightSrc)
-		{
-			shader.setVec3("objectColor", getColor());
-			shader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-			shader.setVec3("lightPos", lightSrc->getPosition());
-			shader.setVec3("viewPos", camera.Position);
-		}
-		break;
-	case CubeType::withTexture:
-
-		break;
-	case CubeType::withTexAndLight:
-		if (lightSrc)
-		{
-			shader.setVec3("light.position", lightSrc->getPosition());
-			shader.setVec3("viewPos", camera.Position);
-			shader.setVec3("light.ambient", 0.5f, 0.5f, 0.5f);
-			shader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-			shader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
-
-			// material properties
-			shader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-			shader.setFloat("material.shininess", 64.0f);
-
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, diffuseMap);
-		}
-		break;
-	case CubeType::withSkyBox:
-		shader.setVec3("cameraPos", camera.Position);
-		// cubes
-		glBindVertexArray(VAO);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, SkyBox::SkyBox::getSkyBxCubeMap());
-		break;
-	default:
-		break;
-	}
-	//MVP变换
-	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)baseManager->screenWidth / (float)baseManager->screenHeight, 0.1f, 100.0f);
-	glm::mat4 view = camera.GetViewMatrix();
-	glm::mat4 model = getModelMatrix();
-	shader.setMat4("projection", projection);
-	shader.setMat4("view", view);
-	shader.setMat4("model", model);
-	
-	
+	//BaseManager* baseManager = BaseManager::getInstance();
+	//Camera& camera = *baseManager->getCamera();
+	//glBindVertexArray(VAO);
+	//
+	//glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)baseManager->screenWidth / (float)baseManager->screenHeight, 0.1f, 100.0f);
+	//glm::mat4 view = camera.GetViewMatrix();
+	//glm::mat4 model = getModelMatrix();
+	//shader.setMat4("projection", projection);
+	//shader.setMat4("view", view);
+	//shader.setMat4("model", model);
+	//shader.setVec3("aColor", getColor());
+	Entity::draw();
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
 }
@@ -178,28 +165,22 @@ void Cube::setType(CubeType _cubeType)
 {
 	switch (_cubeType)
 	{
+	case CubeType::normal:
+		setComponent(Shader3D_normal::create());
 	case CubeType::withLight:
-		shader = Shader::getShader("withLight");
-		//法线
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
-		glEnableVertexAttribArray(1);
+		setComponent(Shader3D_Light::create());
 		break;
 	case CubeType::withTexture:
-		shader = Shader::getShader("withTexture");
-		//法线
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
-		glEnableVertexAttribArray(1);
+		setComponent(Shader3D_Tex::create());
 		break;
 	case CubeType::withTexAndLight:
-		shader = Shader::getShader("withTexAndLight");
-		shader.setInt("material.diffuse", 0);
-		//法线
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));	//最后一个参数是数据的起点
-		glEnableVertexAttribArray(1);
-		//纹理坐标
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));	//最后一个参数是数据的起点
-		glEnableVertexAttribArray(2);
+		setComponent(Shader3D_TexLight::create());
 		break;
+	case CubeType::withSkyBox:
+		setComponent(Shader3D_SkyBox::create());
+		break;
+	default:
+		setComponent(Shader3D_normal::create());
 	}
 	cubeType = _cubeType;
 }
