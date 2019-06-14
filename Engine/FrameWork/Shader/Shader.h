@@ -45,7 +45,6 @@ public:
 	unsigned int ID;
 	Shader() : ID(-1)
 	{
-
 	};
 	// 构造器读取并构建着色器
 	template <typename S1, typename S2 = std::string>
@@ -62,8 +61,8 @@ public:
 		try
 		{
 			// 打开文件
-			vShaderFile.open(SHADER_PATH + std::forward<S1>(vertexPath));
-			fShaderFile.open(SHADER_PATH + std::forward<S2>(fragmentPath));
+			vShaderFile.open(std::forward<S1>(vertexPath));
+			fShaderFile.open(std::forward<S2>(fragmentPath));
 			std::stringstream vShaderStream, fShaderStream;
 			// 读取文件的缓冲内容到数据流中
 			vShaderStream << vShaderFile.rdbuf();
@@ -105,8 +104,8 @@ public:
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
 	}
-
-	static Shader getShader(string&& shaderName)
+	//获得着色器
+	static Shader& getShader(string&& shaderName)
 	{
 		if (shaderMap.find(shaderName) != shaderMap.end())
 		{
@@ -115,9 +114,24 @@ public:
 		}
 		else
 		{
-			Shader shader(shaderName + ".vs", shaderName + ".fs");
+			Shader shader(SHADER_PATH + shaderName + ".vs", SHADER_PATH + shaderName + ".fs");
 			shaderMap.insert(std::pair<string, Shader>(shaderName, shader));
 			return shaderMap[shaderName];
+		}
+	}
+	//获得滤镜
+	static Shader& getFilter(string&& filterName)
+	{
+		if (shaderMap.find(filterName) != shaderMap.end())
+		{
+			return shaderMap[filterName];
+
+		}
+		else
+		{
+			Shader shader(FILTER_VS, FILTER_PATH + filterName + ".fs");
+			shaderMap.insert(std::pair<string, Shader>(filterName, shader));
+			return shaderMap[filterName];
 		}
 	}
 	// 使用/激活程序

@@ -15,6 +15,8 @@ class BaseManager
 public:
 	float screenWidth;
 	float screenHeight;
+	float saturation;
+	float contrast;
 	static BaseManager* m_instance;
 	~BaseManager();
 	static BaseManager* getInstance();
@@ -37,11 +39,9 @@ private:
 	float lastY;
 	bool firstMouse;
 	float view;
-
+	
 	void BaseInit();//窗口初始化
 	void MainLoop();//主循环
-	
-	
-	
+
 	BaseManager();
 };
