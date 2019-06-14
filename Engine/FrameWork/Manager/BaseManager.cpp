@@ -148,8 +148,10 @@ void BaseManager::MainLoop()
 	Scene* scene = Scene::create();
 	originNode->addChild(scene);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 	while (!glfwWindowShouldClose(glWindow))
 	{
+		
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
@@ -166,6 +168,8 @@ void BaseManager::MainLoop()
 		RenderManager::getInstance()->filterUse();
 		glfwSwapBuffers(glWindow);
 		glfwPollEvents();
+
+
 	}
 	glfwTerminate();
 }
