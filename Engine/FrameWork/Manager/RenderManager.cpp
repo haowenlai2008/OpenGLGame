@@ -61,7 +61,7 @@ void RenderManager::filterInit()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
-	screenShader = Shader::getFilter("normal2");
+	screenShader = Shader::getFilter("sharpen");
 	screenShader.use();
 	screenShader.setInt("screenTexture", 0);
 	//´´½¨Ö¡»º³å
