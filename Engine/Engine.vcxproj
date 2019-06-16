@@ -22,32 +22,32 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D3931063-2C29-4B6F-92C1-05BD0DC9CBAF}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -139,12 +139,14 @@
     <ClCompile Include="FrameWork\Component\Shader3D_TexLight.cpp" />
     <ClCompile Include="FrameWork\Graph\Cube.cpp" />
     <ClCompile Include="FrameWork\Graph\CubeMat.cpp" />
+    <ClCompile Include="FrameWork\Graph\DirCube.cpp" />
     <ClCompile Include="FrameWork\Graph\Entity.cpp" />
     <ClCompile Include="FrameWork\Graph\Maze.cpp" />
     <ClCompile Include="FrameWork\Graph\Perlin.cpp" />
     <ClCompile Include="FrameWork\Graph\PerlinGround.cpp" />
     <ClCompile Include="FrameWork\Graph\SkyBox.cpp" />
     <ClCompile Include="FrameWork\Manager\BaseManager.cpp" />
+    <ClCompile Include="FrameWork\Manager\LogicManager.cpp" />
     <ClCompile Include="FrameWork\Manager\RefManager.cpp" />
     <ClCompile Include="FrameWork\Manager\RenderManager.cpp" />
     <ClCompile Include="FrameWork\Mesh\Mesh.cpp" />
@@ -169,12 +171,14 @@
     <ClInclude Include="FrameWork\func.h" />
     <ClInclude Include="FrameWork\Graph\Cube.h" />
     <ClInclude Include="FrameWork\Graph\CubeMat.h" />
+    <ClInclude Include="FrameWork\Graph\DirCube.h" />
     <ClInclude Include="FrameWork\Graph\Entity.h" />
     <ClInclude Include="FrameWork\Graph\Maze.h" />
     <ClInclude Include="FrameWork\Graph\Perlin.h" />
     <ClInclude Include="FrameWork\Graph\PerlinGround.h" />
     <ClInclude Include="FrameWork\Graph\SkyBox.h" />
     <ClInclude Include="FrameWork\Manager\BaseManager.h" />
+    <ClInclude Include="FrameWork\Manager\LogicManager.h" />
     <ClInclude Include="FrameWork\Manager\RefManager.h" />
     <ClInclude Include="FrameWork\Manager\RenderManager.h" />
     <ClInclude Include="FrameWork\Mesh\Mesh.h" />

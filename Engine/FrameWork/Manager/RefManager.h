@@ -8,6 +8,7 @@ class RefManager
 public:
 	static RefManager* getInstance();
 	void addRef(Ref* ref);
+	void init();
 	void update();
 	~RefManager();
 private:

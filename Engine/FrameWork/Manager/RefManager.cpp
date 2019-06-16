@@ -16,7 +16,10 @@ void RefManager::addRef(Ref * ref)
 {
 	refPool.push_back(ref);
 }
+void RefManager::init()
+{
 
+}
 void RefManager::update()
 {
 	for (auto it = refPool.begin(); it != refPool.end(); ++it)
