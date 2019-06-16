@@ -55,25 +55,6 @@ void BaseManager::ProcessInput(GLFWwindow *window)
 		camera.ProcessKeyboard(LEFT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime);
-
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-	{
-		saturation += 0.02f;
-		saturation = saturation > 1.0f ? 1.0f : saturation;
-		
-		contrast += 0.02f;
-		contrast = contrast > 1.0f ? 1.0f : contrast;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-	{
-		saturation -= 0.02f;
-		saturation = saturation < 0.0f ? 0.0f : saturation;
-
-		contrast -= 0.02f;
-		contrast = contrast < 0.0f ? 0.0f : contrast;
-	}
-		
 }
 void BaseManager::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
@@ -133,7 +114,6 @@ void BaseManager::BaseInit()
 	glfwSetFramebufferSizeCallback(glWindow, [](GLFWwindow* window, int width, int height) { glViewport(0, 0, width, height); });
 	glfwSetCursorPosCallback(glWindow, [](GLFWwindow* window, double xpos, double ypos) {BaseManager::getInstance()->mouse_callback(window, xpos, ypos); });
 	glfwSetScrollCallback(glWindow, [](GLFWwindow* window, double xoffset, double yoffset) {BaseManager::getInstance()->scroll_callback(window, xoffset, yoffset); });
-<<<<<<< HEAD
 	originNode = Node::create();
 	originNode->retain();
 	Scene* scene = Scene::create();
@@ -146,53 +126,28 @@ void BaseManager::BaseInit()
 	refManager->init();
 	logicManager->init();
 	//glEnable(GL_CULL_FACE);
-=======
-	
-	
->>>>>>> 32e5c0305ec2d7aab8da4cd5e54629d694867979
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void BaseManager::MainLoop()
 {
-	saturation = 0.0f;
-	contrast = 0.0f;
-	RenderManager::getInstance()->init();
-	originNode = Node::create();
-	originNode->retain();
-	Scene* scene = Scene::create();
-	originNode->addChild(scene);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+
 	while (!glfwWindowShouldClose(glWindow))
 	{
-		
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		ProcessInput(glWindow);
-		RenderManager::getInstance()->bindFrameBuffer();
-		glEnable(GL_DEPTH_TEST);
-		
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-<<<<<<< HEAD
 		logicManager->update(originNode, deltaTime);
 		renderManager->update(originNode);
 		
 		refManager->update();
-=======
-		RenderManager::getInstance()->update(originNode);
-		RefManager::getInstance()->update();
-		
-		RenderManager::getInstance()->filterUse();
->>>>>>> 32e5c0305ec2d7aab8da4cd5e54629d694867979
 		glfwSwapBuffers(glWindow);
 		glfwPollEvents();
-
-
 	}
 	glfwTerminate();
 }
