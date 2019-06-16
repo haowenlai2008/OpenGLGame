@@ -41,14 +41,11 @@ private:
 	float lastY;
 	bool firstMouse;
 	float view;
-<<<<<<< HEAD
 
 	RefManager* refManager;
 	RenderManager* renderManager;
 	LogicManager* logicManager;
-=======
-	
->>>>>>> 32e5c0305ec2d7aab8da4cd5e54629d694867979
+
 	void BaseInit();//窗口初始化
 	void MainLoop();//主循环
 
