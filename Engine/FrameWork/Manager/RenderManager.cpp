@@ -62,6 +62,7 @@ void RenderManager::filterInit()
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
 	screenShader = Shader::getFilter("blur");
+
 	screenShader.use();
 	screenShader.setInt("screenTexture", 0);
 	//´´½¨Ö¡»º³å

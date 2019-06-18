@@ -10,6 +10,10 @@
 class GLFWwindow;
 class Node;
 class Scene;
+class RenderManager;
+class RefManager;
+class LogicManager;
+
 class BaseManager
 {
 public:
@@ -30,8 +34,6 @@ private:
 	GLFWwindow* glWindow;
 	Camera camera;
 	Node* originNode;
-	unsigned int VAO;
-	unsigned int EBO;
 
 	float lastFrame;
 	float deltaTime;
@@ -39,7 +41,11 @@ private:
 	float lastY;
 	bool firstMouse;
 	float view;
-	
+
+	RefManager* refManager;
+	RenderManager* renderManager;
+	LogicManager* logicManager;
+
 	void BaseInit();//窗口初始化
 	void MainLoop();//主循环
 

@@ -3,6 +3,7 @@
 #include "Node.h"
 #include "RefManager.h"
 #include "RenderManager.h"
+#include "LogicManager.h"
 #include "Scene.h"
 #include <functional>
 #include <string>
@@ -132,8 +133,16 @@ void BaseManager::BaseInit()
 	glfwSetFramebufferSizeCallback(glWindow, [](GLFWwindow* window, int width, int height) { glViewport(0, 0, width, height); });
 	glfwSetCursorPosCallback(glWindow, [](GLFWwindow* window, double xpos, double ypos) {BaseManager::getInstance()->mouse_callback(window, xpos, ypos); });
 	glfwSetScrollCallback(glWindow, [](GLFWwindow* window, double xoffset, double yoffset) {BaseManager::getInstance()->scroll_callback(window, xoffset, yoffset); });
-	
-	
+
+	glEnable(GL_DEPTH_TEST);
+	renderManager = RenderManager::getInstance();
+	refManager = RefManager::getInstance();
+	logicManager = LogicManager::getInstance();
+	renderManager->init();
+	refManager->init();
+	logicManager->init();
+	//glEnable(GL_CULL_FACE);
+
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -142,6 +151,7 @@ void BaseManager::MainLoop()
 {
 	saturation = 0.0f;
 	contrast = 0.0f;
+
 	RenderManager::getInstance()->init();
 	originNode = Node::create();
 	originNode->retain();
@@ -162,13 +172,16 @@ void BaseManager::MainLoop()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		logicManager->update(originNode, deltaTime);
+		renderManager->update(originNode);
+		
+		refManager->update();
 		RenderManager::getInstance()->update(originNode);
 		RefManager::getInstance()->update();
 		
 		RenderManager::getInstance()->filterUse();
 		glfwSwapBuffers(glWindow);
 		glfwPollEvents();
-
 
 	}
 	glfwTerminate();

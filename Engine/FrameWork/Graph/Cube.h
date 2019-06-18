@@ -19,6 +19,7 @@ public:
 	static vector<int> index;
 	virtual bool init();
 	virtual void draw();
+	virtual void update(float delta);
 	void setType(CubeType _cubeType);
 	Cube();
 	virtual ~Cube();

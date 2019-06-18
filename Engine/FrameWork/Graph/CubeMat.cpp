@@ -1,7 +1,9 @@
 #include "CubeMat.h"
 #include "Cube.h"
+#include "DirCube.h"
 #include "BaseManager.h"
 #include <fstream>
+#include <list>
 using std::ifstream;
 vec3 CubeMat::dotScale = vec3(1.0f);
 CubeMat * CubeMat::create(vector<vector<int>>& mat, MatType type)
@@ -152,6 +154,107 @@ CubeMat * CubeMat::create(std::string&& file, MatType type)
 			break;
 		default:
 			break;
+		}
+		pRet->autorelease();
+		return pRet;
+	}
+	else
+	{
+		delete pRet;
+		pRet = nullptr;
+		return nullptr;
+	}
+	return nullptr;
+}
+
+CubeMat * CubeMat::createDirMat(std::string && file, MatType type)
+{
+	ifstream infile;
+	std::cout << DOT_MAT_PATH + file << std::endl;
+	infile.open(DOT_MAT_PATH + file);
+	if (!infile.is_open())
+	{
+		std::cout << "nonono" << std::endl;
+	}
+	vector<string> mat;
+	string str;
+	while (infile)//一行行地读
+	{
+		std::getline(infile, str);
+		mat.push_back(str);
+		std::cout << str << std::endl;
+	}
+	infile.close();
+	auto pRet = new(std::nothrow) CubeMat();
+	setDotScale(vec3(0.1f, 0.2f, 0.1f));
+	if (pRet && pRet->init())
+	{
+		switch (type)
+		{
+		case MatType::vertical:
+			for (int i = 0; i < mat.size(); i++)
+			{
+				for (int j = 0; j < mat[i].size(); j++)
+				{
+					
+					if (mat[i][j] != '0')
+					{
+						int half = mat[i].size() / 2;
+						int halfy = mat.size() / 2;
+						vec3 dir = vec3(float(j - half) * dotScale.x, float(mat.size() - i - 1)* dotScale.y, -20.0f);
+						auto cube = DirCube::create(CubeType::withSkyBox, dir);
+						cube->setTexture("flower.jpg");
+						cube->setScale(dotScale);
+						pRet->addChild(cube);
+
+						dir = vec3(float(j - half) * dotScale.x, float(mat.size() - i - 1)* dotScale.y, -20.0f - dotScale.z);
+						auto cube2 = DirCube::create(CubeType::withSkyBox, dir);
+						cube2->setTexture("flower.jpg");
+						cube2->setScale(dotScale);
+						pRet->addChild(cube2);
+					}
+				}
+			}
+			break;
+		case MatType::lie:
+			for (int i = 0; i < mat.size(); i++)
+			{
+				for (int j = 0; j < mat[i].size(); j++)
+				{
+					if (mat[i][j] != '0')
+					{
+						vec3 dir = vec3(float(j) * dotScale.x, 0.0f, -float(mat.size() - i - 1) * dotScale.z);
+						auto cube = DirCube::create(CubeType::withSkyBox, dir);
+						cube->setScale(dotScale);
+						pRet->addChild(cube);
+
+						dir = vec3(float(j) * dotScale.x, 1.0f * dotScale.y, -float(mat.size() - i - 1) * dotScale.z);
+						auto cube2 = DirCube::create(CubeType::withSkyBox, dir);
+						cube2->setScale(dotScale);
+						pRet->addChild(cube2);
+					}
+				}
+			}
+			break;
+		default:
+			break;
+		}
+		int wight = 0, count = 0;
+		for (int i = 0; i * i < pRet->childs.size(); i++)
+		{
+			wight = i;
+		}
+		int lenth = pRet->childs.size() / wight;
+		lenth += pRet->childs.size() % wight == 0 ? 0 : 1;
+
+		int i = 0;
+		for (auto& ref : pRet->childs)
+		{
+			int tmp = i % wight;
+			int half = wight / 2;
+			vec3 pos = vec3(float(tmp - half) * dotScale.x, 0.0f, -float(lenth - i / wight - 1) * dotScale.z);
+			ref->setLocalPosition(pos);
+			i++;
 		}
 		pRet->autorelease();
 		return pRet;

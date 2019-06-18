@@ -144,19 +144,7 @@ bool Cube::init()
 
 void Cube::draw()
 {
-	//shader.use();
 	glBindVertexArray(VAO);
-	//BaseManager* baseManager = BaseManager::getInstance();
-	//Camera& camera = *baseManager->getCamera();
-	//glBindVertexArray(VAO);
-	//
-	//glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)baseManager->screenWidth / (float)baseManager->screenHeight, 0.1f, 100.0f);
-	//glm::mat4 view = camera.GetViewMatrix();
-	//glm::mat4 model = getModelMatrix();
-	//shader.setMat4("projection", projection);
-	//shader.setMat4("view", view);
-	//shader.setMat4("model", model);
-	//shader.setVec3("aColor", getColor());
 	Entity::draw();
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
@@ -186,7 +174,12 @@ void Cube::setType(CubeType _cubeType)
 	cubeType = _cubeType;
 }
 
-
+void Cube::update(float delta)
+{
+	//vec3 dic(0.0f, 0.0f, -20.0f);
+	//vec3 dir = glm::normalize(dic - transform.position);
+	//transform.position += dir * 1.0f;
+}
 Cube::Cube() : cubeType(CubeType::normal)
 {
 }

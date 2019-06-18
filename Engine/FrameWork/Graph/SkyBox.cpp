@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 unsigned int SkyBox::cubemapTexture = 0;
-unsigned int SkyBox::loadCubemap(std::string&& sboxName, vector<std::string> faces)
+unsigned int SkyBox::loadCubemap(std::string&& sboxName, vector<std::string>& faces)
 {
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
@@ -14,7 +14,8 @@ unsigned int SkyBox::loadCubemap(std::string&& sboxName, vector<std::string> fac
 	int width, height, nrChannels;
 	for (unsigned int i = 0; i < faces.size(); i++)
 	{
-		unsigned char *data = stbi_load((TEXTURE_PATH + sboxName + faces[i]).c_str(), &width, &height, &nrChannels, 0);
+		unsigned char *data = stbi_load((TEXTURE_PATH + sboxName + faces[i]).c_str(), 
+			&width, &height, &nrChannels, 0);
 		if (data)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,

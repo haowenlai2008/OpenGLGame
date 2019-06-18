@@ -7,11 +7,14 @@ mat4 Node::getModelMatrix()
 	mat4 model = mat4(1.0f);
 	if (parent)
 	{
-		glm::qua<float> q = glm::qua<float>(glm::radians(parent->getRotate() + transform.rotate));		//旋转
+		
 		model = glm::scale(model, transform.scale);									//缩放
 		vec3 scaleC(1.0f / transform.scale.x, 1.0f / transform.scale.y, 1.0f / transform.scale.z);	//缩放系数每个分量的倒数组成的向量
 		vec3 move = parent->getPosition() + transform.position;//理论上的位移
 		model = glm::translate(model, vec3(move.x * scaleC.x, move.y * scaleC.y, move.z * scaleC.z));		//位移, 为了保持尺度不变，去掉缩放的影响
+
+		glm::qua<float> q = glm::qua<float>(glm::radians(parent->getRotate() + transform.rotate));		//旋转
+		model = glm::mat4_cast(q) * model;
 	}
 	return model;
 }
@@ -96,4 +99,9 @@ bool Node::init()
 
 void Node::draw()
 {
+}
+
+void Node::update(float delta)
+{
+
 }

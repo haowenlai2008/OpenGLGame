@@ -49,6 +49,9 @@
     <Filter Include="源文件\组件">
       <UniqueIdentifier>{8022c258-f734-412f-b630-9bce423f19bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\图形类\光源">
+      <UniqueIdentifier>{bac32bce-78fd-49d1-9b48-22142cc8b4be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\source\glad.c">
@@ -135,6 +138,12 @@
     <ClCompile Include="FrameWork\Component\Shader3D_SkyBox.cpp">
       <Filter>源文件\组件</Filter>
     </ClCompile>
+    <ClCompile Include="FrameWork\Manager\LogicManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Graph\DirCube.cpp">
+      <Filter>源文件\图形类</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork\Model\Model.h">
@@ -220,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="FrameWork\Component\Shader3D_SkyBox.h">
       <Filter>源文件\组件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Manager\LogicManager.h">
+      <Filter>源文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Graph\DirCube.h">
+      <Filter>源文件\图形类</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

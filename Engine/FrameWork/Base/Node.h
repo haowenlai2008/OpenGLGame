@@ -27,6 +27,7 @@ public:
 	
 	virtual bool init();
 	virtual void draw();
+	virtual void update(float delta);
 	mat4 getModelMatrix();
 	Node();
 	virtual ~Node();
