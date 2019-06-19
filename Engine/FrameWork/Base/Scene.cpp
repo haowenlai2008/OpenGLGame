@@ -19,9 +19,7 @@ bool Scene::init()
 	this->addChild(light);
 
 
-	CubeMat* mt = CubeMat::createDirMat("f.txt", MatType::vertical);
-	for (auto child : mt->childs)
-		child->setRotate(vec3(-40.0f, 0.0f, 0.0f));
+	CubeMat* mt = CubeMat::createDirMat("h.txt", MatType::vertical);
 	mt->setLightSrc(light);
 	this->addChild(mt);
 

@@ -4,6 +4,7 @@
 #include "func.h"
 #include "Node.h"
 #include <map>
+
 RenderManager* RenderManager::renderManager = nullptr;
 std::map<string, int> RenderManager::textures;
 
@@ -61,7 +62,7 @@ void RenderManager::filterInit()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
-	screenShader = Shader::getFilter("blur");
+	screenShader = Shader::getFilter("sharpen");
 
 	screenShader.use();
 	screenShader.setInt("screenTexture", 0);
