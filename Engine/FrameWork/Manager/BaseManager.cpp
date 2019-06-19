@@ -152,13 +152,12 @@ void BaseManager::MainLoop()
 	saturation = 0.0f;
 	contrast = 0.0f;
 
-	RenderManager::getInstance()->init();
-	originNode = Node::create();
+	originNode = Node::create();//游戏对象树的根
 	originNode->retain();
 	Scene* scene = Scene::create();
 	originNode->addChild(scene);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);	//开启深度测试
+	glEnable(GL_CULL_FACE);		//开启面剔除
 	while (!glfwWindowShouldClose(glWindow))
 	{
 		
@@ -166,7 +165,7 @@ void BaseManager::MainLoop()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		ProcessInput(glWindow);
-		RenderManager::getInstance()->bindFrameBuffer();
+		RenderManager::getInstance()->bindFrameBuffer();//绑定帧缓冲
 		glEnable(GL_DEPTH_TEST);
 		
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -175,11 +174,10 @@ void BaseManager::MainLoop()
 		logicManager->update(originNode, deltaTime);
 		renderManager->update(originNode);
 		
-		refManager->update();
-		RenderManager::getInstance()->update(originNode);
-		RefManager::getInstance()->update();
+		refManager->update();	//引用计数更新
+		RenderManager::getInstance()->update(originNode);	//渲染
 		
-		RenderManager::getInstance()->filterUse();
+		RenderManager::getInstance()->filterUse();	//使用滤镜
 		glfwSwapBuffers(glWindow);
 		glfwPollEvents();
 
