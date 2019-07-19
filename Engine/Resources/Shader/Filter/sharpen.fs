@@ -35,3 +35,96 @@ void main()
 
     FragColor = vec4(col, 1.0);
 } 
+
+
+
+public class Move : MonoBehaviour 
+{
+    private GameObject ball;
+    public speed = 5.0f;
+    bool left = true;//方向
+    void OnStart()
+    {
+        ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);//创建个球球
+        ball.transform = new Vec3(10.0f, 0.0f, 0.0f);
+    }
+
+    void Update() {
+        if (ball.transform.x < -10.0f)
+        {
+            left = false;
+        }
+        if (ball.transform.x > 10.0f)
+        {
+            left = true;
+        }
+        ball.transform += new Vec3(speed * Time.deltaTime * left ? -1 : 1 , 0.0f, 0.0f);//根据方向移动
+    }
+}
+
+
+public class Move : MonoBehaviour 
+{
+    private GameObject ball;
+    public speed = 5.0f;
+    bool left = true;//方向
+    void OnStart()
+    {
+        ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);//创建个球球
+        ball.transform = new Vec3(10.0f, 0.0f, 0.0f);
+    }
+
+    void Update() {
+        if (ball.transform.x < -10.0f)
+        {
+            left = false;
+        }
+        if (ball.transform.x > 10.0f)
+        {
+            left = true;
+        }
+        ball.transform.position += new Vec3(speed * Time.deltaTime * left ? -1 : 1 , 0.0f, 0.0f);//根据方向移动
+    }
+}
+
+
+public class ExampleClass : MonoBehaviour
+{
+    void OnStart()
+    {
+
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            Vector3 position = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
+            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);//创建个方方
+            go.transform.position = position;
+        }
+    }
+}
+
+
+public class ExampleClass : MonoBehaviour
+{
+    void OnStart()
+    {
+         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);//创建个球球
+         go.AddComponent(typeof(SphereCollider));
+    }
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            //创建一条从摄像机到触摸位置的射线
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 定义射线
+            RaycastHit rayHit;
+            if (Physics.Raycast(ray, out rayHit, layerGround))  // 参数1 射线，参数2 碰撞信息， 参数3 碰撞层
+            {
+                //打印射线碰撞到的对象需要挂载Collider盒子
+                print("info   " + rayHit.collider.gameObject.name);
+            }
+        }
+    }
+}

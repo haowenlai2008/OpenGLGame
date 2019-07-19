@@ -19,7 +19,7 @@ bool Scene::init()
 	this->addChild(light);
 
 
-	CubeMat* mt = CubeMat::createDirMat("h.txt", MatType::vertical);
+	CubeMat* mt = CubeMat::createDirMat("d.txt", MatType::vertical);
 	mt->setLightSrc(light);
 	this->addChild(mt);
 

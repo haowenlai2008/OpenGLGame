@@ -165,7 +165,7 @@ void BaseManager::MainLoop()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		ProcessInput(glWindow);
-		RenderManager::getInstance()->bindFrameBuffer();//绑定帧缓冲
+		//RenderManager::getInstance()->bindFrameBuffer();//绑定帧缓冲
 		glEnable(GL_DEPTH_TEST);
 		
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -177,7 +177,7 @@ void BaseManager::MainLoop()
 		refManager->update();	//引用计数更新
 		RenderManager::getInstance()->update(originNode);	//渲染
 		
-		RenderManager::getInstance()->filterUse();	//使用滤镜
+		//RenderManager::getInstance()->filterUse();	//使用滤镜
 		glfwSwapBuffers(glWindow);
 		glfwPollEvents();
 

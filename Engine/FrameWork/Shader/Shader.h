@@ -23,6 +23,7 @@ inline void assertShader(unsigned int shaderObj, std::string&& shaderName)
 	if (!success)
 	{
 		glGetShaderInfoLog(shaderObj, 512, NULL, infoLog);
+		std::cout << shaderName << "   ";
 		std::cout << "ERROR::SHADER" << shaderName << "::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 }
