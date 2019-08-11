@@ -125,6 +125,7 @@
     <ClCompile Include="external\source\glad.c" />
     <ClCompile Include="external\source\stb_image.cpp" />
     <ClCompile Include="FrameWork\Application.cpp" />
+    <ClCompile Include="FrameWork\Base\BSpline.cpp" />
     <ClCompile Include="FrameWork\Base\Node.cpp" />
     <ClCompile Include="FrameWork\Base\Ref.cpp" />
     <ClCompile Include="FrameWork\Base\Scene.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="FrameWork\Shader\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FrameWork\Base\BSpline.h" />
     <ClInclude Include="FrameWork\Base\Node.h" />
     <ClInclude Include="FrameWork\Base\Ref.h" />
     <ClInclude Include="FrameWork\Base\Scene.h" />
