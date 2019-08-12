@@ -52,6 +52,9 @@
     <Filter Include="源文件\图形类\光源">
       <UniqueIdentifier>{bac32bce-78fd-49d1-9b48-22142cc8b4be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\算法">
+      <UniqueIdentifier>{2090705f-f53e-4cf9-8ead-60428ce80e9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\source\glad.c">
@@ -144,6 +147,9 @@
     <ClCompile Include="FrameWork\Graph\DirCube.cpp">
       <Filter>源文件\图形类</Filter>
     </ClCompile>
+    <ClCompile Include="FrameWork\Base\BSpline.cpp">
+      <Filter>源文件\算法</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork\Model\Model.h">
@@ -235,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="FrameWork\Graph\DirCube.h">
       <Filter>源文件\图形类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Base\BSpline.h">
+      <Filter>源文件\算法</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
