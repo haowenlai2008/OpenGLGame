@@ -1,14 +1,15 @@
 #pragma once
 #include "Node.h"
-#include "Shader.h"
-#include "Component.h"
+class Shader;
+class Component;
 class Entity : public Node
 {
 public:
 	CREATE_FUNC(Entity);
 	LL_SYNTHESIZE(glm::vec3, color, Color);//颜色设置
 	LL_SYNTHESIZE(Node*, lightSrc, LightSrc);//光源设置
-	virtual void draw();
+	virtual bool init() override;
+	virtual void draw() override;
 	virtual void setTexture(string&& src);
 	void addComponent(Component* component);
 	void setComponent(Component* component);
@@ -19,7 +20,7 @@ public:
 	virtual ~Entity();
 protected:
 	vector<Component*> comList;
-	Shader shader;
+	std::shared_ptr<Shader> shader;
 	unsigned int VAO;
 	unsigned int VBO;
 	unsigned int diffuseMap;

@@ -1,10 +1,11 @@
 #include "Shader3D_normal.h"
 #include <glm/vec3.hpp>
+
 void Shader3D_normal::use()
 {
 	
 	Shader3D_Component::use();
-	shader.setVec3("aColor", getColor());
+	shader->setVec3("aColor", getColor());
 }
 
 bool Shader3D_normal::init()

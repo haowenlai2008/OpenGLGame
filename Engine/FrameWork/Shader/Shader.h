@@ -47,6 +47,7 @@ public:
 	Shader() : ID(-1)
 	{
 	};
+	~Shader() {};
 	// 构造器读取并构建着色器
 	template <typename S1, typename S2 = std::string>
 	Shader(S1&& vertexPath, S2&& fragmentPath)
@@ -106,7 +107,7 @@ public:
 		glDeleteShader(fragment);
 	}
 	//获得着色器
-	static Shader& getShader(string&& shaderName)
+	static std::shared_ptr<Shader>& getShader(string&& shaderName)
 	{
 		if (shaderMap.find(shaderName) != shaderMap.end())
 		{
@@ -115,13 +116,13 @@ public:
 		}
 		else
 		{
-			Shader shader(SHADER_PATH + shaderName + ".vs", SHADER_PATH + shaderName + ".fs");
-			shaderMap.insert(std::pair<string, Shader>(shaderName, shader));
+			std::shared_ptr<Shader> shader(new Shader(SHADER_PATH + shaderName + ".vs", SHADER_PATH + shaderName + ".fs"));
+			shaderMap.insert(std::pair<string, std::shared_ptr<Shader>>(shaderName, shader));
 			return shaderMap[shaderName];
 		}
 	}
 	//获得滤镜
-	static Shader& getFilter(string&& filterName)
+	static std::shared_ptr<Shader>& getFilter(string&& filterName)
 	{
 		if (shaderMap.find(filterName) != shaderMap.end())
 		{
@@ -130,11 +131,13 @@ public:
 		}
 		else
 		{
-			Shader shader(FILTER_VS, FILTER_PATH + filterName + ".fs");
-			shaderMap.insert(std::pair<string, Shader>(filterName, shader));
+			std::shared_ptr<Shader> shader(new Shader(FILTER_VS, FILTER_PATH + filterName + ".fs"));
+			shaderMap.insert(std::pair<string, std::shared_ptr<Shader>>(filterName, shader));
 			return shaderMap[filterName];
 		}
 	}
+	Shader(Shader&& rref) { ID = rref.ID, rref.ID = -1; };
+	Shader(const Shader& lref) { ID = lref.ID; };
 	// 使用/激活程序
 	void use();
 	// uniform工具函数
@@ -152,7 +155,7 @@ public:
 	void setMat4(const std::string &name, const glm::mat4 &mat) const;
 
 private:
-	static map<string, Shader> shaderMap;
+	static map<string, std::shared_ptr<Shader>> shaderMap;
 };
 
 #endif

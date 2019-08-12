@@ -1,9 +1,12 @@
 #include "SkyBox.h"
 #include "BaseManager.h"
 #include "func.h"
+#include "Shader.h"
 #include <iostream>
 #include <vector>
 #include <string>
+
+using std::vector;
 unsigned int SkyBox::cubemapTexture = 0;
 unsigned int SkyBox::loadCubemap(std::string&& sboxName, vector<std::string>& faces)
 {
@@ -110,7 +113,7 @@ bool SkyBox::init()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	cubemapTexture = getSkyBxCubeMap();
-	shader.use();
+	shader->use();
 	//shader.setInt("skybox", 0);
 	return true;
 }
@@ -125,10 +128,10 @@ void SkyBox::draw()
 	glm::mat4 view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
 
 	glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
-	shader.use();
+	shader->use();
 	view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
-	shader.setMat4("view", view);
-	shader.setMat4("projection", projection);
+	shader->setMat4("view", view);
+	shader->setMat4("projection", projection);
 	// skybox cube
 	glBindVertexArray(VAO);
 	glActiveTexture(GL_TEXTURE0);

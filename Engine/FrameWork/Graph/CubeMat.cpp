@@ -101,7 +101,6 @@ CubeMat * CubeMat::create(std::string&& file, MatType type)
 	{
 		std::getline(infile, str);
 		mat.push_back(str);
-		std::cout << str << std::endl;
 	}
 	infile.close();
 	auto pRet = new(std::nothrow) CubeMat();
@@ -182,7 +181,6 @@ CubeMat * CubeMat::createDirMat(std::string && file, MatType type)
 	{
 		std::getline(infile, str);
 		mat.push_back(str);
-		std::cout << str << std::endl;
 	}
 	infile.close();
 	auto pRet = new(std::nothrow) CubeMat();

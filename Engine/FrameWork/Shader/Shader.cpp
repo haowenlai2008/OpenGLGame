@@ -1,6 +1,7 @@
 #include "Shader.h"
 #include <string>
-map<string, Shader> Shader::shaderMap;
+using std::string;
+map<string, std::shared_ptr<Shader>> Shader::shaderMap;
 void Shader::use()
 {
 	glUseProgram(ID);

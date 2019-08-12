@@ -2,15 +2,16 @@
 #include "Entity.h"
 #include "BaseManager.h"
 #include "Camera.h"
+#include "Shader.h"
 void Shader3D_Light::use()
 {
 	Shader3D_Component::use();
 	if (entity->getLightSrc())
 	{
-		shader.setVec3("objectColor", getColor());
-		shader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-		shader.setVec3("lightPos", entity->getLightSrc()->getPosition());
-		shader.setVec3("viewPos", BaseManager::getCamera()->Position);
+		shader->setVec3("objectColor", getColor());
+		shader->setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+		shader->setVec3("lightPos", entity->getLightSrc()->getPosition());
+		shader->setVec3("viewPos", BaseManager::getCamera()->Position);
 	}
 }
 

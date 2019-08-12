@@ -3,8 +3,10 @@
 #include "Ref.h"
 #include "func.h"
 #include "Node.h"
+#include "Shader.h"
 #include <map>
-
+#include <vector>
+using std::vector;
 RenderManager* RenderManager::renderManager = nullptr;
 std::map<string, int> RenderManager::textures;
 
@@ -64,8 +66,8 @@ void RenderManager::filterInit()
 
 	screenShader = Shader::getFilter("normal2");
 
-	screenShader.use();
-	screenShader.setInt("screenTexture", 0);
+	screenShader->use();
+	screenShader->setInt("screenTexture", 0);
 	//´´½¨Ö¡»º³å
 	BaseManager* bmp = BaseManager::getInstance();
 	glGenFramebuffers(1, &framebuffer);
@@ -118,7 +120,7 @@ void RenderManager::filterUse()
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // set clear color to white (not really necessery actually, since we won't be able to see behind the quad anyways)
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	screenShader.use();
+	screenShader->use();
 	//screenShader.setFloat("saturation", BaseManager::getInstance()->saturation);
 	//screenShader.setFloat("contrast", BaseManager::getInstance()->contrast);
 	glBindVertexArray(quadVAO);

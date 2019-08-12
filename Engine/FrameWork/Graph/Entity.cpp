@@ -76,6 +76,10 @@ Entity::~Entity()
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 }
+bool Entity::init()
+{
+	return true;
+}
 void Entity::draw()
 {
 	for (auto& sd : comList)

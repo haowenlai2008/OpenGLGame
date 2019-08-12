@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "Shader.h"
+class Shader;
 class Shader3D_Component : public Component
 {
 public:
@@ -11,5 +11,5 @@ public:
 	Shader3D_Component();
 	~Shader3D_Component();
 protected:
-	Shader shader;
+	std::shared_ptr<Shader> shader;
 };

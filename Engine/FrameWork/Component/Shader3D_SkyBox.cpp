@@ -4,10 +4,11 @@
 #include "RenderManager.h"
 #include "Camera.h"
 #include "SkyBox.h"
+#include "Shader.h"
 void Shader3D_SkyBox::use()
 {
 	Shader3D_Component::use();
-	shader.setVec3("cameraPos", BaseManager::getCamera()->Position);
+	shader->setVec3("cameraPos", BaseManager::getCamera()->Position);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, SkyBox::getSkyBxCubeMap());
 }

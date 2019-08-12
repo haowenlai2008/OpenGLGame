@@ -22,14 +22,14 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D3931063-2C29-4B6F-92C1-05BD0DC9CBAF}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -132,6 +132,8 @@
     <ClCompile Include="FrameWork\Base\Transform.cpp" />
     <ClCompile Include="FrameWork\Camera.cpp" />
     <ClCompile Include="FrameWork\Component\Component.cpp" />
+    <ClCompile Include="FrameWork\Component\Shader2D_Component.cpp" />
+    <ClCompile Include="FrameWork\Component\Shader2D_Line.cpp" />
     <ClCompile Include="FrameWork\Component\Shader3D_Component.cpp" />
     <ClCompile Include="FrameWork\Component\Shader3D_Light.cpp" />
     <ClCompile Include="FrameWork\Component\Shader3D_normal.cpp" />
@@ -142,6 +144,8 @@
     <ClCompile Include="FrameWork\Graph\CubeMat.cpp" />
     <ClCompile Include="FrameWork\Graph\DirCube.cpp" />
     <ClCompile Include="FrameWork\Graph\Entity.cpp" />
+    <ClCompile Include="FrameWork\Graph\Line2D.cpp" />
+    <ClCompile Include="FrameWork\Graph\Line2D_color_balance.cpp" />
     <ClCompile Include="FrameWork\Graph\Maze.cpp" />
     <ClCompile Include="FrameWork\Graph\Perlin.cpp" />
     <ClCompile Include="FrameWork\Graph\PerlinGround.cpp" />
@@ -161,8 +165,10 @@
     <ClInclude Include="FrameWork\Base\Scene.h" />
     <ClInclude Include="FrameWork\Base\Transform.h" />
     <ClInclude Include="FrameWork\Camera.h" />
-    <ClInclude Include="FrameWork\Component\all3DShader.h" />
+    <ClInclude Include="FrameWork\Component\allShaderComponent.h" />
     <ClInclude Include="FrameWork\Component\Component.h" />
+    <ClInclude Include="FrameWork\Component\Shader2D_Component.h" />
+    <ClInclude Include="FrameWork\Component\Shader2D_Line.h" />
     <ClInclude Include="FrameWork\Component\Shader3D_Component.h" />
     <ClInclude Include="FrameWork\Component\Shader3D_Light.h" />
     <ClInclude Include="FrameWork\Component\Shader3D_normal.h" />
@@ -175,6 +181,8 @@
     <ClInclude Include="FrameWork\Graph\CubeMat.h" />
     <ClInclude Include="FrameWork\Graph\DirCube.h" />
     <ClInclude Include="FrameWork\Graph\Entity.h" />
+    <ClInclude Include="FrameWork\Graph\Line2D.h" />
+    <ClInclude Include="FrameWork\Graph\Line2D_color_balance.h" />
     <ClInclude Include="FrameWork\Graph\Maze.h" />
     <ClInclude Include="FrameWork\Graph\Perlin.h" />
     <ClInclude Include="FrameWork\Graph\PerlinGround.h" />
@@ -193,6 +201,8 @@
     <None Include="Resources\Shader\basic_lighting2.fs" />
     <None Include="Resources\Shader\basic_lighting2.vs" />
     <None Include="Resources\Shader\lighting_maps.vs" />
+    <None Include="Resources\Shader\line2D.fs" />
+    <None Include="Resources\Shader\line2D.vs" />
     <None Include="Resources\Shader\normal.fs" />
     <None Include="Resources\Shader\normal.vs" />
     <None Include="Resources\Shader\SkyBox.fs" />

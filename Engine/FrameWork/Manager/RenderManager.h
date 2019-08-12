@@ -4,12 +4,13 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "Shader.h"
+
 using std::list;
 using std::map;
 using std::string;
 using std::vector;
 class Node;
+class Shader;
 class RenderManager
 {
 public:
@@ -21,7 +22,7 @@ public:
 	void update(Node* node);
 	void bindFrameBuffer();
 	void filterUse();
-	Shader screenShader;
+	std::shared_ptr<Shader> screenShader;
 	~RenderManager();
 private:
 	unsigned int framebuffer;			//Ö¡»º³å

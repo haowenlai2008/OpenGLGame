@@ -17,6 +17,7 @@ enum class ComponentTypeII	//组件小类
 	Shader3D_Tex,
 	Shader3D_TexLight,
 	Shader3D_SkyBox,
+	Shader2D_Line,
 };
 class Component : public Ref
 {

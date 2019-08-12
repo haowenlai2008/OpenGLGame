@@ -3,19 +3,20 @@
 #include "BaseManager.h"
 #include "RenderManager.h"
 #include "Camera.h"
+#include "Shader.h"
 void Shader3D_TexLight::use()
 {
 	Shader3D_Component::use();
 	if (entity->getLightSrc())
 	{
-		shader.setVec3("light.position", entity->getLightSrc()->getPosition());
-		shader.setVec3("viewPos", BaseManager::getCamera()->Position);
-		shader.setVec3("light.ambient", 0.5f, 0.5f, 0.5f);
-		shader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-		shader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		shader->setVec3("light.position", entity->getLightSrc()->getPosition());
+		shader->setVec3("viewPos", BaseManager::getCamera()->Position);
+		shader->setVec3("light.ambient", 0.5f, 0.5f, 0.5f);
+		shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+		shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 		// material properties
-		shader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-		shader.setFloat("material.shininess", 64.0f);
+		shader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+		shader->setFloat("material.shininess", 64.0f);
 		glActiveTexture(GL_TEXTURE0);
 		if (diffuseMap != 0)
 			glBindTexture(GL_TEXTURE_2D, diffuseMap);

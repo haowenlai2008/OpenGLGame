@@ -1,5 +1,6 @@
 #include "Shader3D_Tex.h"
 #include "RenderManager.h"
+#include "Shader.h"
 void Shader3D_Tex::use()
 {
 	Shader3D_Component::use();

@@ -1,7 +1,7 @@
 #include "DirCube.h"
 #include "BaseManager.h"
 #include "SkyBox.h"
-#include "all3DShader.h"
+#include "allShaderComponent.h"
 using std::endl;
 using std::cout;
 vector<float> DirCube::vertex  = {

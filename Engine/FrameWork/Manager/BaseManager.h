@@ -1,9 +1,8 @@
 #pragma once
-#include "Shader.h"
+#include <glfw3.h>
+#include <glad.h> // 包含glad来获取所有的必须OpenGL头文件
 #include "Camera.h"
 #include "const.h"
-#include <glfw3.h>
-#include <glad.h>
 #include <stb_image.h>
 #include <iostream>
 

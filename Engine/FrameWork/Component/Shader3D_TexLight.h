@@ -1,6 +1,5 @@
 #pragma once
 #include "Shader3D_Component.h"
-#include "Shader.h"
 class Shader3D_TexLight : public Shader3D_Component
 {
 public:
