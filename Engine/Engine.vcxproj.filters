@@ -237,4 +237,63 @@
       <Filter>源文件\图形类</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shader\1.model_loading.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\1.model_loading.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\basic_lighting2.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\basic_lighting2.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\lighting_maps.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\normal.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\normal.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\SkyBox.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\SkyBox.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withBox.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withBox.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withLight.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withLight.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withSkyBox.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withSkyBox.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withTexAndLight.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withTexAndLight.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withTexture.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\withTexture.vs">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
 </Project>

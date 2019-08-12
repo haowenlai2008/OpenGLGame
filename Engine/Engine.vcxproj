@@ -185,6 +185,27 @@
     <ClInclude Include="FrameWork\Model\Model.h" />
     <ClInclude Include="FrameWork\Shader\Shader.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shader\1.model_loading.fs" />
+    <None Include="Resources\Shader\1.model_loading.vs" />
+    <None Include="Resources\Shader\basic_lighting2.fs" />
+    <None Include="Resources\Shader\basic_lighting2.vs" />
+    <None Include="Resources\Shader\lighting_maps.vs" />
+    <None Include="Resources\Shader\normal.fs" />
+    <None Include="Resources\Shader\normal.vs" />
+    <None Include="Resources\Shader\SkyBox.fs" />
+    <None Include="Resources\Shader\SkyBox.vs" />
+    <None Include="Resources\Shader\withBox.fs" />
+    <None Include="Resources\Shader\withBox.vs" />
+    <None Include="Resources\Shader\withLight.fs" />
+    <None Include="Resources\Shader\withLight.vs" />
+    <None Include="Resources\Shader\withSkyBox.fs" />
+    <None Include="Resources\Shader\withSkyBox.vs" />
+    <None Include="Resources\Shader\withTexAndLight.fs" />
+    <None Include="Resources\Shader\withTexAndLight.vs" />
+    <None Include="Resources\Shader\withTexture.fs" />
+    <None Include="Resources\Shader\withTexture.vs" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
