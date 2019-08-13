@@ -22,14 +22,17 @@ void LogicManager::update(Node * node, float delta)
 {
 	if (node == nullptr)
 		return;
-	for (auto* p : node->childs)
+	for (auto*& p : node->childs)
 	{
-		if (p->count == 0)
+		if (p == nullptr)
 		{
-			std::cout << "diu" << std::endl;
-			node->childs.erase(std::find(node->childs.begin(), node->childs.end(), p));
 			continue;
 		}	
+		if (p->count == 0)
+		{
+			p = nullptr;
+			continue;
+		}
 		if (p->getVisable())
 			p->update(delta);
 		update(p, delta);

@@ -97,11 +97,14 @@ void RenderManager::update(Node * node)
 {
 	if (node == nullptr)
 		return;
-	for (auto* p : node->childs)
+	for (auto*& p : node->childs)
 	{
-		if (p->getVisable())
-			p->draw();
-		update(p);
+		if (p != nullptr && p->count != 0)
+		{
+			if (p->getVisable())
+				p->draw();
+			update(p);
+		}
 	}
 		
 }

@@ -79,7 +79,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\FrameWork\Component;.\FrameWork\Graph;.\FrameWork\Base;.\FrameWork\Manager;.\FrameWork;.\FrameWork\Model;.\FrameWork\Mesh;.\FrameWork\Shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FrameWork\Algorithm;.\FrameWork\Component;.\FrameWork\Graph;.\FrameWork\Base;.\FrameWork\Manager;.\FrameWork;.\FrameWork\Model;.\FrameWork\Mesh;.\FrameWork\Shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -124,8 +124,8 @@
   <ItemGroup>
     <ClCompile Include="external\source\glad.c" />
     <ClCompile Include="external\source\stb_image.cpp" />
+    <ClCompile Include="FrameWork\Algorithm\BSpline.cpp" />
     <ClCompile Include="FrameWork\Application.cpp" />
-    <ClCompile Include="FrameWork\Base\BSpline.cpp" />
     <ClCompile Include="FrameWork\Base\Node.cpp" />
     <ClCompile Include="FrameWork\Base\Ref.cpp" />
     <ClCompile Include="FrameWork\Base\Scene.cpp" />
@@ -145,6 +145,7 @@
     <ClCompile Include="FrameWork\Graph\DirCube.cpp" />
     <ClCompile Include="FrameWork\Graph\Entity.cpp" />
     <ClCompile Include="FrameWork\Graph\Line2D.cpp" />
+    <ClCompile Include="FrameWork\Graph\Line2D_BSpline.cpp" />
     <ClCompile Include="FrameWork\Graph\Line2D_color_balance.cpp" />
     <ClCompile Include="FrameWork\Graph\Maze.cpp" />
     <ClCompile Include="FrameWork\Graph\Perlin.cpp" />
@@ -159,7 +160,7 @@
     <ClCompile Include="FrameWork\Shader\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrameWork\Base\BSpline.h" />
+    <ClInclude Include="FrameWork\Algorithm\BSpline.h" />
     <ClInclude Include="FrameWork\Base\Node.h" />
     <ClInclude Include="FrameWork\Base\Ref.h" />
     <ClInclude Include="FrameWork\Base\Scene.h" />
@@ -182,6 +183,7 @@
     <ClInclude Include="FrameWork\Graph\DirCube.h" />
     <ClInclude Include="FrameWork\Graph\Entity.h" />
     <ClInclude Include="FrameWork\Graph\Line2D.h" />
+    <ClInclude Include="FrameWork\Graph\Line2D_BSpline.h" />
     <ClInclude Include="FrameWork\Graph\Line2D_color_balance.h" />
     <ClInclude Include="FrameWork\Graph\Maze.h" />
     <ClInclude Include="FrameWork\Graph\Perlin.h" />

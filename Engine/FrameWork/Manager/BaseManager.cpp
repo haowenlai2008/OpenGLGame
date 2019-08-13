@@ -91,6 +91,7 @@ void BaseManager::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	lastY = ypos;
 
 	camera.ProcessMouseMovement(xoffset, yoffset);
+	std::cout << "x = " << xoffset << " y = " << yoffset << std::endl;
 }
 void BaseManager::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
@@ -165,19 +166,20 @@ void BaseManager::MainLoop()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		ProcessInput(glWindow);
-		//RenderManager::getInstance()->bindFrameBuffer();//绑定帧缓冲
+		RenderManager::getInstance()->bindFrameBuffer();//绑定帧缓冲
 		glEnable(GL_DEPTH_TEST);
 		
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		
+
 		logicManager->update(originNode, deltaTime);
 		renderManager->update(originNode);
 		
 		refManager->update();	//引用计数更新
-		RenderManager::getInstance()->update(originNode);	//渲染
 		
-		//RenderManager::getInstance()->filterUse();	//使用滤镜
+		RenderManager::getInstance()->filterUse();	//使用滤镜
 		glfwSwapBuffers(glWindow);
 		glfwPollEvents();
 

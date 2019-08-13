@@ -174,9 +174,6 @@
     <ClCompile Include="FrameWork\Component\Shader3D_TexLight.cpp">
       <Filter>源文件\组件</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Base\BSpline.cpp">
-      <Filter>源文件\算法</Filter>
-    </ClCompile>
     <ClCompile Include="FrameWork\Graph\Line2D.cpp">
       <Filter>源文件\图形类</Filter>
     </ClCompile>
@@ -190,6 +187,12 @@
       <Filter>源文件\组件</Filter>
     </ClCompile>
     <ClCompile Include="FrameWork\Graph\Line2D_color_balance.cpp">
+      <Filter>源文件\图形类</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Algorithm\BSpline.cpp">
+      <Filter>源文件\算法</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Graph\Line2D_BSpline.cpp">
       <Filter>源文件\图形类</Filter>
     </ClCompile>
   </ItemGroup>
@@ -281,9 +284,6 @@
     <ClInclude Include="FrameWork\Graph\DirCube.h">
       <Filter>头文件\图形类</Filter>
     </ClInclude>
-    <ClInclude Include="FrameWork\Base\BSpline.h">
-      <Filter>头文件\算法</Filter>
-    </ClInclude>
     <ClInclude Include="FrameWork\Graph\Line2D.h">
       <Filter>头文件\图形类</Filter>
     </ClInclude>
@@ -297,6 +297,12 @@
       <Filter>头文件\组件</Filter>
     </ClInclude>
     <ClInclude Include="FrameWork\Graph\Line2D_color_balance.h">
+      <Filter>头文件\图形类</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Algorithm\BSpline.h">
+      <Filter>头文件\算法</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\Graph\Line2D_BSpline.h">
       <Filter>头文件\图形类</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,6 +14,14 @@ RefManager * RefManager::getInstance()
 
 void RefManager::addRef(Ref * ref)
 {
+	for (auto*& p : refPool)
+	{
+		if (p == nullptr)
+		{
+			p = ref;
+			return;
+		}
+	}
 	refPool.push_back(ref);
 }
 void RefManager::init()
@@ -24,11 +32,10 @@ void RefManager::update()
 {
 	for (auto it = refPool.begin(); it != refPool.end(); ++it)
 	{
-		if ((*it)->count == 0)
+		if ((*it) != nullptr && (*it)->count == 0)
 		{
 			delete (*it);
 			(*it) = nullptr;
-			refPool.erase(it);
 		}
 	}
 }

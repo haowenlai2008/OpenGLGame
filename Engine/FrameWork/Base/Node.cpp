@@ -32,6 +32,15 @@ Node::~Node()
 
 void Node::addChild(Node * node)
 {
+	for (auto*& p : node->childs)
+	{
+		if (p == nullptr)
+		{
+			p = node;
+			p->retain();
+			return;
+		}
+	}
 	if (node->parent == nullptr)
 	{
 		childs.push_back(node);

@@ -7,6 +7,7 @@
 #include "PerlinGround.h"
 #include "Line2D.h"
 #include "Line2D_color_balance.h"
+#include "Line2D_BSpline.h"
 bool Scene::init()
 {
 	//SkyBox* skyBox = SkyBox::create();
@@ -41,7 +42,17 @@ bool Scene::init()
 	//this->addChild(line1);
 	//this->addChild(line2);
 	//this->addChild(line3);
-	Line2D_ColorBalance* line = Line2D_ColorBalance::create();
+	Line2D_BSpline* line = Line2D_BSpline::create();
 	this->addChild(line);
+	//vector<int> test = { 1, 2, 3, 4, 5, 6 };
+	//for (auto it = test.begin(); it != test.end(); it++)
+	//{
+	//	if (*it == 3)
+	//	{
+	//		std::cout << int(it._Ptr) << std::endl;
+	//		auto it2 = test.erase(it);
+	//		std::cout << int(it2._Ptr) << std::endl;
+	//	}
+	//}
 	return true;
 }
