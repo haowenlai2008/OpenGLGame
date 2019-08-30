@@ -3,6 +3,7 @@
 #include "Shader.h"
 void Shader2D_Line::use()
 {
+	std::shared_ptr<Shader> shader(pShader);
 	Shader2D_Component::use();
 	shader->setVec3("aColor", getColor());
 }
@@ -17,7 +18,7 @@ Shader2D_Line::Shader2D_Line()
 {
 	setComTypeI(ComponentTypeI::Shader);
 	setComTypeII(ComponentTypeII::Shader2D_Line);
-	shader = Shader::getShader("line2D");
+	pShader = Shader::getShader("line2D");
 	setColor(glm::vec3(0.5, 0.5, 0.9));
 }
 

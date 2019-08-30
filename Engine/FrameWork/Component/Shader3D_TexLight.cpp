@@ -9,6 +9,7 @@ void Shader3D_TexLight::use()
 	Shader3D_Component::use();
 	if (entity->getLightSrc())
 	{
+		std::shared_ptr<Shader> shader(pShader);
 		shader->setVec3("light.position", entity->getLightSrc()->getPosition());
 		shader->setVec3("viewPos", BaseManager::getCamera()->Position);
 		shader->setVec3("light.ambient", 0.5f, 0.5f, 0.5f);
@@ -37,7 +38,7 @@ Shader3D_TexLight::Shader3D_TexLight() : diffuseMap(0)
 {
 	setComTypeI(ComponentTypeI::Shader);
 	setComTypeII(ComponentTypeII::Shader3D_TexLight);
-	shader = Shader::getShader("withTexAndLight");
+	pShader = Shader::getShader("withTexAndLight");
 }
 
 Shader3D_TexLight::~Shader3D_TexLight()

@@ -11,5 +11,5 @@ public:
 	Shader3D_Component();
 	~Shader3D_Component();
 protected:
-	std::shared_ptr<Shader> shader;
+	std::weak_ptr<Shader> pShader;
 };

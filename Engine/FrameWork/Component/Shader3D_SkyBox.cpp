@@ -7,6 +7,7 @@
 #include "Shader.h"
 void Shader3D_SkyBox::use()
 {
+	std::shared_ptr<Shader> shader(pShader);
 	Shader3D_Component::use();
 	shader->setVec3("cameraPos", BaseManager::getCamera()->Position);
 	glActiveTexture(GL_TEXTURE0);
@@ -26,7 +27,7 @@ Shader3D_SkyBox::Shader3D_SkyBox() : diffuseMap(0)
 {
 	setComTypeI(ComponentTypeI::Shader);
 	setComTypeII(ComponentTypeII::Shader3D_SkyBox);
-	shader = Shader::getShader("withSkyBox");
+	pShader = Shader::getShader("withSkyBox");
 }
 
 Shader3D_SkyBox::~Shader3D_SkyBox()

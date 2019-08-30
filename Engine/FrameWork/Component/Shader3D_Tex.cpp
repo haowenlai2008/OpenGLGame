@@ -21,7 +21,7 @@ Shader3D_Tex::Shader3D_Tex()
 {
 	setComTypeI(ComponentTypeI::Shader);
 	setComTypeII(ComponentTypeII::Shader3D_Tex);
-	shader = Shader::getShader("withTexture");
+	pShader = Shader::getShader("withTexture");
 }
 
 Shader3D_Tex::~Shader3D_Tex()

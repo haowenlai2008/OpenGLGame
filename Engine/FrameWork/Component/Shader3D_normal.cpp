@@ -3,7 +3,7 @@
 
 void Shader3D_normal::use()
 {
-	
+	std::shared_ptr<Shader> shader(pShader);
 	Shader3D_Component::use();
 	shader->setVec3("aColor", getColor());
 }
@@ -16,9 +16,10 @@ bool Shader3D_normal::init()
 
 Shader3D_normal::Shader3D_normal()
 {
+
 	setComTypeI(ComponentTypeI::Shader);
 	setComTypeII(ComponentTypeII::Shader3D_normal);
-	shader = Shader::getShader("normal");
+	pShader = Shader::getShader("normal");
 	setColor(glm::vec3(1.0f, 1.0f, 1.0f));
 }
 

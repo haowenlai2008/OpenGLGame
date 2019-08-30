@@ -10,21 +10,21 @@
 #include "Line2D_BSpline.h"
 bool Scene::init()
 {
-	//SkyBox* skyBox = SkyBox::create();
-	//this->addChild(skyBox);
+	SkyBox* skyBox = SkyBox::create();
+	this->addChild(skyBox);
 
-	//Cube* light = Cube::create(CubeType::normal);
-	////light->setTexture("container2.png");
-	//light->setScale(vec3(1.0f, 1.0f, 1.0f));
-	//light->setLocalPosition(vec3(0.0f, 10.0f, 10.0f));
-	//light->setLightSrc(light);
-	//DEBUG_VEC3(light->transform.position);
-	//this->addChild(light);
+	Cube* light = Cube::create(CubeType::normal);
+	//light->setTexture("container2.png");
+	light->setScale(vec3(1.0f, 1.0f, 1.0f));
+	light->setLocalPosition(vec3(0.0f, 10.0f, 10.0f));
+	light->setLightSrc(light);
+	DEBUG_VEC3(light->transform.position);
+	this->addChild(light);
 
 
-	//CubeMat* mt = CubeMat::createDirMat("d.txt", MatType::vertical);
-	//mt->setLightSrc(light);
-	//this->addChild(mt);
+	CubeMat* mt = CubeMat::createDirMat("d.txt", MatType::vertical);
+	mt->setLightSrc(light);
+	this->addChild(mt);
 
 
 	//Line2D* line1 = Line2D::create();
@@ -42,8 +42,8 @@ bool Scene::init()
 	//this->addChild(line1);
 	//this->addChild(line2);
 	//this->addChild(line3);
-	Line2D_BSpline* line = Line2D_BSpline::create();
-	this->addChild(line);
+	//Line2D_BSpline* line = Line2D_BSpline::create();
+	//this->addChild(line);
 	//vector<int> test = { 1, 2, 3, 4, 5, 6 };
 	//for (auto it = test.begin(); it != test.end(); it++)
 	//{

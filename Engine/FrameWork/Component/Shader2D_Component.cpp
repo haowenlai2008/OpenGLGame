@@ -6,6 +6,7 @@
 #include "Shader.h"
 void Shader2D_Component::use()
 {
+	std::shared_ptr<Shader> shader(pShader);
 	shader->use();
 	glGetError();
 	BaseManager* baseManager = BaseManager::getInstance();

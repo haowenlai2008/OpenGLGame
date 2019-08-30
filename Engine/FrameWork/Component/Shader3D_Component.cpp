@@ -6,6 +6,7 @@
 #include "Shader.h"
 void Shader3D_Component::use()
 {
+	std::shared_ptr<Shader> shader(pShader);
 	shader->use();
 	BaseManager* baseManager = BaseManager::getInstance();
 	Camera& camera = *baseManager->getCamera();
