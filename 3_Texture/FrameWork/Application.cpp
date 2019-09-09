@@ -2,6 +2,7 @@
 #include "glfw3.h"
 #include "glad.h"
 #include "stb_image.h"
+#include "stb_image_write.h"
 #include <iostream>
 using namespace std;
 //环绕模式
@@ -28,8 +29,8 @@ void LoadTexture(unsigned int &texture, S1&& pic)
 	// 为当前绑定的纹理对象设置环绕、过滤方式
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	// 加载并生成纹理
 	int width, height, nrChannels;
 	stbi_set_flip_vertically_on_load(true);//读取图片的时候对Y轴进行反转
@@ -84,6 +85,8 @@ void LoadTexture(unsigned int &texture, S1&& pic, SurroundMode surroundMode, Fil
 	stbi_image_free(data);
 	data = nullptr;
 }
+
+
 void BaseInit()
 {
 	glfwInit();//初始化
@@ -113,10 +116,10 @@ void SurroundTest(SurroundMode surroundMode, FilteringMode filteringMode)
 {
 	float vertices[] = {
 		//     ---- 位置 ----     - 纹理坐标 -
-			 0.5f,  0.5f, 0.0f,  2.0f, 2.0f,    // 右上
-			 0.5f, -0.5f, 0.0f,  2.0f, -1.0f,   // 右下
-			-0.5f, -0.5f, 0.0f,  -1.0f, -1.0f,  // 左下
-			-0.5f,  0.5f, 0.0f,  -1.0f, 2.0f    // 左上
+			 1.0f,  1.0f, 0.0f,  2.0f, 2.0f,    // 右上
+			 1.0f, -1.0f, 0.0f,  2.0f, -1.0f,   // 右下
+			-1.0f, -1.0f, 0.0f,  -1.0f, -1.0f,  // 左下
+			-1.0f,  1.0f, 0.0f,  -1.0f, 2.0f    // 左上
 	};
 
 	unsigned int indices[] = {
@@ -239,15 +242,17 @@ void FilterTest(SurroundMode surroundMode, FilteringMode filteringMode)
 	glfwTerminate();
 }
 
+
+
 //普通测试
 void NormalTest()
 {
 	float vertices[] = {
 		//     ---- 位置 ----     - 纹理坐标 -
-			 0.9f,  0.9f, 0.0f,  1.0f, 1.0f,   // 右上
-			 0.9f, -0.9f, 0.0f,  1.0f, 0.0f,   // 右下
-			-0.9f, -0.9f, 0.0f,  0.0f, 0.0f,   // 左下
-			-0.9f,  0.9f, 0.0f,  0.0f, 1.0f    // 左上
+			 1.0f,  1.0f, 0.0f,  1.0f, 1.0f,    // 右上
+			 1.0f, -1.0f, 0.0f,  1.0f, 0.0f,   // 右下
+			-1.0f, -1.0f, 0.0f,  0.0f, 0.0f,  // 左下
+			-1.0f,  1.0f, 0.0f,  0.0f, 1.0f    // 左上
 	};
 
 	unsigned int indices[] = {
@@ -301,6 +306,42 @@ void NormalTest()
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 	glfwTerminate();
+}
+
+class RenderBufferStructure
+{
+public:
+	unsigned int bufferID = -1;
+	unsigned int textureID = -1;
+	unsigned int rbo = -1;
+	RenderBufferStructure() {}
+	RenderBufferStructure(int weight, int height) 
+	{
+		glGenFramebuffers(1, &bufferID);
+		glBindFramebuffer(GL_FRAMEBUFFER, bufferID);
+		//添加一个颜色附件
+		glGenTextures(1, &textureID);
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, weight, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureID, 0);
+		//为深度和模板附件创建一个渲染缓冲对象 create a renderbuffer object for depth and stencil attachment (we won't be sampling these)
+		glGenRenderbuffers(1, &rbo);
+		glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, weight, height); // use a single renderbuffer object for both a depth AND stencil buffer.
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo); // now actually attach it
+		//创建帧缓冲，添加所有的附件 now that we actually created the framebuffer and added all attachments we want to check if it is actually complete now
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+	~RenderBufferStructure() {}
+};
+
+void saveImage(char* data, int weight, int height, std::string path)
+{
+	//stbi_write_png(data, weight, height, )
 }
 void MainLoop()
 {

@@ -21,11 +21,18 @@
   <ItemGroup>
     <ClCompile Include="external\source\glad.c" />
     <ClCompile Include="external\source\stb_image.cpp" />
+    <ClCompile Include="external\source\stb_image_write.cpp" />
     <ClCompile Include="FrameWork\Application.cpp" />
     <ClCompile Include="FrameWork\Shader.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="ImageLWManager.cpp" />
+    <ClCompile Include="UnsignedImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork\Shader.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="ImageLWManager.h" />
+    <ClInclude Include="UnsignedImage.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
