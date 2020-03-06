@@ -71,7 +71,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>.\external\include;$(IncludePath)</IncludePath>
-    <LibraryPath>.\external\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>.\external\x86\Debug\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>.\external\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\external\x86\Release\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>.\external\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\external\x64\Debug\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>.\external\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\external\x64\Release\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -79,10 +91,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\FrameWork\Algorithm;.\FrameWork\Component;.\FrameWork\Graph;.\FrameWork\Base;.\FrameWork\Manager;.\FrameWork;.\FrameWork\Model;.\FrameWork\Mesh;.\FrameWork\Shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -92,6 +104,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -105,6 +120,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,106 +135,100 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BaseManager.cpp" />
+    <ClCompile Include="BSpline.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="CubeMat.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
+    <ClCompile Include="CylinderNoCap.cpp" />
+    <ClCompile Include="DirCube.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="external\source\glad.c" />
     <ClCompile Include="external\source\stb_image.cpp" />
-    <ClCompile Include="FrameWork\Algorithm\BSpline.cpp" />
-    <ClCompile Include="FrameWork\Application.cpp" />
-    <ClCompile Include="FrameWork\Base\Node.cpp" />
-    <ClCompile Include="FrameWork\Base\Ref.cpp" />
-    <ClCompile Include="FrameWork\Base\Scene.cpp" />
-    <ClCompile Include="FrameWork\Base\Transform.cpp" />
-    <ClCompile Include="FrameWork\Camera.cpp" />
-    <ClCompile Include="FrameWork\Component\Component.cpp" />
-    <ClCompile Include="FrameWork\Component\Shader2D_Component.cpp" />
-    <ClCompile Include="FrameWork\Component\Shader2D_Line.cpp" />
-    <ClCompile Include="FrameWork\Component\Shader3D_Component.cpp" />
-    <ClCompile Include="FrameWork\Component\Shader3D_Light.cpp" />
-    <ClCompile Include="FrameWork\Component\Shader3D_normal.cpp" />
-    <ClCompile Include="FrameWork\Component\Shader3D_SkyBox.cpp" />
-    <ClCompile Include="FrameWork\Component\Shader3D_Tex.cpp" />
-    <ClCompile Include="FrameWork\Component\Shader3D_TexLight.cpp" />
-    <ClCompile Include="FrameWork\Graph\Cube.cpp" />
-    <ClCompile Include="FrameWork\Graph\CubeMat.cpp" />
-    <ClCompile Include="FrameWork\Graph\DirCube.cpp" />
-    <ClCompile Include="FrameWork\Graph\Entity.cpp" />
-    <ClCompile Include="FrameWork\Graph\Line2D.cpp" />
-    <ClCompile Include="FrameWork\Graph\Line2D_BSpline.cpp" />
-    <ClCompile Include="FrameWork\Graph\Line2D_color_balance.cpp" />
-    <ClCompile Include="FrameWork\Graph\Maze.cpp" />
-    <ClCompile Include="FrameWork\Graph\Perlin.cpp" />
-    <ClCompile Include="FrameWork\Graph\PerlinGround.cpp" />
-    <ClCompile Include="FrameWork\Graph\SkyBox.cpp" />
-    <ClCompile Include="FrameWork\Manager\BaseManager.cpp" />
-    <ClCompile Include="FrameWork\Manager\LogicManager.cpp" />
-    <ClCompile Include="FrameWork\Manager\RefManager.cpp" />
-    <ClCompile Include="FrameWork\Manager\RenderManager.cpp" />
-    <ClCompile Include="FrameWork\Mesh\Mesh.cpp" />
-    <ClCompile Include="FrameWork\Model\Model.cpp" />
-    <ClCompile Include="FrameWork\Shader\Shader.cpp" />
+    <ClCompile Include="GameCamera.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="LeftWheel.cpp" />
+    <ClCompile Include="MyKeyboard.cpp" />
+    <ClCompile Include="LightCamera.cpp" />
+    <ClCompile Include="Line2D.cpp" />
+    <ClCompile Include="Line2D_BSpline.cpp" />
+    <ClCompile Include="Line2D_color_balance.cpp" />
+    <ClCompile Include="LogicManager.cpp" />
+    <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MyMouse.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Perlin.cpp" />
+    <ClCompile Include="PerlinGround.cpp" />
+    <ClCompile Include="Ref.cpp" />
+    <ClCompile Include="RefManager.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="RightWheel.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="VertexFactory.cpp" />
+    <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrameWork\Algorithm\BSpline.h" />
-    <ClInclude Include="FrameWork\Base\Node.h" />
-    <ClInclude Include="FrameWork\Base\Ref.h" />
-    <ClInclude Include="FrameWork\Base\Scene.h" />
-    <ClInclude Include="FrameWork\Base\Transform.h" />
-    <ClInclude Include="FrameWork\Camera.h" />
-    <ClInclude Include="FrameWork\Component\allShaderComponent.h" />
-    <ClInclude Include="FrameWork\Component\Component.h" />
-    <ClInclude Include="FrameWork\Component\Shader2D_Component.h" />
-    <ClInclude Include="FrameWork\Component\Shader2D_Line.h" />
-    <ClInclude Include="FrameWork\Component\Shader3D_Component.h" />
-    <ClInclude Include="FrameWork\Component\Shader3D_Light.h" />
-    <ClInclude Include="FrameWork\Component\Shader3D_normal.h" />
-    <ClInclude Include="FrameWork\Component\Shader3D_SkyBox.h" />
-    <ClInclude Include="FrameWork\Component\Shader3D_Tex.h" />
-    <ClInclude Include="FrameWork\Component\Shader3D_TexLight.h" />
-    <ClInclude Include="FrameWork\const.h" />
-    <ClInclude Include="FrameWork\func.h" />
-    <ClInclude Include="FrameWork\Graph\Cube.h" />
-    <ClInclude Include="FrameWork\Graph\CubeMat.h" />
-    <ClInclude Include="FrameWork\Graph\DirCube.h" />
-    <ClInclude Include="FrameWork\Graph\Entity.h" />
-    <ClInclude Include="FrameWork\Graph\Line2D.h" />
-    <ClInclude Include="FrameWork\Graph\Line2D_BSpline.h" />
-    <ClInclude Include="FrameWork\Graph\Line2D_color_balance.h" />
-    <ClInclude Include="FrameWork\Graph\Maze.h" />
-    <ClInclude Include="FrameWork\Graph\Perlin.h" />
-    <ClInclude Include="FrameWork\Graph\PerlinGround.h" />
-    <ClInclude Include="FrameWork\Graph\SkyBox.h" />
-    <ClInclude Include="FrameWork\Manager\BaseManager.h" />
-    <ClInclude Include="FrameWork\Manager\LogicManager.h" />
-    <ClInclude Include="FrameWork\Manager\RefManager.h" />
-    <ClInclude Include="FrameWork\Manager\RenderManager.h" />
-    <ClInclude Include="FrameWork\Mesh\Mesh.h" />
-    <ClInclude Include="FrameWork\Model\Model.h" />
-    <ClInclude Include="FrameWork\Shader\Shader.h" />
+    <ClInclude Include="BaseManager.h" />
+    <ClInclude Include="BSpline.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Car.h" />
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="const.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="CubeMat.h" />
+    <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="CylinderNoCap.h" />
+    <ClInclude Include="DirCube.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="func.h" />
+    <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="LeftWheel.h" />
+    <ClInclude Include="MyKeyboard.h" />
+    <ClInclude Include="LightCamera.h" />
+    <ClInclude Include="Line2D.h" />
+    <ClInclude Include="Line2D_BSpline.h" />
+    <ClInclude Include="Line2D_color_balance.h" />
+    <ClInclude Include="LogicManager.h" />
+    <ClInclude Include="Maze.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MyMouse.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Perlin.h" />
+    <ClInclude Include="PerlinGround.h" />
+    <ClInclude Include="Ref.h" />
+    <ClInclude Include="RefManager.h" />
+    <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="RightWheel.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="VertexFactory.h" />
+    <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shader\1.model_loading.fs" />
-    <None Include="Resources\Shader\1.model_loading.vs" />
-    <None Include="Resources\Shader\basic_lighting2.fs" />
-    <None Include="Resources\Shader\basic_lighting2.vs" />
-    <None Include="Resources\Shader\lighting_maps.vs" />
-    <None Include="Resources\Shader\line2D.fs" />
-    <None Include="Resources\Shader\line2D.vs" />
     <None Include="Resources\Shader\normal.fs" />
     <None Include="Resources\Shader\normal.vs" />
     <None Include="Resources\Shader\SkyBox.fs" />
     <None Include="Resources\Shader\SkyBox.vs" />
-    <None Include="Resources\Shader\withBox.fs" />
-    <None Include="Resources\Shader\withBox.vs" />
-    <None Include="Resources\Shader\withLight.fs" />
-    <None Include="Resources\Shader\withLight.vs" />
-    <None Include="Resources\Shader\withSkyBox.fs" />
-    <None Include="Resources\Shader\withSkyBox.vs" />
-    <None Include="Resources\Shader\withTexAndLight.fs" />
-    <None Include="Resources\Shader\withTexAndLight.vs" />
-    <None Include="Resources\Shader\withTexture.fs" />
-    <None Include="Resources\Shader\withTexture.vs" />
+    <None Include="Resources\Shader\texture.fs" />
+    <None Include="Resources\Shader\texture.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -19,20 +19,11 @@
     <Filter Include="头文件\基类">
       <UniqueIdentifier>{0d65765d-01b6-434b-bd2d-955ca1ea0d77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\模型">
-      <UniqueIdentifier>{6f45eb78-45d8-4336-91cd-29c0cbbf8ab8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\摄像机">
       <UniqueIdentifier>{4fe172ff-0f2c-4cb9-924c-f27a5de072ed}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\算法">
       <UniqueIdentifier>{2090705f-f53e-4cf9-8ead-60428ce80e9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\图形类">
-      <UniqueIdentifier>{718294b5-1f9c-4be3-b47d-1ea68926dd66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\图形类\光源">
-      <UniqueIdentifier>{bac32bce-78fd-49d1-9b48-22142cc8b4be}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\网格">
       <UniqueIdentifier>{07703ccc-9772-4292-9a86-4a961ee245ba}</UniqueIdentifier>
@@ -52,17 +43,11 @@
     <Filter Include="源文件\基类">
       <UniqueIdentifier>{7a704bdd-5e2b-409c-b019-66234e79882a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\模型">
-      <UniqueIdentifier>{85407d94-6f3d-47ec-8e32-c2ca2c165fa1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\摄像机">
       <UniqueIdentifier>{84c15b81-f940-443e-a628-cef2c73c5ead}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\算法">
       <UniqueIdentifier>{ade2c34d-310a-4018-b823-fc4bdfc09848}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\图形类">
-      <UniqueIdentifier>{bb736e7c-3b26-4fa9-9956-4a077820b4fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\网格">
       <UniqueIdentifier>{32376ac1-7c37-4fe2-92a2-ad15284d0c98}</UniqueIdentifier>
@@ -85,243 +70,279 @@
     <Filter Include="头文件\地形">
       <UniqueIdentifier>{76539750-c4ec-431f-a562-06ed2c4ae5dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\模板">
+      <UniqueIdentifier>{46a58d66-b8eb-4ae3-99a9-c6c0e23a2e04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\鼠标键盘">
+      <UniqueIdentifier>{7d2d661a-8df2-4127-a6e7-58fa789cddfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\鼠标键盘">
+      <UniqueIdentifier>{b3f6b1d5-7d5e-46af-9113-7fbf12c684e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\第三方库">
+      <UniqueIdentifier>{5fdf28c1-71ae-425e-b0de-f821b4e3f4bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\物体">
+      <UniqueIdentifier>{bb736e7c-3b26-4fa9-9956-4a077820b4fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\物体">
+      <UniqueIdentifier>{718294b5-1f9c-4be3-b47d-1ea68926dd66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\物体\光源">
+      <UniqueIdentifier>{bac32bce-78fd-49d1-9b48-22142cc8b4be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\场景">
+      <UniqueIdentifier>{95e66e45-e096-499c-a91f-0fc79e78c6aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\场景">
+      <UniqueIdentifier>{601403e1-edd9-470b-b5a8-5c78385c588b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PerlinGround.cpp">
+      <Filter>源文件\地形</Filter>
+    </ClCompile>
+    <ClCompile Include="Perlin.cpp">
+      <Filter>源文件\地形</Filter>
+    </ClCompile>
+    <ClCompile Include="Maze.cpp">
+      <Filter>源文件\地形</Filter>
+    </ClCompile>
+    <ClCompile Include="RefManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>源文件\基类</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>源文件\基类</Filter>
+    </ClCompile>
+    <ClCompile Include="Ref.cpp">
+      <Filter>源文件\基类</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>源文件\摄像机</Filter>
+    </ClCompile>
+    <ClCompile Include="BSpline.cpp">
+      <Filter>源文件\算法</Filter>
+    </ClCompile>
+    <ClCompile Include="DirCube.cpp">
+      <Filter>源文件\物体</Filter>
+    </ClCompile>
+    <ClCompile Include="Line2D.cpp">
+      <Filter>源文件\物体</Filter>
+    </ClCompile>
+    <ClCompile Include="Line2D_BSpline.cpp">
+      <Filter>源文件\物体</Filter>
+    </ClCompile>
+    <ClCompile Include="Line2D_color_balance.cpp">
+      <Filter>源文件\物体</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>源文件\物体</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>源文件\物体</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMat.cpp">
+      <Filter>源文件\物体</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>源文件\网格</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>源文件\着色器</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera.cpp">
+      <Filter>源文件\摄像机</Filter>
+    </ClCompile>
+    <ClCompile Include="LightCamera.cpp">
+      <Filter>源文件\摄像机</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>源文件\基类</Filter>
+    </ClCompile>
     <ClCompile Include="external\source\glad.c">
       <Filter>源文件\第三方库\glad</Filter>
     </ClCompile>
     <ClCompile Include="external\source\stb_image.cpp">
       <Filter>源文件\第三方库\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Application.cpp">
+    <ClCompile Include="MyMouse.cpp">
+      <Filter>源文件\鼠标键盘</Filter>
+    </ClCompile>
+    <ClCompile Include="MyKeyboard.cpp">
+      <Filter>源文件\鼠标键盘</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexFactory.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Graph\Maze.cpp">
-      <Filter>源文件\地形</Filter>
+    <ClCompile Include="Car.cpp">
+      <Filter>源文件\物体</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Graph\Perlin.cpp">
-      <Filter>源文件\地形</Filter>
+    <ClCompile Include="Circle.cpp">
+      <Filter>源文件\物体</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Graph\PerlinGround.cpp">
-      <Filter>源文件\地形</Filter>
+    <ClCompile Include="Cylinder.cpp">
+      <Filter>源文件\物体</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Manager\BaseManager.cpp">
-      <Filter>源文件\管理器</Filter>
+    <ClCompile Include="CylinderNoCap.cpp">
+      <Filter>源文件\物体</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Manager\LogicManager.cpp">
-      <Filter>源文件\管理器</Filter>
+    <ClCompile Include="Ground.cpp">
+      <Filter>源文件\物体</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Manager\RefManager.cpp">
-      <Filter>源文件\管理器</Filter>
+    <ClCompile Include="LeftWheel.cpp">
+      <Filter>源文件\物体</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Manager\RenderManager.cpp">
-      <Filter>源文件\管理器</Filter>
+    <ClCompile Include="RightWheel.cpp">
+      <Filter>源文件\物体</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Base\Transform.cpp">
-      <Filter>源文件\基类</Filter>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>源文件\物体</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Base\Scene.cpp">
-      <Filter>源文件\基类</Filter>
+    <ClCompile Include="Wheel.cpp">
+      <Filter>源文件\物体</Filter>
     </ClCompile>
-    <ClCompile Include="FrameWork\Base\Ref.cpp">
-      <Filter>源文件\基类</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Base\Node.cpp">
-      <Filter>源文件\基类</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Model\Model.cpp">
-      <Filter>源文件\模型</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Camera.cpp">
-      <Filter>源文件\摄像机</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Graph\Cube.cpp">
-      <Filter>源文件\图形类</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Graph\CubeMat.cpp">
-      <Filter>源文件\图形类</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Graph\DirCube.cpp">
-      <Filter>源文件\图形类</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Graph\Entity.cpp">
-      <Filter>源文件\图形类</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Graph\SkyBox.cpp">
-      <Filter>源文件\图形类</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Mesh\Mesh.cpp">
-      <Filter>源文件\网格</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Component\Component.cpp">
-      <Filter>源文件\组件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Component\Shader3D_Component.cpp">
-      <Filter>源文件\组件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Component\Shader3D_Light.cpp">
-      <Filter>源文件\组件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Component\Shader3D_normal.cpp">
-      <Filter>源文件\组件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Component\Shader3D_SkyBox.cpp">
-      <Filter>源文件\组件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Component\Shader3D_Tex.cpp">
-      <Filter>源文件\组件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Component\Shader3D_TexLight.cpp">
-      <Filter>源文件\组件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Graph\Line2D.cpp">
-      <Filter>源文件\图形类</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Shader\Shader.cpp">
-      <Filter>源文件\着色器</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Component\Shader2D_Component.cpp">
-      <Filter>源文件\组件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Component\Shader2D_Line.cpp">
-      <Filter>源文件\组件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Graph\Line2D_color_balance.cpp">
-      <Filter>源文件\图形类</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Algorithm\BSpline.cpp">
-      <Filter>源文件\算法</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameWork\Graph\Line2D_BSpline.cpp">
-      <Filter>源文件\图形类</Filter>
+    <ClCompile Include="Scene.cpp">
+      <Filter>源文件\场景</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrameWork\Model\Model.h">
-      <Filter>头文件\模型</Filter>
+    <ClInclude Include="PerlinGround.h">
+      <Filter>头文件\地形</Filter>
     </ClInclude>
-    <ClInclude Include="FrameWork\Camera.h">
+    <ClInclude Include="Maze.h">
+      <Filter>头文件\地形</Filter>
+    </ClInclude>
+    <ClInclude Include="Perlin.h">
+      <Filter>头文件\地形</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseManager.h">
+      <Filter>头文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicManager.h">
+      <Filter>头文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="RefManager.h">
+      <Filter>头文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>头文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>头文件\基类</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>头文件\基类</Filter>
+    </ClInclude>
+    <ClInclude Include="Ref.h">
+      <Filter>头文件\基类</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>头文件\模板</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
       <Filter>头文件\摄像机</Filter>
     </ClInclude>
-    <ClInclude Include="FrameWork\Mesh\Mesh.h">
-      <Filter>头文件\网格</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Shader\Shader.h">
-      <Filter>头文件\着色器</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\const.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Manager\BaseManager.h">
-      <Filter>头文件\管理器</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Base\Transform.h">
-      <Filter>头文件\基类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Base\Ref.h">
-      <Filter>头文件\基类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Base\Node.h">
-      <Filter>头文件\基类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Manager\RefManager.h">
-      <Filter>头文件\管理器</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\Cube.h">
-      <Filter>头文件\图形类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\func.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Manager\RenderManager.h">
-      <Filter>头文件\管理器</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Base\Scene.h">
-      <Filter>头文件\基类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\Entity.h">
-      <Filter>头文件\图形类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\SkyBox.h">
-      <Filter>头文件\图形类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\CubeMat.h">
-      <Filter>头文件\图形类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\Maze.h">
-      <Filter>头文件\地形</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\Perlin.h">
-      <Filter>头文件\地形</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\PerlinGround.h">
-      <Filter>头文件\地形</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\Component.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\Shader3D_Light.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\Shader3D_normal.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\Shader3D_Tex.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\Shader3D_TexLight.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\Shader3D_Component.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\Shader3D_SkyBox.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Manager\LogicManager.h">
-      <Filter>头文件\管理器</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\DirCube.h">
-      <Filter>头文件\图形类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\Line2D.h">
-      <Filter>头文件\图形类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\Shader2D_Component.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\Shader2D_Line.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Component\allShaderComponent.h">
-      <Filter>头文件\组件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Graph\Line2D_color_balance.h">
-      <Filter>头文件\图形类</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameWork\Algorithm\BSpline.h">
+    <ClInclude Include="BSpline.h">
       <Filter>头文件\算法</Filter>
     </ClInclude>
-    <ClInclude Include="FrameWork\Graph\Line2D_BSpline.h">
-      <Filter>头文件\图形类</Filter>
+    <ClInclude Include="SkyBox.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMat.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="DirCube.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Line2D.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Line2D_BSpline.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Line2D_color_balance.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>头文件\网格</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>头文件\着色器</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="const.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera.h">
+      <Filter>头文件\摄像机</Filter>
+    </ClInclude>
+    <ClInclude Include="LightCamera.h">
+      <Filter>头文件\摄像机</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>头文件\基类</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMouse.h">
+      <Filter>头文件\鼠标键盘</Filter>
+    </ClInclude>
+    <ClInclude Include="MyKeyboard.h">
+      <Filter>头文件\鼠标键盘</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Wheel.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Car.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="CylinderNoCap.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftWheel.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="RightWheel.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>头文件\场景</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shader\1.model_loading.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\1.model_loading.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\basic_lighting2.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\basic_lighting2.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\lighting_maps.vs">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="Resources\Shader\normal.fs">
       <Filter>资源文件</Filter>
     </None>
@@ -334,40 +355,10 @@
     <None Include="Resources\Shader\SkyBox.vs">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Resources\Shader\withBox.fs">
+    <None Include="Resources\Shader\texture.fs">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Resources\Shader\withBox.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\withLight.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\withLight.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\withSkyBox.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\withSkyBox.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\withTexAndLight.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\withTexAndLight.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\withTexture.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\withTexture.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\line2D.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\line2D.vs">
+    <None Include="Resources\Shader\texture.vs">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
