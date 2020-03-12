@@ -110,7 +110,7 @@ void Scene::lateUpdate(float delta)
 	if (m_pCar != nullptr)
 	{
 		auto carPos = m_pCar->getHeadPos();
-		lCamera->setPosition(vec3(carPos.x, carPos.y + 10.0f, carPos.z + 10.0f));
+		lCamera->setPosition(vec3(carPos.x, carPos.y + 10.0f, carPos.z - 10.0f));
 	}
 	// 照相机参数更新
 	if (m_pCar != nullptr)
