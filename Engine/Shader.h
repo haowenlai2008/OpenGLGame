@@ -18,7 +18,7 @@ static void assertShader(unsigned int shaderObj, std::string&& shaderName)
 	{
 		glGetShaderInfoLog(shaderObj, 512, NULL, infoLog);
 		std::cout << shaderName << "   ";
-		std::cout << "ERROR::SHADER" << shaderName << "::COMPILATION_FAILED\n" << infoLog << std::endl;
+		std::cout << "ERROR::SHADER " << shaderName << " ::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 }
 //检查着色器程序是否编译正确
@@ -30,7 +30,7 @@ static void assertProgram(unsigned int programObj, std::string&& programName)
 	if (!success)
 	{
 		glGetShaderInfoLog(programObj, 512, NULL, infoLog);
-		std::cout << "ERROR::PROGRAM::" << programName << "::COMPILATION_FAILED\n" << infoLog << std::endl;
+		std::cout << "ERROR::PROGRAM " << programName << "::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 }
 class Shader

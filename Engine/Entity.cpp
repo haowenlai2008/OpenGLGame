@@ -7,69 +7,21 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "GameCamera.h"
-//void Entity::addComponent(Component* component)
-//{
-//	component->setEntity(this);
-//	comList.emplace_back(component);
-//}
-//void Entity::setComponent(Component* component)
-//{
-//	for (auto p : comList)
-//	{
-//		if (p->getComTypeI() == component->getComTypeI())
-//		{
-//			p->release();
-//			component->setEntity(this);
-//			p = component;
-//			return;
-//		}
-//	}
-//	addComponent(component);
-//}
-//Component* Entity::getComponent(ComponentTypeI typeI)
-//{
-//	for (auto& ref : comList)
-//	{
-//		if (ref->getComTypeI() == typeI)
-//			return ref;
-//	}
-//	return nullptr;
-//}
-//
-//Component* Entity::getComponent(ComponentTypeII typeII)
-//{
-//	for (auto& ref : comList)
-//	{
-//		if (ref->getComTypeII() == typeII)
-//			return ref;
-//	}
-//	return nullptr;
-//}
-//Component* Entity::getComponent(ComponentTypeI typeI, ComponentTypeII typeII)
-//{
-//	for (auto& ref : comList)
-//	{
-//		if (ref->getComTypeI() == typeI && ref->getComTypeII() == typeII)
-//			return ref;
-//	}
-//	return nullptr;
-//}
 
 void Entity::setTexture(string&& src)
 {
 	m_DiffuseMap = RenderManager::getTexture(src);
-	//for (auto& ref : comList)
-	//{
-	//	if (ref->getComTypeII() == ComponentTypeII::Shader3D_Tex || ref->getComTypeII() == ComponentTypeII::Shader3D_TexLight)
-	//		static_cast<Shader3D_Component*>(ref)->setTexture(std::move(src));
-	//}
+
 
 }
 void Entity::bindShaderResource()
 {
+	if (RenderManager::getInstance()->getIsShadow())
+		return;
 	if (m_type == Entity_Type::WithTex)
 	{
 		std::shared_ptr<Shader> shader(m_Shader);
+		shader->use();
 		if (getLightSrc() != nullptr)
 			shader->setVec3("light.position", getLightSrc()->getPosition());
 		shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
@@ -79,9 +31,21 @@ void Entity::bindShaderResource()
 		// material properties
 		shader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
 		shader->setFloat("material.shininess", 64.0f);
-		glActiveTexture(GL_TEXTURE0);
+
+		shader->setInt("material.diffuse", 0);
+		shader->setInt("shadowMap", 1);
+		
 		if (m_DiffuseMap != -1)
+		{
+			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, m_DiffuseMap);
+		}
+			
+		GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, shadowMap);
+
+
 	}
 
 }
@@ -140,16 +104,29 @@ void Entity::renderParamUpdate()
 {
 	if (m_Shader.expired())
 		return;
-	auto shader = m_Shader.lock();
-	shader->use();
+	auto rm = RenderManager::getInstance();
+	std::shared_ptr<Shader> shader;
+	if (rm->getIsShadow())
+	{
+		shader = rm->getSimpleDepthShader();
+	}
+	else
+	{
+		shader = m_Shader.lock();
+	}
 	BaseManager* baseManager = BaseManager::getInstance();
 	glm::mat4 projection = baseManager->getProjMat4();
 	glm::mat4 view = baseManager->getViewMat4();
 	glm::mat4 model = getModelMatrix();
+	glm::mat4 lightSpace = baseManager->getLightSpaceMat4();
+	
+	shader->use();
 	shader->setMat4("projection", projection);
 	shader->setMat4("view", view);
 	shader->setMat4("model", model);
+	shader->setMat4("lightSpaceMatrix", lightSpace);
 	bindShaderResource();
+
 }
 
 void Entity::setMeshAndBuffer(std::weak_ptr<Mesh> meshData)

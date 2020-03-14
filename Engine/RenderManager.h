@@ -20,19 +20,29 @@ public:
 	static vector<float> quadVertices;
 	static unsigned int getTexture(string& path);
 	void init();
+	void depthFBOInit();
 	void update(Node* node);
 	void draw();
 	void bindFrameBuffer();
 	void filterUse();
 	void addDrawNode(Node* node);
+	void shadowMapRenderBegin();
+	void shadowMapRenderEnd();
+	void renderScene();
 	LL_SYNTHESIZE(bool, m_IsShadow, IsShadow);	// 是否正在渲染阴影
+	LL_SYNTHESIZE(GLuint, m_CurrentFBO, CurrentFBO);	// 获得当前帧缓冲
+	LL_SYNTHESIZE(GLuint, m_DepthMap, DepthMap);	// 获得当前帧缓冲
+	std::shared_ptr<Shader> getSimpleDepthShader();
 	~RenderManager();
 private:
-	unsigned int framebuffer;			//帧缓冲
-	unsigned int textureColorbuffer;	//颜色缓冲
-	unsigned int rbo;					//渲染缓冲对象
-	unsigned int quadVAO, quadVBO;		//帧缓冲的窗口的顶点数组对象和顶点缓冲对象
-	std::shared_ptr<Shader> screenShader;
+	GLuint framebuffer;			//帧缓冲
+	GLuint textureColorbuffer;	//颜色缓冲
+	GLuint rbo;					//渲染缓冲对象
+	GLuint quadVAO, quadVBO;		//帧缓冲的窗口的顶点数组对象和顶点缓冲对象
+
+	GLuint m_DepthFrameBuffer;
+	std::weak_ptr<Shader> m_SimpleDepthShader;
+	std::weak_ptr<Shader> screenShader;
 	list<Node*> drawObjects;		// 需要渲染的物体集合
 	static map<string, int> textures;
 	void filterInit();

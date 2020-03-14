@@ -43,11 +43,19 @@ bool Scene::init()
 	//this->addChild(cube);
 
 
+	Ground* gnd = Ground::create(Entity_Type::WithTex);
+	this->addChild(gnd);
+
+
+	//Cube* cu = Cube::create(Entity_Type::WithTex);
+	//cu->setTexture("back__.jpg");
+	//cu->setScale(vec3(50.0f, 1.0f, 50.0f));
+	//cu->setPosition(vec3(0.0f, -0.5f, 0.0f));
+	//this->addChild(cu);
 	m_pCar = Car::create();
 	this->addChild(m_pCar);
 
-	Ground* gnd = Ground::create(Entity_Type::WithTex);
-	this->addChild(gnd);
+
 	//Line2D* line1 = Line2D::create();
 	//Line2D* line2 = Line2D::create();
 	//Line2D* line3 = Line2D::create();

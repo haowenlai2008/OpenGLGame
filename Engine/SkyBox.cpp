@@ -84,12 +84,13 @@ void SkyBox::renderParamUpdate()
 		return;
 	auto shader = m_Shader.lock();
 	shader->use();
-	shader->setInt("skybox", 0);
+	
 	BaseManager* baseManager = BaseManager::getInstance();
 	glm::mat4 projection = baseManager->getProjMat4();	// ²Ã¼ô¾ØÕó
 	glm::mat4 view = glm::mat4(glm::mat3(baseManager->getViewMat4()));	// ¹Û²ì¾ØÕó,È¥µôÆ½ÒÆ·ÖÁ¿
 	shader->setMat4("projection", projection);
 	shader->setMat4("view", view);
+	shader->setInt("skybox", 0);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 }

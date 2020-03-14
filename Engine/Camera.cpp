@@ -24,6 +24,6 @@ mat4 Camera::getProjMat4()
 
 mat4 Camera::getViewProjMat4()
 {
-	return m_View * m_Proj;
+	return m_Proj * m_View;
 }
 

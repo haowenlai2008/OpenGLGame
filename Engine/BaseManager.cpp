@@ -106,48 +106,19 @@ void BaseManager::runScene(Scene * scene)
 }
 mat4 BaseManager::getViewMat4()
 {
-	if (!m_pRenderManager)
-		return mat4();
-	if (m_pRenderManager->getIsShadow())
-	{
-		return m_pLightCamera->getViewMat4();
-		//return m_Camera->getViewXM();
-	}
-	else
-	{
-		//return m_LightCamera->getViewXM();
-		return m_pGameCamera->getViewMat4();
-	}
+	return m_pGameCamera->getViewMat4();
 }
 mat4 BaseManager::getProjMat4()
 {
-	if (!m_pRenderManager)
-		return mat4();
-	if (m_pRenderManager->getIsShadow())
-	{
-		return m_pLightCamera->getProjMat4();
-		//return m_Camera->getViewXM();
-	}
-	else
-	{
-		//return m_LightCamera->getViewXM();
-		return m_pGameCamera->getProjMat4();
-	}
+	return m_pGameCamera->getProjMat4();
 }
 mat4 BaseManager::getViewProjMat4()
 {
-	if (!m_pRenderManager)
-		return mat4();
-	if (m_pRenderManager->getIsShadow())
-	{
-		return m_pLightCamera->getViewProjMat4();
-		//return m_Camera->getViewXM();
-	}
-	else
-	{
-		//return m_LightCamera->getViewXM();
-		return m_pGameCamera->getViewProjMat4();
-	}
+	return m_pGameCamera->getViewProjMat4();
+}
+mat4 BaseManager::getLightSpaceMat4()
+{
+	return m_pLightCamera->getViewProjMat4();
 }
 //´°¿Ú³õÊ¼»¯
 void BaseManager::baseInit()

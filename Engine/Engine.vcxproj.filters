@@ -97,6 +97,9 @@
     <Filter Include="头文件\场景">
       <UniqueIdentifier>{601403e1-edd9-470b-b5a8-5c78385c588b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\filter">
+      <UniqueIdentifier>{d9de3126-d95c-46ba-8837-3b8166ca4d8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PerlinGround.cpp">
@@ -360,6 +363,54 @@
     </None>
     <None Include="Resources\Shader\texture.vs">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\simpleDepth.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\simpleDepth.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\blur.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\contrast.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\depthTest.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\depthTest.vs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\edgeDetection.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\filterBase.vs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\grayScale.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\grayScaleWeight.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\invert.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\normal.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\normal2.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\saturation.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\sharpen.fs">
+      <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\sharpening.fs">
+      <Filter>资源文件\filter</Filter>
     </None>
   </ItemGroup>
 </Project>

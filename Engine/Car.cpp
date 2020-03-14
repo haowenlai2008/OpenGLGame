@@ -86,7 +86,6 @@ void Car::update(float dt)
 	if (BaseManager::getInstance()->getCamera()->getCameraType() == GameCamera::Camera_Type::Free)
 		return;
 	float CWheel = 0.75 * 2 * glm::pi<float>();// 车轮周长
-	
 	MyKeyboard::State keyState = BaseManager::getInstance()->getKeyboardState();
 	auto originRotateL = m_pLeftWheel->getRotate();
 	auto originRotateR = m_pRightWheel->getRotate();

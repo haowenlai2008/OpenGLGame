@@ -43,19 +43,15 @@ public:
 	void setMeshAndBuffer(std::weak_ptr<Mesh> meshData);
 	virtual void setTexture(string&& src);
 	virtual void bindShaderResource();
-	//void addComponent(Component* component);
-	//void setComponent(Component* component);
-	//Component* getComponent(ComponentTypeI typeI);	//根据大类获得组件
-	//Component* getComponent(ComponentTypeII typeII);//根据小类获得组件
-	//Component* getComponent(ComponentTypeI typeI, ComponentTypeII typeII);
 	Entity();
 	virtual ~Entity();
 protected:
 	vector<Component*> comList;
 	std::weak_ptr<Shader> m_Shader;
-	unsigned int m_VAO;
-	unsigned int m_VBO;
-	unsigned int m_EBO;
-	unsigned int m_DiffuseMap;
-	unsigned int m_VertexNum;
+	GLuint m_VAO;
+	GLuint m_VBO;
+	GLuint m_EBO;
+	GLuint m_DiffuseMap;
+	GLuint m_ShadowMap;
+	GLuint m_VertexNum;
 };

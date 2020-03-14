@@ -39,6 +39,29 @@ unsigned int RenderManager::getTexture(string& path)
 void RenderManager::init()
 {
 	filterInit();
+	depthFBOInit();
+}
+
+const GLuint SHADOW_WIDTH = 2048, SHADOW_HEIGHT = 2048;
+void RenderManager::depthFBOInit()
+{
+	glGenFramebuffers(1, &m_DepthFrameBuffer);
+	glGenTextures(1, &m_DepthMap);
+	glBindTexture(GL_TEXTURE_2D, m_DepthMap);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+		SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, m_DepthFrameBuffer);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_DepthMap, 0);
+	glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	m_SimpleDepthShader = Shader::getShader("simpleDepth");
 }
 //滤镜初始化(创建帧缓冲)
 void RenderManager::filterInit()
@@ -54,10 +77,11 @@ void RenderManager::filterInit()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
-	screenShader = Shader::getFilter("normal2");
-
-	screenShader->use();
-	screenShader->setInt("screenTexture", 0);
+	//screenShader = Shader::getFilter("depthTest");
+	screenShader = Shader::getFilter("normal");
+	auto shader = screenShader.lock();
+	shader->use();
+	shader->setInt("screenTexture", 0);
 	//创建帧缓冲
 	BaseManager* bmp = BaseManager::getInstance();
 	glGenFramebuffers(1, &framebuffer);
@@ -78,8 +102,6 @@ void RenderManager::filterInit()
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
 }
 
 
@@ -101,14 +123,10 @@ void RenderManager::update(Node * node)
 
 void RenderManager::draw()
 {
-	for (auto& p : drawObjects)
-	{
-		if (p != nullptr && p->count != 0)
-		{
-			p->renderParamUpdate();
-			p->draw();
-		}
-	}
+	shadowMapRenderBegin();
+	renderScene();
+	shadowMapRenderEnd();
+	renderScene();
 	drawObjects.clear();
 }
 
@@ -124,13 +142,18 @@ void RenderManager::filterUse()
 	glDisable(GL_DEPTH_TEST); // disable depth test so screen-space quad isn't discarded due to depth test.
 	// clear all relevant buffers
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // set clear color to white (not really necessery actually, since we won't be able to see behind the quad anyways)
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	screenShader->use();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	auto shader = screenShader.lock();
+	
 	//screenShader.setFloat("saturation", BaseManager::getInstance()->saturation);
 	//screenShader.setFloat("contrast", BaseManager::getInstance()->contrast);
 	glBindVertexArray(quadVAO);
+	
+	shader->setInt("screenTexture", 0);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	// use the color attachment texture as the texture of the quad plane
+	//glBindTexture(GL_TEXTURE_2D, m_DepthMap);	// use the color attachment texture as the texture of the quad plane
+	shader->use();
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
@@ -140,7 +163,40 @@ void RenderManager::addDrawNode(Node* node)
 	drawObjects.push_back(node);
 }
 
+void RenderManager::shadowMapRenderBegin()
+{
+	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+	glBindFramebuffer(GL_FRAMEBUFFER, m_DepthFrameBuffer);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	setIsShadow(true);
+}
 
+void RenderManager::shadowMapRenderEnd()
+{
+	setIsShadow(false);
+	bindFrameBuffer();
+	BaseManager* bmp = BaseManager::getInstance();
+	glViewport(0, 0, bmp->screenWidth, bmp->screenHeight);
+}
+
+void RenderManager::renderScene()
+{
+	for (auto& p : drawObjects)
+	{
+		if (p != nullptr && p->count != 0)
+		{
+			p->renderParamUpdate();
+			p->draw();
+		}
+	}
+}
+
+
+
+std::shared_ptr<Shader> RenderManager::getSimpleDepthShader()
+{
+	return m_SimpleDepthShader.lock();
+}
 
 RenderManager::~RenderManager()
 {

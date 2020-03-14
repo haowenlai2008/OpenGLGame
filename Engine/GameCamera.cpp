@@ -8,7 +8,7 @@ GameCamera::GameCamera() :
 	m_Aspect(1.0f),
 	m_FovY(90.0f),
 	m_Distance(5.0f),
-	m_CType(Camera_Type::Free),
+	m_CType(Camera_Type::ThirdPerson),
 	m_MouseSensitivity(0.5f)
 {
 

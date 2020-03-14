@@ -223,8 +223,24 @@
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shader\Filter\blur.fs" />
+    <None Include="Resources\Shader\Filter\contrast.fs" />
+    <None Include="Resources\Shader\Filter\depthTest.fs" />
+    <None Include="Resources\Shader\Filter\depthTest.vs" />
+    <None Include="Resources\Shader\Filter\edgeDetection.fs" />
+    <None Include="Resources\Shader\Filter\filterBase.vs" />
+    <None Include="Resources\Shader\Filter\grayScale.fs" />
+    <None Include="Resources\Shader\Filter\grayScaleWeight.fs" />
+    <None Include="Resources\Shader\Filter\invert.fs" />
+    <None Include="Resources\Shader\Filter\normal.fs" />
+    <None Include="Resources\Shader\Filter\normal2.fs" />
+    <None Include="Resources\Shader\Filter\saturation.fs" />
+    <None Include="Resources\Shader\Filter\sharpen.fs" />
+    <None Include="Resources\Shader\Filter\sharpening.fs" />
     <None Include="Resources\Shader\normal.fs" />
     <None Include="Resources\Shader\normal.vs" />
+    <None Include="Resources\Shader\simpleDepth.fs" />
+    <None Include="Resources\Shader\simpleDepth.vs" />
     <None Include="Resources\Shader\SkyBox.fs" />
     <None Include="Resources\Shader\SkyBox.vs" />
     <None Include="Resources\Shader\texture.fs" />
