@@ -79,9 +79,6 @@
     <Filter Include="源文件\鼠标键盘">
       <UniqueIdentifier>{b3f6b1d5-7d5e-46af-9113-7fbf12c684e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\第三方库">
-      <UniqueIdentifier>{5fdf28c1-71ae-425e-b0de-f821b4e3f4bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\物体">
       <UniqueIdentifier>{bb736e7c-3b26-4fa9-9956-4a077820b4fd}</UniqueIdentifier>
     </Filter>
@@ -222,6 +219,12 @@
     <ClCompile Include="Scene.cpp">
       <Filter>源文件\场景</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -343,6 +346,15 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>头文件\场景</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>头文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="bulletHead.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
