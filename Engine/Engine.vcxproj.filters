@@ -97,6 +97,12 @@
     <Filter Include="资源文件\filter">
       <UniqueIdentifier>{d9de3126-d95c-46ba-8837-3b8166ca4d8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\物理组件">
+      <UniqueIdentifier>{11253043-e6ec-4571-b134-0d38067dcdaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\物理组件">
+      <UniqueIdentifier>{446783e7-e972-4977-850f-a62b90f8fe92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PerlinGround.cpp">
@@ -223,6 +229,21 @@
       <Filter>源文件\管理器</Filter>
     </ClCompile>
     <ClCompile Include="Rigidbody.cpp">
+      <Filter>源文件\物理组件</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>源文件\物理组件</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>源文件\物理组件</Filter>
+    </ClCompile>
+    <ClCompile Include="BallScene.cpp">
+      <Filter>源文件\场景</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>源文件\物体</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -354,6 +375,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Rigidbody.h">
+      <Filter>头文件\物理组件</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>头文件\物理组件</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>头文件\物理组件</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>头文件\物体</Filter>
+    </ClInclude>
+    <ClInclude Include="BallScene.h">
+      <Filter>头文件\场景</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -368,12 +404,6 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="Resources\Shader\SkyBox.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\texture.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\texture.vs">
       <Filter>资源文件</Filter>
     </None>
     <None Include="Resources\Shader\simpleDepth.fs">
@@ -423,6 +453,30 @@
     </None>
     <None Include="Resources\Shader\Filter\sharpening.fs">
       <Filter>资源文件\filter</Filter>
+    </None>
+    <None Include="Resources\Shader\WithColor.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\WithColor.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\WithColorAndLight.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\WithColorAndLight.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\WithTex.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\WithTex.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\WithTexAndLight.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\WithTexAndLight.vs">
+      <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
 </Project>

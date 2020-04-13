@@ -6,5 +6,6 @@ bool Sphere::init()
 		return false;
 	setMeshAndBuffer(VertexFactory::getSphereData());
 	setTexture("container2.png");
+	//addSphereRigidBody();
 	return true;
 }

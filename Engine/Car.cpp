@@ -43,14 +43,14 @@ bool Car::init()
 
 	float wheelRadius = m_pLeftWheel->getRadius();
 	// 车头
-	Cube* head = Cube::create(Entity_Type::WithTex);
+	Cube* head = Cube::create(Entity_Type::WithTexAndLight);
 	head->setTexture("carhead.jpg");
 	head->setLocalPosition(vec3(0.0f, 1 + v + wheelRadius, 0.0f));
 	head->setScale(vec3(2.0f, 2.0f, 1.0f));
 	this->addChild(head);
 	
 	// 车后面的板子
-	Cube* board = Cube::create(Entity_Type::WithTex);
+	Cube* board = Cube::create(Entity_Type::WithTexAndLight);
 	board->setTexture("surface.jpg");
 	board->setScale(vec3(2.0f, 0.5f, 2.75f));
 	board->setLocalPosition(vec3(0.0f, 0.25 + v + wheelRadius, 1.875f));

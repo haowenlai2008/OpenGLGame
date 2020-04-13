@@ -6,7 +6,9 @@
 #include "RefManager.h"
 #include "RenderManager.h"
 #include "LogicManager.h"
+#include "PhysicsManager.h"
 #include "Scene.h"
+#include "BallScene.h"
 #include "Camera.h"
 #include "GameCamera.h"
 #include "LightCamera.h"
@@ -38,37 +40,7 @@ int BaseManager::run()
 
 void BaseManager::processInput(GLFWwindow *window)
 {
-	//if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	//	glfwSetWindowShouldClose(window, true);
-
-	//if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-	//	camera.ProcessKeyboard(FORWARD, deltaTime);
-	//if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-	//	camera.ProcessKeyboard(BACKWARD, deltaTime);
-	//if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-	//	camera.ProcessKeyboard(LEFT, deltaTime);
-	//if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-	//	camera.ProcessKeyboard(RIGHT, deltaTime);
-
-	//if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-	//{
-	//	saturation += 0.02f;
-	//	saturation = saturation > 1.0f ? 1.0f : saturation;
-	//	
-	//	contrast += 0.02f;
-	//	contrast = contrast > 1.0f ? 1.0f : contrast;
-	//}
-
-	//if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-	//{
-	//	saturation -= 0.02f;
-	//	saturation = saturation < 0.0f ? 0.0f : saturation;
-
-	//	contrast -= 0.02f;
-	//	contrast = contrast < 0.0f ? 0.0f : contrast;
-	//}
 	m_pKeyboard->processInput(window);
-	//m_pKeyboard->haha(window);
 }
 void BaseManager::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
@@ -130,8 +102,8 @@ void BaseManager::baseInit()
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
-	screenWidth = 1280.0f;
-	screenHeight = 720.0f;
+	screenWidth = 720.0f;
+	screenHeight = 480.0f;
 	//创建窗口
 	glWindow = glfwCreateWindow(screenWidth, screenHeight, "LearnOpenGL", nullptr, nullptr);
 	if (glWindow == nullptr)
@@ -166,9 +138,11 @@ void BaseManager::baseInit()
 	m_pRenderManager = RenderManager::getInstance();
 	m_pRefManager = RefManager::getInstance();
 	m_pLogicManager = LogicManager::getInstance();
+	m_pPhysicsManager = PhysicsManager::getInstance();
 	m_pRenderManager->init();
 	m_pRefManager->init();
 	m_pLogicManager->init();
+	m_pPhysicsManager->init();
 	//glEnable(GL_CULL_FACE);
 
 	//glEnable(GL_BLEND);
@@ -183,7 +157,7 @@ void BaseManager::mainLoop()
 
 	originNode = Node::create();//游戏对象树的根
 	originNode->retain();
-	Scene* scene = Scene::create();
+	auto scene = BallScene::create();	// 换场景可以在这里换，有BallScene和Scene
 	originNode->addChild(scene);
 	glEnable(GL_DEPTH_TEST);	//开启深度测试
 	glEnable(GL_CULL_FACE);		//开启面剔除
@@ -212,6 +186,12 @@ void BaseManager::mainLoop()
 
 		m_pRefManager->update();	//引用计数更新
 		m_pLogicManager->update(originNode, deltaTime);
+
+		// 物理系统更新三连
+		m_pPhysicsManager->prePhysicUpdate(originNode, deltaTime);	// 刚体的位置更新到物体的位置
+		m_pPhysicsManager->physicUpdate(deltaTime);	// 物理计算
+		m_pPhysicsManager->latePhysicUpdate(originNode, deltaTime);	// 物体自身的位置更新到刚体的位置
+
 		m_pLogicManager->lateUpdate(originNode, deltaTime);
 
 		m_pGameCamera->updateViewProjMatrix();

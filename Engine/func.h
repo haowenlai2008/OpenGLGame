@@ -57,6 +57,7 @@ static __TYPE__* create() \
     } \
 }
 #define DEBUG_VEC3(VEC3) std::cout << std::string(#VEC3) + " = " << "(" << VEC3.x <<"," << VEC3.y <<"," << VEC3.z <<")" << std::endl;
+#define DEBUG_BTVEC3(VEC3) std::cout << std::string(#VEC3) + " = " << "(" << VEC3.x() <<"," << VEC3.y() <<"," << VEC3.z() <<")" << std::endl;
 //¼ÓÔØÎÆÀí
 template <typename S1 = std::string>
 void LoadTexture(unsigned int &texture, S1&& pic)

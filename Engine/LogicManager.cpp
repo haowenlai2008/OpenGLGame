@@ -14,7 +14,7 @@ void LogicManager::update(Node * node, float delta)
 	if (node == nullptr)
 		return;
 
-	for (auto*& p : node->childs)
+	for (auto& p : node->childs)
 	{
 		if (p == nullptr)
 		{
@@ -41,7 +41,7 @@ void LogicManager::lateUpdate(Node* node, float delta)
 {
 	if (node == nullptr)
 		return;
-	for (auto*& p : node->childs)
+	for (auto& p : node->childs)
 	{
 		if (p == nullptr)
 		{
@@ -56,7 +56,6 @@ void LogicManager::lateUpdate(Node* node, float delta)
 		if (p->getVisable())
 		{
 			p->lateUpdate(delta);
-
 			lateUpdate(p, delta);
 		}
 

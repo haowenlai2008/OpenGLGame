@@ -15,6 +15,4 @@ public:
 	void init();
 	void update(Node* node, float delta);
 	void lateUpdate(Node* node, float delta);
-private:
-	static map<string, int> textures;
 };

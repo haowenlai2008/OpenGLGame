@@ -4,8 +4,8 @@
 
 
 static float radius = 1.0f;//球面或者圆面的半径
-static GLuint slices = 20; //圆或者圆柱的底面的精度
-static GLuint levels = 20;//球面的层数
+static GLuint slices = 40; //圆或者圆柱的底面的精度
+static GLuint levels = 40;//球面的层数
 shared_ptr<Mesh> VertexFactory::boxData = std::make_shared<Mesh>();
 shared_ptr<Mesh> VertexFactory::circleData = std::make_shared<Mesh>();
 shared_ptr<Mesh> VertexFactory::cylinderNoCapData = std::make_shared<Mesh>();

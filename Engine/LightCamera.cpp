@@ -21,4 +21,5 @@ void LightCamera::updateViewProjMatrix()
 	m_View = glm::lookAt(m_Position, m_Position + m_Look, m_Up);
 	//m_View = glm::lookAt(glm::vec3(-2.0f, 4.0f, -1.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	m_Proj = glm::ortho(-50.0f, 50.0f, -50.0f, 50.0f, 1.0f, 100.0f);
+	//m_Proj = glm::ortho(-20.0f, 20.0f, -20.0f, 20.0f, 1.0f, 20.0f);
 }

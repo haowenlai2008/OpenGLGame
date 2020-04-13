@@ -92,6 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.\external\source\bullet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -140,7 +141,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BallScene.cpp" />
     <ClCompile Include="BaseManager.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="BSpline.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Car.cpp" />
@@ -156,6 +159,7 @@
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="LeftWheel.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="MyKeyboard.cpp" />
     <ClCompile Include="LightCamera.cpp" />
     <ClCompile Include="Line2D.cpp" />
@@ -178,12 +182,16 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VertexFactory.cpp" />
+    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BallScene.h" />
     <ClInclude Include="BaseManager.h" />
+    <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="BSpline.h" />
     <ClInclude Include="bulletHead.h" />
     <ClInclude Include="Camera.h" />
@@ -200,6 +208,7 @@
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="LeftWheel.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="MyKeyboard.h" />
     <ClInclude Include="LightCamera.h" />
     <ClInclude Include="Line2D.h" />
@@ -223,8 +232,10 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="VertexFactory.h" />
+    <ClInclude Include="Wall.h" />
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
@@ -248,8 +259,14 @@
     <None Include="Resources\Shader\simpleDepth.vs" />
     <None Include="Resources\Shader\SkyBox.fs" />
     <None Include="Resources\Shader\SkyBox.vs" />
-    <None Include="Resources\Shader\texture.fs" />
-    <None Include="Resources\Shader\texture.vs" />
+    <None Include="Resources\Shader\WithColor.fs" />
+    <None Include="Resources\Shader\WithColor.vs" />
+    <None Include="Resources\Shader\WithColorAndLight.fs" />
+    <None Include="Resources\Shader\WithColorAndLight.vs" />
+    <None Include="Resources\Shader\WithTex.fs" />
+    <None Include="Resources\Shader\WithTex.vs" />
+    <None Include="Resources\Shader\WithTexAndLight.fs" />
+    <None Include="Resources\Shader\WithTexAndLight.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,11 @@
 #include "Node.h"
 #include <list>
 #include <glm/gtc/quaternion.hpp>
-
+#include "bulletHead.h"
+#include "Rigidbody.h"
+#include "SphereCollider.h"
+#include "BoxCollider.h"
+#include "PhysicsManager.h"
 mat4 Node::getModelMatrix()
 {
 	mat4 model = mat4(1.0f);
@@ -28,7 +32,7 @@ mat4 Node::getRotateMatrix()
 		return rotate;
 }
 
-Node::Node() : parent(nullptr), isVis(true)
+Node::Node() : parent(nullptr), isVis(true), isPhysicActive(false), m_btrd(nullptr)
 {
 }
 
@@ -68,10 +72,23 @@ void Node::setPosition(const vec3& position)
 
 void Node::setPosition(vec3&& position)
 {
+	vec3 pos;
 	if (parent)
-		transform.position = position - parent->getPosition();
+	{
+		pos = position - parent->getPosition();
+	}
 	else
-		transform.position = position;
+	{
+		pos = position;
+	}
+	transform.position = pos;
+	//if (m_btrd != nullptr)
+	//{
+	//	btQuaternion quaternion(transform.rotate.x, transform.rotate.y, transform.rotate.z, 1.0f);
+	//	btVector3 pos(transform.position.x, transform.position.y, transform.position.z);
+	//	btTransform btt(quaternion, pos);
+	//	m_btrd->setWorldTransform(btt);
+	//}
 }
 
 void Node::setLocalPosition(const vec3& position)
@@ -156,10 +173,58 @@ void Node::update(float delta)
 
 }
 
+void Node::physicUpdate(float delta)
+{
+	if (m_btrd != nullptr)
+	{
+		btQuaternion quaternion(transform.rotate.x, transform.rotate.y, transform.rotate.z, 1.0f);
+		btVector3 pos(transform.position.x, transform.position.y, transform.position.z);
+		btTransform btt(quaternion, pos);
+		m_btrd->setWorldTransform(btt);
+	}
+	
+}
+
 void Node::lateUpdate(float delta)
 {
 }
 
+void Node::physicLateUpdate(float delta)
+{
+	if (m_btrd != nullptr)
+	{
+		btTransform btt = m_btrd->getWorldTransform();
+		btVector3 btVec3 = btt.getOrigin();
+		btQuaternion btQt = btt.getRotation();
+		setPosition(vec3(btVec3.x(), btVec3.y(), btVec3.z()));
+		setRotate(vec3(btQt.x(), btQt.y(), btQt.z()));
+	}
+}
+
 void Node::renderParamUpdate()
 {
+}
+
+void Node::addSphereRigidBody()
+{
+	auto pscm = PhysicsManager::getInstance();
+	m_btrd = pscm->addRigidBody(SphereCollider::Normal(), Rigidbody(10.0f, 0.5f));
+}
+
+void Node::addSphereRigidBody(float radius)
+{
+	auto pscm = PhysicsManager::getInstance();
+	m_btrd =  pscm->addRigidBody(SphereCollider(radius), Rigidbody(10.0f, 0.5f));
+}
+
+void Node::addBoxRigidBody()
+{
+	auto pscm = PhysicsManager::getInstance();
+	m_btrd = pscm->addRigidBody(BoxCollider::Normal(), Rigidbody(10.0f, 0.5f));
+}
+
+void Node::addBoxRigidBody(float length, float width, float height)
+{
+	auto pscm = PhysicsManager::getInstance();
+	m_btrd = pscm->addRigidBody(BoxCollider(length, width, height), Rigidbody(10.0f, 0.5f));
 }

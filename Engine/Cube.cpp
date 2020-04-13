@@ -11,5 +11,6 @@ bool Cube::init()
 		return false;
 	setMeshAndBuffer(VertexFactory::getBoxData());
 	setTexture("container.jpg");
+	//addBoxRigidBody();
 	return true;
 }

@@ -8,7 +8,7 @@ GameCamera::GameCamera() :
 	m_Aspect(1.0f),
 	m_FovY(90.0f),
 	m_Distance(5.0f),
-	m_CType(Camera_Type::ThirdPerson),
+	m_CType(Camera_Type::Free),
 	m_MouseSensitivity(0.5f)
 {
 
@@ -21,27 +21,14 @@ void GameCamera::processMouse(MyMouse::State mouseState, MyMouse::State lastMous
 	float xoffset = -m_MouseSensitivity * (mouseState.offsetX);
 	float yoffset = -m_MouseSensitivity * (mouseState.offsetY);
 	float scrollWheelValue = mouseState.scroll;
-
+	
 	if (m_CType == Camera_Type::Free || m_CType == Camera_Type::FirstPerson)
 	{
 		m_Yaw += xoffset;
 		m_Pitch += yoffset;
 		m_FovY -= scrollWheelValue * 0.1f;
-		//std::wostringstream outs;
-		//outs.precision(6);
-		//outs << L"   "
-		//	<< L"m_Yaw: " << m_Yaw
-		//	<< L"m_Pitch: " << m_Pitch
-		//	<< L"look: " << m_Look.x << "," << m_Look.y << "," << m_Look.z;
-		//SetWindowText(BaseManager::getInstance()->getMainWindow(), outs.str().c_str());
-		//std::wostringstream outs;
-		//outs.precision(6);
-		//outs << L"   "
-		//	<< L"x: " << mouseState.x
-		//	<< L"y: " << mouseState.y
-		//	<< L" x2: " << mouseState.realX
-		//	<< L" y2: " << mouseState.realY;
-		//SetWindowText(BaseManager::getInstance()->getMainWindow(), outs.str().c_str());
+		//DEBUG_VEC3(m_Look);
+
 		if (m_Pitch > 89.0f)
 			m_Pitch = 89.0f;
 		if (m_Pitch < -89.0f)
@@ -50,31 +37,14 @@ void GameCamera::processMouse(MyMouse::State mouseState, MyMouse::State lastMous
 			m_FovY = 134.0f;
 		if (m_FovY < 46.0f)
 			m_FovY = 46.0f;
+
+		//std::cout << m_Pitch << "," << m_FovY << std::endl;
 	}
 	else if (m_CType == Camera_Type::ThirdPerson)
 	{
 		m_Yaw += xoffset;
 		m_Pitch -= yoffset;
 		m_Distance -= scrollWheelValue * 0.1f;
-		//std::wostringstream outs;
-		//outs.precision(6);
-		//outs << L"   "
-		//	<< L"m_Yaw: " << m_Yaw
-		//	<< L" yoffset: " << yoffset
-		//	<< L" m_Pitch: " << m_Pitch
-		//	<< L" look: " << m_Look.x << "," << m_Look.y << "," << m_Look.z;
-		//SetWindowText(BaseManager::getInstance()->getMainWindow(), outs.str().c_str());
-		//std::wostringstream outs;
-		//outs.precision(6);
-		//outs << L"   "
-		//	<< L"x: " << m_Position.x
-		//	<< L"y: " << m_Position.y
-		//	<< L" x2: " << mouseState.realX
-		//	<< L" y2: " << mouseState.realY
-		//	<< L" x3: " << xoffset
-		//	<< L" y3: " << yoffset;
-		//SetWindowText(BaseManager::getInstance()->getMainWindow(), outs.str().c_str());
-
 		//限制垂直方向的角度
 		if (m_Pitch > 89.0f)
 			m_Pitch = 89.0f;

@@ -1,9 +1,9 @@
 #include "Camera.h"
 
 Camera::Camera():
-	m_Position(0.0f, 2.0f, -3.0f),
+	m_Position(0.0f, 0.0f, -2.0f),
 	m_Look(0.0f, 0.0f, -1.0f),
-	m_Right(1.0f, 0.0f, 0.0f),
+	m_Right(-1.0f, 0.0f, 0.0f),
 	m_Up(0.0f, 1.0f, 0.0f)
 {
 }

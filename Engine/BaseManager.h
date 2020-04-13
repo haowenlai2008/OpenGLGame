@@ -9,6 +9,7 @@ class Scene;
 class RenderManager;
 class RefManager;
 class LogicManager;
+class PhysicsManager;
 class GameCamera;
 class LightCamera;
 class BaseManager : public Singleton<BaseManager>
@@ -51,7 +52,7 @@ private:
 	RefManager* m_pRefManager;
 	RenderManager* m_pRenderManager;
 	LogicManager* m_pLogicManager;
-
+	PhysicsManager* m_pPhysicsManager;
 	void baseInit();//窗口初始化
 	void mainLoop();//主循环
 };

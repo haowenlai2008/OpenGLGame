@@ -42,7 +42,7 @@ void RenderManager::init()
 	depthFBOInit();
 }
 
-const GLuint SHADOW_WIDTH = 2048, SHADOW_HEIGHT = 2048;
+const GLuint SHADOW_WIDTH = 4096, SHADOW_HEIGHT = 4096;
 void RenderManager::depthFBOInit()
 {
 	glGenFramebuffers(1, &m_DepthFrameBuffer);
@@ -123,9 +123,11 @@ void RenderManager::update(Node * node)
 
 void RenderManager::draw()
 {
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	shadowMapRenderBegin();
 	renderScene();
 	shadowMapRenderEnd();
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	renderScene();
 	drawObjects.clear();
 }
@@ -137,6 +139,7 @@ void RenderManager::bindFrameBuffer()
 
 void RenderManager::filterUse()
 {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	// now bind back to default framebuffer and draw a quad plane with the attached framebuffer color texture
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glDisable(GL_DEPTH_TEST); // disable depth test so screen-space quad isn't discarded due to depth test.

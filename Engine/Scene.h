@@ -10,4 +10,5 @@ public:
 	virtual void lateUpdate(float delta) override;
 protected:
 	Car* m_pCar;
+	Node* m_focus;
 };

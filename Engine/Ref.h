@@ -8,6 +8,4 @@ public:
 	void retain();
 	void release();
 	void autorelease();
-private:
-	
 };
