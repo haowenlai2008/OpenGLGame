@@ -78,7 +78,7 @@ void RenderManager::filterInit()
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
 	//screenShader = Shader::getFilter("depthTest");
-	screenShader = Shader::getFilter("normal");
+	screenShader = Shader::getFilter("depthTest");
 	auto shader = screenShader.lock();
 	shader->use();
 	shader->setInt("screenTexture", 0);
