@@ -60,6 +60,7 @@ public:
 	void setMaterial(vec3& specular, float shininess);
 	void setMaterial(vec3&& specular, float shininess);
 	virtual void setTexture(string&& src);
+	virtual void setCubeTexture(string&& src);
 	virtual void bindShaderResource();
 	
 	Entity();

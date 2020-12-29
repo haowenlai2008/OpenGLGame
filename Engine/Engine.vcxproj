@@ -264,6 +264,8 @@
     <None Include="Resources\Shader\WithColor.vs" />
     <None Include="Resources\Shader\WithColorAndLight.fs" />
     <None Include="Resources\Shader\WithColorAndLight.vs" />
+    <None Include="Resources\Shader\WithCube.fs" />
+    <None Include="Resources\Shader\WithCube.vs" />
     <None Include="Resources\Shader\WithTex.fs" />
     <None Include="Resources\Shader\WithTex.vs" />
     <None Include="Resources\Shader\WithTexAndLight.fs" />

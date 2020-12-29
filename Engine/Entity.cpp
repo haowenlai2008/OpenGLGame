@@ -24,6 +24,12 @@ void Entity::setTexture(string&& src)
 
 
 }
+
+void Entity::setCubeTexture(string&& src)
+{
+	m_DiffuseMap = loadCubemap(std::move(src));
+}
+
 void Entity::bindShaderResource()
 {
 	if (RenderManager::getInstance()->getIsShadow())
@@ -94,6 +100,15 @@ void Entity::bindShaderResource()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, shadowMap);
 	};
+	auto withCubeFunc = [&]() {
+		std::shared_ptr<Shader> shader(m_Shader);
+		shader->use();
+		if (m_DiffuseMap != -1)
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, m_DiffuseMap);
+		}
+	};
 	switch (m_type)
 	{
 	case Entity_Type::WithColor:
@@ -107,6 +122,9 @@ void Entity::bindShaderResource()
 		break;
 	case Entity_Type::WithTexAndLight:
 		withTexAndLightFun();
+		break;
+	case Entity_Type::TextureCube:
+		withCubeFunc();
 		break;
 	default:
 		break;
@@ -140,7 +158,7 @@ bool Entity::init()
 	switch (m_type)
 	{
 	case Entity_Type::TextureCube:
-		shaderName = "cube";
+		shaderName = "WithCube";
 		break;
 	case Entity_Type::WithColor:
 		shaderName = "WithColor";

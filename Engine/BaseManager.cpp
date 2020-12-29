@@ -157,7 +157,7 @@ void BaseManager::mainLoop()
 
 	originNode = Node::create();//游戏对象树的根
 	originNode->retain();
-	auto scene = BallScene::create();	// 换场景可以在这里换，有BallScene和Scene
+	auto scene = Scene::create();	// 换场景可以在这里换，有BallScene和Scene
 	originNode->addChild(scene);
 	glEnable(GL_DEPTH_TEST);	//开启深度测试
 	glEnable(GL_CULL_FACE);		//开启面剔除

@@ -478,5 +478,11 @@
     <None Include="Resources\Shader\WithTexAndLight.vs">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="Resources\Shader\WithCube.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\WithCube.vs">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

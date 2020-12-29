@@ -14,13 +14,17 @@
 #include "LightCamera.h"
 #include "Ground.h"
 #include "Sphere.h"
+#include "Cube.h"
 bool Scene::init()
 {
-	SkyBox* skyBox = SkyBox::create();
-	this->addChild(skyBox);
+	//SkyBox* skyBox = SkyBox::create();
+	//this->addChild(skyBox);
 
-	Ground* gnd = Ground::create(Entity_Type::WithTexAndLight);
-	this->addChild(gnd);
+	//Ground* gnd = Ground::create(Entity_Type::WithTexAndLight);
+	//this->addChild(gnd);
+	Cube* cube = Cube::create(Entity_Type::TextureCube);
+	cube->setTexture("back__.jpg");
+	this->addChild(cube);
 
 	m_pCar = Car::create();
 	this->addChild(m_pCar);

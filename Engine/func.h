@@ -90,4 +90,3 @@ void LoadTexture(unsigned int &texture, S1&& pic)
 	stbi_image_free(data);
 	data = nullptr;
 }
-
