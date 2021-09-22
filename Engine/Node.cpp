@@ -7,15 +7,7 @@
 #include "BoxCollider.h"
 #include "PhysicsManager.h"
 
-static vector<std::string> faces
-{
-	"/right.jpg",
-	"/left.jpg",
-	"/top.jpg",
-	"/bottom.jpg",
-	"/front.jpg",
-	"/back.jpg"
-};
+
 
 mat4 Node::getModelMatrix()
 {
@@ -54,7 +46,7 @@ Node::~Node()
 		ptr->release();
 }
 
-GLuint Node::loadCubemap(std::string&& sboxName, vector<std::string>& faces = ::faces)
+GLuint Node::loadCubemap(std::string&& sboxName, vector<std::string>& faces)
 {
 	unsigned int textureID;
 	glGenTextures(1, &textureID);

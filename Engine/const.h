@@ -1,4 +1,8 @@
 #pragma once
+#include <vector>
+#include <string>
+using std::vector;
+using std::string;
 #define TEXTURE_PATH (std::string("Resources/Texture/"))	//纹理的路径
 #define SHADER_PATH (std::string("Resources/Shader/"))		//Shader的路径
 #define MODEL_PATH (std::string("Resources/Model/"))			//模型的路径
@@ -6,3 +10,16 @@
 #define FILTER_PATH (std::string("Resources/Shader/Filter/"))	//滤镜的路径
 #define FILTER_VS (std::string("Resources/Shader/Filter/filterBase.vs"))	//滤镜的顶点着色器
 #define SKY_BOX (std::string("sor_cwd"))
+
+namespace Const
+{
+	static vector<string> facesName = 
+	{
+		"/right.jpg",
+		"/left.jpg",
+		"/top.jpg",
+		"/bottom.jpg",
+		"/front.jpg",
+		"/back.jpg"
+	};
+}
