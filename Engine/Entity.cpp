@@ -27,7 +27,7 @@ void Entity::setTexture(string&& src)
 
 void Entity::setCubeTexture(string&& src)
 {
-	m_DiffuseMap = loadCubemap(std::move(src));
+	m_DiffuseMap = ResourceTools::LoadCubemap(std::move(src));
 }
 
 void Entity::bindShaderResource()
@@ -103,11 +103,28 @@ void Entity::bindShaderResource()
 	auto withCubeFunc = [&]() {
 		std::shared_ptr<Shader> shader(m_Shader);
 		shader->use();
+		if (getLightSrc() != nullptr)
+			shader->setVec3("light.position", getLightSrc()->getPosition());
+		shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
+		shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+		shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+		shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		// material properties
+		shader->setVec3("material.specular", m_material->getSpecular());
+		shader->setFloat("material.shininess", m_material->getShininess());
+
+		shader->setInt("material.diffuse", 0);
+		shader->setInt("shadowMap", 1);
+
 		if (m_DiffuseMap != -1)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, m_DiffuseMap);
 		}
+
+		GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, shadowMap);
 	};
 	switch (m_type)
 	{

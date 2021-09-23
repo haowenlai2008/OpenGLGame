@@ -47,6 +47,5 @@ public:
 	mat4 getRotateMatrix();
 	Node();
 	virtual ~Node();
-	static GLuint loadCubemap(std::string&& sboxName, vector<std::string>& faces= Const::facesName);
 	
 };

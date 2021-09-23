@@ -25,7 +25,7 @@ unsigned int RenderManager::getTexture(string& path)
 	unsigned int result = 0;
 	if (textures.find(path) == textures.end())
 	{
-		LoadTexture(result, path);
+		ResourceTools::LoadTexture(result, path);
 		textures.insert(std::pair<string, unsigned int>(path, result));
 		return result;
 	}
@@ -109,6 +109,7 @@ void RenderManager::update(Node * node)
 {
 	if (node == nullptr)
 		return;
+	glCullFace(GL_FRONT_AND_BACK);
 	for (auto*& p : node->childs)
 	{
 		if (p != nullptr && p->count != 0)

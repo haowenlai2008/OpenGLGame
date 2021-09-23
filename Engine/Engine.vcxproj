@@ -177,6 +177,7 @@
     <ClCompile Include="Ref.cpp" />
     <ClCompile Include="RefManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="ResourceTools.cpp" />
     <ClCompile Include="RightWheel.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="Ref.h" />
     <ClInclude Include="RefManager.h" />
     <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="ResourceTools.h" />
     <ClInclude Include="RightWheel.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Scene.h" />

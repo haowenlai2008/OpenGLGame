@@ -16,7 +16,7 @@ bool Wheel::init()
 	Circle* c2 = Circle::create(Entity_Type::WithTexAndLight);
 	c2->setTexture("wheelface.jpg");
 	c2->setPosition(vec3(-0.25f, 0.0f, 0.0f));
-	c2->setRotate(vec3(0.0f, 180.0f, 0.0f));//翻转180度
+	c2->setRotate(vec3(0.0f, 90.0f, 0.0f));//翻转180度
 	this->addChild(c2);
 
 	setRadius(0.5f);

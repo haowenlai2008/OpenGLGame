@@ -20,6 +20,6 @@ bool LeftWheel::init()
 	c2->setRotate(vec3(0.0f, 180.0f, 0.0f));//翻转180度
 	this->addChild(c2);
 
-	setRadius(0.5f);
+	setRadius(1.0f);
 	return true;
 }

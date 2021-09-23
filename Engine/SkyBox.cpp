@@ -22,7 +22,7 @@ static vector<std::string> faces
 unsigned int SkyBox::getSkyBxCubeMap()
 {
 	if (cubemapTexture == -1)
-		cubemapTexture = loadCubemap(SKY_BOX, faces);
+		cubemapTexture = ResourceTools::LoadCubemap(SKY_BOX, faces);
 	return cubemapTexture;
 }
 

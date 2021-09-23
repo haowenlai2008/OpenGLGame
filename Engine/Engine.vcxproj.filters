@@ -246,6 +246,9 @@
     <ClCompile Include="Material.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceTools.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -390,6 +393,9 @@
       <Filter>头文件\场景</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceTools.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -25,6 +25,7 @@ bool Scene::init()
 
 	Cube* cube = Cube::create(Entity_Type::TextureCube);
 	cube->setTexture("back__.jpg");
+	cube->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
 	this->addChild(cube);
 
 	m_pCar = Car::create();
