@@ -15,6 +15,7 @@
 #include "Ground.h"
 #include "Sphere.h"
 #include "Cube.h"
+#include "Circle.h"
 #include "Wheel.h"
 bool Scene::init()
 {
@@ -35,6 +36,11 @@ bool Scene::init()
 	m_pCar = Car::create();
 	this->addChild(m_pCar);
 
+	Circle* c2 = Circle::create(Entity_Type::WithTexAndLight);
+	c2->setTexture("wheelface.jpg");
+	c2->setLocalPosition(vec3(0.0f, 0.0f, 6.0f));
+	c2->setRotate(vec3(0.0f, 180.0f, 0.0f));//·­×ª180¶È
+	this->addChild(c2);
 	return true;
 }
 

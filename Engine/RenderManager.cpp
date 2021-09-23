@@ -109,7 +109,6 @@ void RenderManager::update(Node * node)
 {
 	if (node == nullptr)
 		return;
-	glCullFace(GL_FRONT_AND_BACK);
 	for (auto*& p : node->childs)
 	{
 		if (p != nullptr && p->count != 0)
