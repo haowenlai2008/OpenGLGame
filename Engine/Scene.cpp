@@ -15,6 +15,7 @@
 #include "Ground.h"
 #include "Sphere.h"
 #include "Cube.h"
+#include "Wheel.h"
 bool Scene::init()
 {
 	SkyBox* skyBox = SkyBox::create();
@@ -28,6 +29,9 @@ bool Scene::init()
 	cube->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
 	this->addChild(cube);
 
+	Wheel* w = Wheel::create();
+	w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));
+	this->addChild(w);
 	m_pCar = Car::create();
 	this->addChild(m_pCar);
 

@@ -77,6 +77,5 @@ void main()
     vec3 ldir = -normalize(vec3(0.0f, -1.0f, 1.0f));
     float shadow = ShadowCalculation(fs_in.FragPosLightSpace, norm, ldir);
     vec3 result = (ambient + (1.0f - shadow) * (diffuse + specular)) * texColor.rgb;
-    //FragColor = vec4(result, 1.0);
-    FragColor = texColor;
+    FragColor = vec4(result, 1.0);
 }
