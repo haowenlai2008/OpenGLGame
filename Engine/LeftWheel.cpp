@@ -1,6 +1,7 @@
 #include "LeftWheel.h"
 #include "CylinderNoCap.h"
 #include "Circle.h"
+#include "Cube.h"
 bool LeftWheel::init()
 {
 	CylinderNoCap* cnc = CylinderNoCap::create(Entity_Type::WithTexAndLight);
@@ -16,10 +17,10 @@ bool LeftWheel::init()
 
 	Circle* c2 = Circle::create(Entity_Type::WithTexAndLight);
 	c2->setTexture("wheelface.jpg");
-	c2->setLocalPosition(vec3(-1.5f, 0.0f, 0.0f));
+	c2->setLocalPosition(vec3(-0.25f, 0.0f, 0.0f));
 	c2->setRotate(vec3(0.0f, 180.0f, 0.0f));//翻转180度
 	this->addChild(c2);
 
-	setRadius(.5f);
+	setRadius(0.5f);
 	return true;
 }

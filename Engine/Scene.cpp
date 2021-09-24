@@ -25,22 +25,29 @@ bool Scene::init()
 	Ground* gnd = Ground::create(Entity_Type::WithTexAndLight);
 	this->addChild(gnd);
 
-	Cube* cube = Cube::create(Entity_Type::TextureCube);
-	cube->setTexture("back__.jpg");
-	cube->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-	this->addChild(cube);
+	//Cube* cube = Cube::create(Entity_Type::TextureCube);
+	//cube->setTexture("back__.jpg");
+	//cube->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
+	//this->addChild(cube);
 
-	Wheel* w = Wheel::create();
+	Circle* w = Circle::create(Entity_Type::WithColorAndLight);
 	w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));
+	w->setRotate(glm::vec3(0.0f, 180.0f, 0.0f));
 	this->addChild(w);
+
+	Wheel* wheel = Wheel::create();
+	wheel->setPosition(glm::vec3(0.0f, 1.0f, 5.0f));
+	wheel->setRotate(glm::vec3(0.0f, 40.0f, 0.0f));
+	this->addChild(wheel);
+
 	m_pCar = Car::create();
 	this->addChild(m_pCar);
 
-	Circle* c2 = Circle::create(Entity_Type::WithTexAndLight);
-	c2->setTexture("wheelface.jpg");
-	c2->setLocalPosition(vec3(0.0f, 0.0f, 6.0f));
-	c2->setRotate(vec3(0.0f, 180.0f, 0.0f));//翻转180度
-	this->addChild(c2);
+	//Circle* c2 = Circle::create(Entity_Type::WithTexAndLight);
+	//c2->setTexture("wheelface.jpg");
+	//c2->setLocalPosition(vec3(0.0f, 0.0f, 6.0f));
+	//c2->setRotate(vec3(0.0f, 180.0f, 0.0f));//翻转180度
+	//this->addChild(c2);
 	return true;
 }
 

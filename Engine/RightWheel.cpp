@@ -18,6 +18,7 @@ bool RightWheel::init()
 	c2->setTexture("wheelface.jpg");
 	c2->setLocalPosition(vec3(0.0f, 0.0f, 0.0f));
 	c2->setRotate(vec3(0.0f, 180.0f, 0.0f));//翻转180度
+	//c2->setDebugID(100);
 	this->addChild(c2);
 
 	setRadius(0.5f);

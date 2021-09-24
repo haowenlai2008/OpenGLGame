@@ -17,6 +17,7 @@ public:
 	LL_SYNTHESIZE(bool, isVis, Visable);
 	LL_SYNTHESIZE(bool, isPhysicActive, PhysicActive);
 	LL_SYNTHESIZE(btRigidBody*, m_btrd, BTRigidBody);
+	LL_SYNTHESIZE(int, debugID, DebugID);
 	void addChild(Node* node);
 	void setPosition(const vec3& position);
 	void setPosition(vec3&& position);

@@ -17,7 +17,7 @@ mat4 Node::getModelMatrix()
 	
 	glm::qua<float> q = glm::qua<float>(glm::radians(transform.rotate));		//Ðý×ª
 	mat4 rotate = glm::mat4_cast(q);
-	model = trans * scale * rotate;
+	model = trans * rotate * scale;
 	if (parent)
 		return parent->getModelMatrix() * model;
 	else
@@ -35,7 +35,7 @@ mat4 Node::getRotateMatrix()
 		return rotate;
 }
 
-Node::Node() : parent(nullptr), isVis(true), isPhysicActive(false), m_btrd(nullptr)
+Node::Node() : parent(nullptr), isVis(true), isPhysicActive(false), m_btrd(nullptr), debugID(0)
 {
 }
 

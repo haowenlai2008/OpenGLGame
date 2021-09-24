@@ -129,7 +129,8 @@ void RenderManager::draw()
 	shadowMapRenderEnd();
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	renderScene();
-	drawObjects.clear();
+	auto newList = std::list<Node*>();
+	drawObjects.swap(newList);
 }
 
 void RenderManager::bindFrameBuffer()
@@ -189,6 +190,10 @@ void RenderManager::renderScene()
 		if (p != nullptr && p->count != 0)
 		{
 			p->renderParamUpdate();
+			if (p->getDebugID() == 100)
+			{
+				std::cout << "hahahahah" << std::endl;
+			}
 			p->draw();
 		}
 	}
