@@ -39,8 +39,12 @@ private:
 	GLuint textureColorbuffer;	//颜色缓冲
 	GLuint rbo;					//渲染缓冲对象
 	GLuint quadVAO, quadVBO;		//帧缓冲的窗口的顶点数组对象和顶点缓冲对象
+	GLuint m_DepthFrameBuffer;		// 深度缓冲
 
-	GLuint m_DepthFrameBuffer;
+	// 延迟渲染用
+	GLuint gPosition;
+	GLuint gNormal;
+	GLuint gColorSpec;
 	std::weak_ptr<Shader> m_SimpleDepthShader;
 	std::weak_ptr<Shader> screenShader;
 	list<Node*> drawObjects;		// 需要渲染的物体集合

@@ -5,6 +5,8 @@ class Shader;
 class Component;
 class Mesh;
 class Material;
+using std::weak_ptr;
+using std::shared_ptr;
 enum class Entity_Type
 {
 	WithColor,
@@ -67,8 +69,10 @@ public:
 	virtual ~Entity();
 protected:
 	vector<Component*> comList;
-	std::weak_ptr<Shader> m_Shader;
-	std::shared_ptr<Material> m_material;
+	weak_ptr<Shader> m_Shader;
+	shared_ptr<Material> m_material;
+	vector<shared_ptr<Mesh>> m_meshList;
+	vector<shared_ptr<Material>> m_materialList;
 	GLuint m_VAO;
 	GLuint m_VBO;
 	GLuint m_EBO;
