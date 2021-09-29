@@ -32,8 +32,10 @@ public:
 	Material(vec3&& specular, float shininess);
 	LL_SYNTHESIZE(vec3, m_specular, Specular);
 	LL_SYNTHESIZE(float, m_shininess, Shininess);
+	string m_shaderName;
+	weak_ptr<Shader> m_Shader;
 	map<int, TextureStructure> textureList;		// 记录每个Texture位置对应的纹理类型
-	// uniform列表
+	// 常量uniform
 	map<string, bool> uniformBool;
 	map<string, int> uniformInt;
 	map<string, float> uniformFloat;
