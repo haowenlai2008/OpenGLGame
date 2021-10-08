@@ -1,8 +1,11 @@
 #pragma once
 #include "func.h"
 #include <map>
+#include "Shader.h"
 using std::pair;
 using std::map;
+using std::weak_ptr;
+
 class Material
 {
 public:
