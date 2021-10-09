@@ -125,6 +125,37 @@ float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
     return shadow;
 }
 
+
+float ShadowCalculationRound(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
+{
+    // 执行透视除法
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+
+    // 变换到[0,1]的范围
+    projCoords = projCoords * 0.5 + 0.5;
+    float shadowTmp;
+    float currentDepth = projCoords.z;
+    // PCF
+    float deltaAngle = PI2 / angleClip;
+    for (int i = 0; i < angleClip; i++)
+    {
+        for (int j = 0; j < pcfCoreSize; j++)
+        {
+            vec2 tmpCoords = projCoords.xy + vec2(cos(deltaAngle * i), sin(deltaAngle * i)) * j * offset;
+            float x = clamp(tmpCoords.x, 0.0, 1.0);
+            float y = clamp(tmpCoords.y, 0.0, 1.0);
+            if (x != tmpCoords.x || y != tmpCoords.y)
+               shadowTmp += 1.0;
+            else
+               // 检查当前片段是否在阴影中
+               shadowTmp += step(texture(shadowMap, tmpCoords).r, currentDepth - 0.005);
+        }
+    }
+    float shadow = shadowTmp / (pcfCoreSize * pcfCoreSize);
+    //float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+    return shadow;
+}
+
 float ShadowCalculationPoission(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 {
     // 执行透视除法
