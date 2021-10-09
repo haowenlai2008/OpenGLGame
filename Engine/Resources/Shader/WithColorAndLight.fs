@@ -31,28 +31,44 @@ uniform Material material;
 uniform Light light;
 uniform sampler2D shadowMap;
 uniform vec3 mColor;
+const float offset = 1.0 / 800.0;
+
 float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 {
     // 执行透视除法
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
 
-
+    
     // 变换到[0,1]的范围
     projCoords = projCoords * 0.5 + 0.5;
 
-    float x = clamp(projCoords.x, 0.0, 1.0);
-    float y = clamp(projCoords.y, 0.0, 1.0);
-    if (x != projCoords.x || y != projCoords.y)
-        return 1.0;
-    // 取得最近点的深度(使用[0,1]范围下的fragPosLight当坐标)
-    float closestDepth = texture(shadowMap, projCoords.xy).r; 
-    // 取得当前片段在光源视角下的深度
+    // PCF
+    vec2 offsets[9] = vec2[](
+        vec2(-offset,  offset), // 左上
+        vec2( 0.0f,    offset), // 正上
+        vec2( offset,  offset), // 右上
+        vec2(-offset,  0.0f),   // 左
+        vec2( 0.0f,    0.0f),   // 中
+        vec2( offset,  0.0f),   // 右
+        vec2(-offset, -offset), // 左下
+        vec2( 0.0f,   -offset), // 正下
+        vec2( offset, -offset)  // 右下
+    );
+    float shadowTmp;
     float currentDepth = projCoords.z;
-
-    float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
-    // 检查当前片段是否在阴影中
-    float shadow = currentDepth  - 0.005 > closestDepth  ? 1.0 : 0.0;
-
+    for(int i = 0; i < 9; i++)
+    {
+        vec2 tmpCoords = projCoords.xy + offsets[i];
+        float x = clamp(tmpCoords.x, 0.0, 1.0);
+        float y = clamp(tmpCoords.y, 0.0, 1.0);
+        if (x != tmpCoords.x || y != tmpCoords.y)
+           shadowTmp = shadowTmp + 1.0;
+        else
+           // 检查当前片段是否在阴影中
+           shadowTmp = shadowTmp + step(texture(shadowMap, tmpCoords).r, currentDepth - 0.005);
+    }
+    float shadow = shadowTmp * 0.1111111111;
+    //float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
     return shadow;
 }
 

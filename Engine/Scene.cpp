@@ -30,15 +30,15 @@ bool Scene::init()
 	//cube->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
 	//this->addChild(cube);
 
-	Circle* w = Circle::create(Entity_Type::WithColorAndLight);
-	w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));
-	w->setRotate(glm::vec3(0.0f, 180.0f, 0.0f));
-	this->addChild(w);
+	//Circle* w = Circle::create(Entity_Type::WithColorAndLight);
+	//w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));
+	//w->setRotate(glm::vec3(0.0f, 180.0f, 0.0f));
+	//this->addChild(w);
 
-	Wheel* wheel = Wheel::create();
-	wheel->setPosition(glm::vec3(0.0f, 1.0f, 5.0f));
-	wheel->setRotate(glm::vec3(0.0f, 40.0f, 0.0f));
-	this->addChild(wheel);
+	//Wheel* wheel = Wheel::create();
+	//wheel->setPosition(glm::vec3(0.0f, 1.0f, 5.0f));
+	//wheel->setRotate(glm::vec3(0.0f, 40.0f, 0.0f));
+	//this->addChild(wheel);
 
 	m_pCar = Car::create();
 	this->addChild(m_pCar);
