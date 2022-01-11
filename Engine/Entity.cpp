@@ -18,6 +18,16 @@ vec3 EntityColor::Purple = vec3(0.5f, 0.0f, 0.5f);
 vec3 EntityColor::Grey = vec3(0.2f, 0.2f, 0.2f);
 vec3 EntityColor::Pink = vec3(1.0f, 0.41f, 0.71f);
 vec3 EntityColor::Black = vec3(0.0f, 0.0f, 0.0f);
+
+
+std::unordered_map<Entity_Type, std::string> Entity::shaderTypeMap = {
+	{Entity_Type::TextureCube, "PBRCube"},
+	{Entity_Type::WithColor, "WithColor"},
+	{Entity_Type::WithColorAndLight, "WithColorAndLight"},
+	{Entity_Type::WithTex, "WithTex"},
+	{Entity_Type::WithTexAndLight, "PBR"},
+};
+
 void Entity::setTexture(string&& src)
 {
 	m_DiffuseMap = RenderManager::getTexture(src);
@@ -171,28 +181,7 @@ Entity::~Entity()
 bool Entity::init()
 {
 	//m_Shader = Shader::getShader();
-	string shaderName;
-	switch (m_type)
-	{
-	case Entity_Type::TextureCube:
-		shaderName = "WithCube";
-		break;
-	case Entity_Type::WithColor:
-		shaderName = "WithColor";
-		break;
-	case Entity_Type::WithColorAndLight:
-		shaderName = "WithColorAndLight";
-		break;
-	case Entity_Type::WithTex:
-		shaderName = "WithTex";
-		break;
-	case Entity_Type::WithTexAndLight:
-		shaderName = "PBR";
-		break;
-	default:
-		break;
-	}
-	m_Shader = Shader::getShader(shaderName);
+	m_Shader = Shader::getShader(Entity::shaderTypeMap[m_type]);
 	m_material = std::make_shared<Material>();	//´´½¨²ÄÖÊ
 	return true;
 }

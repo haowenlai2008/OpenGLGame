@@ -1,6 +1,7 @@
 #pragma once
 #include "Node.h"
 #include "VertexFactory.h"
+#include <unordered_map>
 class Shader;
 class Component;
 class Mesh;
@@ -64,6 +65,7 @@ public:
 	virtual void setTexture(string&& src);
 	virtual void setCubeTexture(string&& src);
 	virtual void bindShaderResource();
+	static std::unordered_map<Entity_Type, std::string> shaderTypeMap;
 	
 	Entity();
 	virtual ~Entity();

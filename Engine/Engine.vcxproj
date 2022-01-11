@@ -260,6 +260,8 @@
     <None Include="Resources\Shader\normal.vs" />
     <None Include="Resources\Shader\PBR.fs" />
     <None Include="Resources\Shader\PBR.vs" />
+    <None Include="Resources\Shader\PBRCube.fs" />
+    <None Include="Resources\Shader\PBRCube.vs" />
     <None Include="Resources\Shader\simpleDepth.fs" />
     <None Include="Resources\Shader\simpleDepth.vs" />
     <None Include="Resources\Shader\SkyBox.fs" />

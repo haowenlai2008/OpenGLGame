@@ -502,5 +502,11 @@
     <None Include="Resources\Shader\PBR.vs">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="Resources\Shader\PBRCube.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\PBRCube.fs">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
