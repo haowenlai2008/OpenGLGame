@@ -187,7 +187,7 @@ bool Entity::init()
 		shaderName = "WithTex";
 		break;
 	case Entity_Type::WithTexAndLight:
-		shaderName = "WithTexAndLight";
+		shaderName = "PBR";
 		break;
 	default:
 		break;
