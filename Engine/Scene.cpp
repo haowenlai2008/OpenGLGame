@@ -19,18 +19,21 @@
 #include "Wheel.h"
 bool Scene::init()
 {
-	SkyBox* skyBox = SkyBox::create();
-	this->addChild(skyBox);
+	//SkyBox* skyBox = SkyBox::create();
+	//this->addChild(skyBox);
 
-	Ground* gnd = Ground::create(Entity_Type::WithTexAndLight);
+	Ground* gnd = Ground::create(MaterialType::PBR);
 	this->addChild(gnd);
 
-	//Cube* cube = Cube::create(Entity_Type::TextureCube);
-	//cube->setTexture("back__.jpg");
-	//cube->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-	//this->addChild(cube);
+	//Sphere* sp = Sphere::create(MaterialType::PBR);
+	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
+	//this->addChild(sp);
+	Cube* cube = Cube::create(MaterialType::TextureCube);
+	cube->setCubeTexture("skybox");
+	cube->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
+	this->addChild(cube);
 
-	//Circle* w = Circle::create(Entity_Type::WithColorAndLight);
+	//Circle* w = Circle::create(MaterialType::WithColorAndLight);
 	//w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));
 	//w->setRotate(glm::vec3(0.0f, 180.0f, 0.0f));
 	//this->addChild(w);
@@ -40,10 +43,11 @@ bool Scene::init()
 	//wheel->setRotate(glm::vec3(0.0f, 40.0f, 0.0f));
 	//this->addChild(wheel);
 
+
 	m_pCar = Car::create();
 	this->addChild(m_pCar);
 
-	//Circle* c2 = Circle::create(Entity_Type::WithTexAndLight);
+	//Circle* c2 = Circle::create(MaterialType::PBR);
 	//c2->setTexture("wheelface.jpg");
 	//c2->setLocalPosition(vec3(0.0f, 0.0f, 6.0f));
 	//c2->setRotate(vec3(0.0f, 180.0f, 0.0f));//·­×ª180¶È

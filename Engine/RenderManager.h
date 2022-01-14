@@ -19,6 +19,7 @@ public:
 	friend class Singleton<RenderManager>;
 	static vector<float> quadVertices;
 	static unsigned int getTexture(string& path);
+	static unsigned int getCubeTexture(string& path);
 	void init();
 	void depthFBOInit();
 	void update(Node* node);
@@ -29,6 +30,7 @@ public:
 	void shadowMapRenderBegin();
 	void shadowMapRenderEnd();
 	void renderScene();
+	void renderEntity(Node* p);
 	LL_SYNTHESIZE(bool, m_IsShadow, IsShadow);	// 是否正在渲染阴影
 	LL_SYNTHESIZE(GLuint, m_CurrentFBO, CurrentFBO);	// 获得当前帧缓冲
 	LL_SYNTHESIZE(GLuint, m_DepthMap, DepthMap);	// 获得当前帧缓冲

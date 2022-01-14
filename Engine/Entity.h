@@ -1,5 +1,6 @@
 #pragma once
 #include "Node.h"
+#include "Material.h"
 #include "VertexFactory.h"
 #include <unordered_map>
 class Shader;
@@ -8,14 +9,6 @@ class Mesh;
 class Material;
 using std::weak_ptr;
 using std::shared_ptr;
-enum class Entity_Type
-{
-	WithColor,
-	WithColorAndLight,
-	WithTex,
-	WithTexAndLight,
-	TextureCube, //
-};
 
 class EntityColor
 {
@@ -33,7 +26,7 @@ public:
 };
 // 实体创建静态函数的宏
 #define ENTITY_CREATE_FUNC(__TYPE__) \
-static __TYPE__* create(Entity_Type Etype) \
+static __TYPE__* create(MaterialType Etype) \
 { \
     __TYPE__ *pRet = new(std::nothrow) __TYPE__(); \
 	pRet->setEntityType(Etype); \
@@ -55,7 +48,7 @@ public:
 	CREATE_FUNC(Entity);
 	LL_SYNTHESIZE(glm::vec3, m_color, Color);//颜色设置
 	LL_SYNTHESIZE(Node*, lightSrc, LightSrc);//光源设置
-	LL_SYNTHESIZE_READ(Entity_Type, m_type, EntityType);
+	LL_SYNTHESIZE_READ(MaterialType, m_type, EntityType);
 	virtual bool init() override;
 	virtual void draw() override;
 	virtual void renderParamUpdate();
@@ -65,7 +58,8 @@ public:
 	virtual void setTexture(string&& src);
 	virtual void setCubeTexture(string&& src);
 	virtual void bindShaderResource();
-	static std::unordered_map<Entity_Type, std::string> shaderTypeMap;
+	weak_ptr<Material> GetMaterial();
+	static std::unordered_map<MaterialType, std::string> shaderTypeMap;
 	
 	Entity();
 	virtual ~Entity();

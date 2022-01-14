@@ -7,6 +7,11 @@
 
 class btRigidBody;
 using std::list;
+enum class NodeType
+{
+	Normal,
+	Render,
+};
 class Node : public Ref
 {
 public:
@@ -18,6 +23,7 @@ public:
 	LL_SYNTHESIZE(bool, isPhysicActive, PhysicActive);
 	LL_SYNTHESIZE(btRigidBody*, m_btrd, BTRigidBody);
 	LL_SYNTHESIZE(int, debugID, DebugID);
+	LL_SYNTHESIZE(NodeType, nodeType, NodeType);
 	void addChild(Node* node);
 	void setPosition(const vec3& position);
 	void setPosition(vec3&& position);

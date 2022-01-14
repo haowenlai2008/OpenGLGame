@@ -7,7 +7,6 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "GameCamera.h"
-#include "Material.h"
 vec3 EntityColor::Red = vec3(1.0f, 0.0f, 0.0f);
 vec3 EntityColor::Orange = vec3(1.0f, 0.65f, 0.0f);
 vec3 EntityColor::Yellow = vec3(1.0f, 1.0f, 0.0f);
@@ -20,152 +19,156 @@ vec3 EntityColor::Pink = vec3(1.0f, 0.41f, 0.71f);
 vec3 EntityColor::Black = vec3(0.0f, 0.0f, 0.0f);
 
 
-std::unordered_map<Entity_Type, std::string> Entity::shaderTypeMap = {
-	{Entity_Type::TextureCube, "PBRCube"},
-	{Entity_Type::WithColor, "WithColor"},
-	{Entity_Type::WithColorAndLight, "WithColorAndLight"},
-	{Entity_Type::WithTex, "WithTex"},
-	{Entity_Type::WithTexAndLight, "PBR"},
+std::unordered_map<MaterialType, std::string> Entity::shaderTypeMap = {
+	{MaterialType::TextureCube, "PBRCube"},
+	{MaterialType::WithColor, "WithColor"},
+	{MaterialType::WithColorAndLight, "WithColorAndLight"},
+	{MaterialType::WithTex, "WithTex"},
+	{MaterialType::PBR, "PBR"},
 };
 
 void Entity::setTexture(string&& src)
 {
 	m_DiffuseMap = RenderManager::getTexture(src);
-
-
+	m_material->setTextureCacheID("material.diffuse", m_DiffuseMap);
 }
 
 void Entity::setCubeTexture(string&& src)
 {
-	m_DiffuseMap = ResourceTools::LoadCubemap(std::move(src));
+	m_DiffuseMap = RenderManager::getCubeTexture(src);
+	m_material->setTextureCacheID("material.diffuse", m_DiffuseMap);
 }
 
 void Entity::bindShaderResource()
 {
 	if (RenderManager::getInstance()->getIsShadow())
 		return;
-	if (RenderManager::getInstance()->getIsShadow())
-		return;
-	auto withTexFun = [&]() {
-		std::shared_ptr<Shader> shader(m_Shader);
-		shader->use();
-		shader->setInt("material.diffuse", 0);
 
-		if (m_DiffuseMap != -1)
-		{
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, m_DiffuseMap);
-		}
-	};
+	//auto withTexFun = [&]() {
+	//	std::shared_ptr<Shader> shader(m_Shader);
+	//	shader->use();
+	//	shader->setInt("material.diffuse", 0);
 
-	auto withTexAndLightFun = [&]() {
-		std::shared_ptr<Shader> shader(m_Shader);
-		shader->use();
-		if (getLightSrc() != nullptr)
-			shader->setVec3("light.position", getLightSrc()->getPosition());
-		shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
-		shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-		shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-		shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
-		// material properties
-		shader->setVec3("material.specular", m_material->getSpecular());
-		shader->setFloat("material.shininess", m_material->getShininess());
+	//	if (m_DiffuseMap != -1)
+	//	{
+	//		glActiveTexture(GL_TEXTURE0);
+	//		glBindTexture(GL_TEXTURE_2D, m_DiffuseMap);
+	//	}
+	//};
 
-		shader->setInt("material.diffuse", 0);
-		shader->setInt("shadowMap", 1);
+	//auto PBRFun = [&]() {
+	//	std::shared_ptr<Shader> shader(m_Shader);
+	//	shader->use();
+	//	if (getLightSrc() != nullptr)
+	//		shader->setVec3("light.position", getLightSrc()->getPosition());
+	//	shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
+	//	shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+	//	shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+	//	shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+	//	// material properties
+	//	shader->setVec3("material.specular", vec3(0.5f, 0.5f, 0.5f));
+	//	shader->setFloat("material.shininess", 64.0f);
 
-		if (m_DiffuseMap != -1)
-		{
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, m_DiffuseMap);
-		}
+	//	shader->setInt("material.diffuse", 0);
+	//	shader->setInt("shadowMap", 1);
 
-		GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, shadowMap);
-	};
+	//	if (m_DiffuseMap != -1)
+	//	{
+	//		glActiveTexture(GL_TEXTURE0);
+	//		glBindTexture(GL_TEXTURE_2D, m_DiffuseMap);
+	//	}
 
-	auto withColorFunc = [&]() {
-		std::shared_ptr<Shader> shader(m_Shader);
-		shader->use();
-		shader->setVec3("mColor", m_color);
-	};
+	//	GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
+	//	glActiveTexture(GL_TEXTURE1);
+	//	glBindTexture(GL_TEXTURE_2D, shadowMap);
+	//};
 
-	auto withColorAndLightFunc = [&]() {
-		std::shared_ptr<Shader> shader(m_Shader);
-		shader->use();
-		if (getLightSrc() != nullptr)
-			shader->setVec3("light.position", getLightSrc()->getPosition());
-		shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
-		shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-		shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-		shader->setVec3("light.specular", 2.0f, 2.0f, 2.0f);
-		// material properties
-		shader->setVec3("material.specular", m_material->getSpecular());
-		shader->setFloat("material.shininess", m_material->getShininess());
-		shader->setVec3("mColor", m_color);
-		shader->setInt("shadowMap", 1);
+	//auto withColorFunc = [&]() {
+	//	std::shared_ptr<Shader> shader(m_Shader);
+	//	shader->use();
+	//	shader->setVec3("mColor", m_color);
+	//};
 
-		GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, shadowMap);
-	};
-	auto withCubeFunc = [&]() {
-		std::shared_ptr<Shader> shader(m_Shader);
-		shader->use();
-		if (getLightSrc() != nullptr)
-			shader->setVec3("light.position", getLightSrc()->getPosition());
-		shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
-		shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-		shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-		shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
-		// material properties
-		shader->setVec3("material.specular", m_material->getSpecular());
-		shader->setFloat("material.shininess", m_material->getShininess());
+	//auto withColorAndLightFunc = [&]() {
+	//	std::shared_ptr<Shader> shader(m_Shader);
+	//	shader->use();
+	//	if (getLightSrc() != nullptr)
+	//		shader->setVec3("light.position", getLightSrc()->getPosition());
+	//	shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
+	//	shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+	//	shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+	//	shader->setVec3("light.specular", 2.0f, 2.0f, 2.0f);
+	//	// material properties
+	//	shader->setVec3("material.specular", vec3(0.5f, 0.5f, 0.5f));
+	//	shader->setFloat("material.shininess", 64.0f);
+	//	shader->setVec3("mColor", m_color);
+	//	shader->setInt("shadowMap", 1);
 
-		shader->setInt("material.diffuse", 0);
-		shader->setInt("shadowMap", 1);
+	//	GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
+	//	glActiveTexture(GL_TEXTURE1);
+	//	glBindTexture(GL_TEXTURE_2D, shadowMap);
+	//};
+	//auto withCubeFunc = [&]() {
+	//	std::shared_ptr<Shader> shader(m_Shader);
+	//	shader->use();
+	//	if (getLightSrc() != nullptr)
+	//		shader->setVec3("light.position", getLightSrc()->getPosition());
+	//	shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
+	//	shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+	//	shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+	//	shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+	//	// material properties
+	//	shader->setVec3("material.specular", vec3(0.5f, 0.5f, 0.5f));
+	//	shader->setFloat("material.shininess", 64.0f);
 
-		if (m_DiffuseMap != -1)
-		{
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, m_DiffuseMap);
-		}
+	//	shader->setInt("material.diffuse", 0);
+	//	shader->setInt("shadowMap", 1);
 
-		GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, shadowMap);
-	};
-	switch (m_type)
-	{
-	case Entity_Type::WithColor:
-		withColorFunc();
-		break;
-	case Entity_Type::WithColorAndLight:
-		withColorAndLightFunc();
-		break;
-	case Entity_Type::WithTex:
-		withTexFun();
-		break;
-	case Entity_Type::WithTexAndLight:
-		withTexAndLightFun();
-		break;
-	case Entity_Type::TextureCube:
-		withCubeFunc();
-		break;
-	default:
-		break;
-	}
+	//	if (m_DiffuseMap != -1)
+	//	{
+	//		glActiveTexture(GL_TEXTURE0);
+	//		glBindTexture(GL_TEXTURE_CUBE_MAP, m_DiffuseMap);
+	//	}
+
+	//	GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
+	//	glActiveTexture(GL_TEXTURE1);
+	//	glBindTexture(GL_TEXTURE_2D, shadowMap);
+	//};
+	//switch (m_type)
+	//{
+	//case MaterialType::WithColor:
+	//	withColorFunc();
+	//	break;
+	//case MaterialType::WithColorAndLight:
+	//	withColorAndLightFunc();
+	//	break;
+	//case MaterialType::WithTex:
+	//	withTexFun();
+	//	break;
+	//case MaterialType::PBR:
+	//	PBRFun();
+	//	break;
+	//case MaterialType::TextureCube:
+	//	withCubeFunc();
+	//	break;
+	//default:
+	//	break;
+	//}
 }
-Entity::Entity() : 
-	lightSrc(nullptr), 
+weak_ptr<Material> Entity::GetMaterial()
+{
+	return m_material;
+}
+Entity::Entity() :
+	lightSrc(nullptr),
 	m_color(glm::vec3(1.0f, 1.0f, 1.0f)),
-	m_type(Entity_Type::WithColor),
+	m_type(MaterialType::WithColor),
 	m_VAO(-1),
 	m_VBO(-1),
 	m_DiffuseMap(-1),
 	m_VertexNum(-1)
 {
+	setNodeType(NodeType::Render);
 }
 
 
@@ -181,45 +184,42 @@ Entity::~Entity()
 bool Entity::init()
 {
 	//m_Shader = Shader::getShader();
-	m_Shader = Shader::getShader(Entity::shaderTypeMap[m_type]);
-	m_material = std::make_shared<Material>();	//创建材质
+	m_material = std::make_shared<Material>(m_type);	//创建材质
 	return true;
 }
 void Entity::draw()
 {
 	glBindVertexArray(m_VAO);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
 	glDrawElements(GL_TRIANGLES, m_VertexNum, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void Entity::renderParamUpdate()
 {
-	if (m_Shader.expired())
-		return;
-	auto rm = RenderManager::getInstance();
-	std::shared_ptr<Shader> shader;
-	if (rm->getIsShadow())
-	{
-		shader = rm->getSimpleDepthShader();
-	}
-	else
-	{
-		shader = m_Shader.lock();
-	}
-	BaseManager* baseManager = BaseManager::getInstance();
-	glm::mat4 projection = baseManager->getProjMat4();
-	glm::mat4 view = baseManager->getViewMat4();
-	glm::mat4 model = getModelMatrix();
-	glm::mat4 lightSpace = baseManager->getLightSpaceMat4();
-	
-	shader->use();
-	shader->setMat4("projection", projection);
-	shader->setMat4("view", view);
-	shader->setMat4("model", model);
-	shader->setMat4("lightSpaceMatrix", lightSpace);
-	bindShaderResource();
+	//if (m_Shader.expired())
+	//	return;
+	//auto rm = RenderManager::getInstance();
+	//std::shared_ptr<Shader> shader;
+	//if (rm->getIsShadow())
+	//{
+	//	shader = rm->getSimpleDepthShader();
+	//}
+	//else
+	//{
+	//	shader = m_Shader.lock();
+	//}
+	//BaseManager* baseManager = BaseManager::getInstance();
+	//glm::mat4 projection = baseManager->getProjMat4();
+	//glm::mat4 view = baseManager->getViewMat4();
+	//glm::mat4 model = getModelMatrix();
+	//glm::mat4 lightSpace = baseManager->getLightSpaceMat4();
+	//
+	//shader->use();
+	//shader->setMat4("projection", projection);
+	//shader->setMat4("view", view);
+	//shader->setMat4("model", model);
+	//shader->setMat4("lightSpaceMatrix", lightSpace);
+	//bindShaderResource();
 
 }
 
@@ -264,12 +264,12 @@ void Entity::setMeshAndBuffer(std::weak_ptr<Mesh> meshData)
 
 void Entity::setMaterial(vec3& specular, float shininess)
 {
-	m_material->setSpecular(specular);
-	m_material->setShininess(shininess);
+	m_material->setVec3("material.specular", specular);
+	m_material->setFloat("material.shininess", shininess);
 }
 
 void Entity::setMaterial(vec3&& specular, float shininess)
 {
-	m_material->setSpecular(specular);
-	m_material->setShininess(shininess);
+	m_material->setVec3("material.specular", specular);
+	m_material->setFloat("material.shininess", shininess);
 }

@@ -92,7 +92,7 @@ bool DirCube::init()
 	//case CubeType::withTexture:
 	//	addComponent(new Shader3D_Tex());
 	//	break;
-	//case CubeType::withTexAndLight:
+	//case CubeType::PBR:
 	//	addComponent(new Shader3D_TexLight());
 	//	break;
 	//case CubeType::withSkyBox:
@@ -124,7 +124,7 @@ void DirCube::setType(CubeType _cubeType)
 	//case CubeType::withTexture:
 	//	setComponent(Shader3D_Tex::create());
 	//	break;
-	//case CubeType::withTexAndLight:
+	//case CubeType::PBR:
 	//	setComponent(Shader3D_TexLight::create());
 	//	break;
 	//case CubeType::withSkyBox:

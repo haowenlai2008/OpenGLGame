@@ -92,6 +92,10 @@ mat4 BaseManager::getLightSpaceMat4()
 {
 	return m_pLightCamera->getViewProjMat4();
 }
+vec3 BaseManager::getViewPos()
+{
+	return m_pGameCamera->getPosition();
+}
 //´°¿Ú³õÊ¼»¯
 void BaseManager::baseInit()
 {

@@ -3,7 +3,9 @@
 #include "Ref.h"
 #include "func.h"
 #include "Node.h"
+#include "Entity.h"
 #include "Shader.h"
+#include "Material.h"
 #include <map>
 #include <vector>
 using std::vector;
@@ -26,6 +28,22 @@ unsigned int RenderManager::getTexture(string& path)
 	if (textures.find(path) == textures.end())
 	{
 		ResourceTools::LoadTexture(result, path);
+		textures.insert(std::pair<string, unsigned int>(path, result));
+		return result;
+	}
+	else
+	{
+		return textures[path];
+	}
+	return 0;
+}
+
+unsigned int RenderManager::getCubeTexture(string& path)
+{
+	unsigned int result = 0;
+	if (textures.find(path) == textures.end())
+	{
+		ResourceTools::LoadCubemap(std::move(path));
 		textures.insert(std::pair<string, unsigned int>(path, result));
 		return result;
 	}
@@ -163,8 +181,8 @@ void RenderManager::filterUse()
 
 void RenderManager::addDrawNode(Node* node)
 {
-
-	drawObjects.push_back(node);
+	if (node->getNodeType() == NodeType::Render)
+		drawObjects.push_back(node);
 }
 
 void RenderManager::shadowMapRenderBegin()
@@ -185,18 +203,46 @@ void RenderManager::shadowMapRenderEnd()
 
 void RenderManager::renderScene()
 {
-	for (auto& p : drawObjects)
+	BaseManager* baseManager = BaseManager::getInstance();
+	glm::mat4 projection = baseManager->getProjMat4();
+	glm::mat4 view = baseManager->getViewMat4();
+	glm::mat4 lightSpace = baseManager->getLightSpaceMat4();
+	glm::vec3 viewPos = baseManager->getViewPos();
+	for (auto p : drawObjects)
 	{
 		if (p != nullptr && p->count != 0)
 		{
-			p->renderParamUpdate();
-			if (p->getDebugID() == 100)
-			{
-				std::cout << "hahahahah" << std::endl;
-			}
+			auto ent_ptr = static_cast<Entity*>(p);
+			ent_ptr->renderParamUpdate();
+			auto selfMat = ent_ptr->GetMaterial().lock();
+			Material& material = getIsShadow() ? Material::systemMaterial[MaterialType::SimpleDepth] : *selfMat;
+
+			if (material.m_Shader.expired())
+				continue;
+			auto shader = material.m_Shader.lock();
+			glm::mat4 model = p->getModelMatrix();
+			shader->use();
+			shader->setMat4("projection", projection);
+			shader->setMat4("view", view);
+			shader->setMat4("model", model);
+			shader->setMat4("lightSpaceMatrix", lightSpace);
+			shader->setVec3("viewPos", viewPos);
+			if (material.castShadow)
+				material.setTextureCacheID("shadowMap", getDepthMap());
+
+			material.bindUniform();
+
+			//if (p->getDebugID() == 100)
+			//{
+			//	std::cout << "hahahahah" << std::endl;
+			//}
 			p->draw();
 		}
 	}
+}
+
+void RenderManager::renderEntity(Node* p)
+{
 }
 
 

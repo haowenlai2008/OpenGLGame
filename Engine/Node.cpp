@@ -35,7 +35,7 @@ mat4 Node::getRotateMatrix()
 		return rotate;
 }
 
-Node::Node() : parent(nullptr), isVis(true), isPhysicActive(false), m_btrd(nullptr), debugID(0)
+Node::Node() : parent(nullptr), isVis(true), isPhysicActive(false), m_btrd(nullptr), debugID(0), nodeType(NodeType::Normal)
 {
 }
 
@@ -164,6 +164,7 @@ vec3 Node::getLookVector()
 
 bool Node::init()
 {
+
 	return true;
 }
 

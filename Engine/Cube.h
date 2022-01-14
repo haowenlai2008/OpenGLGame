@@ -7,7 +7,7 @@ enum class CubeType
 	normal,
 	withLight,
 	withTexture,
-	withTexAndLight,
+	PBR,
 	withSkyBox
 };
 class Cube : public Entity

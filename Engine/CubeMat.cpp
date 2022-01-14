@@ -20,7 +20,7 @@ CubeMat * CubeMat::create(vector<vector<int>>& mat, MatType type)
 				{
 					if (mat[i][j] != 0)
 					{
-						auto cube = Cube::create(Entity_Type::WithTex);
+						auto cube = Cube::create(MaterialType::WithTex);
 						cube->setTexture("awesomeface2.png");
 						cube->setScale(dotScale);
 						cube->setLocalPosition(vec3(float(j) * dotScale.x, float(mat.size() - i - 1)* dotScale.y, 0.0f));
@@ -36,7 +36,7 @@ CubeMat * CubeMat::create(vector<vector<int>>& mat, MatType type)
 				{
 					if (mat[i][j] != 0)
 					{
-						auto cube = Cube::create(Entity_Type::WithTex);
+						auto cube = Cube::create(MaterialType::WithTex);
 						cube->setTexture("awesomeface2.png");
 						cube->setScale(dotScale);
 						cube->setLocalPosition(vec3(float(j)* dotScale.x, 0.0f, -float(mat.size() - i - 1) * dotScale.z));
@@ -68,7 +68,7 @@ CubeMat* CubeMat::create(vector<vector<vec3> >& mat)
 		{
 			for (int j = 0; j < mat[i].size(); j++)
 			{
-				auto cube = Cube::create(Entity_Type::WithTex);
+				auto cube = Cube::create(MaterialType::WithTex);
 				cube->setTexture("awesomeface2.png");
 				cube->setScale(dotScale);
 				cube->setLocalPosition(vec3(mat[i][j].x * dotScale.x, mat[i][j].y * dotScale.y, mat[i][j].z * dotScale.z));
@@ -116,13 +116,13 @@ CubeMat * CubeMat::create(std::string&& file, MatType type)
 				{
 					if (mat[i][j] != '0')
 					{
-						auto cube = Cube::create(Entity_Type::WithTex);
+						auto cube = Cube::create(MaterialType::WithTex);
 						//cube->setTexture("back__.jpg");
 						cube->setScale(dotScale);
 						cube->setLocalPosition(vec3(float(j) * dotScale.x, float(mat.size() - i - 1)* dotScale.y, 0.0f));
 						pRet->addChild(cube);
 
-						auto cube2 = Cube::create(Entity_Type::WithTex);
+						auto cube2 = Cube::create(MaterialType::WithTex);
 						//cube2->setTexture("back__.jpg");
 						cube2->setScale(dotScale);
 						cube2->setLocalPosition(vec3(float(j)* dotScale.x, float(mat.size() - i - 1)* dotScale.y, -1.0f *  dotScale.z));
@@ -138,12 +138,12 @@ CubeMat * CubeMat::create(std::string&& file, MatType type)
 				{
 					if (mat[i][j] != '0')
 					{
-						auto cube = Cube::create(Entity_Type::WithTex);
+						auto cube = Cube::create(MaterialType::WithTex);
 						cube->setScale(dotScale);
 						cube->setLocalPosition(vec3(float(j) * dotScale.x, 0.0f, -float(mat.size() - i - 1) * dotScale.z));
 						pRet->addChild(cube);
 
-						auto cube2 = Cube::create(Entity_Type::WithTex);
+						auto cube2 = Cube::create(MaterialType::WithTex);
 						cube2->setScale(dotScale);
 						cube2->setLocalPosition(vec3(float(j) * dotScale.x, 1.0f * dotScale.y, -float(mat.size() - i - 1) * dotScale.z));
 						pRet->addChild(cube2);
