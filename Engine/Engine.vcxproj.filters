@@ -255,6 +255,9 @@
     <ClCompile Include="Material.cpp">
       <Filter>源文件\材质</Filter>
     </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">

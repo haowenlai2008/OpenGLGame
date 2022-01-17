@@ -43,7 +43,7 @@ public: static varType varName;\
 public: static varType get##funName(void) { return varName; }\
 public: static void set##funName(varType var){ varName = var; }
 
-unsigned int loadCubemap(vector<std::string> faces);
+//unsigned int loadCubemap(vector<std::string> faces);
 #define CREATE_FUNC(__TYPE__) \
 static __TYPE__* create() \
 { \

@@ -19,14 +19,6 @@ vec3 EntityColor::Pink = vec3(1.0f, 0.41f, 0.71f);
 vec3 EntityColor::Black = vec3(0.0f, 0.0f, 0.0f);
 
 
-std::unordered_map<MaterialType, std::string> Entity::shaderTypeMap = {
-	{MaterialType::TextureCube, "PBRCube"},
-	{MaterialType::WithColor, "WithColor"},
-	{MaterialType::WithColorAndLight, "WithColorAndLight"},
-	{MaterialType::WithTex, "WithTex"},
-	{MaterialType::PBR, "PBR"},
-};
-
 void Entity::setTexture(string&& src)
 {
 	m_DiffuseMap = RenderManager::getTexture(src);
@@ -148,7 +140,7 @@ void Entity::bindShaderResource()
 	//case MaterialType::PBR:
 	//	PBRFun();
 	//	break;
-	//case MaterialType::TextureCube:
+	//case MaterialType::PBRCube:
 	//	withCubeFunc();
 	//	break;
 	//default:
@@ -183,6 +175,8 @@ Entity::~Entity()
 }
 bool Entity::init()
 {
+	if (!Node::init())
+		return false;
 	//m_Shader = Shader::getShader();
 	m_material = std::make_shared<Material>(m_type);	//´´½¨²ÄÖÊ
 	return true;

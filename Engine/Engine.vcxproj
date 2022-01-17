@@ -157,6 +157,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="external\source\glad.c" />
     <ClCompile Include="external\source\stb_image.cpp" />
+    <ClCompile Include="func.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="LeftWheel.cpp" />

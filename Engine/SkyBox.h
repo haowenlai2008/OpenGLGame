@@ -5,12 +5,9 @@ class SkyBox : public Entity
 {
 public:
 	CREATE_FUNC(SkyBox);
-	static unsigned int getSkyBxCubeMap();
+	ENTITY_CREATE_FUNC(SkyBox);
 	virtual bool init() override;
 	virtual void draw() override;
-	virtual void renderParamUpdate() override;
 	SkyBox();
 	virtual ~SkyBox();
-private:
-	static unsigned int cubemapTexture;
 };

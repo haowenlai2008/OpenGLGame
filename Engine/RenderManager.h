@@ -13,6 +13,11 @@ using std::vector;
 class Node;
 class Shader;
 class Camera;
+enum class RenderMode
+{
+	TestDepthMap,
+	Normal,
+};
 class RenderManager : public Singleton<RenderManager>
 {
 public:
@@ -25,7 +30,7 @@ public:
 	void update(Node* node);
 	void draw();
 	void bindFrameBuffer();
-	void filterUse();
+	void postProcess();
 	void addDrawNode(Node* node);
 	void shadowMapRenderBegin();
 	void shadowMapRenderEnd();
@@ -34,6 +39,7 @@ public:
 	LL_SYNTHESIZE(bool, m_IsShadow, IsShadow);	// 是否正在渲染阴影
 	LL_SYNTHESIZE(GLuint, m_CurrentFBO, CurrentFBO);	// 获得当前帧缓冲
 	LL_SYNTHESIZE(GLuint, m_DepthMap, DepthMap);	// 获得当前帧缓冲
+	LL_SYNTHESIZE(RenderMode, m_Rendermode, RenderMode); // 设置当前渲染模式
 	std::shared_ptr<Shader> getSimpleDepthShader();
 	~RenderManager();
 private:

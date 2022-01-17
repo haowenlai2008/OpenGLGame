@@ -1,11 +1,15 @@
-#version 330 core
+            #version 330 core
 out vec4 FragColor;
 
 in vec3 TexCoords;
-
-uniform samplerCube skybox;
+struct Material {
+    samplerCube diffuse;
+    vec3 specular;    
+    float shininess;
+}; 
+uniform Material material;
 
 void main()
 {    
-    FragColor = texture(skybox, TexCoords);
+    FragColor = texture(material.diffuse, TexCoords);
 }

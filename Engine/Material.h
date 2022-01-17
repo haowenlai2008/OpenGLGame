@@ -18,8 +18,9 @@ enum class MaterialType
 	WithColorAndLight,
 	WithTex,
 	PBR,
-	TextureCube, //
+	PBRCube, //
 	SimpleDepth,
+	SkyBox,
 };
 
 // Uniform数据类型
@@ -105,11 +106,12 @@ public:
 	Material();
 	Material(MaterialType entityType);
 	Material(std::initializer_list<pair<string, UniformValue>> uniformList);
+	LL_SYNTHESIZE(GLuint, m_state_cull, Cull)
 	string m_shaderName;
 	weak_ptr<Shader> m_Shader;
 
 	bool castShadow;
-	// 常量uniform
+	// uniform
 	unordered_map<string, bool> uniformBool;
 	unordered_map<string, int> uniformInt;
 	unordered_map<string, float> uniformFloat;
@@ -121,9 +123,6 @@ public:
 	unordered_map<string, mat4> uniformMat4;
 	// 记录每个Texture位置对应的纹理类型
 	unordered_map<string, TextureStructure> uniformTex;
-	// 系统自带材质
-	static unordered_map<MaterialType, Material> systemMaterial;
-	static std::unordered_map<MaterialType, std::string> shaderTypeMap;
 
 	// DC前调用，设置所有Uniform
 	void bindUniform();
@@ -148,5 +147,11 @@ public:
 	void setTextureCacheID(const string& name, GLuint cacheID);
 
 	bool hasTexture(const string& name);
+	static Material& getSystemMaterial(MaterialType materialType);
+
+private:
+	// 系统自带材质，只能通过getSystemMaterial获取
+	static unordered_map<MaterialType, Material> systemMaterial;
+	static std::unordered_map<MaterialType, std::string> shaderTypeMap;
 };
 

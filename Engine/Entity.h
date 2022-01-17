@@ -59,8 +59,7 @@ public:
 	virtual void setCubeTexture(string&& src);
 	virtual void bindShaderResource();
 	weak_ptr<Material> GetMaterial();
-	static std::unordered_map<MaterialType, std::string> shaderTypeMap;
-	
+
 	Entity();
 	virtual ~Entity();
 protected:

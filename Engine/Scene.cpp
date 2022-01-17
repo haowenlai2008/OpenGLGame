@@ -19,8 +19,8 @@
 #include "Wheel.h"
 bool Scene::init()
 {
-	//SkyBox* skyBox = SkyBox::create();
-	//this->addChild(skyBox);
+	SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
+	this->addChild(skyBox);
 
 	Ground* gnd = Ground::create(MaterialType::PBR);
 	this->addChild(gnd);
@@ -28,10 +28,6 @@ bool Scene::init()
 	//Sphere* sp = Sphere::create(MaterialType::PBR);
 	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
 	//this->addChild(sp);
-	Cube* cube = Cube::create(MaterialType::TextureCube);
-	cube->setCubeTexture("skybox");
-	cube->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-	this->addChild(cube);
 
 	//Circle* w = Circle::create(MaterialType::WithColorAndLight);
 	//w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));
@@ -87,7 +83,7 @@ void Scene::lateUpdate(float delta)
 	if (m_pCar != nullptr)
 	{
 		auto carPos = m_pCar->getHeadPos();
-		lCamera->setPosition(vec3(carPos.x, carPos.y + 10.0f, carPos.z - 10.0f));
+		lCamera->setPosition(vec3(carPos.x - 10.0f, carPos.y + 10.0f, carPos.z - 10.0f));
 	}
 	// 照相机参数更新
 	if (m_pCar != nullptr)

@@ -1,13 +1,15 @@
 #include "Material.h"
+#include "RenderManager.h"
 
 
 std::unordered_map<MaterialType, std::string> Material::shaderTypeMap = {
-	{MaterialType::TextureCube, "PBRCube"},
+	{MaterialType::PBRCube, "PBRCube"},
 	{MaterialType::WithColor, "WithColor"},
 	{MaterialType::WithColorAndLight, "WithColorAndLight"},
 	{MaterialType::WithTex, "WithTex"},
 	{MaterialType::PBR, "PBR"},
 	{MaterialType::SimpleDepth, "simpleDepth"},
+	{MaterialType::SkyBox, "SkyBox"},
 };
 
 
@@ -28,7 +30,7 @@ unordered_map<MaterialType, Material> Material::systemMaterial = {
 		{"material.diffuse", TextureStructure(TextureType::Texture2D, 0)},
 		{"shadowMap", TextureStructure(TextureType::ShadowMap, 1)},
 	}},
-	{MaterialType::TextureCube, {
+	{MaterialType::PBRCube, {
 		{"viewPos", vec3(0.0f)},
 		{"light.position", vec3(0.0f)},
 		{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
@@ -40,13 +42,14 @@ unordered_map<MaterialType, Material> Material::systemMaterial = {
 		{"shadowMap", TextureStructure(TextureType::ShadowMap, 1)},
 	}},
 	{MaterialType::SimpleDepth, {}},
+	{MaterialType::SkyBox, {
+		{"material.diffuse", TextureStructure("skybox3", TextureType::TextureCubMap, 0)},
+	}},
 };
 
 Material::Material(MaterialType materialType)
 {
-	*this = Material::systemMaterial[materialType];
-	this->m_Shader = Shader::getShader(shaderTypeMap[materialType]);
-	std::cout << "233333333333" << std::endl;
+	*this = getSystemMaterial(materialType);
 }
 
 Material::Material() : castShadow(false)
@@ -54,7 +57,9 @@ Material::Material() : castShadow(false)
 }
 
 
-Material::Material(std::initializer_list<pair<string, UniformValue>> uniformList)
+Material::Material(std::initializer_list<pair<string, UniformValue>> uniformList) : 
+	castShadow(false),
+	m_state_cull()
 {
 	for (auto& p : uniformList)
 	{
@@ -88,9 +93,10 @@ Material::Material(std::initializer_list<pair<string, UniformValue>> uniformList
 			uniformMat4.insert({ p.first, p.second.data.mat4Data });
 			break;
 		case UniformType::Tex:
+			// 确定该材质为产生阴影的材质
 			if (p.second.texData.m_textureType == TextureType::ShadowMap)
 				castShadow = true;
-			uniformTex.insert({ p.first, p.second.texData });
+			uniformTex.insert({ p.first, p.second.texData});
 			break;
 		default:
 			break;
@@ -126,8 +132,30 @@ void Material::bindUniform()
 	for (auto& pair : uniformTex)
 	{
 		auto& texInfo = pair.second;
+		// 有路径但是没加载的话加载一次
+		if (texInfo.m_textureID == ERROR_TEX_ID && texInfo.m_path != "")
+		{
+			TextureType textureType = texInfo.m_textureType;
+			string srcPath = texInfo.m_path;
+			GLuint textureID;
+			switch (textureType)
+			{
+			case TextureType::Texture2D:
+				textureID = RenderManager::getTexture(srcPath);
+				break;
+			case TextureType::TextureCubMap:
+				textureID = RenderManager::getCubeTexture(srcPath);
+				break;
+			default:
+				std::cout << "Texture " << srcPath << "TypeError" << std::endl;
+				break;
+			}
+			texInfo.m_textureID = textureID;
+			std::cout << "Load " << srcPath << std::endl;
+		}
 		if (texInfo.m_textureID == ERROR_TEX_ID)
 			continue;
+		shader->setInt(pair.first, pair.second.m_location);
 		glActiveTexture(GL_TEXTURE0 + texInfo.m_location);
 		GLuint texType = texInfo.m_textureType == TextureType::TextureCubMap ? GL_TEXTURE_CUBE_MAP : GL_TEXTURE_2D;
 		glBindTexture(texType, texInfo.m_textureID);
@@ -251,4 +279,14 @@ void Material::setTextureCacheID(const string& name, GLuint cacheID)
 bool Material::hasTexture(const string& name)
 {
 	return uniformTex.find(name) != uniformTex.end();
+}
+
+Material& Material::getSystemMaterial(MaterialType materialType)
+{
+	auto& mat = systemMaterial[materialType];
+	if (mat.m_Shader.expired())
+	{
+		mat.m_Shader = Shader::getShader(shaderTypeMap[materialType]);
+	}
+	return mat;
 }

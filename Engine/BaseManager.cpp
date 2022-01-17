@@ -96,6 +96,10 @@ vec3 BaseManager::getViewPos()
 {
 	return m_pGameCamera->getPosition();
 }
+vec3 BaseManager::getLightPos()
+{
+	return m_pLightCamera->getPosition();
+}
 //窗口初始化
 void BaseManager::baseInit()
 {
@@ -204,8 +208,6 @@ void BaseManager::mainLoop()
 		m_pRenderManager->draw();
 		
 
-		
-		RenderManager::getInstance()->filterUse();	//使用滤镜
 		glfwSwapBuffers(glWindow);
 		glfwPollEvents();
 

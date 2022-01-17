@@ -25,7 +25,7 @@ vector<float> RenderManager::quadVertices = { // vertex attributes for a quad th
 unsigned int RenderManager::getTexture(string& path)
 {
 	unsigned int result = 0;
-	if (textures.find(path) == textures.end())
+	if (textures.empty() || textures.find(path) == textures.end())
 	{
 		ResourceTools::LoadTexture(result, path);
 		textures.insert(std::pair<string, unsigned int>(path, result));
@@ -41,9 +41,9 @@ unsigned int RenderManager::getTexture(string& path)
 unsigned int RenderManager::getCubeTexture(string& path)
 {
 	unsigned int result = 0;
-	if (textures.find(path) == textures.end())
+	if (textures.empty() || textures.find(path) == textures.end())
 	{
-		ResourceTools::LoadCubemap(std::move(path));
+		ResourceTools::LoadCubemap(result, std::move(path));
 		textures.insert(std::pair<string, unsigned int>(path, result));
 		return result;
 	}
@@ -56,6 +56,7 @@ unsigned int RenderManager::getCubeTexture(string& path)
 
 void RenderManager::init()
 {
+	setRenderMode(RenderMode::Normal);
 	filterInit();
 	depthFBOInit();
 }
@@ -79,7 +80,7 @@ void RenderManager::depthFBOInit()
 	glReadBuffer(GL_NONE);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	m_SimpleDepthShader = Shader::getShader("simpleDepth");
+	//m_SimpleDepthShader = Shader::getShader("simpleDepth");
 }
 //滤镜初始化(创建帧缓冲)
 void RenderManager::filterInit()
@@ -95,11 +96,20 @@ void RenderManager::filterInit()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
+	string filterName = "";
+	switch (m_Rendermode)
+	{
+		case RenderMode::Normal:
+			filterName = "normal";
+			break;
+		case RenderMode::TestDepthMap:
+			filterName = "depthTest";
+			break;
+		default:
+			break;
+	}
 	//screenShader = Shader::getFilter("depthTest");
-	screenShader = Shader::getFilter("normal");
-	auto shader = screenShader.lock();
-	shader->use();
-	shader->setInt("screenTexture", 0);
+	screenShader = Shader::getFilter(std::move(filterName));
 	//创建帧缓冲
 	BaseManager* bmp = BaseManager::getInstance();
 	glGenFramebuffers(1, &framebuffer);
@@ -122,41 +132,7 @@ void RenderManager::filterInit()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-
-void RenderManager::update(Node * node)
-{
-	if (node == nullptr)
-		return;
-	for (auto*& p : node->childs)
-	{
-		if (p != nullptr && p->count != 0)
-		{
-			if (p->getVisable())
-				p->draw();
-			update(p);
-		}
-	}
-		
-}
-
-void RenderManager::draw()
-{
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	shadowMapRenderBegin();
-	renderScene();
-	shadowMapRenderEnd();
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	renderScene();
-	auto newList = std::list<Node*>();
-	drawObjects.swap(newList);
-}
-
-void RenderManager::bindFrameBuffer()
-{
-	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-}
-
-void RenderManager::filterUse()
+void RenderManager::postProcess()
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	// now bind back to default framebuffer and draw a quad plane with the attached framebuffer color texture
@@ -166,17 +142,54 @@ void RenderManager::filterUse()
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // set clear color to white (not really necessery actually, since we won't be able to see behind the quad anyways)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	auto shader = screenShader.lock();
-	
-	//screenShader.setFloat("saturation", BaseManager::getInstance()->saturation);
-	//screenShader.setFloat("contrast", BaseManager::getInstance()->contrast);
+	shader->use();
 	glBindVertexArray(quadVAO);
-	
+
 	shader->setInt("screenTexture", 0);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	// use the color attachment texture as the texture of the quad plane
+	GLuint bufferId = 0;
+	switch (m_Rendermode)
+	{
+	case RenderMode::Normal:
+		bufferId = textureColorbuffer;
+		break;
+	case RenderMode::TestDepthMap:
+		bufferId = m_DepthMap;
+		break;
+	default:
+		break;
+	}
+	glBindTexture(GL_TEXTURE_2D, bufferId);	// use the color attachment texture as the texture of the quad plane
 	//glBindTexture(GL_TEXTURE_2D, m_DepthMap);	// use the color attachment texture as the texture of the quad plane
-	shader->use();
+
 	glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+void RenderManager::update(Node * node)
+{
+		
+}
+
+// 管线
+void RenderManager::draw()
+{
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	shadowMapRenderBegin();
+	renderScene();
+	shadowMapRenderEnd();
+
+	bindFrameBuffer();
+	renderScene();
+	postProcess();
+	auto newList = std::list<Node*>();
+	drawObjects.swap(newList);
+}
+
+void RenderManager::bindFrameBuffer()
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	glDepthFunc(GL_LESS);
+	glCullFace(GL_BACK);
 }
 
 void RenderManager::addDrawNode(Node* node)
@@ -196,7 +209,6 @@ void RenderManager::shadowMapRenderBegin()
 void RenderManager::shadowMapRenderEnd()
 {
 	setIsShadow(false);
-	bindFrameBuffer();
 	BaseManager* bmp = BaseManager::getInstance();
 	glViewport(0, 0, bmp->screenWidth, bmp->screenHeight);
 }
@@ -208,6 +220,7 @@ void RenderManager::renderScene()
 	glm::mat4 view = baseManager->getViewMat4();
 	glm::mat4 lightSpace = baseManager->getLightSpaceMat4();
 	glm::vec3 viewPos = baseManager->getViewPos();
+	glm::vec3 lightPos = baseManager->getLightPos();
 	for (auto p : drawObjects)
 	{
 		if (p != nullptr && p->count != 0)
@@ -215,10 +228,7 @@ void RenderManager::renderScene()
 			auto ent_ptr = static_cast<Entity*>(p);
 			ent_ptr->renderParamUpdate();
 			auto selfMat = ent_ptr->GetMaterial().lock();
-			Material& material = getIsShadow() ? Material::systemMaterial[MaterialType::SimpleDepth] : *selfMat;
-
-			if (material.m_Shader.expired())
-				continue;
+			Material& material = m_IsShadow ? Material::getSystemMaterial(MaterialType::SimpleDepth) : *selfMat;
 			auto shader = material.m_Shader.lock();
 			glm::mat4 model = p->getModelMatrix();
 			shader->use();
@@ -227,9 +237,13 @@ void RenderManager::renderScene()
 			shader->setMat4("model", model);
 			shader->setMat4("lightSpaceMatrix", lightSpace);
 			shader->setVec3("viewPos", viewPos);
+			shader->setVec3("light.position", lightPos);
 			if (material.castShadow)
+			{
+				//DEBUG_VEC3(lightPos);
+				//std::cout << getDepthMap() << std::endl;
 				material.setTextureCacheID("shadowMap", getDepthMap());
-
+			}
 			material.bindUniform();
 
 			//if (p->getDebugID() == 100)

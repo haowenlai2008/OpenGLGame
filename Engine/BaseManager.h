@@ -33,6 +33,7 @@ public:
 	mat4 getViewProjMat4();	// 获得观察矩阵裁剪矩阵的乘积
 	mat4 getLightSpaceMat4();	// 获得光空间转换矩阵
 	vec3 getViewPos();	// 获得观察点
+	vec3 getLightPos();	// 获得光源
 	LL_SYNTHESIZE(MyKeyboard::State, m_KeyboardState, KeyboardState);
 	LL_SYNTHESIZE(MyMouse::State, m_MouseState, MouseState);
 	~BaseManager();

@@ -47,11 +47,10 @@ public:
 	}
 
 
-	static GLuint LoadCubemap(string&& sboxName, vector<string>& faces = Const::facesName)
+	static void LoadCubemap(unsigned int& texture, string&& sboxName, vector<string>& faces = Const::facesName)
 	{
-		unsigned int textureID;
-		glGenTextures(1, &textureID);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
 		int width, height, nrChannels;
 		stbi_set_flip_vertically_on_load(false);
@@ -79,7 +78,6 @@ public:
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-		return textureID;
 	}
 };
 
