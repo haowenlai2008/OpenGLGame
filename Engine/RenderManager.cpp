@@ -312,13 +312,16 @@ void RenderManager::renderScene()
 			shader->setMat4("lightSpaceMatrix", lightSpace);
 			shader->setVec3("viewPos", viewPos);
 			shader->setVec3("light.position", lightPos);
-			material.setTextureCacheID("environmentMap", getEnvMap());
 
 			if (material.castShadow)
 			{
 				//DEBUG_VEC3(lightPos);
 				//std::cout << getDepthMap() << std::endl;
 				material.setTextureCacheID("shadowMap", getDepthMap());
+			}
+			if (material.requireEnvironmentMap)
+			{
+				material.setTextureCacheID("environmentMap", getEnvMap());
 			}
 			material.bindUniform();
 

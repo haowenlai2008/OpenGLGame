@@ -115,6 +115,7 @@ public:
 	weak_ptr<Shader> m_Shader;
 
 	bool castShadow;
+	bool requireEnvironmentMap;
 	// uniform
 	unordered_map<string, bool> uniformBool;
 	unordered_map<string, int> uniformInt;

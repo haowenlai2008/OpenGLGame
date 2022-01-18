@@ -46,7 +46,7 @@ unordered_map<MaterialType, Material> Material::systemMaterial = {
 	{MaterialType::SimpleDepth, {}},
 	{MaterialType::SkyBox, {
 		{"material.diffuse", TextureStructure("skybox3", TextureType::TextureCubMap, 0)},
-		{"environmentMap", TextureStructure(TextureType::TextureCubMap, 1)},
+		{"environmentMap", TextureStructure(TextureType::TextureEnv, 1)},
 	}},
 	{MaterialType::SkyBoxHDR, {
 		{"equirectangularMap", TextureStructure("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
@@ -61,7 +61,7 @@ Material::Material(MaterialType materialType)
 	*this = getSystemMaterial(materialType);
 }
 
-Material::Material() : castShadow(false)
+Material::Material() : castShadow(false), requireEnvironmentMap(false)
 {
 }
 
@@ -105,6 +105,8 @@ Material::Material(std::initializer_list<pair<string, UniformValue>> uniformList
 			// 确定该材质为产生阴影的材质
 			if (p.second.texData.m_textureType == TextureType::ShadowMap)
 				castShadow = true;
+			if (p.second.texData.m_textureType == TextureType::TextureEnv)
+				requireEnvironmentMap = true;
 			uniformTex.insert({ p.first, p.second.texData});
 			break;
 		default:
@@ -149,9 +151,6 @@ void Material::bindUniform()
 			GLuint textureID;
 			switch (textureType)
 			{
-			case TextureType::Texture2D:
-				textureID = RenderManager::getTexture(srcPath);
-				break;
 			case TextureType::TextureHDR:
 				textureID = RenderManager::getHDRTexture(srcPath);
 				break;
@@ -159,7 +158,7 @@ void Material::bindUniform()
 				textureID = RenderManager::getCubeTexture(srcPath);
 				break;
 			default:
-				std::cout << "Texture " << srcPath << "TypeError" << std::endl;
+				textureID = RenderManager::getTexture(srcPath);
 				break;
 			}
 			texInfo.m_textureID = textureID;
