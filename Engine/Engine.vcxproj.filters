@@ -511,5 +511,17 @@
     <None Include="Resources\Shader\PBRCube.fs">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="Resources\Shader\EquirectangularToCubemap.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\EquirectangularToCubemap.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\SkyBoxHDR.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\SkyBoxHDR.vs">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

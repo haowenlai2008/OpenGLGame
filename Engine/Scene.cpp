@@ -25,9 +25,9 @@ bool Scene::init()
 	Ground* gnd = Ground::create(MaterialType::PBR);
 	this->addChild(gnd);
 
-	//Sphere* sp = Sphere::create(MaterialType::PBR);
-	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-	//this->addChild(sp);
+	Cube* sp = Cube::create(MaterialType::EquirectangularToCubemap);
+	sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
+	this->addChild(sp);
 
 	//Circle* w = Circle::create(MaterialType::WithColorAndLight);
 	//w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));

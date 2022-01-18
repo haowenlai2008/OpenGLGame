@@ -24,9 +24,11 @@ public:
 	friend class Singleton<RenderManager>;
 	static vector<float> quadVertices;
 	static unsigned int getTexture(string& path);
+	static unsigned int getHDRTexture(string& path);
 	static unsigned int getCubeTexture(string& path);
 	void init();
 	void depthFBOInit();
+	void equirectangularToCubemap();
 	void update(Node* node);
 	void draw();
 	void bindFrameBuffer();
@@ -38,8 +40,10 @@ public:
 	void renderEntity(Node* p);
 	LL_SYNTHESIZE(bool, m_IsShadow, IsShadow);	// 是否正在渲染阴影
 	LL_SYNTHESIZE(GLuint, m_CurrentFBO, CurrentFBO);	// 获得当前帧缓冲
-	LL_SYNTHESIZE(GLuint, m_DepthMap, DepthMap);	// 获得当前帧缓冲
 	LL_SYNTHESIZE(RenderMode, m_Rendermode, RenderMode); // 设置当前渲染模式
+	// 特殊贴图
+	LL_SYNTHESIZE(GLuint, m_DepthMap, DepthMap);	// shadowmap
+	LL_SYNTHESIZE(GLuint, m_EnvMap, EnvMap);		// 环境贴图
 	std::shared_ptr<Shader> getSimpleDepthShader();
 	~RenderManager();
 private:
@@ -55,7 +59,7 @@ private:
 	GLuint gColorSpec;
 	std::weak_ptr<Shader> m_SimpleDepthShader;
 	std::weak_ptr<Shader> screenShader;
-	list<Node*> drawObjects;		// 需要渲染的物体集合
+	list<Node*> drawObjects;		// 需要渲染的物体集合，每帧清除
 	static map<string, int> textures;
 	void filterInit();
 	

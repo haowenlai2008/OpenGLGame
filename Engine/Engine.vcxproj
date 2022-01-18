@@ -243,6 +243,8 @@
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shader\EquirectangularToCubemap.fs" />
+    <None Include="Resources\Shader\EquirectangularToCubemap.vs" />
     <None Include="Resources\Shader\Filter\blur.fs" />
     <None Include="Resources\Shader\Filter\contrast.fs" />
     <None Include="Resources\Shader\Filter\depthTest.fs" />
@@ -267,6 +269,8 @@
     <None Include="Resources\Shader\simpleDepth.vs" />
     <None Include="Resources\Shader\SkyBox.fs" />
     <None Include="Resources\Shader\SkyBox.vs" />
+    <None Include="Resources\Shader\SkyBoxHDR.fs" />
+    <None Include="Resources\Shader\SkyBoxHDR.vs" />
     <None Include="Resources\Shader\WithColor.fs" />
     <None Include="Resources\Shader\WithColor.vs" />
     <None Include="Resources\Shader\WithColorAndLight.fs" />

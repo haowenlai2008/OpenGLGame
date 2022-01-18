@@ -10,6 +10,8 @@ std::unordered_map<MaterialType, std::string> Material::shaderTypeMap = {
 	{MaterialType::PBR, "PBR"},
 	{MaterialType::SimpleDepth, "simpleDepth"},
 	{MaterialType::SkyBox, "SkyBox"},
+	{MaterialType::SkyBoxHDR, "SkyBoxHDR"},
+	{MaterialType::EquirectangularToCubemap, "EquirectangularToCubemap"},
 };
 
 
@@ -44,6 +46,13 @@ unordered_map<MaterialType, Material> Material::systemMaterial = {
 	{MaterialType::SimpleDepth, {}},
 	{MaterialType::SkyBox, {
 		{"material.diffuse", TextureStructure("skybox3", TextureType::TextureCubMap, 0)},
+		{"environmentMap", TextureStructure(TextureType::TextureCubMap, 1)},
+	}},
+	{MaterialType::SkyBoxHDR, {
+		{"equirectangularMap", TextureStructure("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
+	}},
+	{MaterialType::EquirectangularToCubemap, {
+		{"equirectangularMap", TextureStructure("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
 	}},
 };
 
@@ -142,6 +151,9 @@ void Material::bindUniform()
 			{
 			case TextureType::Texture2D:
 				textureID = RenderManager::getTexture(srcPath);
+				break;
+			case TextureType::TextureHDR:
+				textureID = RenderManager::getHDRTexture(srcPath);
 				break;
 			case TextureType::TextureCubMap:
 				textureID = RenderManager::getCubeTexture(srcPath);
@@ -248,7 +260,7 @@ void Material::setTextureLocation(const string& name, GLubyte location)
 	}
 	else
 	{
-		std::cout << "Texture " << name << "doesn't exist" << std::endl;
+		std::cout << "Texture " << name << " doesn't exist" << std::endl;
 	}
 }
 
@@ -260,7 +272,7 @@ void Material::setTexturePath(const string& name, const string& path)
 	}
 	else
 	{
-		std::cout << "Texture " << name << "doesn't exist" << std::endl;
+		std::cout << "Texture " << name << " doesn't exist" << std::endl;
 	}
 }
 
@@ -272,7 +284,7 @@ void Material::setTextureCacheID(const string& name, GLuint cacheID)
 	}
 	else
 	{
-		std::cout << "Texture " << name << "doesn't exist" << std::endl;
+		std::cout << "Texture " << name << " doesn't exist" << std::endl;
 	}
 }
 

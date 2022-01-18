@@ -21,6 +21,8 @@ enum class MaterialType
 	PBRCube, //
 	SimpleDepth,
 	SkyBox,
+	SkyBoxHDR,
+	EquirectangularToCubemap,
 };
 
 // Uniform数据类型
@@ -42,8 +44,10 @@ enum class UniformType
 enum class TextureType
 {
 	ShadowMap,
-	Texture2D = GL_TEXTURE_2D,
-	TextureCubMap = GL_TEXTURE_CUBE_MAP,
+	Texture2D,
+	TextureHDR,
+	TextureEnv,
+	TextureCubMap,
 };
 
 // 纹理结构体
@@ -123,7 +127,8 @@ public:
 	unordered_map<string, mat4> uniformMat4;
 	// 记录每个Texture位置对应的纹理类型
 	unordered_map<string, TextureStructure> uniformTex;
-
+	// 记录特殊纹理
+	unordered_map<TextureType, bool> textureRequireState;
 	// DC前调用，设置所有Uniform
 	void bindUniform();
 	// uniform工具函数
@@ -151,7 +156,8 @@ public:
 
 private:
 	// 系统自带材质，只能通过getSystemMaterial获取
+	static vector<MaterialType> specialTexture;
+	static unordered_map<MaterialType, std::string> shaderTypeMap;
 	static unordered_map<MaterialType, Material> systemMaterial;
-	static std::unordered_map<MaterialType, std::string> shaderTypeMap;
 };
 
