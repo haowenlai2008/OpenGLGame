@@ -108,9 +108,8 @@ class Material
 public:
 
 	Material();
-	Material(MaterialType entityType);
 	Material(std::initializer_list<pair<string, UniformValue>> uniformList);
-	LL_SYNTHESIZE(GLuint, m_state_cull, Cull)
+	//LL_SYNTHESIZE(GLuint, m_state_cull, Cull)
 	string m_shaderName;
 	weak_ptr<Shader> m_Shader;
 
@@ -153,12 +152,5 @@ public:
 	void setTextureCacheID(const string& name, GLuint cacheID);
 
 	bool hasTexture(const string& name);
-	static Material& getSystemMaterial(MaterialType materialType);
-
-private:
-	// 系统自带材质，只能通过getSystemMaterial获取
-	static vector<MaterialType> specialTexture;
-	static unordered_map<MaterialType, std::string> shaderTypeMap;
-	static unordered_map<MaterialType, Material> systemMaterial;
 };
 

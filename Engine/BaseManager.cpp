@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Node.h"
 #include "RefManager.h"
+#include "MaterialManager.h"
 #include "RenderManager.h"
 #include "LogicManager.h"
 #include "PhysicsManager.h"
@@ -143,10 +144,13 @@ void BaseManager::baseInit()
 	resize_callback(glWindow, screenWidth, screenHeight);
 	glEnable(GL_DEPTH_TEST);
 	
+	m_pMaterialManager = MaterialManager::getInstance();
 	m_pRenderManager = RenderManager::getInstance();
 	m_pRefManager = RefManager::getInstance();
 	m_pLogicManager = LogicManager::getInstance();
 	m_pPhysicsManager = PhysicsManager::getInstance();
+
+	m_pMaterialManager->init();
 	m_pRenderManager->init();
 	m_pRefManager->init();
 	m_pLogicManager->init();

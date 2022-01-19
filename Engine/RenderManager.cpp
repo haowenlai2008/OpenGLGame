@@ -7,6 +7,7 @@
 #include "Shader.h"
 #include "Cube.h"
 #include "Material.h"
+#include "MaterialManager.h"
 #include <map>
 #include <vector>
 using std::vector;
@@ -73,6 +74,8 @@ unsigned int RenderManager::getCubeTexture(string& path)
 
 void RenderManager::init()
 {
+	setDepthMap(-1);
+	setEnvMap(-1);
 	setRenderMode(RenderMode::Normal);
 	equirectangularToCubemap();	// 预计算环境贴图
 	filterInit();
@@ -155,6 +158,8 @@ void RenderManager::equirectangularToCubemap()
 		cb->draw(); // renders a 1x1 cube
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	cb->release();
+	cb = nullptr;
 }
 //滤镜初始化(创建帧缓冲)
 void RenderManager::filterInit()
@@ -290,11 +295,14 @@ void RenderManager::shadowMapRenderEnd()
 void RenderManager::renderScene()
 {
 	BaseManager* baseManager = BaseManager::getInstance();
+	MaterialManager* matManager = MaterialManager::getInstance();
 	glm::mat4 projection = baseManager->getProjMat4();
 	glm::mat4 view = baseManager->getViewMat4();
 	glm::mat4 lightSpace = baseManager->getLightSpaceMat4();
 	glm::vec3 viewPos = baseManager->getViewPos();
 	glm::vec3 lightPos = baseManager->getLightPos();
+	GLuint shadowMap = getDepthMap();
+	GLuint envMap = getEnvMap();
 	for (auto p : drawObjects)
 	{
 		if (p != nullptr && p->count != 0)
@@ -302,7 +310,7 @@ void RenderManager::renderScene()
 			auto ent_ptr = static_cast<Entity*>(p);
 			ent_ptr->renderParamUpdate();
 			auto selfMat = ent_ptr->GetMaterial().lock();
-			Material& material = m_IsShadow ? Material::getSystemMaterial(MaterialType::SimpleDepth) : *selfMat;
+			Material& material = m_IsShadow ? matManager->getSystemMaterial(MaterialType::SimpleDepth) : *selfMat;
 			auto shader = material.m_Shader.lock();
 			glm::mat4 model = p->getModelMatrix();
 			shader->use();
@@ -313,15 +321,15 @@ void RenderManager::renderScene()
 			shader->setVec3("viewPos", viewPos);
 			shader->setVec3("light.position", lightPos);
 
-			if (material.castShadow)
+			if (material.castShadow && shadowMap != -1)
 			{
 				//DEBUG_VEC3(lightPos);
 				//std::cout << getDepthMap() << std::endl;
-				material.setTextureCacheID("shadowMap", getDepthMap());
+				material.setTextureCacheID("shadowMap", shadowMap);
 			}
-			if (material.requireEnvironmentMap)
+			if (material.requireEnvironmentMap && envMap != -1)
 			{
-				material.setTextureCacheID("environmentMap", getEnvMap());
+				material.setTextureCacheID("environmentMap", envMap);
 			}
 			material.bindUniform();
 

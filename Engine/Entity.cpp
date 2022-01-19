@@ -1,6 +1,7 @@
 #include "Entity.h"
 #include "RenderManager.h"
 #include "BaseManager.h"
+#include "MaterialManager.h"
 #include "Shader3D_Component.h"
 #include <algorithm>
 #include "Component.h"
@@ -178,7 +179,8 @@ bool Entity::init()
 	if (!Node::init())
 		return false;
 	//m_Shader = Shader::getShader();
-	m_material = std::make_shared<Material>(m_type);	//´´½¨²ÄÖÊ
+	auto& sysMaterial = MaterialManager::getInstance()->getSystemMaterial(m_type);
+	m_material = std::make_shared<Material>(sysMaterial);
 	return true;
 }
 void Entity::draw()

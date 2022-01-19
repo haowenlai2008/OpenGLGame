@@ -258,6 +258,9 @@
     <ClCompile Include="func.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>源文件\管理器</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>头文件\材质</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>头文件\管理器</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
