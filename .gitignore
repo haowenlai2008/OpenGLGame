@@ -1,4 +1,4 @@
-\Debug\*.obj
+*/Debug/*.obj
 *.tlog
 *.log
 *.idb
