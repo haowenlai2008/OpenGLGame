@@ -12,5 +12,7 @@ uniform Material material;
 
 void main()
 {    
-    FragColor = texture(environmentMap, TexCoords);
+    //FragColor = texture(environmentMap, TexCoords);
+    FragColor = texture(material.diffuse, TexCoords);
+
 }

@@ -142,7 +142,7 @@ void RenderManager::equirectangularToCubemap()
 	auto material = cb->GetMaterial().lock();
 	auto equirectangularToCubemapShader = material->m_Shader.lock();
 	equirectangularToCubemapShader->use();
-
+	equirectangularToCubemapShader->setInt("equirectangularMap", 0);
 	equirectangularToCubemapShader->setMat4("projection", captureProjection);
 	material->bindUniform();
 
