@@ -205,10 +205,6 @@ void Node::physicLateUpdate(float delta)
 	}
 }
 
-void Node::renderParamUpdate()
-{
-}
-
 void Node::addSphereRigidBody()
 {
 	auto pscm = PhysicsManager::getInstance();

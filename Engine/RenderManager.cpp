@@ -308,7 +308,6 @@ void RenderManager::renderScene()
 		if (p != nullptr && p->count != 0)
 		{
 			auto ent_ptr = static_cast<Entity*>(p);
-			ent_ptr->renderParamUpdate();
 			auto selfMat = ent_ptr->GetMaterial().lock();
 			Material& material = m_IsShadow ? matManager->getSystemMaterial(MaterialType::SimpleDepth) : *selfMat;
 			auto shader = material.m_Shader.lock();

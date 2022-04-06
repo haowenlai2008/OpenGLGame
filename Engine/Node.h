@@ -45,7 +45,6 @@ public:
 	virtual void physicUpdate(float delta);
 	virtual void lateUpdate(float delta);
 	virtual void physicLateUpdate(float delta);
-	virtual void renderParamUpdate();
 	virtual void addSphereRigidBody();
 	virtual void addSphereRigidBody(float radius);
 	virtual void addBoxRigidBody();
