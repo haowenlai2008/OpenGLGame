@@ -163,6 +163,7 @@
     <ClCompile Include="LeftWheel.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="MyKeyboard.cpp" />
     <ClCompile Include="LightCamera.cpp" />
     <ClCompile Include="Line2D.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="LeftWheel.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialManager.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="MyKeyboard.h" />
     <ClInclude Include="LightCamera.h" />
     <ClInclude Include="Line2D.h" />

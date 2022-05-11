@@ -109,6 +109,12 @@
     <Filter Include="头文件\材质">
       <UniqueIdentifier>{697af251-d727-452a-969a-181e01ec70a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\模型">
+      <UniqueIdentifier>{8c71d4fa-9c7d-493c-9258-d4f5cf35fe29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\模型">
+      <UniqueIdentifier>{975ef07e-f772-41aa-9cc8-aef86c317479}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PerlinGround.cpp">
@@ -261,6 +267,9 @@
     <ClCompile Include="MaterialManager.cpp">
       <Filter>源文件\管理器</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>源文件\模型</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -412,6 +421,9 @@
     </ClInclude>
     <ClInclude Include="MaterialManager.h">
       <Filter>头文件\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>头文件\模型</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
