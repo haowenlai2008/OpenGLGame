@@ -2,7 +2,9 @@
 #include "func.h"
 #include <unordered_map>
 #include <list>
+#include <variant>
 #include "Shader.h"
+#include "Enum.h"
 
 #define ERROR_TEX_ID -1
 using std::pair;
@@ -11,44 +13,6 @@ using std::list;
 using std::weak_ptr;
 
 
-// 预设材质类型
-enum class MaterialType
-{
-	WithColor,
-	WithColorAndLight,
-	WithTex,
-	PBR,
-	PBRCube, //
-	SimpleDepth,
-	SkyBox,
-	SkyBoxHDR,
-	EquirectangularToCubemap,
-};
-
-// Uniform数据类型
-enum class UniformType
-{
-	Bool,
-	Int,
-	Float,
-	Vec2,
-	Vec3,
-	Vec4,
-	Mat2,
-	Mat3,
-	Mat4,
-	Tex,
-};
-
-// 纹理类型
-enum class TextureType
-{
-	ShadowMap,
-	Texture2D,
-	TextureHDR,
-	TextureEnv,
-	TextureCubMap,
-};
 
 // 纹理结构体
 class TextureStructure
@@ -65,42 +29,32 @@ public:
 	GLuint m_textureID;				// 纹理缓存ID
 };
 
-union UniformUnion
-{
-	bool boolData;
-	int intData;
-	float floatData;
-	vec2 vec2Data;
-	vec3 vec3Data;
-	vec4 vec4Data;
-	mat2 mat2Data;
-	mat3 mat3Data;
-	mat4 mat4Data;
-};
+using UniformVariant = std::variant<bool, int, float, vec2, vec3, vec4, mat2, mat3, mat4>;
+
 class UniformValue
 {
 public:
-	UniformUnion data;
+	UniformVariant data;
 	TextureStructure texData;
 	UniformType m_type;
 
-	UniformValue(bool value) { data.boolData = value; m_type = UniformType::Bool; };
-	UniformValue(int value) { data.intData = value; m_type = UniformType::Int; };
-	UniformValue(float value) { data.floatData = value; m_type = UniformType::Float; };
-	UniformValue(const vec2& value) { data.vec2Data = value; m_type = UniformType::Vec2; };
-	UniformValue(vec2&& value) { data.vec2Data = value; m_type = UniformType::Vec2; };
-	UniformValue(const vec3& value) { data.vec3Data = value; m_type = UniformType::Vec3; };
-	UniformValue(vec3&& value) { data.vec3Data = value; m_type = UniformType::Vec3; };
-	UniformValue(const vec4& value) { data.vec4Data = value; m_type = UniformType::Vec4; };
-	UniformValue(vec4&& value) { data.vec4Data = value; m_type = UniformType::Vec4; };
-	UniformValue(const mat2& value) { data.mat2Data = value; m_type = UniformType::Mat2; };
-	UniformValue(mat2&& value) { data.mat2Data = value; m_type = UniformType::Mat2; };
-	UniformValue(const mat3& value) { data.mat3Data = value; m_type = UniformType::Mat3; };
-	UniformValue(mat3&& value) { data.mat3Data = value; m_type = UniformType::Mat3; };
-	UniformValue(const mat4& value) { data.mat4Data = value; m_type = UniformType::Mat4; };
-	UniformValue(mat4&& value) { data.mat4Data = value; m_type = UniformType::Mat4; };
-	UniformValue(const TextureStructure& value) { texData = value; m_type = UniformType::Mat4; };
-	UniformValue(TextureStructure&& value) { texData = value; m_type = UniformType::Tex; };
+	UniformValue(bool value) :data(value) { m_type = UniformType::Bool; };
+	UniformValue(int value) :data(value) { m_type = UniformType::Int; };
+	UniformValue(float value) :data(value) { m_type = UniformType::Float; };
+	UniformValue(const vec2& value) :data(value) { value; m_type = UniformType::Vec2; };
+	UniformValue(vec2&& value) :data(value) { value; m_type = UniformType::Vec2; };
+	UniformValue(const vec3& value) :data(value) { value; m_type = UniformType::Vec3; };
+	UniformValue(vec3&& value) :data(value) { value; m_type = UniformType::Vec3; };
+	UniformValue(const vec4& value) :data(value) { value; m_type = UniformType::Vec4; };
+	UniformValue(vec4&& value) :data(value) { m_type = UniformType::Vec4; };
+	UniformValue(const mat2& value) :data(value) { m_type = UniformType::Mat2; };
+	UniformValue(mat2&& value) :data(value) { m_type = UniformType::Mat2; };
+	UniformValue(const mat3& value) :data(value) { m_type = UniformType::Mat3; };
+	UniformValue(mat3&& value) :data(value) { m_type = UniformType::Mat3; };
+	UniformValue(const mat4& value) :data(value) { m_type = UniformType::Mat4; };
+	UniformValue(mat4&& value) :data(value) { m_type = UniformType::Mat4; };
+	UniformValue(const TextureStructure& value) :data(0) { texData = value; m_type = UniformType::Mat4; };
+	UniformValue(TextureStructure&& value) :data(0) { texData = value; m_type = UniformType::Tex; };
 };
 
 class Material

@@ -10,6 +10,7 @@
 #include "Circle.h"
 #include "CylinderNoCap.h"
 #include "Cylinder.h"
+#include "const.h"
 bool BallScene::init()
 {
 	SkyBox* skyBox = SkyBox::create();
@@ -18,7 +19,7 @@ bool BallScene::init()
 
 
 	Ground* gnd = Ground::create(MaterialType::PBR);
-	//gnd->setColor(EntityColor::Grey);
+	//gnd->setColor(Const::EntityColor::Grey);
 	this->addChild(gnd);
 
 
@@ -27,7 +28,7 @@ bool BallScene::init()
 	////cb->setScale(vec3(1.0f, 2.0f, 1.0f));
 	//cb->setPosition(vec3(1.5f, 0.0f, 0.0f));
 	//cb->setMaterial(vec3(0.5f, 0.5f, 0.5f), 32.0f);
-	//cb->setColor(EntityColor::Pink);
+	//cb->setColor(Const::EntityColor::Pink);
 	//this->addChild(cb);
 
 	auto cb2 = Sphere::create(MaterialType::WithColorAndLight);
@@ -36,13 +37,13 @@ bool BallScene::init()
 	cb2->addSphereRigidBody();
 	cb2->setPosition(vec3(-1.5f, 0.0f, 0.0f));
 	cb2->setMaterial(vec3(0.1f, 0.1f, 0.1f), 32.0f);
-	cb2->setColor(EntityColor::Pink);
+	cb2->setColor(Const::EntityColor::Pink);
 
 	this->addChild(cb2);
 
 	m_focus = Sphere::create(MaterialType::PBR);
 	//dynamic_cast<Sphere*>(m_focus)->setTexture("white.png");
-	dynamic_cast<Sphere*>(m_focus)->setColor(EntityColor::Yellow);
+	dynamic_cast<Sphere*>(m_focus)->setColor(Const::EntityColor::Yellow);
 	m_focus->addSphereRigidBody();
 	m_focus->setPosition(vec3(1.5f,2.0f, 0.0f));
 	this->addChild(m_focus);
@@ -50,7 +51,7 @@ bool BallScene::init()
 
 	//auto sp = Sphere::create(MaterialType::WithColorAndLight);
 	//sp->setPosition(vec3(0.0f, 2.0f, -4.0f));
-	//sp->setColor(EntityColor::Yellow);
+	//sp->setColor(Const::EntityColor::Yellow);
 	//sp->setRotate(vec3(0.0f, 45.0f, 0.0f));
 	//this->addChild(sp);
 	return true;

@@ -8,16 +8,6 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "GameCamera.h"
-vec3 EntityColor::Red = vec3(1.0f, 0.0f, 0.0f);
-vec3 EntityColor::Orange = vec3(1.0f, 0.65f, 0.0f);
-vec3 EntityColor::Yellow = vec3(1.0f, 1.0f, 0.0f);
-vec3 EntityColor::Green = vec3(0.0f, 1.0f, 0.0f);
-vec3 EntityColor::Cyan = vec3(0.0f, 1.0f, 1.0f);
-vec3 EntityColor::Blue = vec3(0.0f, 0.0f, 1.0f);
-vec3 EntityColor::Purple = vec3(0.5f, 0.0f, 0.5f);
-vec3 EntityColor::Grey = vec3(0.2f, 0.2f, 0.2f);
-vec3 EntityColor::Pink = vec3(1.0f, 0.41f, 0.71f);
-vec3 EntityColor::Black = vec3(0.0f, 0.0f, 0.0f);
 
 
 void Entity::setTexture(string&& src)

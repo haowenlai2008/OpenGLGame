@@ -16,31 +16,31 @@ Material::Material(std::initializer_list<pair<string, UniformValue>> uniformList
 		switch (p.second.m_type)
 		{
 		case UniformType::Bool:
-			uniformBool.insert({ p.first, p.second.data.boolData });
+			uniformBool.insert({ p.first, std::get<bool>(p.second.data) });
 			break;
 		case UniformType::Int:
-			uniformInt.insert({ p.first, p.second.data.intData });
+			uniformInt.insert({ p.first, std::get<int>(p.second.data) });
 			break;
 		case UniformType::Float:
-			uniformFloat.insert({ p.first, p.second.data.floatData });
+			uniformFloat.insert({ p.first, std::get<float>(p.second.data) });
 			break;
 		case UniformType::Vec2:
-			uniformVec2.insert({ p.first, p.second.data.vec2Data });
+			uniformVec2.insert({ p.first, std::get<vec2>(p.second.data) });
 			break;
 		case UniformType::Vec3:
-			uniformVec3.insert({ p.first, p.second.data.vec3Data });
+			uniformVec3.insert({ p.first, std::get<vec3>(p.second.data) });
 			break;
 		case UniformType::Vec4:
-			uniformVec4.insert({ p.first, p.second.data.vec4Data });
+			uniformVec4.insert({ p.first, std::get<vec4>(p.second.data) });
 			break;
 		case UniformType::Mat2:
-			uniformMat2.insert({ p.first, p.second.data.mat2Data });
+			uniformMat2.insert({ p.first, std::get<mat2>(p.second.data) });
 			break;
 		case UniformType::Mat3:
-			uniformMat3.insert({ p.first, p.second.data.mat3Data });
+			uniformMat3.insert({ p.first, std::get<mat3>(p.second.data) });
 			break;
 		case UniformType::Mat4:
-			uniformMat4.insert({ p.first, p.second.data.mat4Data });
+			uniformMat4.insert({ p.first, std::get<mat4>(p.second.data) });
 			break;
 		case UniformType::Tex:
 			// 确定该材质为产生阴影的材质

@@ -10,20 +10,6 @@ class Material;
 using std::weak_ptr;
 using std::shared_ptr;
 
-class EntityColor
-{
-public:
-	static vec3 Red;
-	static vec3 Orange;
-	static vec3 Yellow;
-	static vec3 Green;
-	static vec3 Cyan;
-	static vec3 Blue;
-	static vec3 Purple;
-	static vec3 Grey;
-	static vec3 Pink;
-	static vec3 Black;
-};
 // 实体创建静态函数的宏
 #define ENTITY_CREATE_FUNC(__TYPE__) \
 static __TYPE__* create(MaterialType Etype) \

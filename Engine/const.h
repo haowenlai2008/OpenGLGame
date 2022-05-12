@@ -1,8 +1,10 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <glm/vec3.hpp>
 using std::vector;
 using std::string;
+using glm::vec3;
 #define TEXTURE_PATH (std::string("Resources/Texture/"))	//纹理的路径
 #define SHADER_PATH (std::string("Resources/Shader/"))		//Shader的路径
 #define MODEL_PATH (std::string("Resources/Model/"))			//模型的路径
@@ -21,5 +23,20 @@ namespace Const
 		"/bottom.jpg",
 		"/front.jpg",
 		"/back.jpg"
+	};
+
+	class EntityColor
+	{
+	public:
+		static vec3 Red;
+		static vec3 Orange;
+		static vec3 Yellow;
+		static vec3 Green;
+		static vec3 Cyan;
+		static vec3 Blue;
+		static vec3 Purple;
+		static vec3 Grey;
+		static vec3 Pink;
+		static vec3 Black;
 	};
 }
