@@ -270,6 +270,12 @@
     <ClCompile Include="Model.cpp">
       <Filter>源文件\模型</Filter>
     </ClCompile>
+    <ClCompile Include="const.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Enum.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -424,6 +430,9 @@
     </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>头文件\模型</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

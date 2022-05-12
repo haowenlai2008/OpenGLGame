@@ -93,6 +93,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.\external\source\bullet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,12 +150,14 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="const.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="CubeMat.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="CylinderNoCap.cpp" />
     <ClCompile Include="DirCube.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Enum.cpp" />
     <ClCompile Include="external\source\glad.c" />
     <ClCompile Include="external\source\stb_image.cpp" />
     <ClCompile Include="func.cpp" />
@@ -209,6 +212,7 @@
     <ClInclude Include="CylinderNoCap.h" />
     <ClInclude Include="DirCube.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Enum.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="Ground.h" />
