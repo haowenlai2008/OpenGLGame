@@ -1,14 +1,9 @@
 #pragma once
 #include "func.h"
 #include <vector>
+#include "Struct.h"
 using std::vector;
 using std::shared_ptr;
-struct MeshData
-{
-	vec3 pos;
-	vec3 normal;
-	vec2 tex;
-};
 
 class Mesh
 {
@@ -18,6 +13,10 @@ public:
 	Mesh& operator=(const Mesh&) = default;
 	Mesh(Mesh&&) = default;
 	Mesh& operator=(Mesh&&) = default;
-	vector<MeshData> vertexData;
+	vector<Vertex> vertexData;
 	vector<GLuint> indices;
+	vector<Texture> textures;
+	unsigned int VAO;
+private:
+	unsigned int VBO, EBO;
 };

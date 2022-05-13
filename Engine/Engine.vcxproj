@@ -191,6 +191,7 @@
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="Struct.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VertexFactory.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -245,12 +246,15 @@
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="Struct.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="VertexFactory.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shader\1.model_loading.fs" />
+    <None Include="Resources\Shader\1.model_loading.vs" />
     <None Include="Resources\Shader\EquirectangularToCubemap.fs" />
     <None Include="Resources\Shader\EquirectangularToCubemap.vs" />
     <None Include="Resources\Shader\Filter\blur.fs" />

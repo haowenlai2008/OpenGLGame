@@ -4,30 +4,14 @@
 #include <list>
 #include <variant>
 #include "Shader.h"
+#include "Struct.h"
 #include "Enum.h"
 
-#define ERROR_TEX_ID -1
 using std::pair;
 using std::unordered_map;
 using std::list;
 using std::weak_ptr;
 
-
-
-// 纹理结构体
-class TextureStructure
-{
-public:
-	TextureStructure() : m_textureType(TextureType::Texture2D), m_location(-1), m_path(""),  m_textureID(ERROR_TEX_ID) {}
-	TextureStructure(TextureType textureType, GLubyte location) : m_textureType(textureType), m_location(location), m_path(""), m_textureID(ERROR_TEX_ID) {}
-	TextureStructure(const string& path, TextureType textureType, GLubyte location) : m_textureType(textureType), m_location(location), m_path(path), m_textureID(ERROR_TEX_ID){}
-	TextureStructure(string&& path, TextureType textureType, GLubyte location) : m_textureType(textureType), m_location(location), m_path(path), m_textureID(ERROR_TEX_ID){}
-	~TextureStructure() {}
-	TextureType m_textureType;		// 纹理类型
-	GLubyte m_location;				// 纹理位置
-	string m_path;					// 资源路径
-	GLuint m_textureID;				// 纹理缓存ID
-};
 
 using UniformVariant = std::variant<bool, int, float, vec2, vec3, vec4, mat2, mat3, mat4>;
 
@@ -35,7 +19,7 @@ class UniformValue
 {
 public:
 	UniformVariant data;
-	TextureStructure texData;
+	Texture texData;
 	UniformType m_type;
 
 	UniformValue(bool value) :data(value) { m_type = UniformType::Bool; };
@@ -53,8 +37,8 @@ public:
 	UniformValue(mat3&& value) :data(value) { m_type = UniformType::Mat3; };
 	UniformValue(const mat4& value) :data(value) { m_type = UniformType::Mat4; };
 	UniformValue(mat4&& value) :data(value) { m_type = UniformType::Mat4; };
-	UniformValue(const TextureStructure& value) :data(0) { texData = value; m_type = UniformType::Mat4; };
-	UniformValue(TextureStructure&& value) :data(0) { texData = value; m_type = UniformType::Tex; };
+	UniformValue(const Texture& value) :data(0) { texData = value; m_type = UniformType::Mat4; };
+	UniformValue(Texture&& value) :data(0) { texData = value; m_type = UniformType::Tex; };
 };
 
 class Material
@@ -80,7 +64,7 @@ public:
 	unordered_map<string, mat3> uniformMat3;
 	unordered_map<string, mat4> uniformMat4;
 	// 记录每个Texture位置对应的纹理类型
-	unordered_map<string, TextureStructure> uniformTex;
+	unordered_map<string, Texture> uniformTex;
 	// 记录特殊纹理
 	unordered_map<TextureType, bool> textureRequireState;
 	// DC前调用，设置所有Uniform

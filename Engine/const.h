@@ -5,6 +5,7 @@
 using std::vector;
 using std::string;
 using glm::vec3;
+#define ERROR_TEX_ID -1
 #define TEXTURE_PATH (std::string("Resources/Texture/"))	//纹理的路径
 #define SHADER_PATH (std::string("Resources/Shader/"))		//Shader的路径
 #define MODEL_PATH (std::string("Resources/Model/"))			//模型的路径

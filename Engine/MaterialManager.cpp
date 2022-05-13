@@ -29,8 +29,8 @@ bool MaterialManager::init()
 			{"light.specular", vec3(1.0f, 1.0f, 1.0f)},
 			{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
 			{"material.shininess", 64.0f},
-			{"material.diffuse", TextureStructure(TextureType::Texture2D, 0)},
-			{"shadowMap", TextureStructure(TextureType::ShadowMap, 1)},
+			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
+			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
 		}},
 		{MaterialType::PBRCube, {
 			{"viewPos", vec3(0.0f)},
@@ -40,19 +40,19 @@ bool MaterialManager::init()
 			{"light.specular", vec3(1.0f, 1.0f, 1.0f)},
 			{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
 			{"material.shininess", 64.0f},
-			{"material.diffuse", TextureStructure(TextureType::TextureCubMap, 0)},
-			{"shadowMap", TextureStructure(TextureType::ShadowMap, 1)},
+			{"material.diffuse", Texture(TextureType::TextureCubMap, 0)},
+			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
 		}},
 		{MaterialType::SimpleDepth, {}},
 		{MaterialType::SkyBox, {
-			{"material.diffuse", TextureStructure("skybox3", TextureType::TextureCubMap, 0)},
-			{"environmentMap", TextureStructure(TextureType::TextureEnv, 1)},
+			{"material.diffuse", Texture("skybox3", TextureType::TextureCubMap, 0)},
+			{"environmentMap", Texture(TextureType::TextureEnv, 1)},
 		}},
 		{MaterialType::SkyBoxHDR, {
-			{"equirectangularMap", TextureStructure("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
+			{"equirectangularMap", Texture("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
 		}},
 		{MaterialType::EquirectangularToCubemap, {
-			{"equirectangularMap", TextureStructure("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
+			{"equirectangularMap", Texture("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
 		}},
 	};
     return true;
@@ -66,4 +66,14 @@ Material& MaterialManager::getSystemMaterial(MaterialType materialType)
 		mat.m_Shader = Shader::getShader(shaderTypeMap[materialType]);
 	}
 	return mat;
+}
+
+Material& MaterialManager::createMaterial(const string& matKey)
+{
+	// TODO: 在此处插入 return 语句
+}
+
+Material& MaterialManager::createMaterial(const string& matKey, MaterialType materialType)
+{
+	// TODO: 在此处插入 return 语句
 }

@@ -62,5 +62,4 @@ private:
 	list<Node*> drawObjects;		// 需要渲染的物体集合，每帧清除
 	static map<string, int> textures;
 	void filterInit();
-	
 };

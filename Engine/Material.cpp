@@ -183,13 +183,13 @@ void Material::setTexture(const string& name, const string& path, TextureType te
 	}
 	else
 	{
-		uniformTex[name] = TextureStructure(path, textureType, -1);
+		uniformTex[name] = Texture(path, textureType, -1);
 	}
 }
 
 void Material::setTexture(const string& name, const string& path, GLubyte location, TextureType textureType)
 {
-	uniformTex[name] = TextureStructure(path, textureType, location);
+	uniformTex[name] = Texture(path, textureType, location);
 }
 
 void Material::setTextureLocation(const string& name, GLubyte location)

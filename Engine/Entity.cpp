@@ -27,116 +27,6 @@ void Entity::bindShaderResource()
 	if (RenderManager::getInstance()->getIsShadow())
 		return;
 
-	//auto withTexFun = [&]() {
-	//	std::shared_ptr<Shader> shader(m_Shader);
-	//	shader->use();
-	//	shader->setInt("material.diffuse", 0);
-
-	//	if (m_DiffuseMap != -1)
-	//	{
-	//		glActiveTexture(GL_TEXTURE0);
-	//		glBindTexture(GL_TEXTURE_2D, m_DiffuseMap);
-	//	}
-	//};
-
-	//auto PBRFun = [&]() {
-	//	std::shared_ptr<Shader> shader(m_Shader);
-	//	shader->use();
-	//	if (getLightSrc() != nullptr)
-	//		shader->setVec3("light.position", getLightSrc()->getPosition());
-	//	shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
-	//	shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-	//	shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-	//	shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
-	//	// material properties
-	//	shader->setVec3("material.specular", vec3(0.5f, 0.5f, 0.5f));
-	//	shader->setFloat("material.shininess", 64.0f);
-
-	//	shader->setInt("material.diffuse", 0);
-	//	shader->setInt("shadowMap", 1);
-
-	//	if (m_DiffuseMap != -1)
-	//	{
-	//		glActiveTexture(GL_TEXTURE0);
-	//		glBindTexture(GL_TEXTURE_2D, m_DiffuseMap);
-	//	}
-
-	//	GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
-	//	glActiveTexture(GL_TEXTURE1);
-	//	glBindTexture(GL_TEXTURE_2D, shadowMap);
-	//};
-
-	//auto withColorFunc = [&]() {
-	//	std::shared_ptr<Shader> shader(m_Shader);
-	//	shader->use();
-	//	shader->setVec3("mColor", m_color);
-	//};
-
-	//auto withColorAndLightFunc = [&]() {
-	//	std::shared_ptr<Shader> shader(m_Shader);
-	//	shader->use();
-	//	if (getLightSrc() != nullptr)
-	//		shader->setVec3("light.position", getLightSrc()->getPosition());
-	//	shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
-	//	shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-	//	shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-	//	shader->setVec3("light.specular", 2.0f, 2.0f, 2.0f);
-	//	// material properties
-	//	shader->setVec3("material.specular", vec3(0.5f, 0.5f, 0.5f));
-	//	shader->setFloat("material.shininess", 64.0f);
-	//	shader->setVec3("mColor", m_color);
-	//	shader->setInt("shadowMap", 1);
-
-	//	GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
-	//	glActiveTexture(GL_TEXTURE1);
-	//	glBindTexture(GL_TEXTURE_2D, shadowMap);
-	//};
-	//auto withCubeFunc = [&]() {
-	//	std::shared_ptr<Shader> shader(m_Shader);
-	//	shader->use();
-	//	if (getLightSrc() != nullptr)
-	//		shader->setVec3("light.position", getLightSrc()->getPosition());
-	//	shader->setVec3("viewPos", BaseManager::getInstance()->getCamera()->getPosition());
-	//	shader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-	//	shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-	//	shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
-	//	// material properties
-	//	shader->setVec3("material.specular", vec3(0.5f, 0.5f, 0.5f));
-	//	shader->setFloat("material.shininess", 64.0f);
-
-	//	shader->setInt("material.diffuse", 0);
-	//	shader->setInt("shadowMap", 1);
-
-	//	if (m_DiffuseMap != -1)
-	//	{
-	//		glActiveTexture(GL_TEXTURE0);
-	//		glBindTexture(GL_TEXTURE_CUBE_MAP, m_DiffuseMap);
-	//	}
-
-	//	GLuint shadowMap = RenderManager::getInstance()->getDepthMap();
-	//	glActiveTexture(GL_TEXTURE1);
-	//	glBindTexture(GL_TEXTURE_2D, shadowMap);
-	//};
-	//switch (m_type)
-	//{
-	//case MaterialType::WithColor:
-	//	withColorFunc();
-	//	break;
-	//case MaterialType::WithColorAndLight:
-	//	withColorAndLightFunc();
-	//	break;
-	//case MaterialType::WithTex:
-	//	withTexFun();
-	//	break;
-	//case MaterialType::PBR:
-	//	PBRFun();
-	//	break;
-	//case MaterialType::PBRCube:
-	//	withCubeFunc();
-	//	break;
-	//default:
-	//	break;
-	//}
 }
 weak_ptr<Material> Entity::GetMaterial()
 {
@@ -231,15 +121,15 @@ void Entity::setMeshAndBuffer(std::weak_ptr<Mesh> meshData)
 
 	glBindVertexArray(m_VAO);// 绑定顶点数组对象
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);//绑定顶点缓冲区
-	glBufferData(GL_ARRAY_BUFFER, sizeof(MeshData) * mesh->vertexData.size(), mesh->vertexData.begin()._Ptr, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mesh->vertexData.size(), mesh->vertexData.begin()._Ptr, GL_STATIC_DRAW);
 	//坐标
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(MeshData), (void*)(0));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(0));
 	glEnableVertexAttribArray(0);
 	//法线
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(MeshData), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 	//纹理坐标
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(MeshData), (void*)(6 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
 	//绑定索引缓存

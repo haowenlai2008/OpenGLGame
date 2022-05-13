@@ -276,6 +276,9 @@
     <ClCompile Include="Enum.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Struct.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -434,6 +437,9 @@
     <ClInclude Include="Enum.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\normal.fs">
@@ -548,6 +554,12 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="Resources\Shader\SkyBoxHDR.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\1.model_loading.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\1.model_loading.vs">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
