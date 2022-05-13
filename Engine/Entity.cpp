@@ -136,6 +136,7 @@ void Entity::setMeshAndBuffer(std::weak_ptr<Mesh> meshData)
 	glGenBuffers(1, &m_EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->indices.size() * sizeof(GLuint), mesh->indices.begin()._Ptr, GL_STATIC_DRAW);
+	glBindVertexArray(0);
 }
 
 void Entity::setMaterial(vec3& specular, float shininess)

@@ -17,6 +17,7 @@ public:
 	vector<GLuint> indices;
 	vector<Texture> textures;
 	unsigned int VAO;
+	void setupMesh();
 private:
 	unsigned int VBO, EBO;
 };

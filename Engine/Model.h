@@ -136,12 +136,12 @@ private:
 			vector.x = mesh->mVertices[i].x;
 			vector.y = -mesh->mVertices[i].y;
 			vector.z = mesh->mVertices[i].z;
-			vertex.Position = vector;
+			vertex.pos = vector;
 			// normals
 			vector.x = mesh->mNormals[i].x;
 			vector.y = -mesh->mNormals[i].y;
 			vector.z = mesh->mNormals[i].z;
-			vertex.Normal = vector;
+			vertex.normal = vector;
 			// texture coordinates
 			if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
 			{
@@ -150,21 +150,21 @@ private:
 				// use models where a vertex can have multiple texture coordinates so we always take the first set (0).
 				vec.x = mesh->mTextureCoords[0][i].x;
 				vec.y = mesh->mTextureCoords[0][i].y;
-				vertex.TexCoords = vec;
+				vertex.tex = vec;
 			}
 			else
-				vertex.TexCoords = glm::vec2(0.0f, 0.0f);
-			// tangent
-			vector.x = mesh->mTangents[i].x;
-			vector.y = -mesh->mTangents[i].y;
-			vector.z = mesh->mTangents[i].z;
-			vertex.Tangent = vector;
-			// bitangent
-			vector.x = mesh->mBitangents[i].x;
-			vector.y = -mesh->mBitangents[i].y;
-			vector.z = mesh->mBitangents[i].z;
-			vertex.Bitangent = vector;
-			vertices.push_back(vertex);
+				vertex.tex = glm::vec2(0.0f, 0.0f);
+			//// tangent
+			//vector.x = mesh->mTangents[i].x;
+			//vector.y = -mesh->mTangents[i].y;
+			//vector.z = mesh->mTangents[i].z;
+			//vertex.Tangent = vector;
+			//// bitangent
+			//vector.x = mesh->mBitangents[i].x;
+			//vector.y = -mesh->mBitangents[i].y;
+			//vector.z = mesh->mBitangents[i].z;
+			//vertex.Bitangent = vector;
+			//vertices.push_back(vertex);
 		}
 		// now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 		for (unsigned int i = 0; i < mesh->mNumFaces; i++)
@@ -213,7 +213,7 @@ private:
 			bool skip = false;
 			for (unsigned int j = 0; j < textures_loaded.size(); j++)
 			{
-				if (std::strcmp(textures_loaded[j].path.data(), str.C_Str()) == 0)
+				if (std::strcmp(textures_loaded[j].m_path.data(), str.C_Str()) == 0)
 				{
 					textures.push_back(textures_loaded[j]);
 					skip = true; // 一个拥有相同路径的纹理已经被加载了，去加载下一个
@@ -223,9 +223,9 @@ private:
 			if (!skip)
 			{   //如果纹理没有加载，那就加载
 				Texture texture;
-				texture.id = TextureFromFile(str.C_Str(), this->directory);
-				texture.type = typeName;
-				texture.path = str.C_Str();
+				texture.m_textureID = TextureFromFile(str.C_Str(), this->directory);
+				texture.m_type = typeName;
+				texture.m_path = str.C_Str();
 				textures.push_back(texture);
 				textures_loaded.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
 			}

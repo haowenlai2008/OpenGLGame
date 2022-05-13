@@ -12,6 +12,7 @@ public:
 	TextureType m_textureType;		// 纹理类型
 	GLubyte m_location;				// 纹理位置
 	string m_path;					// 资源路径
+	string m_type;					// 模型中的纹理类型
 	GLuint m_textureID;				// 纹理缓存ID
 };
 
