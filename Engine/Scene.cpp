@@ -40,8 +40,8 @@ bool Scene::init()
 	//this->addChild(wheel);
 
 
-	m_pCar = Car::create();
-	this->addChild(m_pCar);
+	//m_pCar = Car::create();
+	//this->addChild(m_pCar);
 
 	//Circle* c2 = Circle::create(MaterialType::PBR);
 	//c2->setTexture("wheelface.jpg");
@@ -106,7 +106,7 @@ void Scene::lateUpdate(float delta)
 	}
 	else
 	{
-		camera->resetCamera(GameCamera::Camera_Type::Free);
+		//camera->resetCamera(GameCamera::Camera_Type::Free);
 	}
 
 }

@@ -50,7 +50,6 @@ public:
 	virtual ~Entity();
 protected:
 	vector<Component*> comList;
-	weak_ptr<Shader> m_Shader;
 	shared_ptr<Material> m_material;
 	vector<shared_ptr<Mesh>> m_meshList;
 	vector<shared_ptr<Material>> m_materialList;

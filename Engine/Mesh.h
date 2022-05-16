@@ -16,6 +16,7 @@ public:
 	vector<Vertex> vertexData;
 	vector<GLuint> indices;
 	vector<Texture> textures;
+	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
 	unsigned int VAO;
 	void setupMesh();
 private:

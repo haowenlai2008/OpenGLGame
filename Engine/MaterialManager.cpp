@@ -68,12 +68,12 @@ Material& MaterialManager::getSystemMaterial(MaterialType materialType)
 	return mat;
 }
 
-Material& MaterialManager::createMaterial(const string& matKey)
-{
-	// TODO: 在此处插入 return 语句
-}
-
-Material& MaterialManager::createMaterial(const string& matKey, MaterialType materialType)
-{
-	// TODO: 在此处插入 return 语句
-}
+//Material& MaterialManager::createMaterial(const string& matKey)
+//{
+//	// TODO: 在此处插入 return 语句
+//}
+//
+//Material& MaterialManager::createMaterial(const string& matKey, MaterialType materialType)
+//{
+//	return Material();
+//}

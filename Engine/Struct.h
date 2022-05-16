@@ -1,4 +1,5 @@
 #pragma once
+#include "func.h"
 #include "Enum.h"
 // 纹理结构体
 class Texture

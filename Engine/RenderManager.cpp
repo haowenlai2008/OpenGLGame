@@ -77,7 +77,7 @@ void RenderManager::init()
 	setDepthMap(-1);
 	setEnvMap(-1);
 	setRenderMode(RenderMode::Normal);
-	equirectangularToCubemap();	// 预计算环境贴图
+	//equirectangularToCubemap();	// 预计算环境贴图
 	filterInit();
 	depthFBOInit();
 }

@@ -58,7 +58,6 @@ bool Entity::init()
 {
 	if (!Node::init())
 		return false;
-	//m_Shader = Shader::getShader();
 	auto& sysMaterial = MaterialManager::getInstance()->getSystemMaterial(m_type);
 	m_material = std::make_shared<Material>(sysMaterial);
 	return true;
@@ -72,30 +71,7 @@ void Entity::draw()
 
 void Entity::renderParamUpdate()
 {
-	//if (m_Shader.expired())
-	//	return;
-	//auto rm = RenderManager::getInstance();
-	//std::shared_ptr<Shader> shader;
-	//if (rm->getIsShadow())
-	//{
-	//	shader = rm->getSimpleDepthShader();
-	//}
-	//else
-	//{
-	//	shader = m_Shader.lock();
-	//}
-	//BaseManager* baseManager = BaseManager::getInstance();
-	//glm::mat4 projection = baseManager->getProjMat4();
-	//glm::mat4 view = baseManager->getViewMat4();
-	//glm::mat4 model = getModelMatrix();
-	//glm::mat4 lightSpace = baseManager->getLightSpaceMat4();
-	//
-	//shader->use();
-	//shader->setMat4("projection", projection);
-	//shader->setMat4("view", view);
-	//shader->setMat4("model", model);
-	//shader->setMat4("lightSpaceMatrix", lightSpace);
-	//bindShaderResource();
+
 
 }
 
