@@ -12,6 +12,7 @@ bool MaterialManager::init()
 	{MaterialType::SkyBox, "SkyBox"},
 	{MaterialType::SkyBoxHDR, "SkyBoxHDR"},
 	{MaterialType::EquirectangularToCubemap, "EquirectangularToCubemap"},
+	{MaterialType::ModelPBR, "1.model_loading"},
 	};
 
 
@@ -53,6 +54,17 @@ bool MaterialManager::init()
 		}},
 		{MaterialType::EquirectangularToCubemap, {
 			{"equirectangularMap", Texture("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
+		}},
+		{MaterialType::ModelPBR, {
+			{"viewPos", vec3(0.0f)},
+			{"light.position", vec3(0.0f)},
+			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
+			{"light.diffuse", vec3(0.5f, 0.5f, 0.5f)},
+			{"light.specular", vec3(1.0f, 1.0f, 1.0f)},
+			{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
+			{"material.shininess", 64.0f},
+			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
+			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
 		}},
 	};
     return true;

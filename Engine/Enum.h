@@ -12,6 +12,7 @@ enum class MaterialType
 	SkyBox,
 	SkyBoxHDR,
 	EquirectangularToCubemap,
+	ModelPBR,
 };
 
 // Uniform数据类型
