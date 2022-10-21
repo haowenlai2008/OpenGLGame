@@ -192,6 +192,14 @@ void Material::setTexture(const string& name, const string& path, GLubyte locati
 	uniformTex[name] = Texture(path, textureType, location);
 }
 
+void Material::setTexture(const string& name, Texture& texture, GLubyte location)
+{
+	//auto curTex = Texture();
+	//curTex.m_location = location;
+	//curTex.
+	//uniformTex[name] = ;
+}
+
 void Material::setTextureLocation(const string& name, GLubyte location)
 {
 	if (uniformTex.find(name) != uniformTex.end())

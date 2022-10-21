@@ -85,6 +85,7 @@ public:
 
 	void setTexture(const string& name, const string& path, TextureType textureType);
 	void setTexture(const string& name, const string& path, GLubyte location, TextureType textureType);
+	void setTexture(const string& name, Texture& texture, GLubyte location);
 	void setTextureLocation(const string& name, GLubyte location);
 	void setTexturePath(const string& name, const string& path);
 	void setTextureCacheID(const string& name, GLuint cacheID);
