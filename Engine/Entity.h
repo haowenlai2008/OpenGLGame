@@ -39,6 +39,7 @@ public:
 	virtual void draw() override;
 	virtual void renderParamUpdate();
 	void setMeshAndBuffer(std::weak_ptr<Mesh> meshData);
+	void setMeshAndBuffer(const Mesh& meshData);
 	void setMaterial(vec3& specular, float shininess);
 	void setMaterial(vec3&& specular, float shininess);
 	virtual void setTexture(string&& src);
@@ -51,8 +52,7 @@ public:
 protected:
 	vector<Component*> comList;
 	shared_ptr<Material> m_material;
-	vector<shared_ptr<Mesh>> m_meshList;
-	vector<shared_ptr<Material>> m_materialList;
+
 	GLuint m_VAO;
 	GLuint m_VBO;
 	GLuint m_EBO;

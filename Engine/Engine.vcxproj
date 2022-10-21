@@ -91,12 +91,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\external\source\bullet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\external\include;.\external\source\bullet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -168,6 +168,7 @@
     <ClCompile Include="MaterialManager.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelEntity.cpp" />
+    <ClCompile Include="ModelNode.cpp" />
     <ClCompile Include="MyKeyboard.cpp" />
     <ClCompile Include="LightCamera.cpp" />
     <ClCompile Include="Line2D.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelEntity.h" />
+    <ClInclude Include="ModelNode.h" />
     <ClInclude Include="MyKeyboard.h" />
     <ClInclude Include="LightCamera.h" />
     <ClInclude Include="Line2D.h" />

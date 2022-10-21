@@ -115,6 +115,45 @@ void Entity::setMeshAndBuffer(std::weak_ptr<Mesh> meshData)
 	glBindVertexArray(0);
 }
 
+void Entity::setMeshAndBuffer(const Mesh& meshData)
+{
+	if (m_VAO != -1)
+	{
+		glDeleteVertexArrays(1, &m_VAO);
+	}
+
+	if (m_VBO != -1)
+	{
+		glDeleteBuffers(1, &m_VBO);
+	}
+	if (m_EBO != -1)
+	{
+		glDeleteBuffers(1, &m_EBO);
+	}
+	m_VertexNum = meshData.indices.size();
+	glGenVertexArrays(1, &m_VAO);
+	glGenBuffers(1, &m_VBO);
+
+	glBindVertexArray(m_VAO);// 绑定顶点数组对象
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);//绑定顶点缓冲区
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * meshData.vertexData.size(), meshData.vertexData.begin()._Ptr, GL_STATIC_DRAW);
+	//坐标
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(0));
+	glEnableVertexAttribArray(0);
+	//法线
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	//纹理坐标
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
+	//绑定索引缓存
+	glGenBuffers(1, &m_EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, meshData.indices.size() * sizeof(GLuint), meshData.indices.begin()._Ptr, GL_STATIC_DRAW);
+	glBindVertexArray(0);
+}
+
 void Entity::setMaterial(vec3& specular, float shininess)
 {
 	m_material->setVec3("material.specular", specular);

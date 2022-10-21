@@ -40,46 +40,46 @@ void Maze::digMaze(int x, int y)
 		return;
 
 	mat[x][y] = 0;
-	std::random_shuffle(randNum.begin(), randNum.end());
-	for (auto num : randNum)
-	{
-		switch (num)
-		{
-		case 0:
-			if (x < size - 2 &&
-				mat[x + 2][y] != 0 &&
-				mat[x + 1][y] != 0 &&
-				mat[x + 1][y - 1] != 0 &&
-				mat[x + 1][y + 1] != 0)
-				digMaze(x + 1, y);
-			break;
-		case 1:
-			if (x > 1 &&
-				mat[x - 2][y] != 0 &&
-				mat[x - 1][y] != 0 &&
-				mat[x - 1][y - 1] != 0 &&
-				mat[x - 1][y + 1] != 0)
-				digMaze(x - 1, y);
-			break;
-		case 2:
-			if(y < size - 2 &&
-				mat[x][y + 2] != 0 &&
-				mat[x][y + 1] != 0 &&
-				mat[x + 1][y + 1] != 0 &&
-				mat[x - 1][y + 1] != 0)
-				digMaze(x, y + 1);
-			break;
-		case 3:
-			if (y > 1 &&
-				mat[x][y - 2] != 0 &&
-				mat[x][y - 1] != 0 &&
-				mat[x + 1][y - 1] != 0 &&
-				mat[x - 1][y - 1] != 0)
-				digMaze(x, y - 1);
-			break;
-		default:
-			break;
-		}
-	}
+	//std::random_shuffle(randNum.begin(), randNum.end());
+	//for (auto num : randNum)
+	//{
+	//	switch (num)
+	//	{
+	//	case 0:
+	//		if (x < size - 2 &&
+	//			mat[x + 2][y] != 0 &&
+	//			mat[x + 1][y] != 0 &&
+	//			mat[x + 1][y - 1] != 0 &&
+	//			mat[x + 1][y + 1] != 0)
+	//			digMaze(x + 1, y);
+	//		break;
+	//	case 1:
+	//		if (x > 1 &&
+	//			mat[x - 2][y] != 0 &&
+	//			mat[x - 1][y] != 0 &&
+	//			mat[x - 1][y - 1] != 0 &&
+	//			mat[x - 1][y + 1] != 0)
+	//			digMaze(x - 1, y);
+	//		break;
+	//	case 2:
+	//		if(y < size - 2 &&
+	//			mat[x][y + 2] != 0 &&
+	//			mat[x][y + 1] != 0 &&
+	//			mat[x + 1][y + 1] != 0 &&
+	//			mat[x - 1][y + 1] != 0)
+	//			digMaze(x, y + 1);
+	//		break;
+	//	case 3:
+	//		if (y > 1 &&
+	//			mat[x][y - 2] != 0 &&
+	//			mat[x][y - 1] != 0 &&
+	//			mat[x + 1][y - 1] != 0 &&
+	//			mat[x - 1][y - 1] != 0)
+	//			digMaze(x, y - 1);
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//}
 	
 }

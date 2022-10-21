@@ -282,6 +282,9 @@
     <ClCompile Include="ModelEntity.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ModelNode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -444,6 +447,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ModelEntity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelNode.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
