@@ -17,13 +17,11 @@ void ModelEntity::draw()
 
 void ModelEntity::setupModel(const string& path)
 {
-    Model model = Model(MODEL_PATH + path);
-    for (int i = 0; i < model.meshes.size(); i++)
+    m_Model = std::make_shared<Model>(Model(MODEL_PATH + path, false));
+    for (int i = 0; i < m_Model->meshes.size(); i++)
     {
-        auto& sysMaterial = MaterialManager::getInstance()->getSystemMaterial(MaterialType::ModelPBR);
         ModelNode* modelNode = ModelNode::create(MaterialType::PBR);
-        modelNode->setMeshAndBuffer(model.meshes[i]);
-        modelNode->setTexture("container.jpg");
+        modelNode->setMeshAndBuffer(m_Model->meshes[i]);
         this->addChild(modelNode);
     }
 }

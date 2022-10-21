@@ -23,16 +23,16 @@ bool Scene::init()
 	SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
 	this->addChild(skyBox);
 
-	Ground* gnd = Ground::create(MaterialType::PBR);
-	this->addChild(gnd);
+	//Ground* gnd = Ground::create(MaterialType::PBR);
+	//this->addChild(gnd);
 
-	Cube* sp = Cube::create(MaterialType::ModelPBR);
-	sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-	this->addChild(sp);
+	//Cube* sp = Cube::create(MaterialType::ModelPBR);
+	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
+	//this->addChild(sp);
 
-	//ModelEntity* modelEntity = ModelEntity::create();
-	//modelEntity->setupModel("nanosuit/nanosuit.obj");
-	//this->addChild(modelEntity);
+	ModelEntity* modelEntity = ModelEntity::create();
+	modelEntity->setupModel("nanosuit/nanosuit.obj");
+	this->addChild(modelEntity);
 
 	//Circle* w = Circle::create(MaterialType::WithColorAndLight);
 	//w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));

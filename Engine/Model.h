@@ -24,7 +24,7 @@ class Model
 public:
 	/*  Model Data */
 	vector<Texture> textures_loaded;	// stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
-	vector<Mesh> meshes;
+	vector<shared_ptr<Mesh>> meshes;
 	string directory;
 	bool gammaCorrection;
 
@@ -110,7 +110,7 @@ private:
 			// the node object only contains indices to index the actual objects in the scene. 
 			// the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-			meshes.push_back(processMesh(mesh, scene));
+			meshes.push_back(std::make_shared<Mesh>(processMesh(mesh, scene)));
 		}
 		// after we've processed all of the meshes (if any) we then recursively process each of the children nodes
 		for (unsigned int i = 0; i < node->mNumChildren; i++)
@@ -134,13 +134,13 @@ private:
 			glm::vec3 vector; // we declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
 			// positions
 			vector.x = mesh->mVertices[i].x;
-			vector.y = -mesh->mVertices[i].y;
-			vector.z = -mesh->mVertices[i].z;
+			vector.y = mesh->mVertices[i].y;
+			vector.z = mesh->mVertices[i].z;
 			vertex.pos = vector;
 			// normals
 			vector.x = mesh->mNormals[i].x;
-			vector.y = -mesh->mNormals[i].y;
-			vector.z =  -mesh->mNormals[i].z;
+			vector.y = mesh->mNormals[i].y;
+			vector.z = mesh->mNormals[i].z;
 			vertex.normal = vector;
 			// texture coordinates
 			if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
@@ -164,7 +164,7 @@ private:
 			//vector.y = -mesh->mBitangents[i].y;
 			//vector.z = mesh->mBitangents[i].z;
 			//vertex.Bitangent = vector;
-			//vertices.push_back(vertex);
+			vertices.push_back(vertex);
 		}
 		// now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 		for (unsigned int i = 0; i < mesh->mNumFaces; i++)
