@@ -24,6 +24,7 @@ public:
 	friend class Singleton<RenderManager>;
 	static vector<float> quadVertices;
 	static unsigned int getTexture(string& path);
+	static unsigned int getTextureByAbsolutePath(string& path);
 	static unsigned int getHDRTexture(string& path);
 	static unsigned int getCubeTexture(string& path);
 	void init();

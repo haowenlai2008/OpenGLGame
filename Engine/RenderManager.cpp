@@ -40,6 +40,22 @@ unsigned int RenderManager::getTexture(string& path)
 	return 0;
 }
 
+unsigned int RenderManager::getTextureByAbsolutePath(string& path)
+{
+	unsigned int result = 0;
+	if (textures.empty() || textures.find(path) == textures.end())
+	{
+		ResourceTools::LoadTextureByAbsolutePath(result, path);
+		textures.insert(std::pair<string, unsigned int>(path, result));
+		return result;
+	}
+	else
+	{
+		return textures[path];
+	}
+	return 0;
+}
+
 unsigned int RenderManager::getHDRTexture(string& path)
 {
 	unsigned int result = 0;

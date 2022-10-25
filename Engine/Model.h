@@ -17,13 +17,12 @@
 #include <map>
 #include <vector>
 #include "Struct.h"
+#include "RenderManager.h"
 using namespace std;
 
 class Model
 {
 public:
-	/*  Model Data */
-	vector<Texture> textures_loaded;	// stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
 	vector<Mesh> meshes;
 	string directory;
 	bool gammaCorrection;
@@ -209,26 +208,14 @@ private:
 		{
 			aiString str;
 			mat->GetTexture(type, i, &str);
-			// check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
-			bool skip = false;
-			for (unsigned int j = 0; j < textures_loaded.size(); j++)
-			{
-				if (std::strcmp(textures_loaded[j].m_path.data(), str.C_Str()) == 0)
-				{
-					textures.push_back(textures_loaded[j]);
-					skip = true; // 一个拥有相同路径的纹理已经被加载了，去加载下一个
-					break;
-				}
-			}
-			if (!skip)
-			{   //如果纹理没有加载，那就加载
-				Texture texture;
-				texture.m_textureID = TextureFromFile(str.C_Str(), this->directory);
-				texture.m_type = typeName;
-				texture.m_path = str.C_Str();
-				textures.push_back(texture);
-				textures_loaded.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
-			}
+
+			Texture texture;
+			string strCstr = this->directory + '/' + str.C_Str();
+			texture.m_textureID = RenderManager::getTextureByAbsolutePath(strCstr);
+			texture.m_type = typeName;
+			texture.m_path = strCstr;
+			texture.m_textureType = TextureType::Texture2D;
+			textures.push_back(texture);
 		}
 		return textures;
 	}

@@ -7,9 +7,12 @@ struct Material {
     vec3 specular;    
     float shininess;
 }; 
+uniform samplerCube environmentMap;
 uniform Material material;
 
 void main()
 {    
+    //FragColor = texture(environmentMap, TexCoords);
     FragColor = texture(material.diffuse, TexCoords);
+
 }

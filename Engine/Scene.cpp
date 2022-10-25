@@ -20,8 +20,8 @@
 #include "ModelEntity.h"
 bool Scene::init()
 {
-	SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
-	this->addChild(skyBox);
+	//SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
+	//this->addChild(skyBox);
 
 	//Ground* gnd = Ground::create(MaterialType::PBR);
 	//this->addChild(gnd);
