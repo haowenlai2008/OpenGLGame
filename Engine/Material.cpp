@@ -194,10 +194,13 @@ void Material::setTexture(const string& name, const string& path, GLubyte locati
 
 void Material::setTexture(const string& name, Texture& texture, GLubyte location)
 {
-	//auto curTex = Texture();
-	//curTex.m_location = location;
-	//curTex.
-	//uniformTex[name] = ;
+	auto curTex = Texture();
+	curTex.m_location = location;
+	curTex.m_path = texture.m_path;
+	curTex.m_textureType = texture.m_textureType;
+	curTex.m_type = texture.m_type;
+	curTex.m_textureID = texture.m_textureID;
+	uniformTex[name] = curTex;
 }
 
 void Material::setTextureLocation(const string& name, GLubyte location)
