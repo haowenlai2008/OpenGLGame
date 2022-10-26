@@ -58,7 +58,7 @@ bool Entity::init()
 {
 	if (!Node::init())
 		return false;
-	auto& sysMaterial = MaterialManager::getInstance()->getSystemMaterial(m_type);
+	Material sysMaterial = MaterialManager::getInstance()->getSystemMaterial(m_type);
 	m_material = std::make_shared<Material>(sysMaterial);
 	return true;
 }

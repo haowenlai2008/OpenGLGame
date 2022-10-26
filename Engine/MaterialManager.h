@@ -8,7 +8,8 @@ class MaterialManager : public Singleton<MaterialManager>
 public:
 	friend class Singleton<MaterialManager>;
 	bool init();
-	Material& getSystemMaterial(MaterialType materialType);
+	Material getSystemMaterial(MaterialType materialType);
+	Material& getSystemMaterialRef(MaterialType materialType);
 	//Material& createMaterial(const string& matKey);
 	//Material& createMaterial(const string& matKey, MaterialType materialType);
 private:

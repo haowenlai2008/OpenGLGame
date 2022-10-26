@@ -70,7 +70,17 @@ bool MaterialManager::init()
     return true;
 }
 
-Material& MaterialManager::getSystemMaterial(MaterialType materialType)
+Material MaterialManager::getSystemMaterial(MaterialType materialType)
+{
+	auto mat = Material(systemMaterial[materialType]);
+	if (mat.m_Shader.expired())
+	{
+		mat.m_Shader = Shader::getShader(shaderTypeMap[materialType]);
+	}
+	return mat;
+}
+
+Material& MaterialManager::getSystemMaterialRef(MaterialType materialType)
 {
 	auto& mat = systemMaterial[materialType];
 	if (mat.m_Shader.expired())
