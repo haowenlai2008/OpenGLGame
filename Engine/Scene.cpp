@@ -31,6 +31,7 @@ bool Scene::init()
 	//this->addChild(sp);
 
 	ModelEntity* modelEntity = ModelEntity::create();
+	modelEntity->setPosition(vec3(-3.0f, -10, -4));
 	modelEntity->setupModel("nanosuit/nanosuit.obj");
 	this->addChild(modelEntity);
 

@@ -253,8 +253,8 @@ float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
 void main()
 {
     vec4 texColor = texture(material.diffuse, fs_in.TexCoords);
-    if (texColor.a < 0.1)
-        discard;
+    //if (texColor.a < 0.1)
+    //    discard;
     vec3 Lo = vec3(0.0);
     vec3 lightPos = vec3(0.0, 10, 0.0);
     vec3 N = normalize(fs_in.Normal);
@@ -292,7 +292,8 @@ void main()
     float shadow = ShadowCalculation2(fs_in.FragPosLightSpace, N, ldir);
 
     vec3 ambient = vec3(0.03) * albedo * ao;
-    vec3 color   = ambient + Lo * (1.0 - shadow);
+    //vec3 color   = ambient + Lo * (1.0 - shadow);
+    vec3 color   = ambient + Lo;
     color = color / (color + vec3(1.0));
     color = pow(color, vec3(1.0/2.2));
 
