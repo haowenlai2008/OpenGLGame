@@ -50,34 +50,64 @@ public:
 	template <typename S1 = std::string>
 	static void LoadTextureByAbsolutePath(unsigned int& texture, S1&& pic)
 	{
-		glGenTextures(1, &texture);
+		//glGenTextures(1, &texture);
 
+		//// 加载并生成纹理
+		//int width, height, nrChannels;
+		////stbi_set_flip_vertically_on_load(true);
+		//unsigned char* data = stbi_load(std::forward<std::string>(pic).c_str(), &width, &height, &nrChannels, 0);
+		//if (data)
+		//{
+		//	GLenum format;
+		//	//位深度为24，3个通道(jpg
+		//	if (nrChannels == 1)
+		//		format = GL_RED;
+		//	else if (nrChannels == 3)
+		//		format = GL_RGB;
+		//	//位深度为32，4个通道(png
+		//	else if (nrChannels == 4)
+		//		format = GL_RGBA;
+		//	glBindTexture(GL_TEXTURE_2D, texture);
+		//	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		//	glGenerateMipmap(GL_TEXTURE_2D);
+
+
+		//	// 为当前绑定的纹理对象设置环绕、过滤方式
+		//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		//}
+		//else
+		//{
+		//	std::cout << "Failed to load texture" << std::endl;
+		//}
+		//stbi_image_free(data);
+		//data = nullptr;
+
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		// 为当前绑定的纹理对象设置环绕、过滤方式
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		// 加载并生成纹理
 		int width, height, nrChannels;
-		stbi_set_flip_vertically_on_load(true);
+		//stbi_set_flip_vertically_on_load(true);
 		unsigned char* data = stbi_load(std::forward<std::string>(pic).c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			GLenum format;
 			//位深度为24，3个通道(jpg
 			if (nrChannels == 1)
-				format = GL_RED;
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			else if (nrChannels == 3)
-				format = GL_RGB;
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//位深度为32，4个通道(png
 			else if (nrChannels == 4)
-				format = GL_RGBA;
-			glBindTexture(GL_TEXTURE_2D, texture);
-			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
-
-
-			// 为当前绑定的纹理对象设置环绕、过滤方式
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
 		}
 		else
 		{

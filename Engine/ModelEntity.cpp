@@ -20,7 +20,7 @@ void ModelEntity::setupModel(const string& path)
     auto model = Model(MODEL_PATH + path);
     for (int i = 0; i < model.meshes.size(); i++)
     {
-        ModelNode* modelNode = ModelNode::create(MaterialType::WithTex);
+        ModelNode* modelNode = ModelNode::create(MaterialType::PBR);
         modelNode->setMeshAndBuffer(model.meshes[i]);
         unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;
@@ -45,6 +45,7 @@ void ModelEntity::setupModel(const string& path)
             {
                 auto mat =  modelNode->GetMaterial().lock();
                 mat->setTexture("material.diffuse", model.meshes[i].textures[j], 0);
+                //mat->setTexture("material.diffuse", "container2.png", 0, TextureType::Texture2D);
             }
         }
         this->addChild(modelNode);
