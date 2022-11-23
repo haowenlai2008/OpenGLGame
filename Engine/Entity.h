@@ -37,7 +37,6 @@ public:
 	LL_SYNTHESIZE_READ(MaterialType, m_type, EntityType);
 	virtual bool init() override;
 	virtual void draw() override;
-	virtual void renderParamUpdate();
 	void setMeshAndBuffer(std::weak_ptr<Mesh> meshData);
 	void setMeshAndBuffer(const Mesh& meshData);
 	void setMaterial(vec3& specular, float shininess);

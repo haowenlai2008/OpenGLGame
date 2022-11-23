@@ -69,12 +69,6 @@ void Entity::draw()
 	glBindVertexArray(0);
 }
 
-void Entity::renderParamUpdate()
-{
-
-
-}
-
 void Entity::setMeshAndBuffer(std::weak_ptr<Mesh> meshData)
 {
 	auto mesh = meshData.lock();
