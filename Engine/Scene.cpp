@@ -20,20 +20,21 @@
 #include "ModelEntity.h"
 bool Scene::init()
 {
-	//SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
-	//this->addChild(skyBox);
+	SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
+	this->addChild(skyBox);
 
 	//Ground* gnd = Ground::create(MaterialType::PBR);
 	//this->addChild(gnd);
 
-	//Cube* sp = Cube::create(MaterialType::ModelPBR);
-	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-	//this->addChild(sp);
+	Cube* sp = Cube::create(MaterialType::EquirectangularToCubemap);
+	sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
+	sp->setCullFace(GL_FRONT);
+	this->addChild(sp);
 
-	ModelEntity* modelEntity = ModelEntity::create();
-	modelEntity->setPosition(vec3(-3.0f, -10, -4));
-	modelEntity->setupModel("nanosuit/nanosuit.obj");
-	this->addChild(modelEntity);
+	//ModelEntity* modelEntity = ModelEntity::create();
+	//modelEntity->setPosition(vec3(-3.0f, -10, -4));
+	//modelEntity->setupModel("nanosuit/nanosuit.obj");
+	//this->addChild(modelEntity);
 
 	//Circle* w = Circle::create(MaterialType::WithColorAndLight);
 	//w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));

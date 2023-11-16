@@ -36,6 +36,7 @@ Entity::Entity() :
 	lightSrc(nullptr),
 	m_color(glm::vec3(1.0f, 1.0f, 1.0f)),
 	m_type(MaterialType::WithColor),
+	CullFace(GL_BACK),
 	m_VAO(-1),
 	m_VBO(-1),
 	m_DiffuseMap(-1),
@@ -64,9 +65,11 @@ bool Entity::init()
 }
 void Entity::draw()
 {
+	glCullFace(CullFace);
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_VertexNum, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+	glCullFace(GL_BACK);
 }
 
 void Entity::setMeshAndBuffer(std::weak_ptr<Mesh> meshData)

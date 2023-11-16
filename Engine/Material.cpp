@@ -84,6 +84,7 @@ void Material::bindUniform()
 	for (auto& pair : uniformTex)
 	{
 		auto& texInfo = pair.second;
+		GLuint texType = GL_TEXTURE_2D;
 		// 有路径但是没加载的话加载一次
 		if (texInfo.m_textureID == ERROR_TEX_ID && texInfo.m_path != "")
 		{
@@ -94,9 +95,15 @@ void Material::bindUniform()
 			{
 			case TextureType::TextureHDR:
 				textureID = RenderManager::getHDRTexture(srcPath);
+
 				break;
 			case TextureType::TextureCubMap:
 				textureID = RenderManager::getCubeTexture(srcPath);
+				texType = GL_TEXTURE_CUBE_MAP;
+				break;
+			case TextureType::TextureEnv:
+				textureID = RenderManager::getInstance()->getEnvMap();
+				texType = GL_TEXTURE_CUBE_MAP;
 				break;
 			default:
 				textureID = RenderManager::getTexture(srcPath);
@@ -109,7 +116,6 @@ void Material::bindUniform()
 			continue;
 		shader->setInt(pair.first, pair.second.m_location);
 		glActiveTexture(GL_TEXTURE0 + texInfo.m_location);
-		GLuint texType = texInfo.m_textureType == TextureType::TextureCubMap ? GL_TEXTURE_CUBE_MAP : GL_TEXTURE_2D;
 		glBindTexture(texType, texInfo.m_textureID);
 	}
 }

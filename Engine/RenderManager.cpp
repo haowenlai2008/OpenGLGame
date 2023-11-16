@@ -93,7 +93,7 @@ void RenderManager::init()
 	setDepthMap(-1);
 	setEnvMap(-1);
 	setRenderMode(RenderMode::Normal);
-	//equirectangularToCubemap();	// 预计算环境贴图
+	equirectangularToCubemap();	// 预计算环境贴图
 	filterInit();
 	depthFBOInit();
 }
@@ -122,6 +122,7 @@ void RenderManager::depthFBOInit()
 void RenderManager::equirectangularToCubemap()
 {
 	Cube* cb = Cube::create(MaterialType::EquirectangularToCubemap);
+	cb->setCullFace(GL_FRONT);
 	unsigned int captureFBO, captureRBO;
 	glGenFramebuffers(1, &captureFBO);
 	glGenRenderbuffers(1, &captureRBO);

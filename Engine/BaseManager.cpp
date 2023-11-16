@@ -77,6 +77,7 @@ void BaseManager::resize_callback(GLFWwindow* window, int width, int height)
 void BaseManager::runScene(Scene * scene)
 {
 }
+
 mat4 BaseManager::getViewMat4()
 {
 	return m_pGameCamera->getViewMat4();

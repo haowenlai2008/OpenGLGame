@@ -35,6 +35,7 @@ public:
 	LL_SYNTHESIZE(glm::vec3, m_color, Color);//颜色设置
 	LL_SYNTHESIZE(Node*, lightSrc, LightSrc);//光源设置
 	LL_SYNTHESIZE_READ(MaterialType, m_type, EntityType);
+	LL_SYNTHESIZE(GLuint, CullFace, CullFace);		// 设置裁剪方式
 	virtual bool init() override;
 	virtual void draw() override;
 	void setMeshAndBuffer(std::weak_ptr<Mesh> meshData);
