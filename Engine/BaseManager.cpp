@@ -197,7 +197,7 @@ void BaseManager::mainLoop()
 
 
 		m_pRefManager->update();	//引用计数更新
-		m_pLogicManager->update(originNode, deltaTime);
+		m_pLogicManager->update(originNode, deltaTime);		// 逻辑系统更新
 
 		// 物理系统更新三连
 		m_pPhysicsManager->prePhysicUpdate(originNode, deltaTime);	// 刚体的位置更新到物体的位置
