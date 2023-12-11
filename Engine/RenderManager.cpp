@@ -8,20 +8,23 @@
 #include "Cube.h"
 #include "Material.h"
 #include "MaterialManager.h"
+#include "RP_IBLPreRenderPass.h"
+#include "RP_PostProcessPass.h"
+#include "RP_ScenePass.h"
+#include "RP_ShadowMapPass.h"
+#include "RP_RenderPass.h"
 #include <map>
 #include <vector>
+
 using std::vector;
-std::map<string, int> RenderManager::textures;
+std::map<string, GLuint> RenderManager::textures;
 
-vector<float> RenderManager::quadVertices = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
-	 //positions   // texCoords
-	-1.0f,  1.0f,  0.0f, 1.0f,
-	-1.0f, -1.0f,  0.0f, 0.0f,
-	 1.0f, -1.0f,  1.0f, 0.0f,
+GlobalTextureStructure RenderManager::globleTexture = {
+	-1, -1, -1
+};
 
-	-1.0f,  1.0f,  0.0f, 1.0f,
-	 1.0f, -1.0f,  1.0f, 0.0f,
-	 1.0f,  1.0f,  1.0f, 1.0f
+GlobleBufferStructure RenderManager::globalBuffer = {
+	-1, -1, -1
 };
 
 unsigned int RenderManager::getTexture(string& path)
@@ -90,12 +93,23 @@ unsigned int RenderManager::getCubeTexture(string& path)
 
 void RenderManager::init()
 {
-	setDepthMap(-1);
-	setEnvMap(-1);
-	setRenderMode(RenderMode::Normal);
-	equirectangularToCubemap();	// 预计算环境贴图
-	filterInit();
-	depthFBOInit();
+	m_RenderPassList =
+	{
+		std::make_shared<RP_IBLPreRenderPass>(),
+		std::make_shared<RP_ShadowMapPass>(),
+		std::make_shared<RP_ScenePass>(),
+		std::make_shared<RP_PostProcessPass>(),
+	};
+	for (weak_ptr<RP_RenderPass> rp_wptr : m_RenderPassList)
+	{
+		rp_wptr.lock().get()->Init();
+	}
+	//setDepthMap(-1);
+	//setEnvMap(-1);
+	//setRenderMode(RenderMode::Normal);
+	//equirectangularToCubemap();	// 预计算环境贴图
+	//filterInit();
+	//depthFBOInit();
 }
 
 const GLuint SHADOW_WIDTH = 4096, SHADOW_HEIGHT = 4096;
@@ -119,6 +133,8 @@ void RenderManager::depthFBOInit()
 
 	//m_SimpleDepthShader = Shader::getShader("simpleDepth");
 }
+
+// 环境贴图
 void RenderManager::equirectangularToCubemap()
 {
 	Cube* cb = Cube::create(MaterialType::EquirectangularToCubemap);
@@ -181,6 +197,18 @@ void RenderManager::equirectangularToCubemap()
 //滤镜初始化(创建帧缓冲)
 void RenderManager::filterInit()
 {
+	// 一次性顶点无所谓了
+	vector<float> quadVertices = {
+		//positions   // texCoords
+	   -1.0f,  1.0f,  0.0f, 1.0f,
+	   -1.0f, -1.0f,  0.0f, 0.0f,
+		1.0f, -1.0f,  1.0f, 0.0f,
+
+	   -1.0f,  1.0f,  0.0f, 1.0f,
+		1.0f, -1.0f,  1.0f, 0.0f,
+		1.0f,  1.0f,  1.0f, 1.0f
+	};
+
 	//创建帧缓冲的窗体(一个正方形)
 	glGenVertexArrays(1, &quadVAO);
 	glGenBuffers(1, &quadVBO);
@@ -228,6 +256,7 @@ void RenderManager::filterInit()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+// 后处理
 void RenderManager::postProcess()
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -270,15 +299,22 @@ void RenderManager::update(Node * node)
 void RenderManager::draw()
 {
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	shadowMapRenderBegin();
-	renderScene();
-	shadowMapRenderEnd();
+	// 先画ShadowMap
+	//shadowMapRenderBegin();
+	//renderScene();
+	//shadowMapRenderEnd();
 
-	bindFrameBuffer();
-	renderScene();
-	postProcess();
+	//bindFrameBuffer();
+	//renderScene();
+	//postProcess();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	for (weak_ptr<RP_RenderPass> rp_wptr : m_RenderPassList)
+	{
+		rp_wptr.lock().get()->Render();
+	}
 	auto newList = std::list<Node*>();
 	drawObjects.swap(newList);
+
 }
 
 void RenderManager::bindFrameBuffer()
@@ -356,10 +392,6 @@ void RenderManager::renderScene()
 			p->draw();
 		}
 	}
-}
-
-void RenderManager::renderEntity(Node* p)
-{
 }
 
 

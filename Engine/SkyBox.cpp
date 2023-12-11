@@ -12,7 +12,7 @@ bool SkyBox::init()
 {
 	if (!Entity::init())
 		return false;
-	setMeshAndBuffer(VertexFactory::getSphereData());
+	setMeshAndBuffer(VertexFactory::getBoxData());
 	return true;
 }
 

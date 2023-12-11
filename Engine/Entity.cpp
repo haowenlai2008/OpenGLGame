@@ -63,6 +63,7 @@ bool Entity::init()
 	m_material = std::make_shared<Material>(sysMaterial);
 	return true;
 }
+
 void Entity::draw()
 {
 	glCullFace(CullFace);

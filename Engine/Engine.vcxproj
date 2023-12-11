@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -188,6 +188,11 @@
     <ClCompile Include="ResourceTools.cpp" />
     <ClCompile Include="RightWheel.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
+    <ClCompile Include="RP_IBLPreRenderPass.cpp" />
+    <ClCompile Include="RP_PostProcessPass.cpp" />
+    <ClCompile Include="RP_RenderPass.cpp" />
+    <ClCompile Include="RP_ScenePass.cpp" />
+    <ClCompile Include="RP_ShadowMapPass.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
@@ -244,6 +249,11 @@
     <ClInclude Include="ResourceTools.h" />
     <ClInclude Include="RightWheel.h" />
     <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="RP_IBLPreRenderPass.h" />
+    <ClInclude Include="RP_PostProcessPass.h" />
+    <ClInclude Include="RP_RenderPass.h" />
+    <ClInclude Include="RP_ScenePass.h" />
+    <ClInclude Include="RP_ShadowMapPass.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Singleton.h" />

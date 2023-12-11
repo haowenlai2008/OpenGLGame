@@ -39,3 +39,10 @@ enum class TextureType
 	TextureEnv,
 	TextureCubMap,
 };
+
+// äÖÈ¾Ä£Ê½
+enum class RenderMode
+{
+	TestDepthMap,
+	Normal,
+};

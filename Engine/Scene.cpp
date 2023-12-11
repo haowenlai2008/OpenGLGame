@@ -23,12 +23,19 @@ bool Scene::init()
 	SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
 	this->addChild(skyBox);
 
-	//Ground* gnd = Ground::create(MaterialType::PBR);
-	//this->addChild(gnd);
+	Ground* gnd = Ground::create(MaterialType::PBR);
+	this->addChild(gnd);
 
-	Cube* sp = Cube::create(MaterialType::EquirectangularToCubemap);
+	//Cube* sp = Cube::create(MaterialType::PBRCube);
+	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
+	//sp->setCubeTexture("skybox");
+	//sp->setCullFace(GL_FRONT);
+	//this->addChild(sp);
+
+	Cube* sp = Cube::create(MaterialType::PBR);
 	sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-	sp->setCullFace(GL_FRONT);
+	sp->setTexture("back__.jpg");
+	//sp->setCullFace(GL_FRONT);
 	this->addChild(sp);
 
 	//ModelEntity* modelEntity = ModelEntity::create();

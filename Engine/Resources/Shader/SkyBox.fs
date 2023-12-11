@@ -7,8 +7,9 @@ struct Material {
     vec3 specular;    
     float shininess;
 }; 
-uniform samplerCube environmentMap;
+
 uniform Material material;
+uniform samplerCube environmentMap;
 
 void main()
 {    

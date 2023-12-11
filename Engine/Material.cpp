@@ -102,7 +102,7 @@ void Material::bindUniform()
 				texType = GL_TEXTURE_CUBE_MAP;
 				break;
 			case TextureType::TextureEnv:
-				textureID = RenderManager::getInstance()->getEnvMap();
+				textureID = RenderManager::globleTexture.iblTexture;
 				texType = GL_TEXTURE_CUBE_MAP;
 				break;
 			default:

@@ -6,6 +6,7 @@
 #include <vector>
 #include "Singleton.h"
 #include "func.h"
+#include "Struct.h"
 using std::list;
 using std::map;
 using std::string;
@@ -13,20 +14,35 @@ using std::vector;
 class Node;
 class Shader;
 class Camera;
-enum class RenderMode
+class RP_RenderPass;
+// 全局纹理
+struct GlobalTextureStructure
 {
-	TestDepthMap,
-	Normal,
+	GLuint shadowMapTexture;
+	GLuint iblTexture;
+	GLuint scenePassTexture;
 };
+
+// 全局buffer
+struct GlobleBufferStructure
+{
+	GLuint shadowMapBuffer;
+	GLuint iblBuffer;
+	GLuint scenePassBuffer;
+};
+
 class RenderManager : public Singleton<RenderManager>
 {
 public:
 	friend class Singleton<RenderManager>;
-	static vector<float> quadVertices;
-	static unsigned int getTexture(string& path);
-	static unsigned int getTextureByAbsolutePath(string& path);
-	static unsigned int getHDRTexture(string& path);
-	static unsigned int getCubeTexture(string& path);
+	list<Node*> drawObjects;		// 需要渲染的物体集合，每帧清除
+	list<std::shared_ptr<RP_RenderPass>> m_RenderPassList;	// 管线
+	static GlobalTextureStructure globleTexture;	// 全局纹理
+	static GlobleBufferStructure globalBuffer;		// 全局Buffer
+	static GLuint getTexture(string& path);
+	static GLuint getTextureByAbsolutePath(string& path);
+	static GLuint getHDRTexture(string& path);
+	static GLuint getCubeTexture(string& path);
 	void init();
 	void depthFBOInit();
 	void equirectangularToCubemap();
@@ -38,7 +54,7 @@ public:
 	void shadowMapRenderBegin();
 	void shadowMapRenderEnd();
 	void renderScene();
-	void renderEntity(Node* p);
+
 	LL_SYNTHESIZE(bool, m_IsShadow, IsShadow);	// 是否正在渲染阴影
 	LL_SYNTHESIZE(GLuint, m_CurrentFBO, CurrentFBO);	// 获得当前帧缓冲
 	LL_SYNTHESIZE(RenderMode, m_Rendermode, RenderMode); // 设置当前渲染模式
@@ -48,6 +64,7 @@ public:
 	std::shared_ptr<Shader> getSimpleDepthShader();
 	~RenderManager();
 private:
+
 	GLuint framebuffer;			//帧缓冲
 	GLuint textureColorbuffer;	//颜色缓冲
 	GLuint rbo;					//渲染缓冲对象
@@ -60,7 +77,7 @@ private:
 	GLuint gColorSpec;
 	std::weak_ptr<Shader> m_SimpleDepthShader;
 	std::weak_ptr<Shader> screenShader;
-	list<Node*> drawObjects;		// 需要渲染的物体集合，每帧清除
-	static map<string, int> textures;
+
+	static map<string, GLuint> textures;
 	void filterInit();
 };

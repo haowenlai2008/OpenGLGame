@@ -112,8 +112,8 @@ void BaseManager::baseInit()
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
-	screenWidth = 720.0f;
-	screenHeight = 480.0f;
+	screenWidth = 2560;
+	screenHeight = 1440;
 	//´´½¨´°¿Ú
 	glWindow = glfwCreateWindow(screenWidth, screenHeight, "LearnOpenGL", nullptr, nullptr);
 	if (glWindow == nullptr)
