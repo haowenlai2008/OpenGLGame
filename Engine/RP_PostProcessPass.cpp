@@ -94,3 +94,9 @@ bool RP_PostProcessPass::Render()
 	glDrawArrays(GL_TRIANGLES, 0, 6);
     return true;
 }
+
+RP_PostProcessPass::~RP_PostProcessPass()
+{
+	glDeleteVertexArrays(1, &quadVAO);
+	glDeleteBuffers(1, &quadVBO);
+}

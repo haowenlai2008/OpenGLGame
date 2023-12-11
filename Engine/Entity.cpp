@@ -22,12 +22,6 @@ void Entity::setCubeTexture(string&& src)
 	m_material->setTextureCacheID("material.diffuse", m_DiffuseMap);
 }
 
-void Entity::bindShaderResource()
-{
-	if (RenderManager::getInstance()->getIsShadow())
-		return;
-
-}
 weak_ptr<Material> Entity::GetMaterial()
 {
 	return m_material;

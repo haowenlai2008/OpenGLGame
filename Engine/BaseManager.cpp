@@ -181,7 +181,6 @@ void BaseManager::mainLoop()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		RenderManager::getInstance()->bindFrameBuffer();//°ó¶¨Ö¡»º³å
 		glEnable(GL_DEPTH_TEST);
 		
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -210,6 +209,7 @@ void BaseManager::mainLoop()
 		m_pGameCamera->updateViewProjMatrix();
 		m_pLightCamera->updateViewProjMatrix();
 
+		// äÖÈ¾
 		m_pRenderManager->draw();
 		
 

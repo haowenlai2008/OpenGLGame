@@ -19,7 +19,7 @@ class RP_RenderPass;
 struct GlobalTextureStructure
 {
 	GLuint shadowMapTexture;
-	GLuint iblTexture;
+	GLuint environmentMapIBL;
 	GLuint scenePassTexture;
 };
 
@@ -27,7 +27,7 @@ struct GlobalTextureStructure
 struct GlobleBufferStructure
 {
 	GLuint shadowMapBuffer;
-	GLuint iblBuffer;
+	GLuint environmentBufferIBL;
 	GLuint scenePassBuffer;
 };
 
@@ -44,40 +44,15 @@ public:
 	static GLuint getHDRTexture(string& path);
 	static GLuint getCubeTexture(string& path);
 	void init();
-	void depthFBOInit();
 	void equirectangularToCubemap();
-	void update(Node* node);
 	void draw();
-	void bindFrameBuffer();
-	void postProcess();
 	void addDrawNode(Node* node);
-	void shadowMapRenderBegin();
-	void shadowMapRenderEnd();
-	void renderScene();
-
-	LL_SYNTHESIZE(bool, m_IsShadow, IsShadow);	// 是否正在渲染阴影
-	LL_SYNTHESIZE(GLuint, m_CurrentFBO, CurrentFBO);	// 获得当前帧缓冲
-	LL_SYNTHESIZE(RenderMode, m_Rendermode, RenderMode); // 设置当前渲染模式
-	// 特殊贴图
-	LL_SYNTHESIZE(GLuint, m_DepthMap, DepthMap);	// shadowmap
-	LL_SYNTHESIZE(GLuint, m_EnvMap, EnvMap);		// 环境贴图
 	std::shared_ptr<Shader> getSimpleDepthShader();
-	~RenderManager();
 private:
-
-	GLuint framebuffer;			//帧缓冲
-	GLuint textureColorbuffer;	//颜色缓冲
-	GLuint rbo;					//渲染缓冲对象
-	GLuint quadVAO, quadVBO;		//帧缓冲的窗口的顶点数组对象和顶点缓冲对象
-	GLuint m_DepthFrameBuffer;		// 深度缓冲
-
 	// 延迟渲染用
 	GLuint gPosition;
 	GLuint gNormal;
 	GLuint gColorSpec;
 	std::weak_ptr<Shader> m_SimpleDepthShader;
-	std::weak_ptr<Shader> screenShader;
-
 	static map<string, GLuint> textures;
-	void filterInit();
 };

@@ -24,7 +24,7 @@ bool RP_ScenePass::Render()
 	glm::vec3 viewPos = baseManager->getViewPos();
 	glm::vec3 lightPos = baseManager->getLightPos();
 	GLuint shadowMap = RenderManager::globleTexture.shadowMapTexture;
-	GLuint envMap = RenderManager::globleTexture.iblTexture;
+	GLuint envMap = RenderManager::globleTexture.environmentMapIBL;
 	for (auto p : RenderManager::getInstance()->drawObjects)
 	{
 		if (p != nullptr && p->count != 0)
