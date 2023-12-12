@@ -21,6 +21,7 @@ public:
 	float screenHeight;
 	float saturation;
 	float contrast;
+
 	std::shared_ptr<GameCamera> getCamera();
 	std::shared_ptr<LightCamera> getLightCamera();
 	int run();
@@ -35,6 +36,7 @@ public:
 	mat4 getLightSpaceMat4();	// 获得光空间转换矩阵
 	vec3 getViewPos();	// 获得观察点
 	vec3 getLightPos();	// 获得光源
+	vec4 clearColor = vec4(1.0, 1.0, 1.0, 1.0);
 	LL_SYNTHESIZE(MyKeyboard::State, m_KeyboardState, KeyboardState);
 	LL_SYNTHESIZE(MyMouse::State, m_MouseState, MouseState);
 	~BaseManager();

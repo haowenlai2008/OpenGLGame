@@ -7,6 +7,9 @@ struct Material {
     samplerCube diffuse;
     vec3 specular;    
     float shininess;
+    float metallic;
+    float roughness;
+    float ao;
 }; 
 
 struct Light {
@@ -223,8 +226,8 @@ float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
 void main()
 {
     vec4 texColor = texture(material.diffuse, fs_in.TexCoords);
-    if (texColor.a < 0.1)
-        discard;
+    //if (texColor.a < 0.1)
+    //    discard;
     vec3 Lo = vec3(0.0);
     vec3 lightPos = vec3(0.0, 10, 0.0);
     vec3 N = normalize(fs_in.Normal);
@@ -233,13 +236,12 @@ void main()
     vec3 H = normalize(V + L);
     float distance = length(lightPos - fs_in.FragPos);
     float attenuation =  1.0/(distance * distance);
-    vec3 lightColor = vec3(1.0);
-    // vec3 radiance = lightColor * attenuation;
-    vec3 radiance = lightColor;
+    vec3 lightColor = vec3(2.0, 2.0, 2.0);
+    vec3 radiance = lightColor * attenuation;
     vec3 albedo = texColor.rgb;
-    float metallic = 0.3;
-    float roughness = 0.2;
-    float ao = 0.1;
+    float metallic = material.metallic;
+    float roughness = material.roughness;
+    float ao = material.ao;
     // Fresnel
     vec3 F0 = vec3(0.04); 
     F0      = mix(F0, albedo, metallic);
@@ -255,16 +257,17 @@ void main()
     vec3 kD = vec3(1.0) - kS;
     kD *= 1.0 - metallic;
 
-    float NdotL = max(dot(N, L), 0.0);
+    float NdotL = max(dot(N, L), 0.0);        
     Lo += (kD * albedo / PI + specular) * radiance * NdotL;
 
-    vec3 ldir = -normalize(light.position - fs_in.FragPos);
-    float shadow = ShadowCalculation(fs_in.FragPosLightSpace, N, ldir);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-    vec3 ambient = vec3(0.03) * albedo * 1.0;
-    vec3 color   = ambient + Lo * (1.0 - shadow);
+    vec3 ldir = -normalize(lightPos - fs_in.FragPos);
+    float shadow = ShadowCalculation(fs_in.FragPosLightSpace, N, ldir);
+
+    vec3 ambient = vec3(0.03) * albedo * ao;
+    //vec3 color   = ambient + Lo * (1.0 - shadow);
+    vec3 color   = ambient + Lo;
     color = color / (color + vec3(1.0));
     color = pow(color, vec3(1.0/2.2));
 
     FragColor = vec4(color, 1.0);
-    //FragColor = texColor;
 } 

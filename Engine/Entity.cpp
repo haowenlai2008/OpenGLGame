@@ -12,14 +12,12 @@
 
 void Entity::setTexture(string&& src)
 {
-	m_DiffuseMap = RenderManager::getTexture(src);
-	m_material->setTextureCacheID("material.diffuse", m_DiffuseMap);
+	m_material->setTexture("material.diffuse", src, 0, TextureType::Texture2D);
 }
 
 void Entity::setCubeTexture(string&& src)
 {
-	m_DiffuseMap = RenderManager::getCubeTexture(src);
-	m_material->setTextureCacheID("material.diffuse", m_DiffuseMap);
+	m_material->setTexture("material.diffuse", src, 0, TextureType::TextureCubMap);
 }
 
 weak_ptr<Material> Entity::GetMaterial()

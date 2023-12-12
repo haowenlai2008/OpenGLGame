@@ -29,8 +29,12 @@ bool RP_ShadowMapPass::Render()
 {
 	// °ó¶¨shadowmapµÄbuffer
 	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
-	glBindFramebuffer(GL_FRAMEBUFFER, RenderManager::globalBuffer.scenePassBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, RenderManager::globalBuffer.shadowMapBuffer);
 	glClear(GL_DEPTH_BUFFER_BIT);
+
+	vec4 clearColor = BaseManager::getInstance()->clearColor;
+	glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	BaseManager* baseManager = BaseManager::getInstance();
 	MaterialManager* matManager = MaterialManager::getInstance();
@@ -51,28 +55,15 @@ bool RP_ShadowMapPass::Render()
 			auto shader = material.m_Shader.lock();
 			glm::mat4 model = p->getModelMatrix();
 			shader->use();
-			shader->setMat4("projection", projection);
-			shader->setMat4("view", view);
 			shader->setMat4("model", model);
 			shader->setMat4("lightSpaceMatrix", lightSpace);
-			shader->setVec3("viewPos", viewPos);
-			shader->setVec3("light.position", lightPos);
-
-			if (material.castShadow && shadowMap != -1)
-			{
-				material.setTextureCacheID("shadowMap", shadowMap);
-			}
-			if (material.requireEnvironmentMap && envMap != -1)
-			{
-				material.setTextureCacheID("environmentMap", envMap);
-			}
 			material.bindUniform();
 
 			p->draw();
 		}
 	}
 
-
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	BaseManager* bmp = BaseManager::getInstance();
 	glViewport(0, 0, bmp->screenWidth, bmp->screenHeight);
 

@@ -15,6 +15,11 @@ bool RP_ScenePass::Render()
 	glBindFramebuffer(GL_FRAMEBUFFER, RenderManager::globalBuffer.scenePassBuffer);
 	glDepthFunc(GL_LESS);
 	glCullFace(GL_BACK);
+
+	vec4 clearColor = BaseManager::getInstance()->clearColor;
+	glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	BaseManager* baseManager = BaseManager::getInstance();
 	MaterialManager* matManager = MaterialManager::getInstance();
@@ -41,21 +46,15 @@ bool RP_ScenePass::Render()
 			shader->setVec3("viewPos", viewPos);
 			shader->setVec3("light.position", lightPos);
 
-			if (material.castShadow && shadowMap != -1)
-			{
-
-				material.setTextureCacheID("shadowMap", shadowMap);
-			}
-			if (material.requireEnvironmentMap && envMap != -1)
-			{
-				material.setTextureCacheID("environmentMap", envMap);
-			}
-			material.bindUniform();
-
-			//if (p->getDebugID() == 100)
+			//if (material.castShadow && shadowMap != -1)
 			//{
-			//	std::cout << "hahahahah" << std::endl;
+			//	material.setTextureCacheID("shadowMap", shadowMap);
 			//}
+			//if (material.requireEnvironmentMap && envMap != -1)
+			//{
+			//	material.setTextureCacheID("environmentMap", envMap);
+			//}
+			material.bindUniform();
 			p->draw();
 		}
 	}

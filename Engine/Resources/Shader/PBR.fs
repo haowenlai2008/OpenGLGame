@@ -5,6 +5,9 @@ struct Material {
     sampler2D diffuse;
     vec3 specular;    
     float shininess;
+    float metallic;
+    float roughness;
+    float ao;
 }; 
 
 struct Light {
@@ -132,7 +135,8 @@ float ShadowCalculation2(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 {
     // 执行透视除法
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
-
+    if (projCoords.x < -1 || projCoords.x > 1 || projCoords.y < -1 || projCoords.y > 1)
+        return 0f;
     // 变换到[0,1]的范围
     projCoords = projCoords * 0.5 + 0.5;
     float shadowTmp;
@@ -158,7 +162,8 @@ float ShadowCalculationRound(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 {
     // 执行透视除法
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
-
+    if (projCoords.x < -1 || projCoords.x > 1 || projCoords.y < -1 || projCoords.y > 1)
+        return 0f;
     // 变换到[0,1]的范围
     projCoords = projCoords * 0.5 + 0.5;
     float shadowTmp;
@@ -263,13 +268,12 @@ void main()
     vec3 H = normalize(V + L);
     float distance = length(lightPos - fs_in.FragPos);
     float attenuation =  1.0/(distance * distance);
-    vec3 lightColor = vec3(1.0);
-    //vec3 radiance = lightColor * attenuation;
-    vec3 radiance = lightColor;
+    vec3 lightColor = vec3(1.0, 0.5, 0.5);
+    vec3 radiance = lightColor * attenuation;
     vec3 albedo = texColor.rgb;
-    float metallic = 0.3;
-    float roughness = 0.2;
-    float ao = 1.0;
+    float metallic = material.metallic;
+    float roughness = material.roughness;
+    float ao = material.ao;
     // Fresnel
     vec3 F0 = vec3(0.04); 
     F0      = mix(F0, albedo, metallic);

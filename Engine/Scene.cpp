@@ -20,23 +20,23 @@
 #include "ModelEntity.h"
 bool Scene::init()
 {
-	SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
-	this->addChild(skyBox);
+	//SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
+	//this->addChild(skyBox);
 
-	Ground* gnd = Ground::create(MaterialType::PBR);
+	Ground* gnd = Ground::create(MaterialType::WithTexAndLight);
 	this->addChild(gnd);
 
-	//Cube* sp = Cube::create(MaterialType::PBRCube);
-	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-	//sp->setCubeTexture("skybox");
-	//sp->setCullFace(GL_FRONT);
-	//this->addChild(sp);
-
-	Cube* sp = Cube::create(MaterialType::PBR);
-	sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-	sp->setTexture("back__.jpg");
+	Sphere* sp = Sphere::create(MaterialType::PBRCube);
+	sp->setPosition(glm::vec3(0.0f, 3.0f, 3.0f));
+	sp->setCubeTexture("skybox");
 	//sp->setCullFace(GL_FRONT);
 	this->addChild(sp);
+
+	//Sphere* sp = Sphere::create(MaterialType::PBR);
+	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
+	//sp->setTexture("back__.jpg");
+	//sp->setCullFace(GL_FRONT);
+	//this->addChild(sp);
 
 	//ModelEntity* modelEntity = ModelEntity::create();
 	//modelEntity->setPosition(vec3(-3.0f, -10, -4));

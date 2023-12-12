@@ -6,6 +6,7 @@ enum class MaterialType
 	WithColor,
 	WithColorAndLight,
 	WithTex,
+	WithTexAndLight,
 	PBR,
 	PBRCube, //
 	SimpleDepth,

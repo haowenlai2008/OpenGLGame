@@ -84,34 +84,52 @@ void Material::bindUniform()
 	for (auto& pair : uniformTex)
 	{
 		auto& texInfo = pair.second;
+		string srcPath = texInfo.m_path;
 		GLuint texType = GL_TEXTURE_2D;
-		// 有路径但是没加载的话加载一次
-		if (texInfo.m_textureID == ERROR_TEX_ID && texInfo.m_path != "")
+		GLuint textureID = ERROR_TEX_ID;
+		TextureType textureType = texInfo.m_textureType;
+
+		// 读文件的纹理
+		if (texInfo.m_textureID == ERROR_TEX_ID && texInfo.m_path != "") // 有路径但是没加载的话加载一次
 		{
-			TextureType textureType = texInfo.m_textureType;
-			string srcPath = texInfo.m_path;
-			GLuint textureID;
 			switch (textureType)
 			{
 			case TextureType::TextureHDR:
 				textureID = RenderManager::getHDRTexture(srcPath);
-
 				break;
 			case TextureType::TextureCubMap:
 				textureID = RenderManager::getCubeTexture(srcPath);
-				texType = GL_TEXTURE_CUBE_MAP;
-				break;
-			case TextureType::TextureEnv:
-				textureID = RenderManager::globleTexture.environmentMapIBL;
 				texType = GL_TEXTURE_CUBE_MAP;
 				break;
 			default:
 				textureID = RenderManager::getTexture(srcPath);
 				break;
 			}
-			texInfo.m_textureID = textureID;
 			std::cout << "Load " << srcPath << std::endl;
 		}
+		else
+			textureID = texInfo.m_textureID;
+
+
+		// 特殊纹理
+		switch (textureType)
+		{
+		case TextureType::TextureEnv:
+			textureID = RenderManager::globleTexture.environmentMapIBL;
+			texType = GL_TEXTURE_CUBE_MAP;
+			break;
+		case TextureType::ShadowMap:
+			textureID = RenderManager::globleTexture.shadowMapTexture;
+			break;
+		default:
+			break;
+		case TextureType::TextureCubMap:
+			texType = GL_TEXTURE_CUBE_MAP;
+			break;
+		}
+
+		texInfo.m_textureID = textureID;
+
 		if (texInfo.m_textureID == ERROR_TEX_ID)
 			continue;
 		shader->setInt(pair.first, pair.second.m_location);

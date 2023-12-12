@@ -163,16 +163,16 @@ void RenderManager::init()
 		std::make_shared<RP_ScenePass>(),
 		std::make_shared<RP_PostProcessPass>(),
 	};
-	for (weak_ptr<RP_RenderPass> rp_wptr : m_RenderPassList)
-		rp_wptr.lock().get()->Init();
+	for (shared_ptr<RP_RenderPass>& rp_ptr : m_RenderPassList)
+		rp_ptr->Init();
 }
 
 // π‹œﬂ
 void RenderManager::draw()
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	for (weak_ptr<RP_RenderPass> rp_wptr : m_RenderPassList)
-		rp_wptr.lock().get()->Render();
+	for (shared_ptr<RP_RenderPass>& rp_ptr : m_RenderPassList)
+		rp_ptr->Render();
 	std::list<Node*>().swap(drawObjects);
 
 }

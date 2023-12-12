@@ -192,9 +192,6 @@
     <ClCompile Include="GameCamera.cpp">
       <Filter>源文件\摄像机</Filter>
     </ClCompile>
-    <ClCompile Include="LightCamera.cpp">
-      <Filter>源文件\摄像机</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>源文件\基类</Filter>
     </ClCompile>
@@ -306,6 +303,9 @@
     <ClCompile Include="RP_RenderPass.cpp">
       <Filter>源文件\Pass</Filter>
     </ClCompile>
+    <ClCompile Include="LightCamera.cpp">
+      <Filter>源文件\摄像机</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -381,9 +381,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="GameCamera.h">
-      <Filter>头文件\摄像机</Filter>
-    </ClInclude>
-    <ClInclude Include="LightCamera.h">
       <Filter>头文件\摄像机</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
@@ -487,6 +484,9 @@
     </ClInclude>
     <ClInclude Include="RP_RenderPass.h">
       <Filter>头文件\Pass</Filter>
+    </ClInclude>
+    <ClInclude Include="LightCamera.h">
+      <Filter>头文件\摄像机</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
