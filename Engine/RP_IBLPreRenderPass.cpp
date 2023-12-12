@@ -4,9 +4,8 @@
 
 bool RP_IBLPreRenderPass::Init()
 {
-    //unsigned int envCubemap;
-    //glGenTextures(1, &envCubemap);
-    //glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
+    //glGenTextures(1, &RenderManager::globleTexture.environmentMapIBL);
+    //glBindTexture(GL_TEXTURE_CUBE_MAP, RenderManager::globleTexture.environmentMapIBL);
     //for (unsigned int i = 0; i < 6; ++i)
     //{
     //    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 512, 512, 0, GL_RGB, GL_FLOAT, nullptr);
@@ -43,7 +42,7 @@ bool RP_IBLPreRenderPass::Init()
     //for (unsigned int i = 0; i < 6; ++i)
     //{
     //    equirectangularToCubemapShader.setMat4("view", captureViews[i]);
-    //    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, envCubemap, 0);
+    //    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, RenderManager::globleTexture.environmentMapIBL, 0);
     //    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     //    renderCube();
@@ -51,7 +50,7 @@ bool RP_IBLPreRenderPass::Init()
     //glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     //// then let OpenGL generate mipmaps from first mip face (combatting visible dots artifact)
-    //glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
+    //glBindTexture(GL_TEXTURE_CUBE_MAP, RenderManager::globleTexture.environmentMapIBL);
     //glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
 
     //// pbr: create an irradiance cubemap, and re-scale capture FBO to irradiance scale.
@@ -79,7 +78,7 @@ bool RP_IBLPreRenderPass::Init()
     //irradianceShader.setInt("environmentMap", 0);
     //irradianceShader.setMat4("projection", captureProjection);
     //glActiveTexture(GL_TEXTURE0);
-    //glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
+    //glBindTexture(GL_TEXTURE_CUBE_MAP, RenderManager::globleTexture.environmentMapIBL);
 
     //glViewport(0, 0, 32, 32); // don't forget to configure the viewport to the capture dimensions.
     //glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
