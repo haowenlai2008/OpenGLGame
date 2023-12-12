@@ -11,44 +11,44 @@ Material::Material(std::initializer_list<pair<string, UniformValue>> uniformList
 	castShadow(false),
 	requireEnvironmentMap(false)
 {
-	for (auto& p : uniformList)
+	for (auto& [uniformName, uniformValue] : uniformList)
 	{
-		switch (p.second.m_type)
+		switch (uniformValue.m_type)
 		{
 		case UniformType::Bool:
-			uniformBool.insert({ p.first, std::get<bool>(p.second.data) });
+			uniformBool.insert({ uniformName, std::get<bool>(uniformValue.data) });
 			break;
 		case UniformType::Int:
-			uniformInt.insert({ p.first, std::get<int>(p.second.data) });
+			uniformInt.insert({ uniformName, std::get<int>(uniformValue.data) });
 			break;
 		case UniformType::Float:
-			uniformFloat.insert({ p.first, std::get<float>(p.second.data) });
+			uniformFloat.insert({ uniformName, std::get<float>(uniformValue.data) });
 			break;
 		case UniformType::Vec2:
-			uniformVec2.insert({ p.first, std::get<vec2>(p.second.data) });
+			uniformVec2.insert({ uniformName, std::get<vec2>(uniformValue.data) });
 			break;
 		case UniformType::Vec3:
-			uniformVec3.insert({ p.first, std::get<vec3>(p.second.data) });
+			uniformVec3.insert({ uniformName, std::get<vec3>(uniformValue.data) });
 			break;
 		case UniformType::Vec4:
-			uniformVec4.insert({ p.first, std::get<vec4>(p.second.data) });
+			uniformVec4.insert({ uniformName, std::get<vec4>(uniformValue.data) });
 			break;
 		case UniformType::Mat2:
-			uniformMat2.insert({ p.first, std::get<mat2>(p.second.data) });
+			uniformMat2.insert({ uniformName, std::get<mat2>(uniformValue.data) });
 			break;
 		case UniformType::Mat3:
-			uniformMat3.insert({ p.first, std::get<mat3>(p.second.data) });
+			uniformMat3.insert({ uniformName, std::get<mat3>(uniformValue.data) });
 			break;
 		case UniformType::Mat4:
-			uniformMat4.insert({ p.first, std::get<mat4>(p.second.data) });
+			uniformMat4.insert({ uniformName, std::get<mat4>(uniformValue.data) });
 			break;
 		case UniformType::Tex:
 			// 确定该材质为产生阴影的材质
-			if (p.second.texData.m_textureType == TextureType::ShadowMap)
+			if (uniformValue.texData.m_textureType == TextureType::ShadowMap)
 				castShadow = true;
-			if (p.second.texData.m_textureType == TextureType::TextureEnv)
+			if (uniformValue.texData.m_textureType == TextureType::TextureEnv)
 				requireEnvironmentMap = true;
-			uniformTex.insert({ p.first, p.second.texData});
+			uniformTex.insert({ uniformName, uniformValue.texData});
 			break;
 		default:
 			break;
