@@ -604,10 +604,10 @@
     <None Include="Resources\Shader\SkyBoxHDR.vs">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Resources\Shader\1.model_loading.fs">
+    <None Include="Resources\Shader\PBRModel.fs">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Resources\Shader\1.model_loading.vs">
+    <None Include="Resources\Shader\PBRModel.vs">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

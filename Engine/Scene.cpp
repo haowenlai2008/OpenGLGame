@@ -27,7 +27,7 @@ bool Scene::init()
 	this->addChild(gnd);
 
 	Sphere* sp = Sphere::create(MaterialType::PBRCube);
-	sp->setPosition(glm::vec3(0.0f, 3.0f, 3.0f));
+	sp->setPosition(glm::vec3(2.0f, 3.0f, 3.0f));
 	sp->setCubeTexture("skybox");
 	//sp->setCullFace(GL_FRONT);
 	this->addChild(sp);
@@ -38,10 +38,11 @@ bool Scene::init()
 	//sp->setCullFace(GL_FRONT);
 	//this->addChild(sp);
 
-	//ModelEntity* modelEntity = ModelEntity::create();
-	//modelEntity->setPosition(vec3(-3.0f, -10, -4));
-	//modelEntity->setupModel("nanosuit/nanosuit.obj");
-	//this->addChild(modelEntity);
+	ModelEntity* modelEntity = ModelEntity::create();
+	modelEntity->setRotate(vec3(0.0f, 180.0f, 0.0f));
+	modelEntity->setPosition(vec3(0.0f, 0.0f, 3.0f));
+	modelEntity->setupModel("mary/Marry.obj");
+	this->addChild(modelEntity);
 
 	//Circle* w = Circle::create(MaterialType::WithColorAndLight);
 	//w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));

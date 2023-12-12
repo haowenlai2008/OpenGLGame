@@ -15,6 +15,7 @@ struct Light {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+    float intensity;
 };
 
 //in vec3 FragPos;  
@@ -268,8 +269,8 @@ void main()
     vec3 H = normalize(V + L);
     float distance = length(lightPos - fs_in.FragPos);
     float attenuation =  1.0/(distance * distance);
-    vec3 lightColor = vec3(1.0, 0.5, 0.5);
-    vec3 radiance = lightColor * attenuation;
+    vec3 lightColor = vec3(1.0);
+    vec3 radiance =  lightColor * attenuation * light.intensity;
     vec3 albedo = texColor.rgb;
     float metallic = material.metallic;
     float roughness = material.roughness;

@@ -13,7 +13,7 @@ bool MaterialManager::init()
 	{MaterialType::SkyBox, "SkyBox"},
 	{MaterialType::SkyBoxHDR, "SkyBoxHDR"},
 	{MaterialType::EquirectangularToCubemap, "EquirectangularToCubemap"},
-	{MaterialType::ModelPBR, "1.model_loading"},
+	{MaterialType::ModelPBR, "PBRModel"},
 	};
 
 
@@ -60,6 +60,7 @@ bool MaterialManager::init()
 			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
 			{"light.diffuse", vec3(0.5f, 0.5f, 0.5f)},
 			{"light.specular", vec3(1.0f, 1.0f, 1.0f)},
+			{"light.intensity", 200.0f},
 			{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
 			{"material.shininess", 64.0f},
 			{"material.metallic", 0.5f},
@@ -74,6 +75,7 @@ bool MaterialManager::init()
 			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
 			{"light.diffuse", vec3(0.5f, 0.5f, 0.5f)},
 			{"light.specular", vec3(1.0f, 1.0f, 1.0f)},
+			{"light.intensity", 200.0f},
 			{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
 			{"material.shininess", 64.0f},
 			{"material.metallic", 0.5f},
@@ -99,8 +101,12 @@ bool MaterialManager::init()
 			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
 			{"light.diffuse", vec3(0.5f, 0.5f, 0.5f)},
 			{"light.specular", vec3(1.0f, 1.0f, 1.0f)},
+			{"light.intensity", 200.0f},
 			{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
 			{"material.shininess", 64.0f},
+			{"material.metallic", 0.9f},
+			{"material.roughness", 0.9f},
+			{"material.ao", 1.0f},
 			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
 			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
 		}},
