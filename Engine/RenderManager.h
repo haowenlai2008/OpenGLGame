@@ -21,6 +21,7 @@ struct GlobalTextureStructure
 	GLuint shadowMapTexture;
 	GLuint environmentMapIBL;
 	GLuint scenePassTexture;
+	GLuint irradianceMapIBL;
 	GLuint prefilterMapIBL;
 	GLuint brdfLUT;
 };

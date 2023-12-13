@@ -133,6 +133,10 @@ void Material::bindUniform()
 			textureID = RenderManager::globleTexture.brdfLUT;
 			texType = GL_TEXTURE_2D;
 			break;
+		case TextureType::TextureIrradianceMap:
+			textureID = RenderManager::globleTexture.irradianceMapIBL;
+			texType = GL_TEXTURE_CUBE_MAP;
+			break;
 		default:
 			break;
 		}

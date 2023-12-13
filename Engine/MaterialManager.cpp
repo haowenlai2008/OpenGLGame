@@ -87,7 +87,8 @@ bool MaterialManager::init()
 		}},
 		{"SimpleDepth", {}},
 		{"SkyBox", {
-			{"material.diffuse", Texture("skybox3", TextureType::TextureCubMap, 0)},
+			//{"material.diffuse", Texture("skybox3", TextureType::TextureCubMap, 0)},
+			{"material.diffuse", Texture(TextureType::TextureEnv, 0)},
 			{"environmentMap", Texture(TextureType::TextureEnv, 1)},
 		}},
 		{"SkyBoxHDR", {
@@ -120,12 +121,12 @@ bool MaterialManager::init()
 			{"light.intensity", 100.0f},
 			{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
 			{"material.shininess", 64.0f},
-			{"material.metallic", 0.4f},
-			{"material.roughness", 0.9f},
+			{"material.metallic", 0.7f},
+			{"material.roughness", 0.1f},
 			{"material.ao", 1.0f},
 			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
 			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
-			{"irradianceMap", Texture(TextureType::TextureEnv, 2)},
+			{"irradianceMap", Texture(TextureType::TextureIrradianceMap, 2)},
 			{"prefilterMap", Texture(TextureType::TexturePrefilter, 3)},
 			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 4)},
 	

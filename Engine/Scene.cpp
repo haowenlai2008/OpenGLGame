@@ -20,17 +20,23 @@
 //#include "Wheel.h"
 bool Scene::init()
 {
-	//SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
-	//this->addChild(skyBox);
+	SkyBox* skyBox = SkyBox::create("SkyBox");
+	this->addChild(skyBox);
 
-	Ground* gnd = Ground::create("WithTexAndLight");
-	this->addChild(gnd);
+	//Ground* gnd = Ground::create("WithTexAndLight");
+	//this->addChild(gnd);
 
 	Cube* sp = Cube::create("IBL_PBR");
 	sp->setPosition(glm::vec3(2.0f, 3.0f, 3.0f));
 	sp->setTexture("container2.png");
 	//sp->setCullFace(GL_FRONT);
 	this->addChild(sp);
+
+	Sphere* sp2 = Sphere::create("IBL_PBR");
+	sp2->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	sp2->setTexture("container2.png");
+	//sp->setCullFace(GL_FRONT);
+	this->addChild(sp2);
 
 	//Sphere* sp = Sphere::create("PBR");
 	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
@@ -40,7 +46,7 @@ bool Scene::init()
 
 	ModelEntity* modelEntity = ModelEntity::create();
 	modelEntity->setRotate(vec3(0.0f, 180.0f, 0.0f));
-	modelEntity->setPosition(vec3(0.0f, 0.0f, 3.0f));
+	modelEntity->setPosition(vec3(5.0f, 0.0f, 3.0f));
 	modelEntity->setupModel("mary/Marry.obj");
 	this->addChild(modelEntity);
 

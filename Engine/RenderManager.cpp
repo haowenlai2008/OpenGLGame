@@ -7,7 +7,7 @@
 #include "RP_RenderPass.h"
 
 GlobalTextureStructure RenderManager::globleTexture = {
-	-1, -1, -1, -1, -1
+	-1, -1, -1, -1, -1, -1
 };
 
 GlobleBufferStructure RenderManager::globalBuffer = {

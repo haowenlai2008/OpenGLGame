@@ -20,7 +20,7 @@ void ModelEntity::setupModel(const string& path)
     auto model = Model(MODEL_PATH + path);
     for (int i = 0; i < model.meshes.size(); i++)
     {
-        ModelNode* modelNode = ModelNode::create("ModelPBR");
+        ModelNode* modelNode = ModelNode::create("IBL_PBR");
         modelNode->setMeshAndBuffer(model.meshes[i]);
         unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;

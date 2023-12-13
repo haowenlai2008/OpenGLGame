@@ -272,9 +272,8 @@ bool RP_IBLPreRenderPass::Init()
 
     // pbr: create an irradiance cubemap, and re-scale capture FBO to irradiance scale.
     // --------------------------------------------------------------------------------
-    unsigned int irradianceMap;
-    glGenTextures(1, &irradianceMap);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, irradianceMap);
+    glGenTextures(1, &RenderManager::globleTexture.irradianceMapIBL);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, RenderManager::globleTexture.irradianceMapIBL);
     for (unsigned int i = 0; i < 6; ++i)
     {
         glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, nullptr);
@@ -302,7 +301,7 @@ bool RP_IBLPreRenderPass::Init()
     for (unsigned int i = 0; i < 6; ++i)
     {
         irradianceShader.setMat4("view", captureViews[i]);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceMap, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, RenderManager::globleTexture.irradianceMapIBL, 0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         renderCube();

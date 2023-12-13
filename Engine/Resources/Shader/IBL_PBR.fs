@@ -92,10 +92,10 @@ vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
 void main()
 {		
     vec4 texColor = texture(material.diffuse, fs_in.TexCoords);
-    vec3 albedo = texColor.rgb;
+    vec3 albedo = vec3(1.0);
     vec3 N = fs_in.Normal;
     vec3 V = normalize(viewPos - fs_in.FragPos);
-    vec3 R = reflect(-V, N); 
+    vec3 R = normalize(reflect(-V, N));
 
     // calculate reflectance at fs_in.Normal incidence; if dia-electric (like plastic) use F0 
     // of 0.04 and if it's a metal, use the albedo color as F0 (material.metallic workflow)    
