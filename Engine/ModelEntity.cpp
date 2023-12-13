@@ -26,7 +26,7 @@ void ModelEntity::setupModel(const string& path)
         unsigned int specularNr = 1;
         unsigned int normalNr = 1;
         unsigned int heightNr = 1;
-        cout << "Mesh num = " << i << endl;
+        cout << "Model:" + path + " Mesh num = " << i << endl;
         for (unsigned int j = 0; j < model.meshes[i].textures.size(); j++)
         {
             string number;
