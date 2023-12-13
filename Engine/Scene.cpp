@@ -1,13 +1,5 @@
 #include "Scene.h"
 #include "SkyBox.h"
-#include "Cube.h"
-#include "CubeMat.h"
-#include "Maze.h"
-#include "DirCube.h"
-#include "PerlinGround.h"
-#include "Line2D.h"
-#include "Line2D_color_balance.h"
-#include "Line2D_BSpline.h"
 #include "Car.h"
 #include "BaseManager.h"
 #include "GameCamera.h"
@@ -15,9 +7,17 @@
 #include "Ground.h"
 #include "Sphere.h"
 #include "Cube.h"
-#include "Circle.h"
-#include "Wheel.h"
 #include "ModelEntity.h"
+
+//#include "CubeMat.h"
+//#include "Maze.h"
+//#include "DirCube.h"
+//#include "PerlinGround.h"
+//#include "Line2D.h"
+//#include "Line2D_color_balance.h"
+//#include "Line2D_BSpline.h"
+//#include "Circle.h"
+//#include "Wheel.h"
 bool Scene::init()
 {
 	//SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
@@ -26,9 +26,9 @@ bool Scene::init()
 	Ground* gnd = Ground::create("WithTexAndLight");
 	this->addChild(gnd);
 
-	Sphere* sp = Sphere::create("PBRCube");
+	Cube* sp = Cube::create("IBL_PBR");
 	sp->setPosition(glm::vec3(2.0f, 3.0f, 3.0f));
-	sp->setCubeTexture("skybox");
+	sp->setTexture("container2.png");
 	//sp->setCullFace(GL_FRONT);
 	this->addChild(sp);
 

@@ -170,7 +170,7 @@ private:
 
 			Texture texture;
 			string strCstr = this->directory + '/' + str.C_Str();
-			texture.m_textureID = RenderManager::getTextureByAbsolutePath(strCstr);
+			texture.m_textureID = ResourceTools::getTextureByAbsolutePath(strCstr);
 			texture.m_type = typeName;
 			texture.m_path = strCstr;
 			texture.m_textureType = TextureType::Texture2D;

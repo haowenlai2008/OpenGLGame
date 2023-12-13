@@ -210,7 +210,7 @@ bool RP_IBLPreRenderPass::Init()
     auto brdfShader = Shader(SHADER_PATH + "IBL_brdf.vs", SHADER_PATH + "IBL_brdf.fs");
     auto backgroundShader = Shader(SHADER_PATH + "IBL_BackGround.vs", SHADER_PATH + "IBL_BackGround.fs");
 
-    GLuint hdrTexture = RenderManager::getHDRTexture("Alexs_Apartment/Alexs_Apt_2k.hdr");
+    GLuint hdrTexture = ResourceTools::getHDRTexture("Alexs_Apartment/Alexs_Apt_2k.hdr");
     unsigned int captureFBO;
     unsigned int captureRBO;
     glGenFramebuffers(1, &captureFBO);
@@ -359,11 +359,10 @@ bool RP_IBLPreRenderPass::Init()
 
     // pbr: generate a 2D LUT from the BRDF equations used.
     // ----------------------------------------------------
-    unsigned int brdfLUTTexture;
-    glGenTextures(1, &brdfLUTTexture);
+    glGenTextures(1, &RenderManager::globleTexture.brdfLUT);
 
     // pre-allocate enough memory for the LUT texture.
-    glBindTexture(GL_TEXTURE_2D, brdfLUTTexture);
+    glBindTexture(GL_TEXTURE_2D, RenderManager::globleTexture.brdfLUT);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RG16F, 512, 512, 0, GL_RG, GL_FLOAT, 0);
     // be sure to set wrapping mode to GL_CLAMP_TO_EDGE
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -375,7 +374,7 @@ bool RP_IBLPreRenderPass::Init()
     glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
     glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, brdfLUTTexture, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, RenderManager::globleTexture.brdfLUT, 0);
 
     glViewport(0, 0, 512, 512);
     brdfShader.use();

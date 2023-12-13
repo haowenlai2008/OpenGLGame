@@ -39,6 +39,8 @@ enum class TextureType
 	TextureHDR,
 	TextureEnv,
 	TextureCubMap,
+	TexturePrefilter,
+	TextureBrdfLUT
 };
 
 // äÖÈ¾Ä£Ê½

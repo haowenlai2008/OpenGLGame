@@ -95,14 +95,14 @@ void Material::bindUniform()
 			switch (textureType)
 			{
 			case TextureType::TextureHDR:
-				textureID = RenderManager::getHDRTexture(srcPath);
+				textureID = ResourceTools::getHDRTexture(srcPath);
 				break;
 			case TextureType::TextureCubMap:
-				textureID = RenderManager::getCubeTexture(srcPath);
+				textureID = ResourceTools::getCubeTexture(srcPath);
 				texType = GL_TEXTURE_CUBE_MAP;
 				break;
 			default:
-				textureID = RenderManager::getTexture(srcPath);
+				textureID = ResourceTools::getTexture(srcPath);
 				break;
 			}
 			std::cout << "Load " << srcPath << std::endl;
@@ -120,11 +120,20 @@ void Material::bindUniform()
 			break;
 		case TextureType::ShadowMap:
 			textureID = RenderManager::globleTexture.shadowMapTexture;
-			break;
-		default:
+			texType = GL_TEXTURE_2D;
 			break;
 		case TextureType::TextureCubMap:
 			texType = GL_TEXTURE_CUBE_MAP;
+			break;
+		case TextureType::TexturePrefilter:
+			textureID = RenderManager::globleTexture.prefilterMapIBL;
+			texType = GL_TEXTURE_CUBE_MAP;
+			break;
+		case TextureType::TextureBrdfLUT:
+			textureID = RenderManager::globleTexture.brdfLUT;
+			texType = GL_TEXTURE_2D;
+			break;
+		default:
 			break;
 		}
 

@@ -6,13 +6,20 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <string>
+#include <map>
 #include "const.h"
 using std::vector;
 using std::string;
-
+using std::map;
 class ResourceTools
 {
 public:
+	static map<string, GLuint> textures;
+	static GLuint getTexture(const string& path);
+	static GLuint getTextureByAbsolutePath(const string& path);
+	static GLuint getHDRTexture(const string& path);
+	static GLuint getCubeTexture(const string& path);
+
 	//º”‘ÿŒ∆¿Ì
 	template <typename S1 = std::string>
 	static void LoadTexture(unsigned int& texture, S1&& pic)

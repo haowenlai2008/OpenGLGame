@@ -14,6 +14,7 @@ bool MaterialManager::init()
 		{"SkyBoxHDR", "SkyBoxHDR"},
 		{"EquirectangularToCubemap", "IBL_EquirectangularToCubemap"},
 		{"ModelPBR", "PBRModel"},
+		{"IBL_PBR", "IBL_PBR"},
 	};
 
 
@@ -109,6 +110,26 @@ bool MaterialManager::init()
 			{"material.ao", 1.0f},
 			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
 			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
+		}},
+		{"IBL_PBR", {
+			{"viewPos", vec3(0.0f)},
+			{"light.position", vec3(0.0f)},
+			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
+			{"light.diffuse", vec3(0.5f, 0.5f, 0.5f)},
+			{"light.specular", vec3(1.0f, 1.0f, 1.0f)},
+			{"light.intensity", 100.0f},
+			{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
+			{"material.shininess", 64.0f},
+			{"material.metallic", 0.4f},
+			{"material.roughness", 0.9f},
+			{"material.ao", 1.0f},
+			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
+			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
+			{"irradianceMap", Texture(TextureType::TextureEnv, 2)},
+			{"prefilterMap", Texture(TextureType::TexturePrefilter, 3)},
+			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 4)},
+	
+
 		}},
 	};
     return true;

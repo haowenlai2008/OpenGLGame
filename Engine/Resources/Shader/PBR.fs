@@ -262,7 +262,7 @@ void main()
     //if (texColor.a < 0.1)
     //    discard;
     vec3 Lo = vec3(0.0);
-    vec3 lightPos = vec3(0.0, 10, 0.0);
+    vec3 lightPos = light.position;
     vec3 N = normalize(fs_in.Normal);
     vec3 V = normalize(viewPos - fs_in.FragPos);
     vec3 L = normalize(lightPos - fs_in.FragPos);
