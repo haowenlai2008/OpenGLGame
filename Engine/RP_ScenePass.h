@@ -6,6 +6,7 @@ class RP_ScenePass :
 public:
     bool Init() override;
     bool Render() override;
+    ~RP_ScenePass() override;
 };
 
 

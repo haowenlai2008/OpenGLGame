@@ -51,7 +51,7 @@ bool RP_ShadowMapPass::Render()
 		{
 			auto ent_ptr = dynamic_cast<Entity*>(p);
 			auto selfMat = ent_ptr->GetMaterial().lock();
-			Material& material = matManager->getSystemMaterialRef(MaterialType::SimpleDepth);
+			Material& material = matManager->getSystemMaterialRef("SimpleDepth");
 			auto shader = material.m_Shader.lock();
 			glm::mat4 model = p->getModelMatrix();
 			shader->use();
@@ -68,4 +68,8 @@ bool RP_ShadowMapPass::Render()
 	glViewport(0, 0, bmp->screenWidth, bmp->screenHeight);
 
 	return true;
+}
+
+RP_ShadowMapPass::~RP_ShadowMapPass()
+{
 }

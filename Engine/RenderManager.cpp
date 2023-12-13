@@ -27,7 +27,7 @@ GlobleBufferStructure RenderManager::globalBuffer = {
 	-1, -1, -1
 };
 
-unsigned int RenderManager::getTexture(string& path)
+unsigned int RenderManager::getTexture(const string& path)
 {
 	unsigned int result = 0;
 	if (textures.empty() || textures.find(path) == textures.end())
@@ -43,7 +43,7 @@ unsigned int RenderManager::getTexture(string& path)
 	return 0;
 }
 
-unsigned int RenderManager::getTextureByAbsolutePath(string& path)
+unsigned int RenderManager::getTextureByAbsolutePath(const string& path)
 {
 	unsigned int result = 0;
 	if (textures.empty() || textures.find(path) == textures.end())
@@ -59,7 +59,7 @@ unsigned int RenderManager::getTextureByAbsolutePath(string& path)
 	return 0;
 }
 
-unsigned int RenderManager::getHDRTexture(string& path)
+unsigned int RenderManager::getHDRTexture(const string& path)
 {
 	unsigned int result = 0;
 	if (textures.empty() || textures.find(path) == textures.end())
@@ -75,7 +75,7 @@ unsigned int RenderManager::getHDRTexture(string& path)
 	return 0;
 }
 
-unsigned int RenderManager::getCubeTexture(string& path)
+unsigned int RenderManager::getCubeTexture(const string& path)
 {
 	unsigned int result = 0;
 	if (textures.empty() || textures.find(path) == textures.end())
@@ -158,7 +158,7 @@ void RenderManager::init()
 {
 	m_RenderPassList =
 	{
-		std::make_shared<RP_IBLPreRenderPass>(),
+		//std::make_shared<RP_IBLPreRenderPass>(),
 		std::make_shared<RP_ShadowMapPass>(),
 		std::make_shared<RP_ScenePass>(),
 		std::make_shared<RP_PostProcessPass>(),

@@ -21,6 +21,7 @@ struct GlobalTextureStructure
 	GLuint shadowMapTexture;
 	GLuint environmentMapIBL;
 	GLuint scenePassTexture;
+	GLuint prefilterMapIBL;
 };
 
 // 全局buffer
@@ -39,10 +40,10 @@ public:
 	list<std::shared_ptr<RP_RenderPass>> m_RenderPassList;	// 管线
 	static GlobalTextureStructure globleTexture;	// 全局纹理
 	static GlobleBufferStructure globalBuffer;		// 全局Buffer
-	static GLuint getTexture(string& path);
-	static GLuint getTextureByAbsolutePath(string& path);
-	static GLuint getHDRTexture(string& path);
-	static GLuint getCubeTexture(string& path);
+	static GLuint getTexture(const string& path);
+	static GLuint getTextureByAbsolutePath(const string& path);
+	static GLuint getHDRTexture(const string& path);
+	static GLuint getCubeTexture(const string& path);
 	void init();
 	void equirectangularToCubemap();
 	void draw();

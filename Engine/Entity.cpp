@@ -27,7 +27,7 @@ weak_ptr<Material> Entity::GetMaterial()
 Entity::Entity() :
 	lightSrc(nullptr),
 	m_color(glm::vec3(1.0f, 1.0f, 1.0f)),
-	m_type(MaterialType::WithColor),
+	m_type("WithColor"),
 	CullFace(GL_BACK),
 	m_VAO(-1),
 	m_VBO(-1),

@@ -3,25 +3,25 @@
 bool MaterialManager::init()
 {
 	shaderTypeMap = {
-	{MaterialType::PBRCube, "PBRCube"},
-	{MaterialType::WithColor, "WithColor"},
-	{MaterialType::WithColorAndLight, "WithColorAndLight"},
-	{MaterialType::WithTex, "WithTex"},
-	{MaterialType::WithTexAndLight, "WithTexAndLight"},
-	{MaterialType::PBR, "PBR"},
-	{MaterialType::SimpleDepth, "simpleDepth"},
-	{MaterialType::SkyBox, "SkyBox"},
-	{MaterialType::SkyBoxHDR, "SkyBoxHDR"},
-	{MaterialType::EquirectangularToCubemap, "EquirectangularToCubemap"},
-	{MaterialType::ModelPBR, "PBRModel"},
+		{"PBRCube", "PBRCube"},
+		{"WithColor", "WithColor"},
+		{"WithColorAndLight", "WithColorAndLight"},
+		{"WithTex", "WithTex"},
+		{"WithTexAndLight", "WithTexAndLight"},
+		{"PBR", "PBR"},
+		{"SimpleDepth", "simpleDepth"},
+		{"SkyBox", "SkyBox"},
+		{"SkyBoxHDR", "SkyBoxHDR"},
+		{"EquirectangularToCubemap", "IBL_EquirectangularToCubemap"},
+		{"ModelPBR", "PBRModel"},
 	};
 
 
 	systemMaterial = {
-		{MaterialType::WithColor,{
+		{"WithColor",{
 			{"mColor", vec3(1.0)},
 		}},
-		{MaterialType::WithColorAndLight, {
+		{"WithColorAndLight", {
 			{"viewPos", vec3(0.0f)},
 			{"light.position", vec3(0.0f)},
 			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
@@ -32,7 +32,7 @@ bool MaterialManager::init()
 			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
 			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
 		}},
-		{MaterialType::WithTex, {
+		{"WithTex", {
 			{"viewPos", vec3(0.0f)},
 			{"light.position", vec3(0.0f)},
 			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
@@ -43,7 +43,7 @@ bool MaterialManager::init()
 			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
 		}},
 
-		{MaterialType::WithTexAndLight, {
+		{"WithTexAndLight", {
 			{"viewPos", vec3(0.0f)},
 			{"light.position", vec3(0.0f)},
 			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
@@ -54,7 +54,7 @@ bool MaterialManager::init()
 			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
 			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
 		}},
-		{MaterialType::PBR, {
+		{"PBR", {
 			{"viewPos", vec3(0.0f)},
 			{"light.position", vec3(0.0f)},
 			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
@@ -69,7 +69,7 @@ bool MaterialManager::init()
 			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
 			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
 		}},
-		{MaterialType::PBRCube, {
+		{"PBRCube", {
 			{"viewPos", vec3(0.0f)},
 			{"light.position", vec3(0.0f)},
 			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
@@ -84,18 +84,18 @@ bool MaterialManager::init()
 			{"material.diffuse", Texture(TextureType::TextureCubMap, 0)},
 			{"shadowMap", Texture(TextureType::ShadowMap, 1)},
 		}},
-		{MaterialType::SimpleDepth, {}},
-		{MaterialType::SkyBox, {
+		{"SimpleDepth", {}},
+		{"SkyBox", {
 			{"material.diffuse", Texture("skybox3", TextureType::TextureCubMap, 0)},
 			{"environmentMap", Texture(TextureType::TextureEnv, 1)},
 		}},
-		{MaterialType::SkyBoxHDR, {
+		{"SkyBoxHDR", {
 			{"equirectangularMap", Texture("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
 		}},
-		{MaterialType::EquirectangularToCubemap, {
+		{"EquirectangularToCubemap", {
 			{"equirectangularMap", Texture("Alexs_Apartment/Alexs_Apt_2k.hdr", TextureType::TextureHDR, 0)},
 		}},
-		{MaterialType::ModelPBR, {
+		{"ModelPBR", {
 			{"viewPos", vec3(0.0f)},
 			{"light.position", vec3(0.0f)},
 			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
@@ -114,22 +114,22 @@ bool MaterialManager::init()
     return true;
 }
 
-Material MaterialManager::getSystemMaterial(MaterialType materialType)
+Material MaterialManager::getSystemMaterial(string string)
 {
-	auto mat = Material(systemMaterial[materialType]);
+	auto mat = Material(systemMaterial[string]);
 	if (mat.m_Shader.expired())
 	{
-		mat.m_Shader = Shader::getShader(shaderTypeMap[materialType]);
+		mat.m_Shader = Shader::getShader(shaderTypeMap[string]);
 	}
 	return mat;
 }
 
-Material& MaterialManager::getSystemMaterialRef(MaterialType materialType)
+Material& MaterialManager::getSystemMaterialRef(string string)
 {
-	auto& mat = systemMaterial[materialType];
+	auto& mat = systemMaterial[string];
 	if (mat.m_Shader.expired())
 	{
-		mat.m_Shader = Shader::getShader(shaderTypeMap[materialType]);
+		mat.m_Shader = Shader::getShader(shaderTypeMap[string]);
 	}
 	return mat;
 }
@@ -139,7 +139,7 @@ Material& MaterialManager::getSystemMaterialRef(MaterialType materialType)
 //	// TODO: 在此处插入 return 语句
 //}
 //
-//Material& MaterialManager::createMaterial(const string& matKey, MaterialType materialType)
+//Material& MaterialManager::createMaterial(const string& matKey, string string)
 //{
 //	return Material();
 //}

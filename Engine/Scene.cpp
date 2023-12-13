@@ -23,16 +23,16 @@ bool Scene::init()
 	//SkyBox* skyBox = SkyBox::create(MaterialType::SkyBox);
 	//this->addChild(skyBox);
 
-	Ground* gnd = Ground::create(MaterialType::WithTexAndLight);
+	Ground* gnd = Ground::create("WithTexAndLight");
 	this->addChild(gnd);
 
-	Sphere* sp = Sphere::create(MaterialType::PBRCube);
+	Sphere* sp = Sphere::create("PBRCube");
 	sp->setPosition(glm::vec3(2.0f, 3.0f, 3.0f));
 	sp->setCubeTexture("skybox");
 	//sp->setCullFace(GL_FRONT);
 	this->addChild(sp);
 
-	//Sphere* sp = Sphere::create(MaterialType::PBR);
+	//Sphere* sp = Sphere::create("PBR");
 	//sp->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
 	//sp->setTexture("back__.jpg");
 	//sp->setCullFace(GL_FRONT);
@@ -58,7 +58,7 @@ bool Scene::init()
 	//m_pCar = Car::create();
 	//this->addChild(m_pCar);
 
-	//Circle* c2 = Circle::create(MaterialType::PBR);
+	//Circle* c2 = Circle::create("PBR");
 	//c2->setTexture("wheelface.jpg");
 	//c2->setLocalPosition(vec3(0.0f, 0.0f, 6.0f));
 	//c2->setRotate(vec3(0.0f, 180.0f, 0.0f));//·­×ª180¶È

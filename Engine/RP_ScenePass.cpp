@@ -61,3 +61,7 @@ bool RP_ScenePass::Render()
     return true;
 
 }
+
+RP_ScenePass::~RP_ScenePass()
+{
+}

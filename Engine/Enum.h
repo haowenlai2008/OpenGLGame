@@ -1,20 +1,20 @@
 #pragma once
 
-// 预设材质类型
-enum class MaterialType
-{
-	WithColor,
-	WithColorAndLight,
-	WithTex,
-	WithTexAndLight,
-	PBR,
-	PBRCube, //
-	SimpleDepth,
-	SkyBox,
-	SkyBoxHDR,
-	EquirectangularToCubemap,
-	ModelPBR,
-};
+//// 预设材质类型
+//enum class MaterialType
+//{
+//	WithColor,
+//	WithColorAndLight,
+//	WithTex,
+//	WithTexAndLight,
+//	PBR,
+//	PBRCube, //
+//	SimpleDepth,
+//	SkyBox,
+//	SkyBoxHDR,
+//	EquirectangularToCubemap,
+//	ModelPBR,
+//};
 
 // Uniform数据类型
 enum class UniformType

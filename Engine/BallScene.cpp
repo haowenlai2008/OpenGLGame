@@ -18,7 +18,7 @@ bool BallScene::init()
 
 
 
-	Ground* gnd = Ground::create(MaterialType::PBR);
+	Ground* gnd = Ground::create("PBR");
 	//gnd->setColor(Const::EntityColor::Grey);
 	this->addChild(gnd);
 
@@ -31,7 +31,7 @@ bool BallScene::init()
 	//cb->setColor(Const::EntityColor::Pink);
 	//this->addChild(cb);
 
-	auto cb2 = Sphere::create(MaterialType::WithColorAndLight);
+	auto cb2 = Sphere::create("WithColorAndLight");
 	//cb->Rotate(vec3(0.0f, 0.0f, 90.0f));
 	//cb->setScale(vec3(1.0f, 2.0f, 1.0f));
 	cb2->addSphereRigidBody();
@@ -41,7 +41,7 @@ bool BallScene::init()
 
 	this->addChild(cb2);
 
-	m_focus = Sphere::create(MaterialType::PBR);
+	m_focus = Sphere::create("PBR");
 	//dynamic_cast<Sphere*>(m_focus)->setTexture("white.png");
 	dynamic_cast<Sphere*>(m_focus)->setColor(Const::EntityColor::Yellow);
 	m_focus->addSphereRigidBody();

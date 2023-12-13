@@ -592,12 +592,6 @@
     <None Include="Resources\Shader\PBRCube.fs">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Resources\Shader\EquirectangularToCubemap.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\EquirectangularToCubemap.vs">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="Resources\Shader\SkyBoxHDR.fs">
       <Filter>资源文件</Filter>
     </None>
@@ -608,6 +602,42 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="Resources\Shader\PBRModel.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_BackGround.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_BackGround.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_brdf.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_brdf.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_EquirectangularToCubemap.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_EquirectangularToCubemap.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_irradiance_convolution.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_irradiance_convolution.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_Prefilter.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_Prefilter.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_PBR.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_PBR.vs">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

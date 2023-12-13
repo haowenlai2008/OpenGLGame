@@ -267,10 +267,20 @@
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shader\IBL_BackGround.fs" />
+    <None Include="Resources\Shader\IBL_BackGround.vs" />
+    <None Include="Resources\Shader\IBL_brdf.fs" />
+    <None Include="Resources\Shader\IBL_brdf.vs" />
+    <None Include="Resources\Shader\IBL_EquirectangularToCubemap.fs" />
+    <None Include="Resources\Shader\IBL_EquirectangularToCubemap.vs" />
+    <None Include="Resources\Shader\IBL_irradiance_convolution.fs" />
+    <None Include="Resources\Shader\IBL_irradiance_convolution.vs" />
+    <None Include="Resources\Shader\IBL_PBR.fs" />
+    <None Include="Resources\Shader\IBL_PBR.vs" />
+    <None Include="Resources\Shader\IBL_Prefilter.fs" />
+    <None Include="Resources\Shader\IBL_Prefilter.vs" />
     <None Include="Resources\Shader\PBRModel.fs" />
     <None Include="Resources\Shader\PBRModel.vs" />
-    <None Include="Resources\Shader\EquirectangularToCubemap.fs" />
-    <None Include="Resources\Shader\EquirectangularToCubemap.vs" />
     <None Include="Resources\Shader\Filter\blur.fs" />
     <None Include="Resources\Shader\Filter\contrast.fs" />
     <None Include="Resources\Shader\Filter\depthTest.fs" />
