@@ -306,6 +306,9 @@
     <ClCompile Include="LightCamera.cpp">
       <Filter>源文件\摄像机</Filter>
     </ClCompile>
+    <ClCompile Include="RP_ToneMappingGammaPass.cpp">
+      <Filter>源文件\Pass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -488,6 +491,9 @@
     <ClInclude Include="LightCamera.h">
       <Filter>头文件\摄像机</Filter>
     </ClInclude>
+    <ClInclude Include="RP_ToneMappingGammaPass.h">
+      <Filter>头文件\Pass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\normal.fs">
@@ -639,6 +645,9 @@
     </None>
     <None Include="Resources\Shader\IBL_PBR.vs">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resources\Shader\Filter\toneMappingGamma.fs">
+      <Filter>资源文件\filter</Filter>
     </None>
   </ItemGroup>
 </Project>

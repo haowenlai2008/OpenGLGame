@@ -18,20 +18,22 @@ class RP_RenderPass;
 // 全局纹理
 struct GlobalTextureStructure
 {
-	GLuint shadowMapTexture;
-	GLuint environmentMapIBL;
-	GLuint scenePassTexture;
-	GLuint irradianceMapIBL;
-	GLuint prefilterMapIBL;
-	GLuint brdfLUT;
+	GLuint shadowMapTexture = -1;
+	GLuint environmentMapIBL = -1;
+	GLuint scenePassTexture = -1;
+	GLuint irradianceMapIBL = -1;
+	GLuint prefilterMapIBL = -1;
+	GLuint brdfLUT = -1;
+	GLuint afterPossprocessTexture = -1;
 };
 
 // 全局buffer
 struct GlobleBufferStructure
 {
-	GLuint shadowMapBuffer;
-	GLuint environmentBufferIBL;
-	GLuint scenePassBuffer;
+	GLuint shadowMapBuffer = -1;
+	GLuint environmentBufferIBL = -1;
+	GLuint scenePassBuffer = -1;
+	GLuint afterPossprocessBuffer = -1;
 };
 
 class RenderManager : public Singleton<RenderManager>

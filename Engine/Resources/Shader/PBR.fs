@@ -297,10 +297,12 @@ void main()
     float shadow = ShadowCalculation2(fs_in.FragPosLightSpace, N, ldir);
 
     vec3 ambient = vec3(0.03) * albedo * ao;
-    //vec3 color   = ambient + Lo * (1.0 - shadow);
-    vec3 color   = ambient + Lo;
-    color = color / (color + vec3(1.0));
-    color = pow(color, vec3(1.0/2.2));
-
+    vec3 color   = ambient + Lo * (1.0 - shadow);
     FragColor = vec4(color, 1.0);
+
+
+    // color = color / (color + vec3(1.0));
+    // color = pow(color, vec3(1.0/2.2));
+    // 
+    // FragColor = vec4(color, 1.0);
 } 

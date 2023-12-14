@@ -5,14 +5,11 @@
 #include "RP_ScenePass.h"
 #include "RP_ShadowMapPass.h"
 #include "RP_RenderPass.h"
+#include "RP_ToneMappingGammaPass.h"
 
-GlobalTextureStructure RenderManager::globleTexture = {
-	-1, -1, -1, -1, -1, -1
-};
+GlobalTextureStructure RenderManager::globleTexture = GlobalTextureStructure();
 
-GlobleBufferStructure RenderManager::globalBuffer = {
-	-1, -1, -1
-};
+GlobleBufferStructure RenderManager::globalBuffer = GlobleBufferStructure();
 
 
 // 管线初始化
@@ -24,6 +21,7 @@ void RenderManager::init()
 		std::make_shared<RP_ShadowMapPass>(),
 		std::make_shared<RP_ScenePass>(),
 		std::make_shared<RP_PostProcessPass>(),
+		std::make_shared<RP_ToneMappingGammaPass>(),
 	};
 	for (std::shared_ptr<RP_RenderPass>& rp_ptr : m_RenderPassList)
 		rp_ptr->Init();

@@ -193,6 +193,7 @@
     <ClCompile Include="RP_RenderPass.cpp" />
     <ClCompile Include="RP_ScenePass.cpp" />
     <ClCompile Include="RP_ShadowMapPass.cpp" />
+    <ClCompile Include="RP_ToneMappingGammaPass.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
@@ -254,6 +255,7 @@
     <ClInclude Include="RP_RenderPass.h" />
     <ClInclude Include="RP_ScenePass.h" />
     <ClInclude Include="RP_ShadowMapPass.h" />
+    <ClInclude Include="RP_ToneMappingGammaPass.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Singleton.h" />
@@ -267,6 +269,7 @@
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shader\Filter\toneMappingGamma.fs" />
     <None Include="Resources\Shader\IBL_BackGround.fs" />
     <None Include="Resources\Shader\IBL_BackGround.vs" />
     <None Include="Resources\Shader\IBL_brdf.fs" />

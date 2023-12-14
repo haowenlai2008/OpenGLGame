@@ -60,7 +60,7 @@ bool RP_PostProcessPass::Render()
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	// now bind back to default framebuffer and draw a quad plane with the attached framebuffer color texture
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, RenderManager::globalBuffer.afterPossprocessBuffer);
 	glDisable(GL_DEPTH_TEST); // disable depth test so screen-space quad isn't discarded due to depth test.
 	// clear all relevant buffers
 	vec4 clearColor = BaseManager::getInstance()->clearColor;
