@@ -1,10 +1,19 @@
+//#version 330 core
+//out vec4 FragColor;
+
+//in vec2 TexCoords;
+
+//uniform sampler2D texture_diffuse1;
+
+//void main()
+//{    
+//    FragColor = texture(texture_diffuse1, TexCoords);
+//}
 #version 330 core
 out vec4 FragColor;
 
-
-
 struct Material {
-    samplerCube diffuse;
+    sampler2D diffuse;
     vec3 specular;    
     float shininess;
     float metallic;
@@ -20,13 +29,17 @@ struct Light {
     float intensity;
 };
 
+//in vec3 FragPos;  
+//in vec3 Normal;  
+//in vec2 TexCoords;
+//in vec4 FragPosLightSpace;
+
 in VS_OUT {
     vec3 FragPos;
     vec3 Normal;
-    vec3 TexCoords;
+    vec2 TexCoords;
     vec4 FragPosLightSpace;
 } fs_in;
-
 
 uniform vec3 viewPos;
 uniform Material material;
@@ -107,6 +120,7 @@ float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
     float shadowTmp;
     float currentDepth = projCoords.z;
     vec2 startCoord = projCoords.xy - vec2(-1.0, 1.0) * offset * pcfCoreSize * 0.5;
+    float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
     // PCF
     for (int i = 0; i < pcfCoreSize; i++)
     {
@@ -123,10 +137,37 @@ float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
         }
     }
     float shadow = shadowTmp / (pcfCoreSize * pcfCoreSize);
-    //float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+
     return shadow;
 }
 
+
+
+float ShadowCalculation2(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
+{
+    // 执行透视除法
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+
+    // 变换到[0,1]的范围
+    projCoords = projCoords * 0.5 + 0.5;
+    float shadowTmp;
+    float currentDepth = projCoords.z;
+    float closetDepth = texture(shadowMap, projCoords.xy).r;
+    vec2 tmpCoords = projCoords.xy;
+    float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+    float x = clamp(tmpCoords.x, 0.0, 1.0);
+    float y = clamp(tmpCoords.y, 0.0, 1.0);
+    if (x != tmpCoords.x || y != tmpCoords.y)
+        shadowTmp = 0.0f;
+    else
+        // 检查当前片段是否在阴影中
+        shadowTmp = currentDepth - 0.005 > closetDepth ? 1.0 : 0.0;
+
+    float shadow = shadowTmp;
+    //float shadow = texture(shadowMap, tmpCoords).r;
+    //float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+    return shadowTmp;
+}
 
 float ShadowCalculationRound(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 {
@@ -175,7 +216,7 @@ float ShadowCalculationPoission(vec4 fragPosLightSpace, vec3 normal, vec3 lightD
         float x = clamp(tmpCoords.x, 0.0, 1.0);
         float y = clamp(tmpCoords.y, 0.0, 1.0);
         if (x != tmpCoords.x || y != tmpCoords.y)
-           shadowTmp += 1.0;
+           shadowTmp += 0.0;
         else
            // 检查当前片段是否在阴影中
            shadowTmp += step(texture(shadowMap, tmpCoords).r, currentDepth - 0.005);
@@ -227,8 +268,8 @@ float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
 void main()
 {
     vec4 texColor = texture(material.diffuse, fs_in.TexCoords);
-    //if (texColor.a < 0.1)
-    //    discard;
+    if (texColor.a < 0.1)
+        discard;
     vec3 Lo = vec3(0.0);
     vec3 lightPos = vec3(0.0, 10, 0.0);
     vec3 N = normalize(fs_in.Normal);
@@ -262,11 +303,10 @@ void main()
     Lo += (kD * albedo / PI + specular) * radiance * NdotL;
 
     vec3 ldir = -normalize(lightPos - fs_in.FragPos);
-    float shadow = ShadowCalculation(fs_in.FragPosLightSpace, N, ldir);
+    float shadow = ShadowCalculation2(fs_in.FragPosLightSpace, N, ldir);
 
     vec3 ambient = vec3(0.03) * albedo * ao;
-    //vec3 color   = ambient + Lo * (1.0 - shadow);
-    vec3 color   = ambient + Lo;
+    vec3 color   = ambient + Lo * (1.0 - shadow);
     color = color / (color + vec3(1.0));
     color = pow(color, vec3(1.0/2.2));
 

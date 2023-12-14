@@ -121,7 +121,7 @@ bool MaterialManager::init()
 			{"light.intensity", 100.0f},
 			{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
 			{"material.shininess", 64.0f},
-			{"material.metallic", 0.7f},
+			{"material.metallic", 0.8f},
 			{"material.roughness", 0.1f},
 			{"material.ao", 1.0f},
 			{"material.diffuse", Texture(TextureType::Texture2D, 0)},
@@ -129,8 +129,6 @@ bool MaterialManager::init()
 			{"irradianceMap", Texture(TextureType::TextureIrradianceMap, 2)},
 			{"prefilterMap", Texture(TextureType::TexturePrefilter, 3)},
 			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 4)},
-	
-
 		}},
 	};
     return true;

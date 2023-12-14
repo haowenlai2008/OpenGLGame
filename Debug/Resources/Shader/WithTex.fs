@@ -35,8 +35,8 @@ void main()
 {
     // ambient
     vec4 texColor = texture(material.diffuse, fs_in.TexCoords);
-    if (texColor.a < 0.1)
-        discard;
+    //if (texColor.a < 0.1)
+    //    discard;
     FragColor = texColor;
     //FragColor = texColor;
 } 
