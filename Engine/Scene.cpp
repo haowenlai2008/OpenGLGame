@@ -23,17 +23,17 @@ bool Scene::init()
 	SkyBox* skyBox = SkyBox::create("SkyBox");
 	this->addChild(skyBox);
 
-	//Ground* gnd = Ground::create("WithTexAndLight");
-	//this->addChild(gnd);
+	Ground* gnd = Ground::create("IBL_PBR");
+	this->addChild(gnd);
 
 	Cube* sp = Cube::create("IBL_PBR");
-	sp->setPosition(glm::vec3(2.0f, 3.0f, 3.0f));
+	sp->setPosition(glm::vec3(2.0f, 1.0f, 3.0f));
 	sp->setTexture("container2.png");
 	//sp->setCullFace(GL_FRONT);
 	this->addChild(sp);
 
 	Sphere* sp2 = Sphere::create("IBL_PBR");
-	sp2->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	sp2->setPosition(glm::vec3(0.0f, 0.5f, 0.0f));
 	sp2->setTexture("container2.png");
 	//sp->setCullFace(GL_FRONT);
 	this->addChild(sp2);
@@ -47,9 +47,15 @@ bool Scene::init()
 	ModelEntity* modelEntity = ModelEntity::create();
 	modelEntity->setRotate(vec3(0.0f, 180.0f, 0.0f));
 	modelEntity->setPosition(vec3(5.0f, 0.0f, 3.0f));
-	modelEntity->setupModel("mary/Marry.obj");
+	modelEntity->setupModel("mary/Marry.obj", "IBL_PBR");
 	this->addChild(modelEntity);
 
+	ModelEntity* modelEntity2 = ModelEntity::create();
+	modelEntity2->setRotate(vec3(0.0f, 180.0f, 0.0f));
+	modelEntity2->setPosition(vec3(0.0f, 0.0f, 3.0f));
+	modelEntity2->setScale(vec3(1.5f));
+	modelEntity2->setupModel("mary/Marry.obj", "IBL_PBR");
+	this->addChild(modelEntity2);
 	//Circle* w = Circle::create(MaterialType::WithColorAndLight);
 	//w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));
 	//w->setRotate(glm::vec3(0.0f, 180.0f, 0.0f));

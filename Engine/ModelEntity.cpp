@@ -15,12 +15,12 @@ void ModelEntity::draw()
 {
 }
 
-void ModelEntity::setupModel(const string& path)
+void ModelEntity::setupModel(const string& path, const string& material)
 {
     auto model = Model(MODEL_PATH + path);
     for (int i = 0; i < model.meshes.size(); i++)
     {
-        ModelNode* modelNode = ModelNode::create("IBL_PBR");
+        ModelNode* modelNode = ModelNode::create(material);
         modelNode->setMeshAndBuffer(model.meshes[i]);
         unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;

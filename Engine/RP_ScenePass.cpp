@@ -39,13 +39,13 @@ bool RP_ScenePass::Render()
 			auto shader = material.m_Shader.lock();
 			glm::mat4 model = p->getModelMatrix();
 			shader->use();
+			material.bindUniform();
 			shader->setMat4("projection", projection);
 			shader->setMat4("view", view);
 			shader->setMat4("model", model);
 			shader->setMat4("lightSpaceMatrix", lightSpace);
 			shader->setVec3("viewPos", viewPos);
 			shader->setVec3("light.position", lightPos);
-
 			//if (material.castShadow && shadowMap != -1)
 			//{
 			//	material.setTextureCacheID("shadowMap", shadowMap);
@@ -54,7 +54,7 @@ bool RP_ScenePass::Render()
 			//{
 			//	material.setTextureCacheID("environmentMap", envMap);
 			//}
-			material.bindUniform();
+
 			p->draw();
 		}
 	}

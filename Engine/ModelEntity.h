@@ -7,7 +7,7 @@ public:
 	CREATE_FUNC(ModelEntity);
 	virtual bool init() override;
 	virtual void draw() override;
-	void setupModel(const string& path);
+	void setupModel(const string& path, const string& material);
 
 protected:
 	vector<GLuint> m_VAOList;
