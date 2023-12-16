@@ -115,10 +115,10 @@
     <Filter Include="头文件\模型">
       <UniqueIdentifier>{975ef07e-f772-41aa-9cc8-aef86c317479}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Pass">
+    <Filter Include="头文件\RenderPass">
       <UniqueIdentifier>{28817ee7-20be-4a5b-adec-248d356ec83b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Pass">
+    <Filter Include="源文件\RenderPass">
       <UniqueIdentifier>{f765be4b-de0f-41f8-8799-b4fd14467ea2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -289,25 +289,25 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="RP_PostProcessPass.cpp">
-      <Filter>源文件\Pass</Filter>
+      <Filter>源文件\RenderPass</Filter>
     </ClCompile>
     <ClCompile Include="RP_ScenePass.cpp">
-      <Filter>源文件\Pass</Filter>
+      <Filter>源文件\RenderPass</Filter>
     </ClCompile>
     <ClCompile Include="RP_ShadowMapPass.cpp">
-      <Filter>源文件\Pass</Filter>
+      <Filter>源文件\RenderPass</Filter>
     </ClCompile>
     <ClCompile Include="RP_IBLPreRenderPass.cpp">
-      <Filter>源文件\Pass</Filter>
+      <Filter>源文件\RenderPass</Filter>
     </ClCompile>
     <ClCompile Include="RP_RenderPass.cpp">
-      <Filter>源文件\Pass</Filter>
+      <Filter>源文件\RenderPass</Filter>
     </ClCompile>
     <ClCompile Include="LightCamera.cpp">
       <Filter>源文件\摄像机</Filter>
     </ClCompile>
     <ClCompile Include="RP_ToneMappingGammaPass.cpp">
-      <Filter>源文件\Pass</Filter>
+      <Filter>源文件\RenderPass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -474,25 +474,28 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="RP_PostProcessPass.h">
-      <Filter>头文件\Pass</Filter>
+      <Filter>头文件\RenderPass</Filter>
     </ClInclude>
     <ClInclude Include="RP_ScenePass.h">
-      <Filter>头文件\Pass</Filter>
+      <Filter>头文件\RenderPass</Filter>
     </ClInclude>
     <ClInclude Include="RP_ShadowMapPass.h">
-      <Filter>头文件\Pass</Filter>
+      <Filter>头文件\RenderPass</Filter>
     </ClInclude>
     <ClInclude Include="RP_IBLPreRenderPass.h">
-      <Filter>头文件\Pass</Filter>
+      <Filter>头文件\RenderPass</Filter>
     </ClInclude>
     <ClInclude Include="RP_RenderPass.h">
-      <Filter>头文件\Pass</Filter>
+      <Filter>头文件\RenderPass</Filter>
     </ClInclude>
     <ClInclude Include="LightCamera.h">
       <Filter>头文件\摄像机</Filter>
     </ClInclude>
     <ClInclude Include="RP_ToneMappingGammaPass.h">
-      <Filter>头文件\Pass</Filter>
+      <Filter>头文件\RenderPass</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
