@@ -145,7 +145,7 @@ void Material::bindUniform()
 
 		if (texInfo.m_textureID == ERROR_TEX_ID)
 			continue;
-		shader->setInt(pair.first, pair.second.m_location);
+		shader->setInt(pair.first, texInfo.m_location);
 		glActiveTexture(GL_TEXTURE0 + texInfo.m_location);
 		glBindTexture(texType, texInfo.m_textureID);
 	}

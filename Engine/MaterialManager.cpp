@@ -17,7 +17,7 @@ bool MaterialManager::init()
 		{"IBL_PBR", "IBL_PBR"},
 	};
 
-
+	userMaterial = {};
 	systemMaterial = {
 		{"WithColor",{
 			{"mColor", vec3(1.0)},
@@ -131,28 +131,260 @@ bool MaterialManager::init()
 			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 4)},
 		}},
 	};
+	
+	// 系统材质写入到json
+	//for (auto [matName, mat] : systemMaterial)
+	//{
+	//	if (shaderTypeMap.find(matName) != shaderTypeMap.end())
+	//	{
+	//		json jsonData = SerializeMaterial(matName, shaderTypeMap[matName], mat);
+	//		string jsonStr = ResourceTools::JsonIndent(nlohmann::to_string(jsonData));
+	//		ResourceTools::WriteFile(MATERIAL_PATH + matName + ".json", jsonStr);
+	//	}
+
+	//}
+
+	//getUserMaterial("IBL_PBR");
     return true;
 }
 
-Material MaterialManager::getSystemMaterial(string string)
+Material MaterialManager::getSystemMaterial(const string& key)
 {
-	auto mat = Material(systemMaterial[string]);
+	auto mat = Material(systemMaterial[key]);
 	if (mat.m_Shader.expired())
 	{
-		mat.m_Shader = Shader::getShader(shaderTypeMap[string]);
+		mat.m_Shader = Shader::getShader(shaderTypeMap[key]);
 	}
 	return mat;
 }
 
-Material& MaterialManager::getSystemMaterialRef(string string)
+Material& MaterialManager::getSystemMaterialRef(const string& key)
 {
-	auto& mat = systemMaterial[string];
+	auto& mat = systemMaterial[key];
 	if (mat.m_Shader.expired())
 	{
-		mat.m_Shader = Shader::getShader(shaderTypeMap[string]);
+		mat.m_Shader = Shader::getShader(shaderTypeMap[key]);
 	}
 	return mat;
 }
+
+Material MaterialManager::getUserMaterial(const string& key)
+{
+	auto resultIt = userMaterial.find(key);
+	if (resultIt != userMaterial.end())
+		return userMaterial[key];
+	string path = MATERIAL_PATH + key + ".json";
+	string result = ResourceTools::ReadFromFile(path);
+	assert(!result.empty());
+	userMaterial[key] = DeserializeJsonToMaterial(result);
+	return userMaterial[key];
+}
+
+Material& MaterialManager::getUserMaterialRef(const string& key)
+{
+	auto resultIt = userMaterial.find(key);
+	if (resultIt != userMaterial.end())
+		return userMaterial[key];
+	string path = MATERIAL_PATH + key + ".json";
+	string result = ResourceTools::ReadFromFile(path);
+	assert(!result.empty());
+	userMaterial[key] = DeserializeJsonToMaterial(result);
+	return userMaterial[key];
+}
+
+// 材质序列化
+json MaterialManager::SerializeMaterial(const string& matName, const string& shaderName, const Material& mat)
+{
+
+	json jsonObj;
+	jsonObj["MatName"] = matName;
+	jsonObj["ShaderName"] = shaderName;
+	jsonObj["UniformBool"] = {};
+	jsonObj["UniformInt"] = {};
+	jsonObj["UniformFloat"] = {};
+	jsonObj["UniformVec2"] = {};
+	jsonObj["UniformVec3"] = {};
+	jsonObj["UniformVec4"] = {};
+	jsonObj["UniformMat2"] = {};
+	jsonObj["UniformMat3"] = {};
+	jsonObj["UniformMat4"] = {};
+	jsonObj["UniformTexture"] = {};
+
+	for (auto [uniformName, value] : mat.uniformBool)
+		jsonObj["UniformBool"][uniformName] = value;
+	for (auto [uniformName, value] : mat.uniformInt)
+		jsonObj["UniformInt"][uniformName] = value;
+	for (auto [uniformName, value] : mat.uniformFloat)
+		jsonObj["UniformFloat"][uniformName] = value;
+
+	for (auto [uniformName, value] : mat.uniformVec2)
+	{
+		jsonObj["UniformVec2"][uniformName] = {};
+		jsonObj["UniformVec2"][uniformName]["x"] = value.x;
+		jsonObj["UniformVec2"][uniformName]["y"] = value.y;
+	}
+
+	for (auto [uniformName, value] : mat.uniformVec3)
+	{
+		jsonObj["UniformVec3"][uniformName] = {};
+		jsonObj["UniformVec3"][uniformName]["x"] = value.x;
+		jsonObj["UniformVec3"][uniformName]["y"] = value.y;
+		jsonObj["UniformVec3"][uniformName]["z"] = value.z;
+	}
+	for (auto [uniformName, value] : mat.uniformVec4)
+	{
+		jsonObj["UniformVec3"][uniformName] = {};
+		jsonObj["UniformVec3"][uniformName]["x"] = value.x;
+		jsonObj["UniformVec3"][uniformName]["y"] = value.y;
+		jsonObj["UniformVec3"][uniformName]["z"] = value.z;
+		jsonObj["UniformVec3"][uniformName]["w"] = value.w;
+	}
+
+	for (auto [uniformName, value] : mat.uniformMat2)
+	{
+		jsonObj["UniformMat2"][uniformName] = {};
+		for (int i = 0; i < 2; i++)
+			for (int j = 0; j < 2; j++)
+			{
+				string key = std::to_string(i) + std::to_string(j);
+				jsonObj["UniformMat"][uniformName][key] = value[i][j];
+			}
+	}
+
+	for (auto [uniformName, value] : mat.uniformMat3)
+	{
+		jsonObj["UniformMat3"][uniformName] = {};
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++)
+			{
+				string key = std::to_string(i) + std::to_string(j);
+				jsonObj["UniformMat3"][uniformName][key] = value[i][j];
+			}
+	}
+
+	for (auto [uniformName, value] : mat.uniformMat4)
+	{
+		jsonObj["UniformMat4"][uniformName] = {};
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+			{
+				string key = std::to_string(i) + std::to_string(j);
+				jsonObj["UniformMat4"][uniformName][key] = value[i][j];
+			}
+	}
+
+	static std::map<TextureType, std::string> textureTypeStringMap = {
+		{TextureType::Texture2D, "Texture2D"},
+		{TextureType::TextureHDR, "TextureHDR"},
+		{TextureType::TextureEnv, "TextureEnv"},
+		{TextureType::TextureCubMap, "TextureCubMap"},
+		{TextureType::TextureIrradianceMap, "TextureIrradianceMap"},
+		{TextureType::TexturePrefilter, "TexturePrefilter"},
+		{TextureType::TextureBrdfLUT, "TextureBrdfLUT"},
+	};
+	for (auto [uniformName, value] : mat.uniformTex)
+	{
+		jsonObj["UniformTexture"][uniformName] = {};
+		jsonObj["UniformTexture"][uniformName]["TextureType"] = textureTypeStringMap[value.m_textureType];
+		jsonObj["UniformTexture"][uniformName]["Location"] = value.m_location;
+		jsonObj["UniformTexture"][uniformName]["Path"] = value.m_path;
+	}
+	return jsonObj;
+
+}
+
+Material MaterialManager::DeserializeJsonToMaterial(const string& jsonStr)
+{
+	json jsonObj = json::parse(jsonStr);
+	Material result;
+	result.m_shaderName = jsonObj["ShaderName"];
+	result.m_Shader = Shader::getShader(jsonObj["ShaderName"]);
+
+	for (auto it = jsonObj["UniformBool"].begin(); it != jsonObj["UniformBool"].end(); ++it)
+		result.uniformBool[it.key()] = it.value();
+
+	for (auto it = jsonObj["UniformInt"].begin(); it != jsonObj["UniformInt"].end(); ++it)
+		result.uniformInt[it.key()] = it.value();
+
+	for (auto it = jsonObj["UniformFloat"].begin(); it != jsonObj["UniformFloat"].end(); ++it)
+		result.uniformFloat[it.key()] = it.value();
+
+	for (auto it = jsonObj["UniformVec2"].begin(); it != jsonObj["UniformVec2"].end(); ++it)
+	{
+		result.uniformVec2[it.key()] = vec2(it.value()["x"], it.value()["y"]);
+	}
+
+	for (auto it = jsonObj["UniformVec3"].begin(); it != jsonObj["UniformVec3"].end(); ++it)
+	{
+		result.uniformVec3[it.key()] = vec3(it.value()["x"], it.value()["y"], it.value()["z"]);
+	}
+
+	for (auto it = jsonObj["UniformVec4"].begin(); it != jsonObj["UniformVec4"].end(); ++it)
+	{
+		result.uniformVec4[it.key()] = vec4(it.value()["x"], it.value()["y"], it.value()["z"], it.value()["w"]);
+	}
+
+	for (auto it = jsonObj["UniformMat2"].begin(); it != jsonObj["UniformMat2"].end(); ++it)
+	{
+		auto matValue = it.value();
+		mat2 matData = mat2();
+		for (int i = 0; i < 2; i++)
+			for (int j = 0; j < 2; j++)
+			{
+				string key = std::to_string(i) + std::to_string(j);
+				matData[i][j] = matValue[key];
+			}
+		result.uniformMat2[it.key()] = matData;
+	}
+
+	for (auto it = jsonObj["UniformMat3"].begin(); it != jsonObj["UniformMat3"].end(); ++it)
+	{
+		auto matValue = it.value();
+		mat3 matData = mat3();
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++)
+			{
+				string key = std::to_string(i) + std::to_string(j);
+				matData[i][j] = matValue[key];
+			}
+		result.uniformMat3[it.key()] = matData;
+	}
+
+	for (auto it = jsonObj["UniformMat4"].begin(); it != jsonObj["UniformMat4"].end(); ++it)
+	{
+		auto matValue = it.value();
+		mat4 matData = mat4();
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+			{
+				string key = std::to_string(i) + std::to_string(j);
+				matData[i][j] = matValue[key];
+			}
+		result.uniformMat4[it.key()] = matData;
+	}
+
+	// 映射。
+	static std::map<std::string, TextureType> textureTypeStringMap = {
+		{"Texture2D", TextureType::Texture2D},
+		{"TextureHDR", TextureType::TextureHDR},
+		{"TextureEnv", TextureType::TextureEnv},
+		{"TextureCubMap", TextureType::TextureCubMap},
+		{"TextureIrradianceMap", TextureType::TextureIrradianceMap},
+		{"TexturePrefilter", TextureType::TexturePrefilter},
+		{"TextureBrdfLUT", TextureType::TextureBrdfLUT},
+	};
+
+	for (auto it = jsonObj["UniformTexture"].begin(); it != jsonObj["UniformTexture"].end(); ++it)
+	{
+		auto matValue = it.value();
+		GLuint location = matValue["Location"];
+		string path = matValue["Path"];
+		TextureType textureType = textureTypeStringMap[matValue["TextureType"]];
+		result.uniformTex[it.key()] = Texture(path, textureType, location);
+	}
+	return result;
+}
+
 
 //Material& MaterialManager::createMaterial(const string& matKey)
 //{

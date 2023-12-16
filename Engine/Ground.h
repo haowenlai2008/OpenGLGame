@@ -7,4 +7,3 @@ public:
 	ENTITY_CREATE_FUNC(Ground);
 	virtual bool init() override;
 };
-

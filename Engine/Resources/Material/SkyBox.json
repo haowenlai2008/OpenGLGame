@@ -1,0 +1,25 @@
+{
+    "MatName":"SkyBox",
+    "ShaderName":"SkyBox",
+    "UniformBool":null,
+    "UniformFloat":null,
+    "UniformInt":null,
+    "UniformMat2":null,
+    "UniformMat3":null,
+    "UniformMat4":null,
+    "UniformTexture":{
+        "environmentMap":{
+            "Location":1,
+            "Path":"",
+            "TextureType":"TextureEnv"
+        },
+        "material.diffuse":{
+            "Location":0,
+            "Path":"",
+            "TextureType":"TextureEnv"
+        }
+    },
+    "UniformVec2":null,
+    "UniformVec3":null,
+    "UniformVec4":null
+}

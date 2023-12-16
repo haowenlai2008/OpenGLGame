@@ -1,0 +1,20 @@
+{
+    "MatName":"SkyBoxHDR",
+    "ShaderName":"SkyBoxHDR",
+    "UniformBool":null,
+    "UniformFloat":null,
+    "UniformInt":null,
+    "UniformMat2":null,
+    "UniformMat3":null,
+    "UniformMat4":null,
+    "UniformTexture":{
+        "equirectangularMap":{
+            "Location":0,
+            "Path":"Alexs_Apartment/Alexs_Apt_2k.hdr",
+            "TextureType":"TextureHDR"
+        }
+    },
+    "UniformVec2":null,
+    "UniformVec3":null,
+    "UniformVec4":null
+}

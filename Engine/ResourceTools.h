@@ -19,7 +19,9 @@ public:
 	static GLuint getTextureByAbsolutePath(const string& path);
 	static GLuint getHDRTexture(const string& path);
 	static GLuint getCubeTexture(const string& path);
-
+	static string ReadFromFile(const string& path);
+	static void WriteFile(const string& path, string data);
+	static string JsonIndent(const string& jsonString, int indentLevel = 0);
 	//º”‘ÿŒ∆¿Ì
 	template <typename S1 = std::string>
 	static void LoadTexture(unsigned int& texture, S1&& pic)
