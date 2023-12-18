@@ -190,6 +190,7 @@
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="RP_DeferredRenderPass.cpp" />
     <ClCompile Include="RP_ForwardRenderPass.cpp" />
+    <ClCompile Include="RP_GBufferPass.cpp" />
     <ClCompile Include="RP_IBLPreRenderPass.cpp" />
     <ClCompile Include="RP_PostProcessPass.cpp" />
     <ClCompile Include="RP_RenderPass.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="RP_DeferredRenderPass.h" />
     <ClInclude Include="RP_ForwardRenderPass.h" />
+    <ClInclude Include="RP_GBufferPass.h" />
     <ClInclude Include="RP_IBLPreRenderPass.h" />
     <ClInclude Include="RP_PostProcessPass.h" />
     <ClInclude Include="RP_RenderPass.h" />
