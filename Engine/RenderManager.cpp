@@ -2,7 +2,7 @@
 #include "Node.h"
 #include "RP_IBLPreRenderPass.h"
 #include "RP_PostProcessPass.h"
-#include "RP_ScenePass.h"
+#include "RP_ForwardRenderPass.h"
 #include "RP_ShadowMapPass.h"
 #include "RP_RenderPass.h"
 #include "RP_ToneMappingGammaPass.h"
@@ -19,7 +19,7 @@ void RenderManager::init()
 	{
 		std::make_shared<RP_IBLPreRenderPass>(),
 		std::make_shared<RP_ShadowMapPass>(),
-		std::make_shared<RP_ScenePass>(),
+		std::make_shared<RP_ForwardRenderPass>(),
 		std::make_shared<RP_PostProcessPass>(),
 		std::make_shared<RP_ToneMappingGammaPass>(),
 	};
@@ -40,8 +40,17 @@ void RenderManager::draw()
 
 void RenderManager::addDrawNode(Node* node)
 {
-	if (node->getNodeType() == NodeType::Render)
-		drawObjects.push_back(node);
+	switch (node->getNodeType())
+	{
+		case NodeType::Render:
+			drawObjects.push_back(node);
+			break;
+		case NodeType::Skybox:
+			skyBox = node;
+			break;
+		default:
+			break;
+	}
 }
 
 

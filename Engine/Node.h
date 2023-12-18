@@ -11,6 +11,7 @@ enum class NodeType
 {
 	Normal,
 	Render,
+	Skybox,
 };
 class Node : public Ref
 {

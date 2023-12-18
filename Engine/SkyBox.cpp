@@ -12,6 +12,7 @@ bool SkyBox::init()
 {
 	if (!Entity::init())
 		return false;
+	nodeType = NodeType::Skybox;
 	setMeshAndBuffer(VertexFactory::getBoxData());
 	return true;
 }

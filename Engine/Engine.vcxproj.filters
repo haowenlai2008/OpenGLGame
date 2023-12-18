@@ -297,9 +297,6 @@
     <ClCompile Include="RP_PostProcessPass.cpp">
       <Filter>源文件\RenderPass</Filter>
     </ClCompile>
-    <ClCompile Include="RP_ScenePass.cpp">
-      <Filter>源文件\RenderPass</Filter>
-    </ClCompile>
     <ClCompile Include="RP_ShadowMapPass.cpp">
       <Filter>源文件\RenderPass</Filter>
     </ClCompile>
@@ -314,6 +311,12 @@
     </ClCompile>
     <ClCompile Include="RP_ToneMappingGammaPass.cpp">
       <Filter>源文件\RenderPass</Filter>
+    </ClCompile>
+    <ClCompile Include="RP_ForwardRenderPass.cpp">
+      <Filter>源文件\RenderPass</Filter>
+    </ClCompile>
+    <ClCompile Include="RP_DeferredRenderPass.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -482,9 +485,6 @@
     <ClInclude Include="RP_PostProcessPass.h">
       <Filter>头文件\RenderPass</Filter>
     </ClInclude>
-    <ClInclude Include="RP_ScenePass.h">
-      <Filter>头文件\RenderPass</Filter>
-    </ClInclude>
     <ClInclude Include="RP_ShadowMapPass.h">
       <Filter>头文件\RenderPass</Filter>
     </ClInclude>
@@ -504,6 +504,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RP_ForwardRenderPass.h">
+      <Filter>头文件\RenderPass</Filter>
+    </ClInclude>
+    <ClInclude Include="RP_DeferredRenderPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

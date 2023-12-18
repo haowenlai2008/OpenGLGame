@@ -188,10 +188,11 @@
     <ClCompile Include="ResourceTools.cpp" />
     <ClCompile Include="RightWheel.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
+    <ClCompile Include="RP_DeferredRenderPass.cpp" />
+    <ClCompile Include="RP_ForwardRenderPass.cpp" />
     <ClCompile Include="RP_IBLPreRenderPass.cpp" />
     <ClCompile Include="RP_PostProcessPass.cpp" />
     <ClCompile Include="RP_RenderPass.cpp" />
-    <ClCompile Include="RP_ScenePass.cpp" />
     <ClCompile Include="RP_ShadowMapPass.cpp" />
     <ClCompile Include="RP_ToneMappingGammaPass.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -252,10 +253,11 @@
     <ClInclude Include="ResourceTools.h" />
     <ClInclude Include="RightWheel.h" />
     <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="RP_DeferredRenderPass.h" />
+    <ClInclude Include="RP_ForwardRenderPass.h" />
     <ClInclude Include="RP_IBLPreRenderPass.h" />
     <ClInclude Include="RP_PostProcessPass.h" />
     <ClInclude Include="RP_RenderPass.h" />
-    <ClInclude Include="RP_ScenePass.h" />
     <ClInclude Include="RP_ShadowMapPass.h" />
     <ClInclude Include="RP_ToneMappingGammaPass.h" />
     <ClInclude Include="Scene.h" />

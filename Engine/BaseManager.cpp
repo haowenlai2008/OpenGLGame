@@ -204,7 +204,7 @@ void BaseManager::mainLoop()
 		m_pPhysicsManager->physicUpdate(deltaTime);	// 物理计算
 		m_pPhysicsManager->latePhysicUpdate(originNode, deltaTime);	// 物体自身的位置更新到刚体的位置
 
-		m_pLogicManager->lateUpdate(originNode, deltaTime);
+		m_pLogicManager->lateUpdate(originNode, deltaTime);		// 根据刚体位置更新模型位置
 
 		m_pGameCamera->updateViewProjMatrix();
 		m_pLightCamera->updateViewProjMatrix();
