@@ -4,7 +4,6 @@
 #include "VertexFactory.h"
 #include <unordered_map>
 class Shader;
-class Component;
 class Mesh;
 class Material;
 using std::weak_ptr;
@@ -12,10 +11,10 @@ using std::shared_ptr;
 
 // 实体创建静态函数的宏
 #define ENTITY_CREATE_FUNC(__TYPE__) \
-static __TYPE__* create(string Etype) \
+static __TYPE__* create(string matType) \
 { \
     __TYPE__ *pRet = new(std::nothrow) __TYPE__(); \
-	pRet->setEntityType(Etype); \
+	pRet->setMaterial(matType); \
 	if (pRet && pRet->init()) \
 	{ \
 	pRet->autorelease(); \
@@ -32,30 +31,29 @@ class Entity : public Node
 {
 public:
 	CREATE_FUNC(Entity);
-	LL_SYNTHESIZE(glm::vec3, m_color, Color);//颜色设置
 	LL_SYNTHESIZE(Node*, lightSrc, LightSrc);//光源设置
-	LL_SYNTHESIZE_READ(string, m_type, EntityType);
 	LL_SYNTHESIZE(GLuint, CullFace, CullFace);		// 设置裁剪方式
 	virtual bool init() override;
 	virtual void draw() override;
 	void setMeshAndBuffer(std::weak_ptr<Mesh> meshData);
 	void setMeshAndBuffer(const Mesh& meshData);
-	void setMaterial(vec3& specular, float shininess);
-	void setMaterial(vec3&& specular, float shininess);
+	void setMaterial(const string& materialName);
+	void setColor(glm::vec3 color);
+	glm::vec3 getColor();
 	virtual void setTexture(string&& src);
 	virtual void setCubeTexture(string&& src);
+
 	weak_ptr<Material> GetMaterial();
 
 	Entity();
 	virtual ~Entity();
 protected:
-	vector<Component*> comList;
+	glm::vec3 m_color;
+	//vector<Component*> comList;
 	shared_ptr<Material> m_material;
-
 	GLuint m_VAO;
 	GLuint m_VBO;
 	GLuint m_EBO;
 	GLuint m_DiffuseMap;
-	GLuint m_ShadowMap;
 	GLuint m_VertexNum;
 };

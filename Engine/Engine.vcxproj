@@ -248,6 +248,7 @@
     <ClInclude Include="Ref.h" />
     <ClInclude Include="RefManager.h" />
     <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceTools.h" />
     <ClInclude Include="RightWheel.h" />
     <ClInclude Include="Rigidbody.h" />
@@ -270,6 +271,18 @@
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Material\EquirectangularToCubemap.json" />
+    <None Include="Resources\Material\IBL_PBR.json" />
+    <None Include="Resources\Material\ModelPBR.json" />
+    <None Include="Resources\Material\PBR.json" />
+    <None Include="Resources\Material\PBRCube.json" />
+    <None Include="Resources\Material\SimpleDepth.json" />
+    <None Include="Resources\Material\SkyBox.json" />
+    <None Include="Resources\Material\SkyBoxHDR.json" />
+    <None Include="Resources\Material\WithColor.json" />
+    <None Include="Resources\Material\WithColorAndLight.json" />
+    <None Include="Resources\Material\WithTex.json" />
+    <None Include="Resources\Material\WithTexAndLight.json" />
     <None Include="Resources\Shader\Filter\toneMappingGamma.fs" />
     <None Include="Resources\Shader\IBL_BackGround.fs" />
     <None Include="Resources\Shader\IBL_BackGround.vs" />
@@ -321,6 +334,9 @@
     <None Include="Resources\Shader\WithTex.vs" />
     <None Include="Resources\Shader\WithTexAndLight.fs" />
     <None Include="Resources\Shader\WithTexAndLight.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

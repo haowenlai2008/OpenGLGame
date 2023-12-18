@@ -121,6 +121,12 @@
     <Filter Include="源文件\RenderPass">
       <UniqueIdentifier>{f765be4b-de0f-41f8-8799-b4fd14467ea2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\shader">
+      <UniqueIdentifier>{de2ad0d4-90cf-4d39-883f-8cf25655de3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\material">
+      <UniqueIdentifier>{a71c373d-04d2-4966-b658-5056ef85ef6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PerlinGround.cpp">
@@ -497,26 +503,11 @@
     <ClInclude Include="json.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shader\normal.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\normal.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\SkyBox.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\SkyBox.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\simpleDepth.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\simpleDepth.vs">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="Resources\Shader\Filter\blur.fs">
       <Filter>资源文件\filter</Filter>
     </None>
@@ -559,98 +550,157 @@
     <None Include="Resources\Shader\Filter\sharpening.fs">
       <Filter>资源文件\filter</Filter>
     </None>
-    <None Include="Resources\Shader\WithColor.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\WithColor.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\WithColorAndLight.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\WithColorAndLight.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\WithTex.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\WithTex.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\WithTexAndLight.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\WithTexAndLight.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\WithCube.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\WithCube.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\PBR.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\PBR.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\PBRCube.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\PBRCube.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\SkyBoxHDR.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\SkyBoxHDR.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\PBRModel.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\PBRModel.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_BackGround.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_BackGround.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_brdf.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_brdf.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_EquirectangularToCubemap.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_EquirectangularToCubemap.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_irradiance_convolution.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_irradiance_convolution.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_Prefilter.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_Prefilter.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_PBR.fs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resources\Shader\IBL_PBR.vs">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="Resources\Shader\Filter\toneMappingGamma.fs">
       <Filter>资源文件\filter</Filter>
     </None>
+    <None Include="Resources\Shader\IBL_BackGround.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_BackGround.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_brdf.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_brdf.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_EquirectangularToCubemap.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_EquirectangularToCubemap.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_irradiance_convolution.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_irradiance_convolution.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_PBR.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_PBR.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_Prefilter.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\IBL_Prefilter.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\normal.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\normal.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\PBR.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\PBR.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\PBRCube.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\PBRCube.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\PBRModel.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\PBRModel.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\simpleDepth.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\simpleDepth.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\SkyBox.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\SkyBox.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\SkyBoxHDR.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\SkyBoxHDR.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithColor.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithColor.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithColorAndLight.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithColorAndLight.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithCube.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithCube.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithTex.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithTex.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithTexAndLight.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\WithTexAndLight.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Material\EquirectangularToCubemap.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\IBL_PBR.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\ModelPBR.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\PBR.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\PBRCube.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\SimpleDepth.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\SkyBox.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\SkyBoxHDR.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\WithColor.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\WithColorAndLight.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\WithTex.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\WithTexAndLight.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

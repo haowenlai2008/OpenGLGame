@@ -1,5 +1,4 @@
 #include "Line2D.h"
-#include "allShaderComponent.h"
 
 void Line2D::addPoint(glm::vec2 point)
 {

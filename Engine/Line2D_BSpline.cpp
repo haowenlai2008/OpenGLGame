@@ -1,5 +1,4 @@
 #include "Line2D_BSpline.h"
-#include "allShaderComponent.h"
 #include "Line2D.h"
 #include "BSpline.h"
 bool Line2D_BSpline::init()

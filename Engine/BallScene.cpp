@@ -36,7 +36,6 @@ bool BallScene::init()
 	//cb->setScale(vec3(1.0f, 2.0f, 1.0f));
 	cb2->addSphereRigidBody();
 	cb2->setPosition(vec3(-1.5f, 0.0f, 0.0f));
-	cb2->setMaterial(vec3(0.1f, 0.1f, 0.1f), 32.0f);
 	cb2->setColor(Const::EntityColor::Pink);
 
 	this->addChild(cb2);

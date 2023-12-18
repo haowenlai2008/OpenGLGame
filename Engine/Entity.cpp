@@ -2,7 +2,6 @@
 #include "RenderManager.h"
 #include "BaseManager.h"
 #include "MaterialManager.h"
-#include "Shader3D_Component.h"
 #include <algorithm>
 #include "Component.h"
 #include "Mesh.h"
@@ -27,7 +26,6 @@ weak_ptr<Material> Entity::GetMaterial()
 Entity::Entity() :
 	lightSrc(nullptr),
 	m_color(glm::vec3(1.0f, 1.0f, 1.0f)),
-	m_type("WithColor"),
 	CullFace(GL_BACK),
 	m_VAO(-1),
 	m_VBO(-1),
@@ -51,8 +49,6 @@ bool Entity::init()
 {
 	if (!Node::init())
 		return false;
-	Material sysMaterial = MaterialManager::getInstance()->getUserMaterial(m_type);
-	m_material = std::make_shared<Material>(sysMaterial);
 	return true;
 }
 
@@ -144,14 +140,19 @@ void Entity::setMeshAndBuffer(const Mesh& meshData)
 	glBindVertexArray(0);
 }
 
-void Entity::setMaterial(vec3& specular, float shininess)
+void Entity::setMaterial(const string& materialName)
 {
-	m_material->setVec3("material.specular", specular);
-	m_material->setFloat("material.shininess", shininess);
+	Material sysMaterial = MaterialManager::getInstance()->getUserMaterial(materialName);
+	m_material = std::make_shared<Material>(sysMaterial);
 }
 
-void Entity::setMaterial(vec3&& specular, float shininess)
+void Entity::setColor(glm::vec3 color)
 {
-	m_material->setVec3("material.specular", specular);
-	m_material->setFloat("material.shininess", shininess);
+	m_color = color;
+	m_material->setVec3("mColor", color);
+}
+
+glm::vec3 Entity::getColor()
+{
+	return m_color;
 }

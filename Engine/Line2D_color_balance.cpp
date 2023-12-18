@@ -1,6 +1,6 @@
 #include "Line2D_color_balance.h"
-#include "allShaderComponent.h"
 #include "Line2D.h"
+
 glm::vec3 Line2D_ColorBalance::transfer(float value)
 {
 	const float a = 64.0f, b = 85.0f, scale = 1.785f;
