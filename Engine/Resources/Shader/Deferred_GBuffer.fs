@@ -25,6 +25,6 @@ void main()
 {	
     gPosition = fs_in.FragPos;
     gNormal = fs_in.Normal;
-    gMetallicRoughness = vec3(material.metallic, material.roughness, 0.0);
+    gMetallicRoughness = vec3(material.metallic, material.roughness, 1.0);
     gAlbedo = texture(material.diffuse, fs_in.TexCoords);
 }

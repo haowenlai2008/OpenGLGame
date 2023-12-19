@@ -718,6 +718,12 @@
     <None Include="Resources\Material\Deferred_GBuffer.json">
       <Filter>资源文件\material</Filter>
     </None>
+    <None Include="Resources\Shader\Deferred_Render.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\Deferred_Render.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc">

@@ -41,7 +41,11 @@ enum class TextureType
 	TextureCubMap,
 	TextureIrradianceMap,
 	TexturePrefilter,
-	TextureBrdfLUT
+	TextureBrdfLUT,
+	GBufferPos,
+	GBufferNormal,
+	GBufferAlbedo,
+	GBufferMetallicRoughness,
 };
 
 // äÖÈ¾Ä£Ê½

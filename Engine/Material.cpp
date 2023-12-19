@@ -132,6 +132,22 @@ void Material::bindUniform()
 			textureID = RenderManager::globleTexture.brdfLUT;
 			texType = GL_TEXTURE_2D;
 			break;
+		case TextureType::GBufferPos:
+			textureID = RenderManager::globleTexture.gBuffer_Position;
+			texType = GL_TEXTURE_2D;
+			break;
+		case TextureType::GBufferNormal:
+			textureID = RenderManager::globleTexture.gBuffer_Normal;
+			texType = GL_TEXTURE_2D;
+			break;
+		case TextureType::GBufferAlbedo:
+			textureID = RenderManager::globleTexture.gBuffer_Albedo;
+			texType = GL_TEXTURE_2D;
+			break;
+		case TextureType::GBufferMetallicRoughness:
+			textureID = RenderManager::globleTexture.gBuffer_MetallicRoughness;
+			texType = GL_TEXTURE_2D;
+			break;
 		case TextureType::TextureIrradianceMap:
 			textureID = RenderManager::globleTexture.irradianceMapIBL;
 			texType = GL_TEXTURE_CUBE_MAP;

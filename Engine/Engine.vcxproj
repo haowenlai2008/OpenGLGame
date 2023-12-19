@@ -290,6 +290,8 @@
     <None Include="Resources\Material\WithTexAndLight.json" />
     <None Include="Resources\Shader\Deferred_GBuffer.fs" />
     <None Include="Resources\Shader\Deferred_GBuffer.vs" />
+    <None Include="Resources\Shader\Deferred_Render.fs" />
+    <None Include="Resources\Shader\Deferred_Render.vs" />
     <None Include="Resources\Shader\Filter\toneMappingGamma.fs" />
     <None Include="Resources\Shader\IBL_BackGround.fs" />
     <None Include="Resources\Shader\IBL_BackGround.vs" />

@@ -15,6 +15,7 @@ bool MaterialManager::init()
 		{"EquirectangularToCubemap", "IBL_EquirectangularToCubemap"},
 		{"ModelPBR", "PBRModel"},
 		{"IBL_PBR", "IBL_PBR"},
+		{"Deferred_Render", "Deferred_Render"},
 	};
 
 	userMaterial = {};
@@ -119,8 +120,6 @@ bool MaterialManager::init()
 			{"light.diffuse", vec3(0.5f, 0.5f, 0.5f)},
 			{"light.specular", vec3(1.0f, 1.0f, 1.0f)},
 			{"light.intensity", 100.0f},
-			//{"material.specular", vec3(0.5f, 0.5f, 0.5f)},
-			//{"material.shininess", 64.0f},
 			{"material.metallic", 0.7f},
 			{"material.roughness", 0.1f},
 			{"material.ao", 1.0f},
@@ -129,6 +128,22 @@ bool MaterialManager::init()
 			{"irradianceMap", Texture(TextureType::TextureIrradianceMap, 2)},
 			{"prefilterMap", Texture(TextureType::TexturePrefilter, 3)},
 			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 4)},
+		}},
+		{ "Deferred_Render", {
+			{"viewPos", vec3(0.0f)},
+			{"light.position", vec3(0.0f)},
+			{"light.ambient", vec3(0.2f, 0.2f, 0.2f)},
+			{"light.diffuse", vec3(0.5f, 0.5f, 0.5f)},
+			{"light.specular", vec3(1.0f, 1.0f, 1.0f)},
+			{"light.intensity", 100.0f},
+			{"gBuffer.pos", Texture(TextureType::GBufferPos, 0)},
+			{"gBuffer.normal", Texture(TextureType::GBufferNormal, 1)},
+			{"gBuffer.albedo", Texture(TextureType::GBufferAlbedo, 2)},
+			{"gBuffer.metal_rough", Texture(TextureType::GBufferMetallicRoughness, 3)},
+			{"shadowMap", Texture(TextureType::ShadowMap, 4)},
+			{"irradianceMap", Texture(TextureType::TextureIrradianceMap, 5)},
+			{"prefilterMap", Texture(TextureType::TexturePrefilter, 6)},
+			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 7)},
 		}},
 	};
 	
@@ -144,7 +159,6 @@ bool MaterialManager::init()
 
 	//}
 
-	//getUserMaterial("IBL_PBR");
     return true;
 }
 
@@ -281,6 +295,10 @@ json MaterialManager::SerializeMaterial(const string& matName, const string& sha
 		{TextureType::TextureIrradianceMap, "TextureIrradianceMap"},
 		{TextureType::TexturePrefilter, "TexturePrefilter"},
 		{TextureType::TextureBrdfLUT, "TextureBrdfLUT"},
+		{TextureType::GBufferPos, "GBufferPos"},
+		{TextureType::GBufferNormal, "GBufferNormal"},
+		{TextureType::GBufferAlbedo, "GBufferAlbedo"},
+		{TextureType::GBufferMetallicRoughness, "GBufferMetallicRoughness"},
 	};
 	for (auto [uniformName, value] : mat.uniformTex)
 	{
@@ -371,7 +389,10 @@ Material MaterialManager::DeserializeJsonToMaterial(const string& jsonStr)
 		{"TextureCubMap", TextureType::TextureCubMap},
 		{"TextureIrradianceMap", TextureType::TextureIrradianceMap},
 		{"TexturePrefilter", TextureType::TexturePrefilter},
-		{"TextureBrdfLUT", TextureType::TextureBrdfLUT},
+		{"GBufferPos", TextureType::GBufferPos},
+		{"GBufferNormal", TextureType::GBufferNormal},
+		{"GBufferAlbedo", TextureType::GBufferAlbedo},
+		{"GBufferMetallicRoughness", TextureType::GBufferMetallicRoughness},
 	};
 
 	for (auto it = jsonObj["UniformTexture"].begin(); it != jsonObj["UniformTexture"].end(); ++it)
