@@ -1,6 +1,6 @@
 #include "Material.h"
 #include "RenderManager.h"
-
+#include <unordered_map>
 
 Material::Material() : castShadow(false), requireEnvironmentMap(false)
 {
@@ -105,7 +105,6 @@ void Material::bindUniform()
 				textureID = ResourceTools::getTexture(srcPath);
 				break;
 			}
-			std::cout << "Load " << srcPath << std::endl;
 		}
 		else
 			textureID = texInfo.m_textureID;
@@ -204,6 +203,7 @@ void Material::setMat2(const string& name, const glm::mat2& mat)
 void Material::setMat3(const string& name, const glm::mat3& mat)
 {
 	uniformMat3[name] = mat;
+	
 }
 
 void Material::setMat4(const string& name, const glm::mat4& mat)
@@ -211,9 +211,65 @@ void Material::setMat4(const string& name, const glm::mat4& mat)
 	uniformMat4[name] = mat;
 }
 
+optional<float> Material::getFloat(const string& name)
+{
+	if (uniformFloat.count(name))
+		return uniformFloat[name];
+	return std::nullopt;
+}
+
+optional<vec2> Material::getVec2(const string& name)
+{
+	if (uniformVec2.count(name))
+		return uniformVec2[name];
+	return std::nullopt;
+}
+
+optional<vec3> Material::getVec3(const string& name)
+{
+	if (uniformVec3.count(name))
+		return uniformVec3[name];
+	return std::nullopt;
+}
+
+optional<vec4> Material::getVec4(const string& name)
+{
+	if (uniformVec4.count(name))
+		return uniformVec4[name];
+	return std::nullopt;
+}
+
+optional<mat2> Material::getMat2(const string& name)
+{
+	if (uniformMat2.count(name))
+		return uniformMat2[name];
+	return std::nullopt;
+}
+
+optional<mat3> Material::getMat3(const string& name)
+{
+	if (uniformMat3.count(name))
+		return uniformMat3[name];
+	return std::nullopt;
+}
+
+optional<mat4> Material::getMat4(const string& name)
+{
+	if (uniformMat4.count(name))
+		return uniformMat4[name];
+	return std::nullopt;
+}
+
+optional<Texture> Material::getTexture(const string& name)
+{
+	if (uniformTex.count(name))
+		return uniformTex[name];
+	return std::nullopt;
+}
+
 void Material::setTexture(const string& name, const string& path, TextureType textureType)
 {
-	if (uniformTex.find(name) != uniformTex.end())
+	if (uniformTex.count(name))
 	{
 		uniformTex[name].m_path = path;
 		uniformTex[name].m_textureType = textureType;

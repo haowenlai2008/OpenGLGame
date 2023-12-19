@@ -25,6 +25,10 @@ struct GlobalTextureStructure
 	GLuint prefilterMapIBL = -1;		// irradiance map生成的mipmap
 	GLuint brdfLUT = -1;				// roughness-cos brdf的映射
 	GLuint afterPossprocessTexture = -1;		// 后处理后的纹理
+	GLuint gBuffer_Position = -1;				// GBuffer 位置
+	GLuint gBuffer_Normal = -1;					// GBuffer 法线
+	GLuint gBuffer_Albedo = -1;					// GBuffer 反照率
+	GLuint gBuffer_MetallicRoughness = -1;		// GBuffer mr模型参数
 };
 
 // 全局buffer
@@ -34,6 +38,7 @@ struct GlobleBufferStructure
 	GLuint environmentBufferIBL = -1;
 	GLuint scenePassBuffer = -1;
 	GLuint afterPossprocessBuffer = -1;
+	GLuint gBuffer = -1;
 };
 
 class RenderManager : public Singleton<RenderManager>

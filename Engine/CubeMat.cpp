@@ -279,7 +279,7 @@ void CubeMat::setLightSrc(Node * node)
 {
 	for (auto* p : childs)
 	{
-		static_cast<Entity*>(p)->setLightSrc(node);
+		dynamic_cast<Entity*>(p)->setLightSrc(node);
 	}
 }
 

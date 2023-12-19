@@ -55,7 +55,7 @@ bool RP_ForwardRenderPass::Render()
 	{
 		if (p != nullptr && p->count != 0)
 		{
-			auto ent_ptr = static_cast<Entity*>(p);
+			auto ent_ptr = dynamic_cast<Entity*>(p);
 			auto& material = *ent_ptr->GetMaterial().lock();
 			auto shader = material.m_Shader.lock();
 			glm::mat4 model = p->getModelMatrix();

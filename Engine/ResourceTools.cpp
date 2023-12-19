@@ -10,6 +10,7 @@ unsigned int ResourceTools::getTexture(const string& path)
 	{
 		ResourceTools::LoadTexture(result, path);
 		textures.insert(std::pair<string, unsigned int>(path, result));
+		std::cout << "Load " << path << std::endl;
 		return result;
 	}
 	else
@@ -26,6 +27,7 @@ unsigned int ResourceTools::getTextureByAbsolutePath(const string& path)
 	{
 		ResourceTools::LoadTextureByAbsolutePath(result, path);
 		textures.insert(std::pair<string, unsigned int>(path, result));
+		std::cout << "Load " << path << std::endl;
 		return result;
 	}
 	else
@@ -42,6 +44,7 @@ unsigned int ResourceTools::getHDRTexture(const string& path)
 	{
 		ResourceTools::LoadHDRTexture(result, path);
 		textures.insert(std::pair<string, unsigned int>(path, result));
+		std::cout << "Load " << path << std::endl;
 		return result;
 	}
 	else
@@ -58,6 +61,7 @@ unsigned int ResourceTools::getCubeTexture(const string& path)
 	{
 		ResourceTools::LoadCubemap(result, std::move(path));
 		textures.insert(std::pair<string, unsigned int>(path, result));
+		std::cout << "Load " << path << std::endl;
 		return result;
 	}
 	else

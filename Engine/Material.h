@@ -6,12 +6,14 @@
 #include "Shader.h"
 #include "Struct.h"
 #include "Enum.h"
+#include <optional>
 
+using std::optional;
 using std::pair;
 using std::unordered_map;
 using std::list;
 using std::weak_ptr;
-
+using namespace glm;
 
 using UniformVariant = std::variant<bool, int, float, vec2, vec3, vec4, mat2, mat3, mat4>;
 
@@ -79,9 +81,18 @@ public:
 	void setVec3(const string& name, float x, float y, float z);
 	void setVec4(const string& name, const vec4& value);
 	void setVec4(const string& name, float x, float y, float z, float w);
-	void setMat2(const string& name, const glm::mat2& mat);
-	void setMat3(const string& name, const glm::mat3& mat);
-	void setMat4(const string& name, const glm::mat4& mat);
+	void setMat2(const string& name, const mat2& mat);
+	void setMat3(const string& name, const mat3& mat);
+	void setMat4(const string& name, const mat4& mat);
+
+	optional<float> getFloat(const string& name);
+	optional<vec2> getVec2(const string& name);
+	optional<vec3> getVec3(const string& name);
+	optional<vec4> getVec4(const string& name);
+	optional<mat2> getMat2(const string& name);
+	optional<mat3> getMat3(const string& name);
+	optional<mat4> getMat4(const string& name);
+	optional<Texture> getTexture(const string& name);
 
 	void setTexture(const string& name, const string& path, TextureType textureType);
 	void setTexture(const string& name, const string& path, GLubyte location, TextureType textureType);

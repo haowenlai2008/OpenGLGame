@@ -275,6 +275,7 @@
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Material\Deferred_GBuffer.json" />
     <None Include="Resources\Material\EquirectangularToCubemap.json" />
     <None Include="Resources\Material\IBL_PBR.json" />
     <None Include="Resources\Material\ModelPBR.json" />
@@ -287,6 +288,8 @@
     <None Include="Resources\Material\WithColorAndLight.json" />
     <None Include="Resources\Material\WithTex.json" />
     <None Include="Resources\Material\WithTexAndLight.json" />
+    <None Include="Resources\Shader\Deferred_GBuffer.fs" />
+    <None Include="Resources\Shader\Deferred_GBuffer.vs" />
     <None Include="Resources\Shader\Filter\toneMappingGamma.fs" />
     <None Include="Resources\Shader\IBL_BackGround.fs" />
     <None Include="Resources\Shader\IBL_BackGround.vs" />
