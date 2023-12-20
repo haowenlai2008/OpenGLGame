@@ -277,6 +277,8 @@
   <ItemGroup>
     <None Include="Resources\Material\Deferred_GBuffer.json" />
     <None Include="Resources\Material\EquirectangularToCubemap.json" />
+    <None Include="Resources\Material\IBL_Ground.json" />
+    <None Include="Resources\Material\IBL_Mary.json" />
     <None Include="Resources\Material\IBL_PBR.json" />
     <None Include="Resources\Material\ModelPBR.json" />
     <None Include="Resources\Material\PBR.json" />

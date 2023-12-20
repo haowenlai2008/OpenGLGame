@@ -1,12 +1,12 @@
 {
-    "MatName":"IBL_PBR",
+    "MatName":"IBL_Mary",
     "ShaderName":"IBL_PBR",
     "UniformBool":null,
     "UniformFloat":{
         "light.intensity":50.0,
         "material.ao":1.0,
-        "material.metallic":0.699999988079071,
-        "material.roughness":0.10000000149011612
+        "material.metallic":0.1,
+        "material.roughness":0.8
     },
     "UniformInt":null,
     "UniformMat2":null,

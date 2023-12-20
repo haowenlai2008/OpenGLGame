@@ -67,6 +67,7 @@ bool RP_ForwardRenderPass::Render()
 			shader->setMat4("lightSpaceMatrix", lightSpace);
 			shader->setVec3("viewPos", viewPos);
 			shader->setVec3("light.position", lightPos);
+			shader->setVec3("light.color", vec3(1.0f, 1.0f, 1.0f));
 			p->draw();
 		}
 	}

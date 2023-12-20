@@ -23,7 +23,8 @@ bool Scene::init()
 	SkyBox* skyBox = SkyBox::create("SkyBox");
 	this->addChild(skyBox);
 
-	Ground* gnd = Ground::create("IBL_PBR");
+	//Ground* gnd = Ground::create("IBL_PBR");
+	Ground* gnd = Ground::create("IBL_Ground");
 	this->addChild(gnd);
 
 	Cube* sp = Cube::create("IBL_PBR");
@@ -47,14 +48,14 @@ bool Scene::init()
 	ModelEntity* modelEntity = ModelEntity::create();
 	modelEntity->setRotate(vec3(0.0f, 180.0f, 0.0f));
 	modelEntity->setPosition(vec3(5.0f, 0.0f, 3.0f));
-	modelEntity->setupModel("mary/Marry.obj", "IBL_PBR");
+	modelEntity->setupModel("mary/Marry.obj", "IBL_Mary");
 	this->addChild(modelEntity);
 
 	ModelEntity* modelEntity2 = ModelEntity::create();
 	modelEntity2->setRotate(vec3(0.0f, 180.0f, 0.0f));
 	modelEntity2->setPosition(vec3(0.0f, 0.0f, 3.0f));
 	modelEntity2->setScale(vec3(1.5f));
-	modelEntity2->setupModel("mary/Marry.obj", "IBL_PBR");
+	modelEntity2->setupModel("mary/Marry.obj", "IBL_Mary");
 	this->addChild(modelEntity2);
 	//Circle* w = Circle::create(MaterialType::WithColorAndLight);
 	//w->setPosition(glm::vec3(0.0f, 1.0f, 4.0f));

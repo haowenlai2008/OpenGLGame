@@ -32,6 +32,41 @@ uniform sampler2D brdfLUT;
 uniform vec3 viewPos;
 
 const float PI = 3.14159265359;
+
+
+float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
+{
+    // 执行透视除法
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+
+    // 变换到[0,1]的范围
+    projCoords = projCoords * 0.5 + 0.5;
+    float shadowTmp;
+    float currentDepth = projCoords.z;
+    vec2 startCoord = projCoords.xy - vec2(-1.0, 1.0) * offset * pcfCoreSize * 0.5;
+    float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+    // PCF
+    for (int i = 0; i < pcfCoreSize; i++)
+    {
+        for (int j = 0; j < pcfCoreSize; j++)
+        {
+            vec2 tmpCoords = startCoord + vec2(i * offset, -j * offset);
+            float x = clamp(tmpCoords.x, 0.0, 1.0);
+            float y = clamp(tmpCoords.y, 0.0, 1.0);
+            if (x != tmpCoords.x || y != tmpCoords.y)
+               shadowTmp += 1.0;
+            else
+               // 检查当前片段是否在阴影中
+               shadowTmp += step(texture(shadowMap, tmpCoords).r, currentDepth - 0.005);
+        }
+    }
+    float shadow = shadowTmp / (pcfCoreSize * pcfCoreSize);
+
+    return shadow;
+}
+
+
+
 // ----------------------------------------------------------------------------
 float DistributionGGX(vec3 N, vec3 H, float roughness)
 {

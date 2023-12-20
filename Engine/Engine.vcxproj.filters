@@ -724,6 +724,12 @@
     <None Include="Resources\Shader\Deferred_Render.vs">
       <Filter>资源文件\shader</Filter>
     </None>
+    <None Include="Resources\Material\IBL_Mary.json">
+      <Filter>资源文件\material</Filter>
+    </None>
+    <None Include="Resources\Material\IBL_Ground.json">
+      <Filter>资源文件\material</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc">
