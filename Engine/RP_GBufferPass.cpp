@@ -35,7 +35,7 @@ bool RP_GBufferPass::Init()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_MetallicRoughness, 0);
 
-    // - 颜色
+    // - 反照率Albedo
     glGenTextures(1, &RenderManager::globleTexture.gBuffer_Albedo);
     glBindTexture(GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_Albedo);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bmp->screenWidth, bmp->screenHeight, 0, GL_RGBA, GL_FLOAT, NULL);
@@ -43,8 +43,22 @@ bool RP_GBufferPass::Init()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_Albedo, 0);
 
-    GLuint attachments[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
-    glDrawBuffers(4, attachments);
+    // - 光源空间坐标
+    glGenTextures(1, &RenderManager::globleTexture.gBuffer_PosLightSpace);
+    glBindTexture(GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_PosLightSpace);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, bmp->screenWidth, bmp->screenHeight, 0, GL_RGBA, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT4, GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_PosLightSpace, 0);
+
+    GLuint attachments[5] = {
+        GL_COLOR_ATTACHMENT0,
+        GL_COLOR_ATTACHMENT1,
+        GL_COLOR_ATTACHMENT2,
+        GL_COLOR_ATTACHMENT3,
+        GL_COLOR_ATTACHMENT4
+    };
+    glDrawBuffers(5, attachments);
 
     GLuint rboDepth;
     glGenRenderbuffers(1, &rboDepth);
@@ -83,7 +97,7 @@ bool RP_GBufferPass::Render()
     auto gbufferMaterial = matManager->getUserMaterialRef("Deferred_GBuffer");
     auto gbufferShader = gbufferMaterial.m_Shader.lock();
     
-    // 天空盒先不渲染
+    // 渲染场景内物体，天空盒不走GBuffer
     for (auto p : RenderManager::getInstance()->drawObjects)
     {
         if (p != nullptr && p->count != 0)
@@ -114,6 +128,7 @@ bool RP_GBufferPass::Render()
             gbufferShader->setMat4("projection", projection);
             gbufferShader->setMat4("view", view);
             gbufferShader->setMat4("model", model);
+            gbufferShader->setMat4("lightSpaceMatrix", lightSpace);
             p->draw();
         }
     }

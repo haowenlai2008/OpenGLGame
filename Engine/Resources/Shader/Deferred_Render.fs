@@ -6,8 +6,9 @@ in vec4 FragPosLightSpace;
 struct GBuffer {
     sampler2D pos;
     sampler2D normal;
-    sampler2D albedo;
     sampler2D metal_rough;
+    sampler2D albedo;
+    sampler2D posLightSpace;
 }; 
 
 struct Light {
@@ -33,6 +34,10 @@ uniform vec3 viewPos;
 
 const float PI = 3.14159265359;
 
+// PCF
+const float offset = 1.0 / 3200.0;
+const int angleClip = 5;
+const int pcfCoreSize = 5;
 
 float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 {
@@ -66,6 +71,32 @@ float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 }
 
 
+//float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
+//{
+//    // 执行透视除法
+//    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+//    // if (projCoords.x < -1 || projCoords.x > 1 || projCoords.y < -1 || projCoords.y > 1)
+//    //     return 0f;
+//    // 变换到[0,1]的范围
+//    projCoords = projCoords * 0.5 + 0.5;
+//    float shadowTmp;
+//    float currentDepth = projCoords.z;
+//    float closetDepth = texture(shadowMap, projCoords.xy).r;
+//    vec2 tmpCoords = projCoords.xy;
+//    float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+//    float x = clamp(tmpCoords.x, 0.0, 1.0);
+//    float y = clamp(tmpCoords.y, 0.0, 1.0);
+//    if (x != tmpCoords.x || y != tmpCoords.y)
+//        shadowTmp = 0.0f;
+//    else
+//        // 检查当前片段是否在阴影中
+//        shadowTmp = currentDepth - 0.005 > closetDepth ? 1.0 : 0.0;
+//
+//    float shadow = shadowTmp;
+//    //float shadow = texture(shadowMap, tmpCoords).r;
+//    //float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+//    return shadowTmp;
+//}
 
 // ----------------------------------------------------------------------------
 float DistributionGGX(vec3 N, vec3 H, float roughness)
@@ -117,6 +148,7 @@ void main()
 {		
     vec4 texColor = texture(gBuffer.albedo, TexCoords);
     vec3 metallRough = texture(gBuffer.metal_rough, TexCoords).rgb;
+    vec4 posLightSpace = texture(gBuffer.posLightSpace, TexCoords);
     float metallic = metallRough.r;
     float roughness = metallRough.g;
     float ao = metallRough.b;
@@ -177,7 +209,18 @@ void main()
 
     vec3 ambient = (kD * diffuse + specular) * ao;
     
-    vec3 color = ambient + Lo;
+    vec3 ldir = -normalize(lightPos - fragPos);
 
+    vec3 projCoords = posLightSpace.xyz / posLightSpace.w;
+    // if (projCoords.x < -1 || projCoords.x > 1 || projCoords.y < -1 || projCoords.y > 1)
+    //     return 0f;
+    // 变换到[0,1]的范围
+    projCoords = projCoords * 0.5 + 0.5;
+    float shadowTmp;
+    float currentDepth = projCoords.z;
+    float closetDepth = texture(shadowMap, projCoords.xy).r;
+    vec2 tmpCoords = projCoords.xy;
+    float shadow = ShadowCalculation(posLightSpace, N, ldir);
+    vec3 color   = ambient + Lo * (1.0 - shadow);
     FragColor = vec4(color, 1.0);
 }

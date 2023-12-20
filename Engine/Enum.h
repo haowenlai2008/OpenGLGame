@@ -46,6 +46,7 @@ enum class TextureType
 	GBufferNormal,
 	GBufferAlbedo,
 	GBufferMetallicRoughness,
+	GBufferPosLightSpace,
 };
 
 // äÖÈ¾Ä£Ê½

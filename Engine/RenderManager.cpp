@@ -16,27 +16,31 @@ GlobleBufferStructure RenderManager::globalBuffer = GlobleBufferStructure();
 // 管线初始化
 void RenderManager::init()
 {
-	// 前向管线
-	m_RenderPassList =
+	if (false)
 	{
-		std::make_shared<RP_IBLPreRenderPass>(),
-		std::make_shared<RP_ShadowMapPass>(),
-		std::make_shared<RP_ForwardRenderPass>(),
-		std::make_shared<RP_PostProcessPass>(),
-		std::make_shared<RP_ToneMappingGammaPass>(),
-	};
-	
-	// 延迟管线
-	//m_RenderPassList =
-	//{
-	//	std::make_shared<RP_IBLPreRenderPass>(),
-	//	std::make_shared<RP_ShadowMapPass>(),
-	//	std::make_shared<RP_GBufferPass>(),
-	//	std::make_shared<RP_DeferredRenderPass>(),
-	//	std::make_shared<RP_PostProcessPass>(),
-	//	std::make_shared<RP_ToneMappingGammaPass>(),
-	//};
-
+		// 前向管线
+		m_RenderPassList =
+		{
+			std::make_shared<RP_IBLPreRenderPass>(),
+			std::make_shared<RP_ShadowMapPass>(),
+			std::make_shared<RP_ForwardRenderPass>(),
+			std::make_shared<RP_PostProcessPass>(),
+			std::make_shared<RP_ToneMappingGammaPass>(),
+		};
+	}
+	else
+	{
+		// 延迟管线
+		m_RenderPassList =
+		{
+			std::make_shared<RP_IBLPreRenderPass>(),
+			std::make_shared<RP_ShadowMapPass>(),
+			std::make_shared<RP_GBufferPass>(),
+			std::make_shared<RP_DeferredRenderPass>(),
+			std::make_shared<RP_PostProcessPass>(),
+			std::make_shared<RP_ToneMappingGammaPass>(),
+		};
+	}
 	for (std::shared_ptr<RP_RenderPass>& rp_ptr : m_RenderPassList)
 		rp_ptr->Init();
 }

@@ -284,16 +284,9 @@ void main()
     
     vec3 ldir = -normalize(lightPos - fs_in.FragPos);
     float shadow = ShadowCalculation(fs_in.FragPosLightSpace, N, ldir);
-    // ambient = vec3(0.03);
     vec3 color   = ambient + Lo * (1.0 - shadow);
-    // vec3 color   = Lo;
-    // vec3 color = ambient + Lo;
+
 
     FragColor = vec4(color, 1.0);
 
-
-    // color = color / (color + vec3(1.0));
-    // color = pow(color, vec3(1.0/2.2));
-    // 
-    // FragColor = vec4(color, 1.0);
 }

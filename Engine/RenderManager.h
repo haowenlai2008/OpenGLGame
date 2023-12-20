@@ -29,6 +29,7 @@ struct GlobalTextureStructure
 	GLuint gBuffer_Normal = -1;					// GBuffer 法线
 	GLuint gBuffer_Albedo = -1;					// GBuffer 反照率
 	GLuint gBuffer_MetallicRoughness = -1;		// GBuffer mr模型参数
+	GLuint gBuffer_PosLightSpace = -1;			// GBuffer 光源空间坐标
 };
 
 // 全局buffer

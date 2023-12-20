@@ -138,26 +138,26 @@ bool MaterialManager::init()
 			{"light.intensity", 100.0f},
 			{"gBuffer.pos", Texture(TextureType::GBufferPos, 0)},
 			{"gBuffer.normal", Texture(TextureType::GBufferNormal, 1)},
-			{"gBuffer.albedo", Texture(TextureType::GBufferAlbedo, 2)},
-			{"gBuffer.metal_rough", Texture(TextureType::GBufferMetallicRoughness, 3)},
-			{"shadowMap", Texture(TextureType::ShadowMap, 4)},
-			{"irradianceMap", Texture(TextureType::TextureIrradianceMap, 5)},
-			{"prefilterMap", Texture(TextureType::TexturePrefilter, 6)},
-			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 7)},
+			{"gBuffer.metal_rough", Texture(TextureType::GBufferMetallicRoughness, 2)},
+			{"gBuffer.albedo", Texture(TextureType::GBufferAlbedo, 3)},
+			{"gBuffer.posLightSpace", Texture(TextureType::GBufferPosLightSpace, 4)},
+			{"shadowMap", Texture(TextureType::ShadowMap, 5)},
+			{"irradianceMap", Texture(TextureType::TextureIrradianceMap, 6)},
+			{"prefilterMap", Texture(TextureType::TexturePrefilter, 7)},
+			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 8)},
 		}},
 	};
 	
 	// 系统材质写入到json
-	//for (auto [matName, mat] : systemMaterial)
-	//{
-	//	if (shaderTypeMap.find(matName) != shaderTypeMap.end())
-	//	{
-	//		json jsonData = SerializeMaterial(matName, shaderTypeMap[matName], mat);
-	//		string jsonStr = ResourceTools::JsonIndent(nlohmann::to_string(jsonData));
-	//		ResourceTools::WriteFile(MATERIAL_PATH + matName + ".json", jsonStr);
-	//	}
-
-	//}
+	for (auto [matName, mat] : systemMaterial)
+	{
+		if (shaderTypeMap.find(matName) != shaderTypeMap.end())
+		{
+			json jsonData = SerializeMaterial(matName, shaderTypeMap[matName], mat);
+			string jsonStr = ResourceTools::JsonIndent(nlohmann::to_string(jsonData));
+			ResourceTools::WriteFile(MATERIAL_PATH + matName + ".json", jsonStr);
+		}
+	}
 
     return true;
 }
@@ -299,6 +299,7 @@ json MaterialManager::SerializeMaterial(const string& matName, const string& sha
 		{TextureType::GBufferNormal, "GBufferNormal"},
 		{TextureType::GBufferAlbedo, "GBufferAlbedo"},
 		{TextureType::GBufferMetallicRoughness, "GBufferMetallicRoughness"},
+		{TextureType::GBufferPosLightSpace, "GBufferPosLightSpace"},
 	};
 	for (auto [uniformName, value] : mat.uniformTex)
 	{
@@ -393,6 +394,7 @@ Material MaterialManager::DeserializeJsonToMaterial(const string& jsonStr)
 		{"GBufferNormal", TextureType::GBufferNormal},
 		{"GBufferAlbedo", TextureType::GBufferAlbedo},
 		{"GBufferMetallicRoughness", TextureType::GBufferMetallicRoughness},
+		{"GBufferPosLightSpace", TextureType::GBufferPosLightSpace},
 	};
 
 	for (auto it = jsonObj["UniformTexture"].begin(); it != jsonObj["UniformTexture"].end(); ++it)
