@@ -1,7 +1,7 @@
 #version 330 core
 out vec4 FragColor;
 in vec2 TexCoords;
-
+in vec4 FragPosLightSpace;
 
 struct GBuffer {
     sampler2D pos;
@@ -85,7 +85,7 @@ void main()
     float metallic = metallRough.r;
     float roughness = metallRough.g;
     float ao = metallRough.b;
-    vec3 fragPos = texture(gBuffer.pos, TexCoords).rbg;
+    vec3 fragPos = texture(gBuffer.pos, TexCoords).rgb;
     vec3 albedo = texColor.rgb;
     
 
