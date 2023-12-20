@@ -30,7 +30,7 @@ bool RP_GBufferPass::Init()
     // - ½ðÊô¶È-´Ö²Ú¶È
     glGenTextures(1, &RenderManager::globleTexture.gBuffer_MetallicRoughness);
     glBindTexture(GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_MetallicRoughness);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bmp->screenWidth, bmp->screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bmp->screenWidth, bmp->screenHeight, 0, GL_RGB,  GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_MetallicRoughness, 0);

@@ -149,15 +149,15 @@ bool MaterialManager::init()
 	};
 	
 	// 系统材质写入到json
-	for (auto [matName, mat] : systemMaterial)
-	{
-		if (shaderTypeMap.find(matName) != shaderTypeMap.end())
-		{
-			json jsonData = SerializeMaterial(matName, shaderTypeMap[matName], mat);
-			string jsonStr = ResourceTools::JsonIndent(nlohmann::to_string(jsonData));
-			ResourceTools::WriteFile(MATERIAL_PATH + matName + ".json", jsonStr);
-		}
-	}
+	//for (auto [matName, mat] : systemMaterial)
+	//{
+	//	if (shaderTypeMap.find(matName) != shaderTypeMap.end())
+	//	{
+	//		json jsonData = SerializeMaterial(matName, shaderTypeMap[matName], mat);
+	//		string jsonStr = ResourceTools::JsonIndent(nlohmann::to_string(jsonData));
+	//		ResourceTools::WriteFile(MATERIAL_PATH + matName + ".json", jsonStr);
+	//	}
+	//}
 
     return true;
 }

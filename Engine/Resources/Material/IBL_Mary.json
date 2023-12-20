@@ -3,7 +3,7 @@
     "ShaderName":"IBL_PBR",
     "UniformBool":null,
     "UniformFloat":{
-        "light.intensity":50.0,
+        "light.intensity":100.0,
         "material.ao":1.0,
         "material.metallic":0.1,
         "material.roughness":0.8
