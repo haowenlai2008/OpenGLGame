@@ -106,21 +106,9 @@ bool RP_GBufferPass::Render()
             auto& material = *ent_ptr->GetMaterial().lock();
             
             // 设置临时材质的参数，albedo，metallic, roughness
-            auto albedoOpt = material.getTexture("material.diffuse");
-            if (albedoOpt.has_value())
-            {
-                gbufferMaterial.setTexture("material.diffuse", albedoOpt.value(), 0);
-            }
-            auto metallicOpt = material.getFloat("material.metallic");
-            if (metallicOpt.has_value())
-            {
-                gbufferMaterial.setFloat("material.metallic", metallicOpt.value());
-            }
-            auto roughnessOpt = material.getFloat("material.roughness");
-            if (roughnessOpt.has_value())
-            {
-                gbufferMaterial.setFloat("material.roughness", roughnessOpt.value());
-            }
+            gbufferMaterial.setTexture("material.diffuse", material.getTexture("material.diffuse"), 0);
+            gbufferMaterial.setFloat("material.metallic", material.getFloat("material.metallic"));
+            gbufferMaterial.setFloat("material.roughness", material.getFloat("material.roughness"));
 
             glm::mat4 model = p->getModelMatrix();
             gbufferShader->use();

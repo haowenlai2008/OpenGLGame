@@ -1,5 +1,38 @@
 #include "MaterialManager.h"
 
+
+// 序列化用映射
+static std::map<TextureType, std::string> textureTypeToString = {
+	{TextureType::Texture2D, "Texture2D"},
+	{TextureType::TextureHDR, "TextureHDR"},
+	{TextureType::TextureEnv, "TextureEnv"},
+	{TextureType::TextureCubMap, "TextureCubMap"},
+	{TextureType::TextureIrradianceMap, "TextureIrradianceMap"},
+	{TextureType::TexturePrefilter, "TexturePrefilter"},
+	{TextureType::TextureBrdfLUT, "TextureBrdfLUT"},
+	{TextureType::GBufferPos, "GBufferPos"},
+	{TextureType::GBufferNormal, "GBufferNormal"},
+	{TextureType::GBufferAlbedo, "GBufferAlbedo"},
+	{TextureType::GBufferMetallicRoughness, "GBufferMetallicRoughness"},
+	{TextureType::GBufferPosLightSpace, "GBufferPosLightSpace"},
+};
+
+
+// 反序列化用映射
+static std::map<std::string, TextureType> stringToTextureType = {
+	{"Texture2D", TextureType::Texture2D},
+	{"TextureHDR", TextureType::TextureHDR},
+	{"TextureEnv", TextureType::TextureEnv},
+	{"TextureCubMap", TextureType::TextureCubMap},
+	{"TextureIrradianceMap", TextureType::TextureIrradianceMap},
+	{"TexturePrefilter", TextureType::TexturePrefilter},
+	{"GBufferPos", TextureType::GBufferPos},
+	{"GBufferNormal", TextureType::GBufferNormal},
+	{"GBufferAlbedo", TextureType::GBufferAlbedo},
+	{"GBufferMetallicRoughness", TextureType::GBufferMetallicRoughness},
+	{"GBufferPosLightSpace", TextureType::GBufferPosLightSpace},
+};
+
 bool MaterialManager::init()
 {
 	shaderTypeMap = {
@@ -287,24 +320,11 @@ json MaterialManager::SerializeMaterial(const string& matName, const string& sha
 			}
 	}
 
-	static std::map<TextureType, std::string> textureTypeStringMap = {
-		{TextureType::Texture2D, "Texture2D"},
-		{TextureType::TextureHDR, "TextureHDR"},
-		{TextureType::TextureEnv, "TextureEnv"},
-		{TextureType::TextureCubMap, "TextureCubMap"},
-		{TextureType::TextureIrradianceMap, "TextureIrradianceMap"},
-		{TextureType::TexturePrefilter, "TexturePrefilter"},
-		{TextureType::TextureBrdfLUT, "TextureBrdfLUT"},
-		{TextureType::GBufferPos, "GBufferPos"},
-		{TextureType::GBufferNormal, "GBufferNormal"},
-		{TextureType::GBufferAlbedo, "GBufferAlbedo"},
-		{TextureType::GBufferMetallicRoughness, "GBufferMetallicRoughness"},
-		{TextureType::GBufferPosLightSpace, "GBufferPosLightSpace"},
-	};
+
 	for (auto [uniformName, value] : mat.uniformTex)
 	{
 		jsonObj["UniformTexture"][uniformName] = {};
-		jsonObj["UniformTexture"][uniformName]["TextureType"] = textureTypeStringMap[value.m_textureType];
+		jsonObj["UniformTexture"][uniformName]["TextureType"] = textureTypeToString[value.m_textureType];
 		jsonObj["UniformTexture"][uniformName]["Location"] = value.m_location;
 		jsonObj["UniformTexture"][uniformName]["Path"] = value.m_path;
 	}
@@ -382,27 +402,14 @@ Material MaterialManager::DeserializeJsonToMaterial(const string& jsonStr)
 		result.uniformMat4[it.key()] = matData;
 	}
 
-	// 映射。
-	static std::map<std::string, TextureType> textureTypeStringMap = {
-		{"Texture2D", TextureType::Texture2D},
-		{"TextureHDR", TextureType::TextureHDR},
-		{"TextureEnv", TextureType::TextureEnv},
-		{"TextureCubMap", TextureType::TextureCubMap},
-		{"TextureIrradianceMap", TextureType::TextureIrradianceMap},
-		{"TexturePrefilter", TextureType::TexturePrefilter},
-		{"GBufferPos", TextureType::GBufferPos},
-		{"GBufferNormal", TextureType::GBufferNormal},
-		{"GBufferAlbedo", TextureType::GBufferAlbedo},
-		{"GBufferMetallicRoughness", TextureType::GBufferMetallicRoughness},
-		{"GBufferPosLightSpace", TextureType::GBufferPosLightSpace},
-	};
+
 
 	for (auto it = jsonObj["UniformTexture"].begin(); it != jsonObj["UniformTexture"].end(); ++it)
 	{
 		auto matValue = it.value();
 		GLuint location = matValue["Location"];
 		string path = matValue["Path"];
-		TextureType textureType = textureTypeStringMap[matValue["TextureType"]];
+		TextureType textureType = stringToTextureType[matValue["TextureType"]];
 		result.uniformTex[it.key()] = Texture(path, textureType, location);
 	}
 	return result;

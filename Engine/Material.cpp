@@ -180,14 +180,32 @@ void Material::setInt(const string& name, int value)
 	uniformInt[name] = value;
 }
 
+void Material::setInt(const string& name, const optional<int>& valueOpt)
+{
+	if (valueOpt.has_value())
+		uniformInt[name] = valueOpt.value();
+}
+
 void Material::setFloat(const string& name, float value)
 {
 	uniformFloat[name] = value;
 }
 
+void Material::setFloat(const string& name, const optional<float>& valueOpt)
+{
+	if (valueOpt.has_value())
+		uniformFloat[name] = valueOpt.value();
+}
+
 void Material::setVec2(const string& name, const vec2& value)
 {
 	uniformVec2[name] = value;
+}
+
+void Material::setVec2(const string& name, const optional<vec2>& valueOpt)
+{
+	if (valueOpt.has_value())
+		uniformVec2[name] = valueOpt.value();
 }
 
 void Material::setVec2(const string& name, float x, float y)
@@ -200,6 +218,12 @@ void Material::setVec3(const string& name, const vec3& value)
 	uniformVec3[name] = value;
 }
 
+void Material::setVec3(const string& name, const optional<vec3>& valueOpt)
+{
+	if (valueOpt.has_value())
+		uniformVec3[name] = valueOpt.value();
+}
+
 void Material::setVec3(const string& name, float x, float y, float z)
 {
 	uniformVec3[name] = vec3(x, y, z);
@@ -208,6 +232,12 @@ void Material::setVec3(const string& name, float x, float y, float z)
 void Material::setVec4(const string& name, const vec4& value)
 {
 	uniformVec4[name] = value;
+}
+
+void Material::setVec4(const string& name, const optional<vec4>& valueOpt)
+{
+	if (valueOpt.has_value())
+		uniformVec4[name] = valueOpt.value();
 }
 
 void Material::setVec4(const string& name, float x, float y, float z, float w)
@@ -220,15 +250,33 @@ void Material::setMat2(const string& name, const glm::mat2& mat)
 	uniformMat2[name] = mat;
 }
 
+void Material::setMat2(const string& name, const optional<mat2>& valueOpt)
+{
+	if (valueOpt.has_value())
+		uniformMat2[name] = valueOpt.value();
+}
+
 void Material::setMat3(const string& name, const glm::mat3& mat)
 {
 	uniformMat3[name] = mat;
 	
 }
 
+void Material::setMat3(const string& name, const optional<mat3>& valueOpt)
+{
+	if (valueOpt.has_value())
+		uniformMat3[name] = valueOpt.value();
+}
+
 void Material::setMat4(const string& name, const glm::mat4& mat)
 {
 	uniformMat4[name] = mat;
+}
+
+void Material::setMat4(const string& name, const optional<mat4>& valueOpt)
+{
+	if (valueOpt.has_value())
+		uniformMat4[name] = valueOpt.value();
 }
 
 optional<float> Material::getFloat(const string& name)
@@ -314,6 +362,21 @@ void Material::setTexture(const string& name, Texture& texture, GLubyte location
 	curTex.m_type = texture.m_type;
 	curTex.m_textureID = texture.m_textureID;
 	uniformTex[name] = curTex;
+}
+
+void Material::setTexture(const string& name, optional<Texture> textureOpt, GLubyte location)
+{
+	if (textureOpt.has_value())
+	{
+		Texture& texture = textureOpt.value();
+		auto curTex = Texture();
+		curTex.m_location = location;
+		curTex.m_path = texture.m_path;
+		curTex.m_textureType = texture.m_textureType;
+		curTex.m_type = texture.m_type;
+		curTex.m_textureID = texture.m_textureID;
+		uniformTex[name] = curTex;
+	}
 }
 
 void Material::setTextureLocation(const string& name, GLubyte location)

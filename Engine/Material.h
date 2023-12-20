@@ -74,17 +74,26 @@ public:
 	// uniform¹¤¾ßº¯Êý
 	void setBool(const string& name, bool value);
 	void setInt(const string& name, int value);
+	void setInt(const string& name, const optional<int>& valueOpt);
 	void setFloat(const string& name, float value);
+	void setFloat(const string& name, const optional<float>& valueOpt);
 	void setVec2(const string& name, const vec2& value);
+	void setVec2(const string& name, const optional<vec2>& valueOpt);
 	void setVec2(const string& name, float x, float y);
 	void setVec3(const string& name, const vec3& value);
+	void setVec3(const string& name, const optional<vec3>& valueOpt);
 	void setVec3(const string& name, float x, float y, float z);
 	void setVec4(const string& name, const vec4& value);
+	void setVec4(const string& name, const optional<vec4>& valueOpt);
 	void setVec4(const string& name, float x, float y, float z, float w);
 	void setMat2(const string& name, const mat2& mat);
+	void setMat2(const string& name, const optional<mat2>& valueOpt);
 	void setMat3(const string& name, const mat3& mat);
+	void setMat3(const string& name, const optional<mat3>& valueOpt);
 	void setMat4(const string& name, const mat4& mat);
+	void setMat4(const string& name, const optional<mat4>& valueOpt);
 
+	optional<float> getFloat(const string& name);
 	optional<float> getFloat(const string& name);
 	optional<vec2> getVec2(const string& name);
 	optional<vec3> getVec3(const string& name);
@@ -97,6 +106,7 @@ public:
 	void setTexture(const string& name, const string& path, TextureType textureType);
 	void setTexture(const string& name, const string& path, GLubyte location, TextureType textureType);
 	void setTexture(const string& name, Texture& texture, GLubyte location);
+	void setTexture(const string& name, optional<Texture> texture, GLubyte location);
 	void setTextureLocation(const string& name, GLubyte location);
 	void setTexturePath(const string& name, const string& path);
 	void setTextureCacheID(const string& name, GLuint cacheID);
