@@ -210,16 +210,6 @@ void main()
     vec3 ambient = (kD * diffuse + specular) * ao;
     
     vec3 ldir = -normalize(lightPos - fragPos);
-
-    vec3 projCoords = posLightSpace.xyz / posLightSpace.w;
-    // if (projCoords.x < -1 || projCoords.x > 1 || projCoords.y < -1 || projCoords.y > 1)
-    //     return 0f;
-    // ±ä»»µ½[0,1]µÄ·¶Î§
-    projCoords = projCoords * 0.5 + 0.5;
-    float shadowTmp;
-    float currentDepth = projCoords.z;
-    float closetDepth = texture(shadowMap, projCoords.xy).r;
-    vec2 tmpCoords = projCoords.xy;
     float shadow = ShadowCalculation(posLightSpace, N, ldir);
     vec3 color   = ambient + Lo * (1.0 - shadow);
     FragColor = vec4(color, 1.0);
