@@ -16,6 +16,10 @@ GlobleBufferStructure RenderManager::globalBuffer = GlobleBufferStructure();
 // 管线初始化
 void RenderManager::init()
 {
+	// 清空状态
+	for (std::shared_ptr<RP_RenderPass>& rp_ptr : m_RenderPassList)
+		rp_ptr->Release();
+
 	if (false)
 	{
 		// 前向管线
@@ -41,6 +45,8 @@ void RenderManager::init()
 			std::make_shared<RP_ToneMappingGammaPass>(),
 		};
 	}
+
+	// 每个pass关联资源初始化
 	for (std::shared_ptr<RP_RenderPass>& rp_ptr : m_RenderPassList)
 		rp_ptr->Init();
 }

@@ -6,6 +6,6 @@ class RP_ShadowMapPass :
 public:
     bool Init() override;
     bool Render() override;
-    ~RP_ShadowMapPass() override;
+    bool Release() override;
 };
 

@@ -15,6 +15,7 @@ static std::map<TextureType, std::string> textureTypeToString = {
 	{TextureType::GBufferAlbedo, "GBufferAlbedo"},
 	{TextureType::GBufferMetallicRoughness, "GBufferMetallicRoughness"},
 	{TextureType::GBufferPosLightSpace, "GBufferPosLightSpace"},
+	{TextureType::SSAOTexture, "SSAOTexture"},
 };
 
 
@@ -31,10 +32,13 @@ static std::map<std::string, TextureType> stringToTextureType = {
 	{"GBufferAlbedo", TextureType::GBufferAlbedo},
 	{"GBufferMetallicRoughness", TextureType::GBufferMetallicRoughness},
 	{"GBufferPosLightSpace", TextureType::GBufferPosLightSpace},
+	{"SSAOTexture", TextureType::SSAOTexture},
 };
 
 bool MaterialManager::init()
 {
+	userMaterial = {};
+
 	shaderTypeMap = {
 		{"PBRCube", "PBRCube"},
 		{"WithColor", "WithColor"},
@@ -51,7 +55,6 @@ bool MaterialManager::init()
 		{"Deferred_Render", "Deferred_Render"},
 	};
 
-	userMaterial = {};
 	systemMaterial = {
 		{"WithColor",{
 			{"mColor", vec3(1.0)},

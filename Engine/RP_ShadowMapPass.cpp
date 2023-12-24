@@ -70,6 +70,7 @@ bool RP_ShadowMapPass::Render()
 	return true;
 }
 
-RP_ShadowMapPass::~RP_ShadowMapPass()
+bool RP_ShadowMapPass::Release()
 {
+	return true;
 }

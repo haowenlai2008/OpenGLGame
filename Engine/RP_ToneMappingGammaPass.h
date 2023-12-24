@@ -6,6 +6,6 @@ class RP_ToneMappingGammaPass :
 public:
     bool Init() override;
     bool Render() override;
-    ~RP_ToneMappingGammaPass() override;
+    bool Release() override;
 };
 

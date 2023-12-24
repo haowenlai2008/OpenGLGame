@@ -77,6 +77,8 @@ bool RP_ForwardRenderPass::Render()
 
 }
 
-RP_ForwardRenderPass::~RP_ForwardRenderPass()
+bool RP_ForwardRenderPass::Release()
 {
+	return true;
 }
+

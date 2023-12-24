@@ -6,6 +6,6 @@ class RP_IBLPreRenderPass :
 public:
     bool Init() override;
     bool Render() override;
-    ~RP_IBLPreRenderPass() override;
+    bool Release() override;
 };
 

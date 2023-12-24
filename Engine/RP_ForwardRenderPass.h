@@ -6,7 +6,7 @@ class RP_ForwardRenderPass :
 public:
     bool Init() override;
     bool Render() override;
-    ~RP_ForwardRenderPass() override;
+    bool Release() override;
 };
 
 

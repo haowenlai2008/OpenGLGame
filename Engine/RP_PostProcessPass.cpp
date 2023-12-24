@@ -75,8 +75,9 @@ bool RP_PostProcessPass::Render()
     return true;
 }
 
-RP_PostProcessPass::~RP_PostProcessPass()
+bool RP_PostProcessPass::Release()
 {
 	glDeleteVertexArrays(1, &quadVAO);
 	glDeleteBuffers(1, &quadVBO);
+	return true;
 }

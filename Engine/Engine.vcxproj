@@ -195,6 +195,7 @@
     <ClCompile Include="RP_PostProcessPass.cpp" />
     <ClCompile Include="RP_RenderPass.cpp" />
     <ClCompile Include="RP_ShadowMapPass.cpp" />
+    <ClCompile Include="RP_SSAOPass.cpp" />
     <ClCompile Include="RP_ToneMappingGammaPass.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -261,6 +262,7 @@
     <ClInclude Include="RP_PostProcessPass.h" />
     <ClInclude Include="RP_RenderPass.h" />
     <ClInclude Include="RP_ShadowMapPass.h" />
+    <ClInclude Include="RP_SSAOPass.h" />
     <ClInclude Include="RP_ToneMappingGammaPass.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />

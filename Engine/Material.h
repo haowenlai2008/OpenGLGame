@@ -94,7 +94,6 @@ public:
 	void setMat4(const string& name, const optional<mat4>& valueOpt);
 
 	optional<float> getFloat(const string& name);
-	optional<float> getFloat(const string& name);
 	optional<vec2> getVec2(const string& name);
 	optional<vec3> getVec3(const string& name);
 	optional<vec4> getVec4(const string& name);

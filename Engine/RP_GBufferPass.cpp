@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "MaterialManager.h"
 #include "Entity.h"
+#include "GameCamera.h"
 
 bool RP_GBufferPass::Init()
 {
@@ -14,7 +15,7 @@ bool RP_GBufferPass::Init()
     // - Î»ÖÃÑÕÉ«»º³å
     glGenTextures(1, &RenderManager::globleTexture.gBuffer_Position);
     glBindTexture(GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_Position);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, bmp->screenWidth, bmp->screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, bmp->screenWidth, bmp->screenHeight, 0, GL_RGBA, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_Position, 0);
@@ -87,8 +88,10 @@ bool RP_GBufferPass::Render()
     //glBindFramebuffer(GL_FRAMEBUFFER, 0);
     BaseManager* baseManager = BaseManager::getInstance();
     MaterialManager* matManager = MaterialManager::getInstance();
-    glm::mat4 projection = baseManager->getProjMat4();
-    glm::mat4 view = baseManager->getViewMat4();
+    auto gameCamera = baseManager->getCamera();
+    auto lightCamera = baseManager->getLightCamera();
+    glm::mat4 projection = gameCamera->getProjMat4();
+    glm::mat4 view = gameCamera->getViewMat4();
     glm::mat4 lightSpace = baseManager->getLightSpaceMat4();
     glm::vec3 viewPos = baseManager->getViewPos();
     glm::vec3 lightPos = baseManager->getLightPos();
@@ -117,6 +120,8 @@ bool RP_GBufferPass::Render()
             gbufferShader->setMat4("view", view);
             gbufferShader->setMat4("model", model);
             gbufferShader->setMat4("lightSpaceMatrix", lightSpace);
+            gbufferShader->setFloat("near", gameCamera->getNear());
+            gbufferShader->setFloat("far", gameCamera->getFar());
             p->draw();
         }
     }
@@ -124,6 +129,7 @@ bool RP_GBufferPass::Render()
     return true;
 }
 
-RP_GBufferPass::~RP_GBufferPass()
+bool RP_GBufferPass::Release()
 {
+    return true;
 }

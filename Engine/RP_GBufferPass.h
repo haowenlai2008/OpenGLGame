@@ -6,6 +6,6 @@ class RP_GBufferPass :
 public:
     bool Init() override;
     bool Render() override;
-    ~RP_GBufferPass() override;
+    bool Release() override;
 };
 

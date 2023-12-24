@@ -80,8 +80,9 @@ bool RP_ToneMappingGammaPass::Render()
 	return true;
 }
 
-RP_ToneMappingGammaPass::~RP_ToneMappingGammaPass()
+bool RP_ToneMappingGammaPass::Release()
 {
 	glDeleteVertexArrays(1, &quadVAO);
 	glDeleteBuffers(1, &quadVBO);
+	return true;
 }

@@ -6,6 +6,6 @@ class RP_PostProcessPass :
 public:
     bool Init() override;
     bool Render() override;
-    ~RP_PostProcessPass() override;
+    bool Release() override;
 };
 

@@ -133,6 +133,7 @@ bool RP_DeferredRenderPass::Render()
     return true;
 }
 
-RP_DeferredRenderPass::~RP_DeferredRenderPass()
+bool RP_DeferredRenderPass::Release()
 {
+	return true;
 }

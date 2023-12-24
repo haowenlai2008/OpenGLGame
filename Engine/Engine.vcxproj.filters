@@ -321,6 +321,9 @@
     <ClCompile Include="RP_GBufferPass.cpp">
       <Filter>源文件\RenderPass</Filter>
     </ClCompile>
+    <ClCompile Include="RP_SSAOPass.cpp">
+      <Filter>源文件\RenderPass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -516,6 +519,9 @@
       <Filter>头文件\RenderPass</Filter>
     </ClInclude>
     <ClInclude Include="RP_GBufferPass.h">
+      <Filter>头文件\RenderPass</Filter>
+    </ClInclude>
+    <ClInclude Include="RP_SSAOPass.h">
       <Filter>头文件\RenderPass</Filter>
     </ClInclude>
   </ItemGroup>

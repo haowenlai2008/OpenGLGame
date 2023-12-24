@@ -6,6 +6,6 @@ class RP_DeferredRenderPass :
 public:
     bool Init() override;
     bool Render() override;
-    ~RP_DeferredRenderPass() override;
+    bool Release() override;
 };
 

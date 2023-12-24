@@ -390,12 +390,13 @@ bool RP_IBLPreRenderPass::Render()
     return true;
 }
 
-RP_IBLPreRenderPass::~RP_IBLPreRenderPass()
+bool RP_IBLPreRenderPass::Release()
 {
     glDeleteVertexArrays(1, &sphereVAO);
     glDeleteVertexArrays(1, &cubeVAO);
     glDeleteBuffers(1, &cubeVBO);
     glDeleteVertexArrays(1, &quadVAO);
     glDeleteBuffers(1, &quadVBO);
+    return true;
 }
 
