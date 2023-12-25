@@ -9,7 +9,13 @@
 #include <random>
 
 static std::vector<glm::vec3> ssaoKernel;
-static std::vector<glm::vec3> ssaoNoise;;
+static std::vector<glm::vec3> ssaoNoise;
+
+GLfloat lerp(GLfloat a, GLfloat b, GLfloat f)
+{
+    return a + f * (b - a);
+}
+
 bool RP_SSAOPass::Init()
 {
     auto bmp = BaseManager::getInstance();
@@ -63,6 +69,17 @@ bool RP_SSAOPass::Init()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, RenderManager::globleTexture.ssao_Texture, 0);
 
+    // ssao Blur FrameBuffer
+    glGenFramebuffers(1, &RenderManager::globalBuffer.ssaoBlurFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, RenderManager::globalBuffer.ssaoBlurFrameBuffer);
+
+
+    glGenTextures(1, &RenderManager::globleTexture.ssao_BlurTexture);
+    glBindTexture(GL_TEXTURE_2D, RenderManager::globleTexture.ssao_BlurTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, bmp->screenWidth, bmp->screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, RenderManager::globleTexture.ssao_BlurTexture, 0);
     return true;
 }
 
@@ -72,13 +89,14 @@ bool RP_SSAOPass::Render()
     BaseManager* baseManager = BaseManager::getInstance();
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glBindFramebuffer(GL_FRAMEBUFFER, RenderManager::globalBuffer.ssaoFrameBuffer);
-    //glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
     glDepthFunc(GL_LESS);
     glCullFace(GL_BACK);
     baseManager->colorClear();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
+    // 画第一张
     auto mat = MaterialManager::getInstance()->getUserMaterialRef("Deferred_SSAO");
     auto shader = mat.m_Shader.lock();
     shader->use();
@@ -90,8 +108,19 @@ bool RP_SSAOPass::Render()
     shader->setMat4("projection", baseManager->getProjMat4());
     for (GLuint i = 0; i < 64; ++i)
         shader->setVec3("samples[" + std::to_string(i) + "]", ssaoKernel[i]);
-
     VertexFactory::getQuadData()->draw();
+
+
+    // 画模糊后的结果
+    glBindFramebuffer(GL_FRAMEBUFFER, RenderManager::globalBuffer.ssaoBlurFrameBuffer);
+    GLuint textureID = RenderManager::globleTexture.ssao_Texture;
+    std::shared_ptr<Shader> shaderBlur = Shader::getFilter("ssao_blur");
+    shaderBlur->use();
+    shaderBlur->setInt("screenTexture", 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    VertexFactory::getQuadData()->draw();
+
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     return true;

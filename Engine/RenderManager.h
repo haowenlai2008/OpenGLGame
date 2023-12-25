@@ -31,8 +31,11 @@ struct GlobalTextureStructure
 	GLuint gBuffer_Albedo = -1;					// GBuffer 反照率
 	GLuint gBuffer_MetallicRoughness = -1;		// GBuffer mr模型参数
 	GLuint gBuffer_PosLightSpace = -1;			// GBuffer 光源空间坐标
+	GLuint gBuffer_ViewPos = -1;				// GBuffer 观察空间位置
+	GLuint gBuffer_ViewNormal = -1;				// GBuffer 观察空间法线
 	GLuint ssao_noise = -1;						// ssao采样随机旋转变量
 	GLuint ssao_Texture = -1;					// ssao结果
+	GLuint ssao_BlurTexture = -1;				// ssao模糊后结果
 };
 
 // 全局buffer
@@ -44,6 +47,7 @@ struct GlobleBufferStructure
 	GLuint afterPossprocessBuffer = -1;
 	GLuint gBuffer = -1;
 	GLuint ssaoFrameBuffer = -1;
+	GLuint ssaoBlurFrameBuffer = -1;
 };
 
 class RenderManager : public Singleton<RenderManager>

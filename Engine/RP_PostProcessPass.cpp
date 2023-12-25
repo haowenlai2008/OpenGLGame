@@ -61,8 +61,7 @@ bool RP_PostProcessPass::Render()
 	default:
 		break;
 	}
-	std::weak_ptr<Shader> screenShader = Shader::getFilter(std::move(filterName));
-	auto shader = screenShader.lock();
+	std::shared_ptr<Shader> shader = Shader::getFilter(std::move(filterName));
 	shader->use();
 	shader->setInt("screenTexture", 0);
 	glActiveTexture(GL_TEXTURE0);

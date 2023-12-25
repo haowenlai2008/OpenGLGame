@@ -152,6 +152,22 @@ void Material::bindUniform()
 			textureID = RenderManager::globleTexture.gBuffer_PosLightSpace;
 			texType = GL_TEXTURE_2D;
 			break;
+		case TextureType::GBufferViewPos:
+			textureID = RenderManager::globleTexture.gBuffer_ViewPos;
+			texType = GL_TEXTURE_2D;
+			break;
+		case TextureType::GBufferViewNormal:
+			textureID = RenderManager::globleTexture.gBuffer_ViewNormal;
+			texType = GL_TEXTURE_2D;
+			break;
+		case TextureType::SSAOTexture:
+			textureID = RenderManager::globleTexture.ssao_Texture;
+			texType = GL_TEXTURE_2D;
+			break;
+		case TextureType::SSAOBlurTexture:
+			textureID = RenderManager::globleTexture.ssao_BlurTexture;
+			texType = GL_TEXTURE_2D;
+			break;
 		case TextureType::TextureIrradianceMap:
 			textureID = RenderManager::globleTexture.irradianceMapIBL;
 			texType = GL_TEXTURE_CUBE_MAP;

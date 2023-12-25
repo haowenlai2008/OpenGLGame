@@ -15,7 +15,10 @@ static std::map<TextureType, std::string> textureTypeToString = {
 	{TextureType::GBufferAlbedo, "GBufferAlbedo"},
 	{TextureType::GBufferMetallicRoughness, "GBufferMetallicRoughness"},
 	{TextureType::GBufferPosLightSpace, "GBufferPosLightSpace"},
+	{TextureType::GBufferViewPos, "GBufferViewPos"},
+	{TextureType::GBufferViewNormal, "GBufferViewNormal"},
 	{TextureType::SSAOTexture, "SSAOTexture"},
+	{TextureType::SSAOBlurTexture, "SSAOBlurTexture"},
 };
 
 
@@ -32,7 +35,10 @@ static std::map<std::string, TextureType> stringToTextureType = {
 	{"GBufferAlbedo", TextureType::GBufferAlbedo},
 	{"GBufferMetallicRoughness", TextureType::GBufferMetallicRoughness},
 	{"GBufferPosLightSpace", TextureType::GBufferPosLightSpace},
+	{"GBufferViewPos", TextureType::GBufferViewPos},
+	{"GBufferViewNormal", TextureType::GBufferViewNormal},
 	{"SSAOTexture", TextureType::SSAOTexture},
+	{"SSAOBlurTexture", TextureType::SSAOBlurTexture},
 };
 
 bool MaterialManager::init()
@@ -182,23 +188,24 @@ bool MaterialManager::init()
 			{"irradianceMap", Texture(TextureType::TextureIrradianceMap, 6)},
 			{"prefilterMap", Texture(TextureType::TexturePrefilter, 7)},
 			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 8)},
+			{"ssao", Texture(TextureType::SSAOBlurTexture, 9)},
 		}},
 		{ "Deferred_SSAO", {
-			{"gBuffer.pos", Texture(TextureType::GBufferPos, 0)},
-			{"gBuffer.normal", Texture(TextureType::GBufferNormal, 1)},
+			{"gBuffer.viewPos", Texture(TextureType::GBufferViewPos, 0)},
+			{"gBuffer.viewNormal", Texture(TextureType::GBufferViewNormal, 1)},
 		} },
 	};
 	
 	// 系统材质写入到json
-	//for (auto [matName, mat] : systemMaterial)
-	//{
-	//	if (shaderTypeMap.find(matName) != shaderTypeMap.end())
-	//	{
-	//		json jsonData = SerializeMaterial(matName, shaderTypeMap[matName], mat);
-	//		string jsonStr = ResourceTools::JsonIndent(nlohmann::to_string(jsonData));
-	//		ResourceTools::WriteFile(MATERIAL_PATH + matName + ".json", jsonStr);
-	//	}
-	//}
+	for (auto [matName, mat] : systemMaterial)
+	{
+		if (shaderTypeMap.find(matName) != shaderTypeMap.end())
+		{
+			json jsonData = SerializeMaterial(matName, shaderTypeMap[matName], mat);
+			string jsonStr = ResourceTools::JsonIndent(nlohmann::to_string(jsonData));
+			ResourceTools::WriteFile(MATERIAL_PATH + matName + ".json", jsonStr);
+		}
+	}
 
     return true;
 }

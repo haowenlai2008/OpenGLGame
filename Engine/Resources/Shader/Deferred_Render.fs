@@ -27,6 +27,7 @@ uniform sampler2D shadowMap;
 uniform samplerCube irradianceMap;
 uniform samplerCube prefilterMap;
 uniform sampler2D brdfLUT;
+uniform sampler2D ssao;
 
 
 uniform vec3 viewPos;
@@ -68,34 +69,6 @@ float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 
     return shadow;
 }
-
-
-//float ShadowCalculation(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
-//{
-//    // 执行透视除法
-//    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
-//    // if (projCoords.x < -1 || projCoords.x > 1 || projCoords.y < -1 || projCoords.y > 1)
-//    //     return 0f;
-//    // 变换到[0,1]的范围
-//    projCoords = projCoords * 0.5 + 0.5;
-//    float shadowTmp;
-//    float currentDepth = projCoords.z;
-//    float closetDepth = texture(shadowMap, projCoords.xy).r;
-//    vec2 tmpCoords = projCoords.xy;
-//    float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
-//    float x = clamp(tmpCoords.x, 0.0, 1.0);
-//    float y = clamp(tmpCoords.y, 0.0, 1.0);
-//    if (x != tmpCoords.x || y != tmpCoords.y)
-//        shadowTmp = 0.0f;
-//    else
-//        // 检查当前片段是否在阴影中
-//        shadowTmp = currentDepth - 0.005 > closetDepth ? 1.0 : 0.0;
-//
-//    float shadow = shadowTmp;
-//    //float shadow = texture(shadowMap, tmpCoords).r;
-//    //float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
-//    return shadowTmp;
-//}
 
 // ----------------------------------------------------------------------------
 float DistributionGGX(vec3 N, vec3 H, float roughness)
@@ -150,7 +123,8 @@ void main()
     vec4 posLightSpace = texture(gBuffer.posLightSpace, TexCoords);
     float metallic = metallRough.r;
     float roughness = metallRough.g;
-    float ao = metallRough.b;
+    //float ao = metallRough.b;
+    float ao = texture(ssao, TexCoords).r;
     vec3 fragPos = texture(gBuffer.pos, TexCoords).rgb;
     vec3 albedo = texColor.rgb;
     

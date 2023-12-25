@@ -8,15 +8,15 @@
     "UniformMat3":null,
     "UniformMat4":null,
     "UniformTexture":{
-        "gBuffer.normal":{
+        "gBuffer.viewNormal":{
             "Location":1,
             "Path":"",
-            "TextureType":"GBufferNormal"
+            "TextureType":"GBufferViewNormal"
         },
-        "gBuffer.pos":{
+        "gBuffer.viewPos":{
             "Location":0,
             "Path":"",
-            "TextureType":"GBufferPos"
+            "TextureType":"GBufferViewPos"
         }
     },
     "UniformVec2":null,

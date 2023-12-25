@@ -61,7 +61,7 @@ bool RP_DeferredRenderPass::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 
-
+	// 延迟渲染渲染
 	BaseManager* baseManager = BaseManager::getInstance();
 	MaterialManager* matManager = MaterialManager::getInstance();
 	glm::mat4 projection = baseManager->getProjMat4();
@@ -86,7 +86,7 @@ bool RP_DeferredRenderPass::Render()
 	// 打开深度写入和深度测试，画天空盒
 	glEnable(GL_DEPTH_TEST);
 	glDepthMask(GL_TRUE);	
-	// 最后前向渲染天空盒
+	// 前向渲染天空盒
 	auto p = RenderManager::getInstance()->skyBox;
 	if (p != nullptr && p->count != 0)
 	{

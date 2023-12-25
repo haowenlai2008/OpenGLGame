@@ -54,6 +54,11 @@
             "Location":5,
             "Path":"",
             "TextureType":""
+        },
+        "ssao":{
+            "Location":9,
+            "Path":"",
+            "TextureType":"SSAOBlurTexture"
         }
     },
     "UniformVec2":null,

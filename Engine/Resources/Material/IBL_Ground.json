@@ -5,7 +5,7 @@
   "UniformFloat": {
     "light.intensity": 100.0,
     "material.ao": 1.0,
-    "material.metallic": 0.1,
+    "material.metallic": 0.4,
     "material.roughness": 0.8
   },
     "UniformInt":null,

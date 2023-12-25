@@ -20,10 +20,8 @@ bool RP_ToneMappingGammaPass::Render()
 	BaseManager::getInstance()->colorClear();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	string filterName = "";
 	GLuint textureID = RenderManager::globleTexture.afterPossprocessTexture;
-	std::weak_ptr<Shader> screenShader = Shader::getFilter("toneMappingGamma");
-	auto shader = screenShader.lock();
+	std::shared_ptr<Shader> shader = Shader::getFilter("toneMappingGamma");
 	shader->use();
 	shader->setInt("screenTexture", 0);
 	glActiveTexture(GL_TEXTURE0);

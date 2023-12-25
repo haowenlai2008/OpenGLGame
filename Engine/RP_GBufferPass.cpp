@@ -52,14 +52,32 @@ bool RP_GBufferPass::Init()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT4, GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_PosLightSpace, 0);
 
-    GLuint attachments[5] = {
+    // - 观察空间位置颜色缓冲
+    glGenTextures(1, &RenderManager::globleTexture.gBuffer_ViewPos);
+    glBindTexture(GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_ViewPos);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, bmp->screenWidth, bmp->screenHeight, 0, GL_RGBA, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT5, GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_ViewPos, 0);
+
+    // - 观察空间法线缓冲
+    glGenTextures(1, &RenderManager::globleTexture.gBuffer_ViewNormal);
+    glBindTexture(GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_ViewNormal);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, bmp->screenWidth, bmp->screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT6, GL_TEXTURE_2D, RenderManager::globleTexture.gBuffer_ViewNormal, 0);
+
+    GLuint attachments[7] = {
         GL_COLOR_ATTACHMENT0,
         GL_COLOR_ATTACHMENT1,
         GL_COLOR_ATTACHMENT2,
         GL_COLOR_ATTACHMENT3,
-        GL_COLOR_ATTACHMENT4
+        GL_COLOR_ATTACHMENT4,
+        GL_COLOR_ATTACHMENT5,
+        GL_COLOR_ATTACHMENT6
     };
-    glDrawBuffers(5, attachments);
+    glDrawBuffers(7, attachments);
 
     GLuint rboDepth;
     glGenRenderbuffers(1, &rboDepth);

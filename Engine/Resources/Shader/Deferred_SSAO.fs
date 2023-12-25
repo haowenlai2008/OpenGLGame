@@ -4,8 +4,8 @@ in vec2 TexCoords;
 in vec4 FragPosLightSpace;
 
 struct GBuffer {
-    sampler2D pos;
-    sampler2D normal;
+    sampler2D viewPos;
+    sampler2D viewNormal;
 }; 
 
 uniform GBuffer gBuffer;
@@ -21,8 +21,8 @@ float radius = 1.0;
 void main()
 {		
     vec2 noiseScale = vec2(screenSize / 4.0f);
-    vec3 fragPos = texture(gBuffer.pos, TexCoords).xyz;
-    vec3 normal = texture(gBuffer.normal, TexCoords).rgb;
+    vec3 fragPos = texture(gBuffer.viewPos, TexCoords).xyz;
+    vec3 normal = texture(gBuffer.viewNormal, TexCoords).rgb;
     vec3 randomVec = texture(texNoise, TexCoords * noiseScale).xyz;
     // Create TBN change-of-basis matrix: from tangent-space to view-space
     vec3 tangent = normalize(randomVec - normal * dot(randomVec, normal));
@@ -43,7 +43,7 @@ void main()
         offset.xyz = offset.xyz * 0.5 + 0.5; // transform to range 0.0 - 1.0
         
         // get sample depth
-        float sampleDepth = -texture(gBuffer.pos, offset.xy).w; // Get depth value of kernel sample
+        float sampleDepth = -texture(gBuffer.viewPos, offset.xy).w; // Get depth value of kernel sample
         
         // range check & accumulate
         float rangeCheck = smoothstep(0.0, 1.0, radius / abs(fragPos.z - sampleDepth ));
