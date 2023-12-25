@@ -19,6 +19,7 @@ public:
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
 	unsigned int VAO;
 	void setupMesh();
+	void draw();
 private:
 	unsigned int VBO, EBO;
 };

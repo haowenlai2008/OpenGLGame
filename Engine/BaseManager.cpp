@@ -78,6 +78,11 @@ void BaseManager::runScene(Scene * scene)
 {
 }
 
+void BaseManager::colorClear()
+{
+	glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+}
+
 mat4 BaseManager::getViewMat4()
 {
 	return m_pGameCamera->getViewMat4();
@@ -183,7 +188,7 @@ void BaseManager::mainLoop()
 
 		glEnable(GL_DEPTH_TEST);
 		
-		glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+		BaseManager::getInstance()->colorClear();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		processInput(glWindow);
 

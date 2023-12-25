@@ -48,3 +48,10 @@ void Mesh::setupMesh()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.begin()._Ptr, GL_STATIC_DRAW);
 	glBindVertexArray(0);
 }
+
+void Mesh::draw()
+{
+	glBindVertexArray(VAO);
+	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+}

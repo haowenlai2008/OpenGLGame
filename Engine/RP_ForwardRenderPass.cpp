@@ -36,8 +36,8 @@ bool RP_ForwardRenderPass::Render()
 	glDepthFunc(GL_LESS);
 	glCullFace(GL_BACK);
 
-	vec4 clearColor = BaseManager::getInstance()->clearColor;
-	glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+	
+	BaseManager::getInstance()->colorClear();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);

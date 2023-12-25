@@ -736,6 +736,12 @@
     <None Include="Resources\Material\IBL_Ground.json">
       <Filter>资源文件\material</Filter>
     </None>
+    <None Include="Resources\Shader\Deferred_SSAO.vs">
+      <Filter>资源文件\shader</Filter>
+    </None>
+    <None Include="Resources\Shader\Deferred_SSAO.fs">
+      <Filter>资源文件\shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc">

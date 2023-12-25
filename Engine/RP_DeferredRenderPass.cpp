@@ -4,34 +4,12 @@
 #include "Material.h"
 #include "Entity.h"
 #include "MaterialManager.h"
+#include "VertexFactory.h"
+#include "Mesh.h"
 
-static GLuint quadVAO, quadVBO;		// 屏幕四边形
 bool RP_DeferredRenderPass::Init()
 {
-	// 一次性顶点无所谓了
-	std::vector<float> quadVertices = {
-		//positions   // texCoords
-	   -1.0f,  1.0f,  0.0f, 1.0f,
-	   -1.0f, -1.0f,  0.0f, 0.0f,
-		1.0f, -1.0f,  1.0f, 0.0f,
-
-	   -1.0f,  1.0f,  0.0f, 1.0f,
-		1.0f, -1.0f,  1.0f, 0.0f,
-		1.0f,  1.0f,  1.0f, 1.0f
-	};
-
-	//创建帧缓冲的窗体(一个正方形)
-	glGenVertexArrays(1, &quadVAO);
-	glGenBuffers(1, &quadVBO);
-	glBindVertexArray(quadVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * quadVertices.size(), quadVertices.begin()._Ptr, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-
-
+	// 给后处理使用的缓冲
 	GLuint rbo;
 	//创建帧缓冲
 	BaseManager* bmp = BaseManager::getInstance();
@@ -103,8 +81,7 @@ bool RP_DeferredRenderPass::Render()
 	shader->setVec3("light.position", lightPos);
 	shader->setVec3("light.position", lightPos);
 	shader->setVec3("light.color", vec3(1.0f, 1.0f, 1.0f));
-	glBindVertexArray(quadVAO);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	VertexFactory::getQuadData()->draw();
 
 	// 打开深度写入和深度测试，画天空盒
 	glEnable(GL_DEPTH_TEST);

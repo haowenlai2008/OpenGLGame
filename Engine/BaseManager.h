@@ -30,17 +30,19 @@ public:
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 	void resize_callback(GLFWwindow* window, int width, int height);
 	void runScene(Scene* scene);
+	void colorClear();
 	mat4 getViewMat4();	// 获得观察矩阵
 	mat4 getProjMat4();	// 获得裁剪矩阵
 	mat4 getViewProjMat4();	// 获得观察矩阵裁剪矩阵的乘积
 	mat4 getLightSpaceMat4();	// 获得光空间转换矩阵
 	vec3 getViewPos();	// 获得观察点
 	vec3 getLightPos();	// 获得光源
-	vec4 clearColor = vec4(1.0, 1.0, 1.0, 1.0);
+
 	LL_SYNTHESIZE(MyKeyboard::State, m_KeyboardState, KeyboardState);
 	LL_SYNTHESIZE(MyMouse::State, m_MouseState, MouseState);
 	~BaseManager();
 private:
+	vec4 clearColor = vec4(1.0, 1.0, 1.0, 1.0);
 	std::unique_ptr<MyMouse> m_pMouse;
 	std::unique_ptr<MyKeyboard> m_pKeyboard;
 	std::shared_ptr<GameCamera> m_pGameCamera;
