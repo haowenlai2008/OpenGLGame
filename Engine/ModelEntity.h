@@ -8,10 +8,6 @@ public:
 	virtual bool init() override;
 	virtual void draw() override;
 	void setupModel(const string& path, const string& material);
-
-protected:
-	vector<GLuint> m_VAOList;
-	vector<Mesh> m_meshList;
-	vector<shared_ptr<Material>> m_materialList;
+	void modelMaterialUnify();		// 统一材质，开了光滑组可能读不到纹理
 };
 

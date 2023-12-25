@@ -742,6 +742,9 @@
     <None Include="Resources\Shader\Deferred_SSAO.fs">
       <Filter>资源文件\shader</Filter>
     </None>
+    <None Include="Resources\Material\Deferred_SSAO.json">
+      <Filter>资源文件\material</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc">

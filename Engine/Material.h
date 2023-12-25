@@ -51,6 +51,7 @@ public:
 	Material(std::initializer_list<pair<string, UniformValue>> uniformList);
 	//LL_SYNTHESIZE(GLuint, m_state_cull, Cull)
 	string m_shaderName;
+	string m_matName;
 	weak_ptr<Shader> m_Shader;
 
 	bool castShadow;
@@ -106,6 +107,7 @@ public:
 	void setTexture(const string& name, const string& path, GLubyte location, TextureType textureType);
 	void setTexture(const string& name, Texture& texture, GLubyte location);
 	void setTexture(const string& name, optional<Texture> texture, GLubyte location);
+	//void setTexture(const string& name, GLuint textureID, GLubyte location);
 	void setTextureLocation(const string& name, GLubyte location);
 	void setTexturePath(const string& name, const string& path);
 	void setTextureCacheID(const string& name, GLuint cacheID);

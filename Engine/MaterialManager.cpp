@@ -53,6 +53,7 @@ bool MaterialManager::init()
 		{"ModelPBR", "PBRModel"},
 		{"IBL_PBR", "IBL_PBR"},
 		{"Deferred_Render", "Deferred_Render"},
+		{"Deferred_SSAO", "Deferred_SSAO"},
 	};
 
 	systemMaterial = {
@@ -182,6 +183,10 @@ bool MaterialManager::init()
 			{"prefilterMap", Texture(TextureType::TexturePrefilter, 7)},
 			{"brdfLUT", Texture(TextureType::TextureBrdfLUT, 8)},
 		}},
+		{ "Deferred_SSAO", {
+			{"gBuffer.pos", Texture(TextureType::GBufferPos, 0)},
+			{"gBuffer.normal", Texture(TextureType::GBufferNormal, 1)},
+		} },
 	};
 	
 	// 系统材质写入到json
@@ -340,6 +345,7 @@ Material MaterialManager::DeserializeJsonToMaterial(const string& jsonStr)
 	json jsonObj = json::parse(jsonStr);
 	Material result;
 	result.m_shaderName = jsonObj["ShaderName"];
+	result.m_matName = jsonObj["MatName"];
 	result.m_Shader = Shader::getShader(jsonObj["ShaderName"]);
 
 	for (auto it = jsonObj["UniformBool"].begin(); it != jsonObj["UniformBool"].end(); ++it)

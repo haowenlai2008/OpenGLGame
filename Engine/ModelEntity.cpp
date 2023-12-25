@@ -41,13 +41,24 @@ void ModelEntity::setupModel(const string& path, const string& material)
                 number = std::to_string(heightNr++); // transfer unsigned int to stream
 
             cout << name + number + " = " << model.meshes[i].textures[j].m_path << endl;
-            if (name == "texture_diffuse" && number == "1")
+            if (name == "texture_diffuse")
             {
-                auto mat =  modelNode->GetMaterial().lock();
-                mat->setTexture("material.diffuse", model.meshes[i].textures[j], 0);
-                //mat->setTexture("material.diffuse", "container2.png", 0, TextureType::Texture2D);
+                if (number == "1")
+                {
+                    auto mat = modelNode->GetMaterial().lock();
+                    mat->setTexture("material.diffuse", model.meshes[i].textures[j], 0);
+                    //mat->setTexture("material.diffuse", "container2.png", 0, TextureType::Texture2D);
+                }
+                else
+                {
+
+                }
             }
         }
         this->addChild(modelNode);
     }
+}
+
+void ModelEntity::modelMaterialUnify()
+{
 }

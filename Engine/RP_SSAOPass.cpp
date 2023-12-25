@@ -4,15 +4,18 @@
 #include "Material.h"
 #include "Entity.h"
 #include "MaterialManager.h"
+#include "VertexFactory.h"
+#include "Mesh.h"
 #include <random>
 
-
+static std::vector<glm::vec3> ssaoKernel;
+static std::vector<glm::vec3> ssaoNoise;;
 bool RP_SSAOPass::Init()
 {
     auto bmp = BaseManager::getInstance();
     std::uniform_real_distribution<GLfloat> randomFloats(0.0, 1.0); // Ëæ»ú¸¡µãÊý£¬·¶Î§0.0 - 1.0
     std::default_random_engine generator;
-    std::vector<glm::vec3> ssaoKernel;
+    ssaoKernel = std::vector<glm::vec3>();
     for (GLuint i = 0; i < 64; ++i)
     {
         glm::vec3 sample(
@@ -29,7 +32,7 @@ bool RP_SSAOPass::Init()
         ssaoKernel.push_back(sample);
     }
 
-    std::vector<glm::vec3> ssaoNoise;
+    ssaoNoise = std::vector<glm::vec3>();
     for (GLuint i = 0; i < 16; i++)
     {
         glm::vec3 noise(
@@ -65,6 +68,32 @@ bool RP_SSAOPass::Init()
 
 bool RP_SSAOPass::Render()
 {
+
+    BaseManager* baseManager = BaseManager::getInstance();
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glBindFramebuffer(GL_FRAMEBUFFER, RenderManager::globalBuffer.ssaoFrameBuffer);
+    //glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glDepthFunc(GL_LESS);
+    glCullFace(GL_BACK);
+    baseManager->colorClear();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+    auto mat = MaterialManager::getInstance()->getUserMaterialRef("Deferred_SSAO");
+    auto shader = mat.m_Shader.lock();
+    shader->use();
+    shader->setInt("texNoise", 2);
+    glActiveTexture(GL_TEXTURE0 + 2);
+    glBindTexture(GL_TEXTURE_2D, RenderManager::globleTexture.ssao_noise);
+    mat.bindUniform();
+    shader->setVec2("screenSize", vec2(baseManager->screenWidth, baseManager->screenHeight));
+    shader->setMat4("projection", baseManager->getProjMat4());
+    for (GLuint i = 0; i < 64; ++i)
+        shader->setVec3("samples[" + std::to_string(i) + "]", ssaoKernel[i]);
+
+    VertexFactory::getQuadData()->draw();
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
     return true;
 }
 
