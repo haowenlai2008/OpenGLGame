@@ -11,5 +11,6 @@ public:
 	virtual bool init() override;
 	virtual void draw() override;
 	virtual void update(float delta) override;
+	GLuint m_VBO;
 };
 

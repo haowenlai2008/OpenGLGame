@@ -42,9 +42,7 @@ public:
 	glm::vec3 getColor();
 	virtual void setTexture(string&& src);
 	virtual void setCubeTexture(string&& src);
-
 	weak_ptr<Material> GetMaterial();
-
 	Entity();
 	virtual ~Entity();
 protected:
@@ -52,8 +50,6 @@ protected:
 	//vector<Component*> comList;
 	shared_ptr<Material> m_material;
 	GLuint m_VAO;
-	GLuint m_VBO;
-	GLuint m_EBO;
 	GLuint m_DiffuseMap;
 	GLuint m_VertexNum;
 };

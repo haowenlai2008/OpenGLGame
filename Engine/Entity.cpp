@@ -28,7 +28,6 @@ Entity::Entity() :
 	m_color(glm::vec3(1.0f, 1.0f, 1.0f)),
 	CullFace(GL_BACK),
 	m_VAO(-1),
-	m_VBO(-1),
 	m_DiffuseMap(-1),
 	m_VertexNum(-1)
 {
@@ -42,8 +41,6 @@ Entity::~Entity()
 	//{
 	//	ref->release();
 	//}
-	glDeleteVertexArrays(1, &m_VAO);
-	glDeleteBuffers(1, &m_VBO);
 }
 bool Entity::init()
 {
@@ -64,80 +61,14 @@ void Entity::draw()
 void Entity::setMeshAndBuffer(std::weak_ptr<Mesh> meshData)
 {
 	auto mesh = meshData.lock();
-	if (m_VAO != -1)
-	{
-		glDeleteVertexArrays(1, &m_VAO);
-	}
-
-	if (m_VBO != -1)
-	{
-		glDeleteBuffers(1, &m_VBO);
-	}
-	if (m_EBO != -1)
-	{
-		glDeleteBuffers(1, &m_EBO);
-	}
+	m_VAO = mesh->VAO;
 	m_VertexNum = mesh->indices.size();
-	glGenVertexArrays(1, &m_VAO);
-	glGenBuffers(1, &m_VBO);
-
-	glBindVertexArray(m_VAO);// 绑定顶点数组对象
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);//绑定顶点缓冲区
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mesh->vertexData.size(), mesh->vertexData.begin()._Ptr, GL_STATIC_DRAW);
-	//坐标
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(0));
-	glEnableVertexAttribArray(0);
-	//法线
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-	//纹理坐标
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
-
-	//绑定索引缓存
-	glGenBuffers(1, &m_EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->indices.size() * sizeof(GLuint), mesh->indices.begin()._Ptr, GL_STATIC_DRAW);
-	glBindVertexArray(0);
 }
 
 void Entity::setMeshAndBuffer(const Mesh& meshData)
 {
-	if (m_VAO != -1)
-	{
-		glDeleteVertexArrays(1, &m_VAO);
-	}
-
-	if (m_VBO != -1)
-	{
-		glDeleteBuffers(1, &m_VBO);
-	}
-	if (m_EBO != -1)
-	{
-		glDeleteBuffers(1, &m_EBO);
-	}
+	m_VAO = meshData.VAO;
 	m_VertexNum = meshData.indices.size();
-	glGenVertexArrays(1, &m_VAO);
-	glGenBuffers(1, &m_VBO);
-
-	glBindVertexArray(m_VAO);// 绑定顶点数组对象
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);//绑定顶点缓冲区
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * meshData.vertexData.size(), meshData.vertexData.begin()._Ptr, GL_STATIC_DRAW);
-	//坐标
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(0));
-	glEnableVertexAttribArray(0);
-	//法线
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-	//纹理坐标
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
-
-	//绑定索引缓存
-	glGenBuffers(1, &m_EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, meshData.indices.size() * sizeof(GLuint), meshData.indices.begin()._Ptr, GL_STATIC_DRAW);
-	glBindVertexArray(0);
 }
 
 void Entity::setMaterial(const string& materialName)
