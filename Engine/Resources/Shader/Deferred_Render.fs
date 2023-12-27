@@ -117,7 +117,7 @@ vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
 }   
 // ----------------------------------------------------------------------------
 void main()
-{		
+{
     vec4 texColor = texture(gBuffer.albedo, TexCoords);
     vec3 metallRough = texture(gBuffer.metal_rough, TexCoords).rgb;
     vec4 posLightSpace = texture(gBuffer.posLightSpace, TexCoords);
@@ -160,7 +160,7 @@ void main()
         
         vec3 kS = F;
         vec3 kD = vec3(1.0) - kS;
-        kD *= 1.0 - metallic;	                
+        kD *= 1.0 - metallic;            
             
         float NdotL = max(dot(N, L), 0.0);        
 
@@ -170,7 +170,7 @@ void main()
     
     vec3 kS = F;
     vec3 kD = 1.0 - kS;
-    kD *= 1.0 - metallic;	  
+    kD *= 1.0 - metallic;
     
     vec3 irradiance = texture(irradianceMap, N).rgb;
     vec3 diffuse      = irradiance * albedo;

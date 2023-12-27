@@ -19,7 +19,7 @@ int kernelSize = 64;
 float radius = 1.0;
 
 void main()
-{		
+{
     vec2 noiseScale = vec2(screenSize / 4.0f);
     vec3 fragPos = texture(gBuffer.viewPos, TexCoords).xyz;
     vec3 normal = texture(gBuffer.viewNormal, TexCoords).rgb;
