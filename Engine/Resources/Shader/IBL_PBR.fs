@@ -12,8 +12,6 @@ in VS_OUT {
 
 struct Material {
     sampler2D diffuse;
-    // vec3 specular;    
-    // float shininess;
     float metallic;
     float roughness;
     float ao;
@@ -211,7 +209,7 @@ vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
 }   
 // ----------------------------------------------------------------------------
 void main()
-{		
+{
     vec4 texColor = texture(material.diffuse, fs_in.TexCoords);
     vec3 albedo = texColor.rgb;
     vec3 N = fs_in.Normal;
@@ -254,7 +252,7 @@ void main()
         // multiply kD by the inverse metalness such that only non-metals 
         // have diffuse lighting, or a linear blend if partly metal (pure metals
         // have no diffuse light).
-        kD *= 1.0 - material.metallic;	                
+        kD *= 1.0 - material.metallic;           
             
         // scale light by NdotL
         float NdotL = max(dot(N, L), 0.0);        
@@ -268,7 +266,7 @@ void main()
     
     vec3 kS = F;
     vec3 kD = 1.0 - kS;
-    kD *= 1.0 - material.metallic;	  
+    kD *= 1.0 - material.metallic;
     
     vec3 irradiance = texture(irradianceMap, N).rgb;
     vec3 diffuse      = irradiance * albedo;
