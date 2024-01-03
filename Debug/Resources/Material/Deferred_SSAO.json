@@ -1,0 +1,25 @@
+{
+    "MatName":"Deferred_SSAO",
+    "ShaderName":"Deferred_SSAO",
+    "UniformBool":null,
+    "UniformFloat":null,
+    "UniformInt":null,
+    "UniformMat2":null,
+    "UniformMat3":null,
+    "UniformMat4":null,
+    "UniformTexture":{
+        "gBuffer.viewNormal":{
+            "Location":1,
+            "Path":"",
+            "TextureType":"GBufferViewNormal"
+        },
+        "gBuffer.viewPos":{
+            "Location":0,
+            "Path":"",
+            "TextureType":"GBufferViewPos"
+        }
+    },
+    "UniformVec2":null,
+    "UniformVec3":null,
+    "UniformVec4":null
+}

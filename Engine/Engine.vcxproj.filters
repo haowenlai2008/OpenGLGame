@@ -324,6 +324,9 @@
     <ClCompile Include="RP_SSAOPass.cpp">
       <Filter>源文件\RenderPass</Filter>
     </ClCompile>
+    <ClCompile Include="SphericalHarmonics.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinGround.h">
@@ -523,6 +526,9 @@
     </ClInclude>
     <ClInclude Include="RP_SSAOPass.h">
       <Filter>头文件\RenderPass</Filter>
+    </ClInclude>
+    <ClInclude Include="SphericalHarmonics.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

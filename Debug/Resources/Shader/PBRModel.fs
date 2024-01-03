@@ -307,8 +307,11 @@ void main()
 
     vec3 ambient = vec3(0.03) * albedo * ao;
     vec3 color   = ambient + Lo * (1.0 - shadow);
-    color = color / (color + vec3(1.0));
-    color = pow(color, vec3(1.0/2.2));
-
     FragColor = vec4(color, 1.0);
+
+
+    // color = color / (color + vec3(1.0));
+    // color = pow(color, vec3(1.0/2.2));
+    // 
+    // FragColor = vec4(color, 1.0);
 } 

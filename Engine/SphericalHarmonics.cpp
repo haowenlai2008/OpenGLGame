@@ -57,6 +57,7 @@ std::vector<float> SphericalHarmonics::Basis(const glm::vec3& pos)
 		Y[14] = 1.f / 4.f * sqrt(105.f / PI) * (x * x - z * z) * y;
 		Y[15] = 1.f / 4.f * sqrt(35.f / (2 * PI)) * (x * x - 3 * z * z) * x;
 	default:
+		break;
 	}
 	return Y;
 }

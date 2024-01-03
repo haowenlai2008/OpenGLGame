@@ -1,0 +1,20 @@
+{
+    "MatName":"WithColor",
+    "ShaderName":"WithColor",
+    "UniformBool":null,
+    "UniformFloat":null,
+    "UniformInt":null,
+    "UniformMat2":null,
+    "UniformMat3":null,
+    "UniformMat4":null,
+    "UniformTexture":null,
+    "UniformVec2":null,
+    "UniformVec3":{
+        "mColor":{
+            "x":1.0,
+            "y":1.0,
+            "z":1.0
+        }
+    },
+    "UniformVec4":null
+}
