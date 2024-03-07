@@ -1,7 +1,4 @@
 #include "LogicManager.h"
-#include <map>
-#include <queue>
-#include "Ref.h"
 #include "func.h"
 #include "Node.h"
 #include "RenderManager.h"

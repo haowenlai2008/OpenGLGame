@@ -1,7 +1,4 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include "Ref.h"
 #include "func.h"
 using std::string;
 class Entity;
