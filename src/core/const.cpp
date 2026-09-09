@@ -1,4 +1,4 @@
-#include "const.h"
+#include "opengl_game/core/const.h"
 
 vec3 Const::EntityColor::Red = vec3(1.0f, 0.0f, 0.0f);
 vec3 Const::EntityColor::Orange = vec3(1.0f, 0.65f, 0.0f);

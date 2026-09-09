@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 #include <map>
-#include "const.h"
+#include "opengl_game/core/const.h"
 using std::vector;
 using std::string;
 using std::map;

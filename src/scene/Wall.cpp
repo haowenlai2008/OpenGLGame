@@ -1,7 +1,7 @@
-#include "Wall.h"
+#include "opengl_game/scene/Wall.h"
 
-#include "BaseManager.h"
-#include "VertexFactory.h"
+#include "opengl_game/core/BaseManager.h"
+#include "opengl_game/render/VertexFactory.h"
 using std::endl;
 using std::cout;
 

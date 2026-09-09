@@ -1,7 +1,7 @@
 #pragma once
-#include "Node.h"
-#include "Material.h"
-#include "VertexFactory.h"
+#include "opengl_game/scene/Node.h"
+#include "opengl_game/render/Material.h"
+#include "opengl_game/render/VertexFactory.h"
 #include <unordered_map>
 class Shader;
 class Mesh;

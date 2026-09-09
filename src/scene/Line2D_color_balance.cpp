@@ -1,5 +1,5 @@
-#include "Line2D_color_balance.h"
-#include "Line2D.h"
+#include "opengl_game/scene/Line2D_color_balance.h"
+#include "opengl_game/scene/Line2D.h"
 
 glm::vec3 Line2D_ColorBalance::transfer(float value)
 {

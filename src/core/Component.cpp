@@ -1,4 +1,4 @@
-#include "Component.h"
+#include "opengl_game/core/Component.h"
 
 void Component::use()
 {

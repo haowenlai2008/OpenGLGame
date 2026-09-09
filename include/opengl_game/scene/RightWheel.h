@@ -1,5 +1,5 @@
 #pragma once
-#include "Wheel.h"
+#include "opengl_game/scene/Wheel.h"
 class RightWheel :
 	public Wheel
 {

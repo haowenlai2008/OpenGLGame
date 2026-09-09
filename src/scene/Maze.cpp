@@ -1,4 +1,4 @@
-#include "Maze.h"
+#include "opengl_game/scene/Maze.h"
 #include <algorithm>
 Maze::Maze()
 {

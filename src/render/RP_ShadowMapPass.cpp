@@ -1,9 +1,9 @@
-#include "RP_ShadowMapPass.h"
-#include "RenderManager.h"
-#include "BaseManager.h"
-#include "Material.h"
-#include "Entity.h"
-#include "MaterialManager.h"
+#include "opengl_game/render/RP_ShadowMapPass.h"
+#include "opengl_game/render/RenderManager.h"
+#include "opengl_game/core/BaseManager.h"
+#include "opengl_game/render/Material.h"
+#include "opengl_game/scene/Entity.h"
+#include "opengl_game/render/MaterialManager.h"
 const GLuint SHADOW_WIDTH = 4096, SHADOW_HEIGHT = 4096;
 bool RP_ShadowMapPass::Init()
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include "opengl_game/scene/Entity.h"
 #include <vector>
 using std::vector;
 enum class MatType

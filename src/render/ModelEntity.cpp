@@ -1,8 +1,8 @@
-#include "ModelEntity.h"
-#include "Model.h"
-#include "MaterialManager.h"
-#include "ModelNode.h"
-#include "Mesh.h"
+#include "opengl_game/render/ModelEntity.h"
+#include "opengl_game/render/Model.h"
+#include "opengl_game/render/MaterialManager.h"
+#include "opengl_game/render/ModelNode.h"
+#include "opengl_game/render/Mesh.h"
 bool ModelEntity::init()
 {
     if (!Node::init())

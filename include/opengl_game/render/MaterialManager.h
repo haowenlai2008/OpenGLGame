@@ -1,8 +1,8 @@
 #pragma once
 #include <unordered_map>
-#include "Material.h"
-#include "Singleton.h"
-#include "json.hpp"
+#include "opengl_game/render/Material.h"
+#include "opengl_game/core/Singleton.h"
+#include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
 class MaterialManager : public Singleton<MaterialManager>

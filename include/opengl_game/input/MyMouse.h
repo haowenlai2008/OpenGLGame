@@ -1,5 +1,5 @@
 #pragma once
-#include "func.h"
+#include "opengl_game/core/func.h"
 struct GLFWwindow;
 class MyMouse
 {

@@ -1,12 +1,12 @@
-#include "SkyBox.h"
+#include "opengl_game/render/SkyBox.h"
 #include <iostream>
 #include <vector>
 #include <string>
-#include "BaseManager.h"
-#include "func.h"
-#include "Shader.h"
-#include "GameCamera.h"
-#include "VertexFactory.h"
+#include "opengl_game/core/BaseManager.h"
+#include "opengl_game/core/func.h"
+#include "opengl_game/render/Shader.h"
+#include "opengl_game/render/GameCamera.h"
+#include "opengl_game/render/VertexFactory.h"
 
 bool SkyBox::init()
 {

@@ -1,5 +1,5 @@
-#include "PhysicsManager.h"
-#include "Node.h"
+#include "opengl_game/physics/PhysicsManager.h"
+#include "opengl_game/scene/Node.h"
 bool PhysicsManager::init()
 {
 	//设置世界的空间大小，限定刚体运动的空间范围

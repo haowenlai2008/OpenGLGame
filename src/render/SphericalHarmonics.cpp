@@ -1,4 +1,4 @@
-#include "SphericalHarmonics.h"
+#include "opengl_game/render/SphericalHarmonics.h"
 #include <cmath>
 
 SphericalHarmonics::SphericalHarmonics(int degree) : _degree(degree)

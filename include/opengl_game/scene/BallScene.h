@@ -1,5 +1,5 @@
 #pragma once
-#include "Node.h"
+#include "opengl_game/scene/Node.h"
 class Car;
 class BallScene : public Node
 {

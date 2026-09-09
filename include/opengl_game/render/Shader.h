@@ -1,6 +1,6 @@
 #ifndef SHADER_H
 #define SHADER_H
-#include "func.h"
+#include "opengl_game/core/func.h"
 #include <string>
 #include <fstream>
 #include <sstream>

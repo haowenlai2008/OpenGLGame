@@ -1,4 +1,4 @@
-#include "SphereCollider.h"
+#include "opengl_game/physics/SphereCollider.h"
 
 SphereCollider::SphereCollider() : m_radius(0.5f)
 {

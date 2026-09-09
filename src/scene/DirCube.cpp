@@ -1,6 +1,6 @@
-#include "DirCube.h"
-#include "BaseManager.h"
-#include "SkyBox.h"
+#include "opengl_game/scene/DirCube.h"
+#include "opengl_game/core/BaseManager.h"
+#include "opengl_game/render/SkyBox.h"
 using std::endl;
 using std::cout;
 vector<float> DirCube::vertex  = {

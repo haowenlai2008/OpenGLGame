@@ -1,10 +1,10 @@
 #pragma once
-#include "Singleton.h"
-#include "func.h"
-#include "bulletHead.h"
-#include "BoxCollider.h"
-#include "SphereCollider.h"
-#include "Rigidbody.h"
+#include "opengl_game/core/Singleton.h"
+#include "opengl_game/core/func.h"
+#include "opengl_game/physics/bulletHead.h"
+#include "opengl_game/physics/BoxCollider.h"
+#include "opengl_game/physics/SphereCollider.h"
+#include "opengl_game/physics/Rigidbody.h"
 class Node;
 class PhysicsManager : public Singleton<PhysicsManager>
 {

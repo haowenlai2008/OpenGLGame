@@ -1,11 +1,11 @@
-#include "Node.h"
+#include "opengl_game/scene/Node.h"
 #include <list>
 #include <glm/gtc/quaternion.hpp>
-#include "bulletHead.h"
-#include "Rigidbody.h"
-#include "SphereCollider.h"
-#include "BoxCollider.h"
-#include "PhysicsManager.h"
+#include "opengl_game/physics/bulletHead.h"
+#include "opengl_game/physics/Rigidbody.h"
+#include "opengl_game/physics/SphereCollider.h"
+#include "opengl_game/physics/BoxCollider.h"
+#include "opengl_game/physics/PhysicsManager.h"
 
 
 

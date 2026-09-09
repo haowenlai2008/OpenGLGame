@@ -1,7 +1,7 @@
-#include "LeftWheel.h"
-#include "CylinderNoCap.h"
-#include "Circle.h"
-#include "Cube.h"
+#include "opengl_game/scene/LeftWheel.h"
+#include "opengl_game/scene/CylinderNoCap.h"
+#include "opengl_game/scene/Circle.h"
+#include "opengl_game/scene/Cube.h"
 bool LeftWheel::init()
 {
 	CylinderNoCap* cnc = CylinderNoCap::create("PBR");

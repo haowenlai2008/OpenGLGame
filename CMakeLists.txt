@@ -46,12 +46,7 @@ source_group("ThirdParty\\stb" FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/Engine/external/source/stb_image.cpp")
 
 target_include_directories(opengl_game_engine PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/core"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/input"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/physics"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/render"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/scene")
+    "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_include_directories(opengl_game_engine SYSTEM PUBLIC
     "${OPENGLGAME_DEPS_INCLUDE_DIR}"
     "${OPENGLGAME_DEPS_BULLET_INCLUDE_DIR}")
@@ -96,7 +91,7 @@ if(OPENGLGAME_BUILD_TESTS)
         tests/resource_path_test.cpp
         src/core/ResourceLocator.cpp)
     target_include_directories(opengl_game_resource_test PRIVATE
-        "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/core")
+        "${CMAKE_CURRENT_SOURCE_DIR}/include")
     add_test(NAME resource_path_test COMMAND opengl_game_resource_test)
 endif()
 

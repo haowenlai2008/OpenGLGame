@@ -1,11 +1,11 @@
 #pragma once
-#include "func.h"
+#include "opengl_game/core/func.h"
 #include <unordered_map>
 #include <list>
 #include <variant>
-#include "Shader.h"
-#include "Struct.h"
-#include "Enum.h"
+#include "opengl_game/render/Shader.h"
+#include "opengl_game/core/Struct.h"
+#include "opengl_game/core/Enum.h"
 #include <optional>
 
 using std::optional;

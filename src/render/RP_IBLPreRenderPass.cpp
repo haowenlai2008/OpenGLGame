@@ -1,7 +1,7 @@
-#include "RP_IBLPreRenderPass.h"
-#include "RenderManager.h"
-#include "BaseManager.h"
-#include "Shader.h"
+#include "opengl_game/render/RP_IBLPreRenderPass.h"
+#include "opengl_game/render/RenderManager.h"
+#include "opengl_game/core/BaseManager.h"
+#include "opengl_game/render/Shader.h"
 
 static unsigned int sphereVAO = 0;
 static unsigned int indexCount;

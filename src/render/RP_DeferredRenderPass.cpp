@@ -1,11 +1,11 @@
-#include "RP_DeferredRenderPass.h"
-#include "RenderManager.h"
-#include "BaseManager.h"
-#include "Material.h"
-#include "Entity.h"
-#include "MaterialManager.h"
-#include "VertexFactory.h"
-#include "Mesh.h"
+#include "opengl_game/render/RP_DeferredRenderPass.h"
+#include "opengl_game/render/RenderManager.h"
+#include "opengl_game/core/BaseManager.h"
+#include "opengl_game/render/Material.h"
+#include "opengl_game/scene/Entity.h"
+#include "opengl_game/render/MaterialManager.h"
+#include "opengl_game/render/VertexFactory.h"
+#include "opengl_game/render/Mesh.h"
 
 bool RP_DeferredRenderPass::Init()
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "RP_RenderPass.h"
+#include "opengl_game/render/RP_RenderPass.h"
 class RP_PostProcessPass :
     public RP_RenderPass
 {

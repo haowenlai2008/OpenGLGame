@@ -1,5 +1,5 @@
 #pragma once
-#include "Node.h"
+#include "opengl_game/scene/Node.h"
 class Line2D_ColorBalance : public Node
 {
 public:

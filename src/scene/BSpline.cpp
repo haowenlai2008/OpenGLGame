@@ -1,1 +1,1 @@
-#include "BSpline.h"
+#include "opengl_game/scene/BSpline.h"

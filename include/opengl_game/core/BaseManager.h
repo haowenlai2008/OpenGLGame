@@ -1,8 +1,8 @@
 #pragma once
-#include "func.h"
-#include "Singleton.h"
-#include "MyMouse.h"
-#include "MyKeyboard.h"
+#include "opengl_game/core/func.h"
+#include "opengl_game/core/Singleton.h"
+#include "opengl_game/input/MyMouse.h"
+#include "opengl_game/input/MyKeyboard.h"
 struct GLFWwindow;
 class Node;
 class Scene;

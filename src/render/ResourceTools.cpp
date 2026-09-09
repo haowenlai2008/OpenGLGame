@@ -1,4 +1,4 @@
-#include "ResourceTools.h"
+#include "opengl_game/render/ResourceTools.h"
 #include <fstream>
 
 map<string, GLuint> ResourceTools::textures;

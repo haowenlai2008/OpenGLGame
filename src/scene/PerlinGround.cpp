@@ -1,6 +1,6 @@
-#include "PerlinGround.h"
+#include "opengl_game/scene/PerlinGround.h"
 #include <algorithm>
-#include "Perlin.h"
+#include "opengl_game/scene/Perlin.h"
 PerlinGround::PerlinGround()
 {
 }

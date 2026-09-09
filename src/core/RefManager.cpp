@@ -1,5 +1,5 @@
-#include "RefManager.h"
-#include "Ref.h"
+#include "opengl_game/core/RefManager.h"
+#include "opengl_game/core/Ref.h"
 
 void RefManager::addRef(Ref * ref)
 {

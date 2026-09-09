@@ -1,5 +1,5 @@
-#include "MyMouse.h"
-#include "func.h"
+#include "opengl_game/input/MyMouse.h"
+#include "opengl_game/core/func.h"
 
 MyMouse::MyMouse() :
 	m_State({0, 0, 0, 0, 0, 0, 0.0f}),

@@ -1,5 +1,5 @@
-#include "Material.h"
-#include "RenderManager.h"
+#include "opengl_game/render/Material.h"
+#include "opengl_game/render/RenderManager.h"
 #include <unordered_map>
 
 Material::Material() : castShadow(false), requireEnvironmentMap(false)

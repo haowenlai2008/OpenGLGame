@@ -1,7 +1,7 @@
 #ifndef MODEL_H_
 #define MODEL_H_
 
-#include "Mesh.h"
+#include "opengl_game/render/Mesh.h"
 #include <glfw3.h>
 #include <glad.h>
 #include <glm/glm.hpp>
@@ -16,8 +16,8 @@
 #include <iostream>
 #include <map>
 #include <vector>
-#include "Struct.h"
-#include "RenderManager.h"
+#include "opengl_game/core/Struct.h"
+#include "opengl_game/render/RenderManager.h"
 using namespace std;
 
 class Model

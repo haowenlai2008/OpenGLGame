@@ -1,4 +1,4 @@
-#include "Sphere.h"
+#include "opengl_game/scene/Sphere.h"
 
 bool Sphere::init()
 {

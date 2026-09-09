@@ -4,9 +4,9 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "Singleton.h"
-#include "func.h"
-#include "Struct.h"
+#include "opengl_game/core/Singleton.h"
+#include "opengl_game/core/func.h"
+#include "opengl_game/core/Struct.h"
 using std::list;
 using std::map;
 using std::string;

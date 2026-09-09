@@ -1,6 +1,6 @@
-#include "MyKeyboard.h"
+#include "opengl_game/input/MyKeyboard.h"
 #include <map>
-#include "func.h"
+#include "opengl_game/core/func.h"
 MyKeyboard::State __cdecl MyKeyboard::getState()
 {
 	return m_State;

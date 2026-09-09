@@ -1,6 +1,6 @@
 #pragma once
-#include "Entity.h"
-#include "Mesh.h"
+#include "opengl_game/scene/Entity.h"
+#include "opengl_game/render/Mesh.h"
 class ModelEntity : public Node
 {
 public:

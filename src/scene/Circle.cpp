@@ -1,4 +1,4 @@
-#include "Circle.h"
+#include "opengl_game/scene/Circle.h"
 
 bool Circle::init()
 {

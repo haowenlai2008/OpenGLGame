@@ -1,4 +1,4 @@
-#include "Line2D.h"
+#include "opengl_game/scene/Line2D.h"
 
 void Line2D::addPoint(glm::vec2 point)
 {

@@ -1,10 +1,10 @@
-#include "RP_GBufferPass.h"
-#include "RenderManager.h"
-#include "BaseManager.h"
-#include "Shader.h"
-#include "MaterialManager.h"
-#include "Entity.h"
-#include "GameCamera.h"
+#include "opengl_game/render/RP_GBufferPass.h"
+#include "opengl_game/render/RenderManager.h"
+#include "opengl_game/core/BaseManager.h"
+#include "opengl_game/render/Shader.h"
+#include "opengl_game/render/MaterialManager.h"
+#include "opengl_game/scene/Entity.h"
+#include "opengl_game/render/GameCamera.h"
 
 bool RP_GBufferPass::Init()
 {

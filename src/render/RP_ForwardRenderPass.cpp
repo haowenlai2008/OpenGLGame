@@ -1,9 +1,9 @@
-#include "RP_ForwardRenderPass.h"
-#include "RenderManager.h"
-#include "BaseManager.h"
-#include "Material.h"
-#include "Entity.h"
-#include "MaterialManager.h"
+#include "opengl_game/render/RP_ForwardRenderPass.h"
+#include "opengl_game/render/RenderManager.h"
+#include "opengl_game/core/BaseManager.h"
+#include "opengl_game/render/Material.h"
+#include "opengl_game/scene/Entity.h"
+#include "opengl_game/render/MaterialManager.h"
 bool RP_ForwardRenderPass::Init()
 {
 	GLuint rbo;

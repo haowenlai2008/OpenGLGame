@@ -1,5 +1,5 @@
-#include "Ref.h"
-#include "RefManager.h"
+#include "opengl_game/core/Ref.h"
+#include "opengl_game/core/RefManager.h"
 #include <iostream>
 
 

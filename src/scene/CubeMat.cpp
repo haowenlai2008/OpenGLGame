@@ -1,7 +1,7 @@
-#include "CubeMat.h"
-#include "Cube.h"
-#include "DirCube.h"
-#include "BaseManager.h"
+#include "opengl_game/scene/CubeMat.h"
+#include "opengl_game/scene/Cube.h"
+#include "opengl_game/scene/DirCube.h"
+#include "opengl_game/core/BaseManager.h"
 #include <fstream>
 #include <list>
 using std::ifstream;

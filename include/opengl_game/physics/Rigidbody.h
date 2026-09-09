@@ -1,5 +1,5 @@
 #pragma once
-#include "func.h"
+#include "opengl_game/core/func.h"
 class Rigidbody
 {
 public:

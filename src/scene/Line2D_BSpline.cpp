@@ -1,6 +1,6 @@
-#include "Line2D_BSpline.h"
-#include "Line2D.h"
-#include "BSpline.h"
+#include "opengl_game/scene/Line2D_BSpline.h"
+#include "opengl_game/scene/Line2D.h"
+#include "opengl_game/scene/BSpline.h"
 bool Line2D_BSpline::init()
 {
 	Line2D* line1 = Line2D::create();

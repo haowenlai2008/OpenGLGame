@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <glm/vec3.hpp>
-#include "ResourceLocator.h"
+#include "opengl_game/core/ResourceLocator.h"
 
 using std::string;
 using std::vector;

@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
-#include "Ref.h"
-#include "Singleton.h"
+#include "opengl_game/core/Ref.h"
+#include "opengl_game/core/Singleton.h"
 using std::list;
 class RefManager : public Singleton<RefManager>
 {

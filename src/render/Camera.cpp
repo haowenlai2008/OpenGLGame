@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "opengl_game/render/Camera.h"
 
 Camera::Camera():
 	m_Position(0.0f, 0.0f, -2.0f),

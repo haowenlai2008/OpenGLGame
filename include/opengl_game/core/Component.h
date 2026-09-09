@@ -1,6 +1,6 @@
 #pragma once
-#include "func.h"
-#include "Ref.h"
+#include "opengl_game/core/func.h"
+#include "opengl_game/core/Ref.h"
 using std::string;
 class Entity;
 enum class ComponentTypeI	//组件大类

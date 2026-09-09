@@ -1,6 +1,6 @@
 #pragma once
-#include "Node.h"
-#include "BSpline.h"
+#include "opengl_game/scene/Node.h"
+#include "opengl_game/scene/BSpline.h"
 class BSpline;
 class Line2D_BSpline : public Node
 {

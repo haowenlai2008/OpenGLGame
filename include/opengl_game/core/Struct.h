@@ -1,6 +1,6 @@
 #pragma once
-#include "func.h"
-#include "Enum.h"
+#include "opengl_game/core/func.h"
+#include "opengl_game/core/Enum.h"
 // 纹理结构体
 class Texture
 {

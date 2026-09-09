@@ -1,4 +1,4 @@
-#include "ModelNode.h"
+#include "opengl_game/render/ModelNode.h"
 
 bool ModelNode::init()
 {

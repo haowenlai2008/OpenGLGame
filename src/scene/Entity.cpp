@@ -1,12 +1,12 @@
-#include "Entity.h"
-#include "RenderManager.h"
-#include "BaseManager.h"
-#include "MaterialManager.h"
+#include "opengl_game/scene/Entity.h"
+#include "opengl_game/render/RenderManager.h"
+#include "opengl_game/core/BaseManager.h"
+#include "opengl_game/render/MaterialManager.h"
 #include <algorithm>
-#include "Component.h"
-#include "Mesh.h"
-#include "Shader.h"
-#include "GameCamera.h"
+#include "opengl_game/core/Component.h"
+#include "opengl_game/render/Mesh.h"
+#include "opengl_game/render/Shader.h"
+#include "opengl_game/render/GameCamera.h"
 
 
 void Entity::setTexture(string&& src)

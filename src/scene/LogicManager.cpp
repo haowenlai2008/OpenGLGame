@@ -1,7 +1,7 @@
-#include "LogicManager.h"
-#include "func.h"
-#include "Node.h"
-#include "RenderManager.h"
+#include "opengl_game/scene/LogicManager.h"
+#include "opengl_game/core/func.h"
+#include "opengl_game/scene/Node.h"
+#include "opengl_game/render/RenderManager.h"
 void LogicManager::init()
 {
 }

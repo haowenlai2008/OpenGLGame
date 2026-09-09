@@ -14,8 +14,8 @@
 #include <glm/ext/scalar_constants.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "const.h"
-#include "ResourceTools.h"
+#include "opengl_game/core/const.h"
+#include "opengl_game/render/ResourceTools.h"
 using glm::vec2;
 using glm::vec3;
 using glm::vec4;

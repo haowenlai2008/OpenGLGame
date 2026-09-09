@@ -1,5 +1,5 @@
 #pragma once
-#include "Cube.h"
+#include "opengl_game/scene/Cube.h"
 #include <vector>
 using std::vector;
 class DirCube : public Entity

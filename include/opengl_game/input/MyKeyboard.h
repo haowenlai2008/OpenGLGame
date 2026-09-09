@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include <bitset>
-#include "func.h"
+#include "opengl_game/core/func.h"
 class MyKeyboard
 {
 public:

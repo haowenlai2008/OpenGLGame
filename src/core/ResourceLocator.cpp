@@ -1,4 +1,4 @@
-#include "ResourceLocator.h"
+#include "opengl_game/core/ResourceLocator.h"
 
 #include <cstdlib>
 

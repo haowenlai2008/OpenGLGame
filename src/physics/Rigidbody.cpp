@@ -1,4 +1,4 @@
-#include "Rigidbody.h"
+#include "opengl_game/physics/Rigidbody.h"
 
 Rigidbody::Rigidbody() : m_mass(10.0f), m_frict(0.5f)
 {

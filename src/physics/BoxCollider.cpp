@@ -1,4 +1,4 @@
-#include "BoxCollider.h"
+#include "opengl_game/physics/BoxCollider.h"
 
 BoxCollider::BoxCollider():
 	m_length(1.0f),

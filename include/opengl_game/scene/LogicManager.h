@@ -3,7 +3,7 @@
 #include <list>
 #include <map>
 #include <string>
-#include "Singleton.h"
+#include "opengl_game/core/Singleton.h"
 using std::list;
 using std::map;
 using std::string;

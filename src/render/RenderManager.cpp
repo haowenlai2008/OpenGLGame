@@ -1,14 +1,14 @@
-#include "RenderManager.h"
-#include "Node.h"
-#include "RP_IBLPreRenderPass.h"
-#include "RP_PostProcessPass.h"
-#include "RP_ForwardRenderPass.h"
-#include "RP_ShadowMapPass.h"
-#include "RP_RenderPass.h"
-#include "RP_ToneMappingGammaPass.h"
-#include "RP_GBufferPass.h";
-#include "RP_DeferredRenderPass.h"
-#include "RP_SSAOPass.h"
+#include "opengl_game/render/RenderManager.h"
+#include "opengl_game/scene/Node.h"
+#include "opengl_game/render/RP_IBLPreRenderPass.h"
+#include "opengl_game/render/RP_PostProcessPass.h"
+#include "opengl_game/render/RP_ForwardRenderPass.h"
+#include "opengl_game/render/RP_ShadowMapPass.h"
+#include "opengl_game/render/RP_RenderPass.h"
+#include "opengl_game/render/RP_ToneMappingGammaPass.h"
+#include "opengl_game/render/RP_GBufferPass.h";
+#include "opengl_game/render/RP_DeferredRenderPass.h"
+#include "opengl_game/render/RP_SSAOPass.h"
 
 GlobalTextureStructure RenderManager::globleTexture = GlobalTextureStructure();
 

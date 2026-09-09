@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "ResourceLocator.h"
+#include "opengl_game/core/ResourceLocator.h"
 
 int main()
 {

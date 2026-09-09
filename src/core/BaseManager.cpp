@@ -1,18 +1,18 @@
-#include "BaseManager.h"
+#include "opengl_game/core/BaseManager.h"
 #include <functional>
 #include <string>
-#include "Shader.h"
-#include "Node.h"
-#include "RefManager.h"
-#include "MaterialManager.h"
-#include "RenderManager.h"
-#include "LogicManager.h"
-#include "PhysicsManager.h"
-#include "Scene.h"
-#include "BallScene.h"
-#include "Camera.h"
-#include "GameCamera.h"
-#include "LightCamera.h"
+#include "opengl_game/render/Shader.h"
+#include "opengl_game/scene/Node.h"
+#include "opengl_game/core/RefManager.h"
+#include "opengl_game/render/MaterialManager.h"
+#include "opengl_game/render/RenderManager.h"
+#include "opengl_game/scene/LogicManager.h"
+#include "opengl_game/physics/PhysicsManager.h"
+#include "opengl_game/scene/Scene.h"
+#include "opengl_game/scene/BallScene.h"
+#include "opengl_game/render/Camera.h"
+#include "opengl_game/render/GameCamera.h"
+#include "opengl_game/render/LightCamera.h"
 using namespace std;
 
 BaseManager::~BaseManager()

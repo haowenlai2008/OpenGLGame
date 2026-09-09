@@ -1,9 +1,9 @@
 #pragma once
 #include <list>
-#include "func.h"
-#include "Transform.h"
-#include "Ref.h"
-#include "Component.h"
+#include "opengl_game/core/func.h"
+#include "opengl_game/core/Transform.h"
+#include "opengl_game/core/Ref.h"
+#include "opengl_game/core/Component.h"
 
 class btRigidBody;
 using std::list;

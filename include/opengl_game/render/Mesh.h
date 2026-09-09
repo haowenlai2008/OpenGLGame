@@ -1,7 +1,7 @@
 #pragma once
-#include "func.h"
+#include "opengl_game/core/func.h"
 #include <vector>
-#include "Struct.h"
+#include "opengl_game/core/Struct.h"
 using std::vector;
 using std::shared_ptr;
 
