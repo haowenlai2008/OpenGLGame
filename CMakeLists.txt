@@ -88,6 +88,10 @@ endif()
 
 if(OPENGLGAME_BUILD_TESTS)
     enable_testing()
+    add_executable(opengl_game_header_smoke tests/header_smoke.cpp)
+    target_link_libraries(opengl_game_header_smoke PRIVATE opengl_game::engine)
+    set_target_properties(opengl_game_header_smoke PROPERTIES FOLDER "OpenGLGame/Tests")
+
     add_executable(opengl_game_resource_test
         tests/resource_path_test.cpp
         src/core/ResourceLocator.cpp)
