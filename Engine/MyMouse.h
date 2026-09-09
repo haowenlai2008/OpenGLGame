@@ -1,6 +1,6 @@
 #pragma once
 #include "func.h"
-class GLFWwindow;
+struct GLFWwindow;
 class MyMouse
 {
 public:

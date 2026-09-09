@@ -5,3 +5,16 @@
 *.pdb
 .vs
 pack
+build/
+build-*/
+out/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+*.user
+*.suo
+*.ilk
+*.iobj
+*.ipdb
+pack.zip

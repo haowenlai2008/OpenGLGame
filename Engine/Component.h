@@ -1,5 +1,6 @@
 #pragma once
 #include "func.h"
+#include "Ref.h"
 using std::string;
 class Entity;
 enum class ComponentTypeI	//组件大类

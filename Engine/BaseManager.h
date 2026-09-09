@@ -3,7 +3,7 @@
 #include "Singleton.h"
 #include "MyMouse.h"
 #include "MyKeyboard.h"
-class GLFWwindow;
+struct GLFWwindow;
 class Node;
 class Scene;
 class RenderManager;

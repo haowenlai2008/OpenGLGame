@@ -1,0 +1,57 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "win32-local",
+      "displayName": "Windows x86 with local dependencies",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "Win32",
+      "binaryDir": "${sourceDir}/build/x86",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/x86"
+      }
+    },
+    {
+      "name": "x64-local",
+      "displayName": "Windows x64 with local dependencies",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build/x64",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/x64"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "win32-debug",
+      "configurePreset": "win32-local",
+      "configuration": "Debug"
+    },
+    {
+      "name": "win32-release",
+      "configurePreset": "win32-local",
+      "configuration": "Release"
+    },
+    {
+      "name": "x64-debug",
+      "configurePreset": "x64-local",
+      "configuration": "Debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "win32-debug-tests",
+      "configurePreset": "win32-local",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}
