@@ -22,9 +22,9 @@ include(cmake/Dependencies.cmake)
 
 file(GLOB_RECURSE OPENGLGAME_ENGINE_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
-file(GLOB OPENGLGAME_ENGINE_HEADERS CONFIGURE_DEPENDS
-    "${CMAKE_CURRENT_SOURCE_DIR}/Engine/*.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Engine/*.hpp")
+file(GLOB_RECURSE OPENGLGAME_ENGINE_HEADERS CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/*.hpp")
 list(REMOVE_ITEM OPENGLGAME_ENGINE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/app/Application.cpp")
 
 add_library(opengl_game_engine STATIC
@@ -37,13 +37,21 @@ add_library(opengl_game::engine ALIAS opengl_game_engine)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src"
     PREFIX "src"
     FILES ${OPENGLGAME_ENGINE_SOURCES})
-source_group("include\\legacy" FILES ${OPENGLGAME_ENGINE_HEADERS})
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    PREFIX "include"
+    FILES ${OPENGLGAME_ENGINE_HEADERS})
 source_group("ThirdParty\\GLAD" FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/Engine/external/source/glad.c")
 source_group("ThirdParty\\stb" FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/Engine/external/source/stb_image.cpp")
 
-target_include_directories(opengl_game_engine PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Engine")
+target_include_directories(opengl_game_engine PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/core"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/input"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/physics"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/render"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/scene")
 target_include_directories(opengl_game_engine SYSTEM PUBLIC
     "${OPENGLGAME_DEPS_INCLUDE_DIR}"
     "${OPENGLGAME_DEPS_BULLET_INCLUDE_DIR}")
@@ -88,7 +96,7 @@ if(OPENGLGAME_BUILD_TESTS)
         tests/resource_path_test.cpp
         src/core/ResourceLocator.cpp)
     target_include_directories(opengl_game_resource_test PRIVATE
-        "${CMAKE_CURRENT_SOURCE_DIR}/Engine")
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_game/core")
     add_test(NAME resource_path_test COMMAND opengl_game_resource_test)
 endif()
 
@@ -96,3 +104,4 @@ install(TARGETS opengl_game opengl_game_engine
     RUNTIME DESTINATION . LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(DIRECTORY Engine/Resources DESTINATION .)
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
