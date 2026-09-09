@@ -55,6 +55,7 @@ target_compile_definitions(opengl_game_engine PUBLIC
 
 if(MSVC)
     target_compile_options(opengl_game_engine PRIVATE /W4 /permissive- /Zc:__cplusplus)
+    target_compile_definitions(opengl_game_engine PRIVATE _CRT_SECURE_NO_WARNINGS)
 else()
     target_compile_options(opengl_game_engine PRIVATE -Wall -Wextra -Wpedantic)
 endif()

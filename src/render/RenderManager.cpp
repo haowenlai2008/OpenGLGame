@@ -6,7 +6,7 @@
 #include "opengl_game/render/RP_ShadowMapPass.h"
 #include "opengl_game/render/RP_RenderPass.h"
 #include "opengl_game/render/RP_ToneMappingGammaPass.h"
-#include "opengl_game/render/RP_GBufferPass.h";
+#include "opengl_game/render/RP_GBufferPass.h"
 #include "opengl_game/render/RP_DeferredRenderPass.h"
 #include "opengl_game/render/RP_SSAOPass.h"
 
