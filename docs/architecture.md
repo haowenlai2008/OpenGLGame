@@ -38,4 +38,4 @@
 
 ## 当前迁移边界
 
-本次先用 CMake target 建立模块边界，源码文件暂时保留在原目录，降低大规模移动文件造成的行为变化。后续可以在不改变 target 接口的前提下，将源码逐步移动到 `src/core`、`src/render`、`src/scene`、`src/physics` 和 `src/assets`。
+实现文件已经按职责移动到 `src/app`、`src/core`、`src/render`、`src/scene`、`src/physics` 和 `src/input`。为了降低迁移风险，旧头文件暂时仍位于 `Engine` 根目录，并作为兼容 include 层；后续可以在不改变 target 接口的前提下，将公共头文件迁移到 `include/opengl_game`，同时逐步收紧模块之间的可见依赖。
