@@ -48,6 +48,7 @@ source_group("ThirdParty\\stb" FILES
 target_include_directories(opengl_game_engine PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_include_directories(opengl_game_engine SYSTEM PUBLIC
+    "${OPENGLGAME_ASSIMP_INCLUDE_DIR}"
     "${OPENGLGAME_DEPS_INCLUDE_DIR}"
     "${OPENGLGAME_DEPS_BULLET_INCLUDE_DIR}")
 target_compile_definitions(opengl_game_engine PUBLIC

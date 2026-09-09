@@ -51,3 +51,16 @@ some broad headers, and existing numeric-conversion warnings. These should be
 addressed incrementally with RAII wrappers and narrower interfaces; changing
 them was deliberately kept separate from the build/layout migration so each
 commit remains easy to validate.
+
+## x64 dependency status
+
+The repository now includes x64 GLFW and Assimp import libraries plus their
+runtime DLLs under `Engine/external/x64`. The x64 Assimp build is generated from
+the locally downloaded Assimp 5.4.3 source; that source tree and intermediate
+build directories are ignored, while the tested binaries are kept with the
+project dependencies. The x64 preset can therefore be configured directly:
+
+```powershell
+cmake --preset x64-local
+cmake --build --preset x64-debug
+```

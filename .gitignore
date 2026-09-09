@@ -7,6 +7,10 @@
 pack
 build/
 build-*/
+Engine/external/source/assimp/
+Engine/external/source/glfw-src/
+Engine/external/assimp-*.zip
+glfw.zip
 out/
 CMakeCache.txt
 CMakeFiles/

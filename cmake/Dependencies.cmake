@@ -14,8 +14,13 @@ endif()
 
 set(_openglgame_config_root "${OPENGLGAME_DEPS_ROOT}/${_openglgame_arch}")
 set(_openglgame_include_dir "${OPENGLGAME_DEPS_ROOT}/include")
+set(_openglgame_assimp_include_dir "${_openglgame_include_dir}")
+if(EXISTS "${_openglgame_config_root}/include/assimp")
+    set(_openglgame_assimp_include_dir "${_openglgame_config_root}/include")
+endif()
 set(_openglgame_bullet_include_dir "${OPENGLGAME_DEPS_ROOT}/source/bullet")
 set(OPENGLGAME_DEPS_INCLUDE_DIR "${_openglgame_include_dir}" CACHE INTERNAL "")
+set(OPENGLGAME_ASSIMP_INCLUDE_DIR "${_openglgame_assimp_include_dir}" CACHE INTERNAL "")
 set(OPENGLGAME_DEPS_BULLET_INCLUDE_DIR "${_openglgame_bullet_include_dir}" CACHE INTERNAL "")
 
 if(OPENGLGAME_USE_SHARED_DEPS)
@@ -48,8 +53,8 @@ function(_openglgame_find_library out_target name)
         message(FATAL_ERROR
             "Could not find local ${name} for ${_openglgame_arch}. "
             "Expected it below ${_openglgame_config_root}/{Debug,Release}/lib. "
-            "The repository has no x64 Assimp binary; use -A Win32, "
-            "set OPENGLGAME_DEPS_ROOT, or provide a package-manager build.")
+            "Set OPENGLGAME_DEPS_ROOT to a matching dependency root, "
+            "or provide a package-manager build.")
     endif()
     if(NOT _openglgame_release_${name})
         set(_openglgame_release_${name} "${_openglgame_debug_${name}}")
@@ -91,7 +96,7 @@ set_target_properties(opengl_game::bullet PROPERTIES
 _openglgame_make_imported(opengl_game::assimp
     "${_openglgame_assimp_RELEASE}" "${_openglgame_assimp_DEBUG}")
 set_target_properties(opengl_game::assimp PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${_openglgame_include_dir}")
+    INTERFACE_INCLUDE_DIRECTORIES "${_openglgame_assimp_include_dir}")
 
 function(opengl_game_copy_runtime_dependencies target)
     add_custom_command(TARGET ${target} POST_BUILD
